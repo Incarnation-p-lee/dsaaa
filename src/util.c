@@ -23,8 +23,8 @@ exchange(int *a, int *b)
 void
 filepointer_init()
 {
-  char *rept_fname = "./homework_report";
-  hwork_rept = fopen(rept_fname, "w");
+  char *rept_fname = "./homework.rept";
+  hwork_rept = fopen(rept_fname, "w+");
   if(NULL == hwork_rept)
     error_handle("fopen");
 
@@ -38,5 +38,4 @@ filepointer_close()
 
   return;
 }
-
 

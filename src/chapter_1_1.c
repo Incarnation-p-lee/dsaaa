@@ -10,12 +10,15 @@ void
 chapt_1_1(void)
 {
   register int *pos;
-  int dsize[] = {10, 100, 1000, 10000, 100000};
+  int dsize[] = {10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 
+    500, 1000, 5000, 10000, 50000, 100000, 500000, 1000000};
   
   report_header();
   pos = dsize;
   while(pos < dsize + sizeof(dsize) / sizeof(dsize[0]))
+  {
     chaptdo_1_1(*pos++);
+  }
   
   return;
 }
@@ -29,9 +32,11 @@ chaptdo_1_1(int data_size)
 
   entry.data_size = data_size;
   dinput = data_prepare(data_size);
+
   TIME_START;
   entry.kvalue = selection_problem(dinput, data_size, data_size >> 1);
   TIME_END(&entry.usec_cost);
+
   entry.validate = result_validate(dinput, data_size, entry.kvalue);
   report_data(&entry);
    
@@ -99,9 +104,9 @@ split_data(int *data, int start, int len)
   j = start + len - 1;
   while(1)
   {
-    while(key < data[j])
+    while(key <= data[j] && start < j)
       j--;
-    while(key > data[i] && i < j)
+    while(key >= data[i] && i < j)
       i++;
     if(i >= j)
       break;
@@ -129,7 +134,7 @@ data_prepare(int data_size)
   pos = random_data;
   srand((unsigned)time(NULL));
   while(pos < random_data + data_size)
-    *pos++ = (DATA_MAX >> 1) - (rand() % DATA_MAX);
+    *pos++ = ((unsigned)DATA_MAX >> 1) - (rand() % DATA_MAX);
  
   return random_data;
 }
@@ -140,21 +145,20 @@ report_header()
 {
   time_t date;
   date = time(NULL);
-  fprintf(stdout, "          Chapter 1-1\n\n\n");
+  fprintf(stdout, "          Chapter 1-1\n\n");
   fprintf(stdout, 
-    "                        Selection problem\n");
+    "                               Selection problem\n\n");
   fprintf(stdout, "TIME: %s", ctime((const time_t *)&date));
   fprintf(stdout, 
-    "No.       DATA_SIZE     KVALUE[ VALD ]    TIME_COST(usec)\n");
+    "No.     DATA_SIZE         KVALUE:VALIDATION     TIME(usec)\n");
 
 
-
-  fprintf(hwork_rept, "          Chapter 1-1\n\n\n");
+  fprintf(hwork_rept, "          Chapter 1-1\n\n");
   fprintf(hwork_rept,
-    "                        Selection problem\n");
+    "                               Selection problem\n\n");
   fprintf(hwork_rept, "TIME: %s", ctime((const time_t *)&date));
   fprintf(hwork_rept,
-    "No.       DATA_SIZE     KVALUE[ VALD ]    TIME_COST(usec)\n");
+    "No.     DATA_SIZE         KVALUE:VALIDATION     TIME(usec)\n");
   return;
 }
 
@@ -165,12 +169,12 @@ report_data(struct rept_entry *rept)
   static int number = 1;
 
   fprintf(stdout, 
-    "%2d       %10d     %6d[%6d]    %10u\n",
+    "%2d     %10d     %10d:%10d     %10u\n",
     number, rept->data_size, rept->kvalue,
     rept->validate, rept->usec_cost);
 
   fprintf(hwork_rept, 
-    "%2d       %10d     %6d[%6d]    %10u\n",
+    "%2d     %10d     %10d:%10d     %10u\n",
     number, rept->data_size, rept->kvalue,
     rept->validate, rept->usec_cost);
 
@@ -197,5 +201,4 @@ result_validate(int *data, int len, int key)
   
   return cnt;
 }
-
 

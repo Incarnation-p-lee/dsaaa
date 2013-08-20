@@ -2,9 +2,6 @@
 #define DEFINES_H
 
 
-
-
-
 #define DATA_MAX         1024000
 
 #define TIME_START       timing_start()
