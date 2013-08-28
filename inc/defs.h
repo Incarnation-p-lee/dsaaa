@@ -15,6 +15,7 @@ typedef struct rept_entry{
   int      data_size;
   int      validate;
   unsigned usec_cost;
+	double   astringent;
 }REPT_entry;
 
 #endif

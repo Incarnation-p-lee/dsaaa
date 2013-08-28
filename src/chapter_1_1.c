@@ -10,8 +10,10 @@ void
 chapt_1_1(void)
 {
   register int *pos;
-  int dsize[] = {10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 
-    500, 1000, 5000, 10000, 50000, 100000, 500000, 1000000};
+  int dsize[] = {10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 500, 
+	  1000, 5000, 10000, 50000, 100000, 500000, 1000000, 5000000, 
+		10000000, 20000000, 30000000, 40000000, 50000000, 
+		60000000, 70000000, 80000000, 90000000, 100000000,};
   
   report_header();
   pos = dsize;
@@ -37,6 +39,7 @@ chaptdo_1_1(int data_size)
   entry.kvalue = selection_problem(dinput, data_size, data_size >> 1);
   TIME_END(&entry.usec_cost);
 
+  entry.astringent = (double)entry.usec_cost / (log(data_size) * data_size);
   entry.validate = result_validate(dinput, data_size, entry.kvalue);
   report_data(&entry);
    
@@ -149,16 +152,20 @@ report_header()
   fprintf(stdout, 
     "                               Selection problem\n\n");
   fprintf(stdout, "TIME: %s", ctime((const time_t *)&date));
-  fprintf(stdout, 
-    "No.     DATA_SIZE         KVALUE:VALIDATION     TIME(usec)\n");
+	fprintf(stdout, "ASTRINGENT: O(N*logN)\n");
 
+  fprintf(stdout, 
+    "No.     DATA_SIZE         KVALUE:VALIDATION     "
+		"TIME(usec)=>ASTRINGENT\n");
 
   fprintf(hwork_rept, "          Chapter 1-1\n\n");
   fprintf(hwork_rept,
     "                               Selection problem\n\n");
   fprintf(hwork_rept, "TIME: %s", ctime((const time_t *)&date));
+	fprintf(hwork_rept, "ASTRINGENT: O(N*logN)\n");
   fprintf(hwork_rept,
-    "No.     DATA_SIZE         KVALUE:VALIDATION     TIME(usec)\n");
+    "No.     DATA_SIZE         KVALUE:VALIDATION     "
+		"TIME(usec)=>ASTRINGENT\n");
   return;
 }
 
@@ -169,14 +176,14 @@ report_data(struct rept_entry *rept)
   static int number = 1;
 
   fprintf(stdout, 
-    "%2d     %10d     %10d:%10d     %10u\n",
+    "%2d     %10d     %10d:%10d     %10u=>%10.6f\n",
     number, rept->data_size, rept->kvalue,
-    rept->validate, rept->usec_cost);
+    rept->validate, rept->usec_cost, rept->astringent);
 
   fprintf(hwork_rept, 
-    "%2d     %10d     %10d:%10d     %10u\n",
+    "%2d     %10d     %10d:%10d     %10u=>%10.6f\n",
     number, rept->data_size, rept->kvalue,
-    rept->validate, rept->usec_cost);
+    rept->validate, rept->usec_cost, rept->astringent);
 
   number++;
   return;

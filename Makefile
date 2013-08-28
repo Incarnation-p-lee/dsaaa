@@ -13,6 +13,7 @@ TARGET        =dsaaa.out
 FDPS          =fdependent
 OBJDIR        =obj
 CFLAG         =-c -g -Wall
+EXRLIB        =-lm
 
 vpath %.o $(OBJDIR)
 
@@ -36,7 +37,7 @@ $(OBJ):%.o:%.c
 	mv $@ $(OBJDIR)
 
 link:$(OBJ)
-	$(CC) $(INC) -o $(TARGET) $^
+	$(CC) $(INC) -o $(TARGET) $^ $(EXRLIB)
 
 
 clean:

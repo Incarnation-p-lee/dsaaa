@@ -12,6 +12,7 @@
 #include <errno.h>
 #include <time.h>
 #include <ctype.h>
+#include <math.h>
 
 #ifdef __linux__
 #include <sys/types.h>
