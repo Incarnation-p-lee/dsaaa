@@ -4,4 +4,4 @@ chapter_1.o: chapter_1.c inc/include.h inc/defs.h inc/chapter_1.h \
 evaluation.o: evaluation.c inc/include.h inc/defs.h inc/evaluation.h \
  src/timing.c
 utilize.o: utilize.c inc/defs.h inc/include.h inc/utilize.h \
- src/error_handle.c src/util.c
+ src/error_handle.c src/util.c src/stack_trace.c

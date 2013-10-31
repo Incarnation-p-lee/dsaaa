@@ -1,50 +1,56 @@
-/*-------------------------------------------------------------------*/
-/*-AUTHOR:      Incarnation.P Lee                                    */
-/*-DATE:        08122013                                             */
-/*-WHAT:        Homework chapter 1.1                                 */
-/*-REVISION:                                                         */
-/*- DATE ------------------------ DESCRIPTION -----------------------*/
-/*- 08122013    CHAPTER 1-1                                         -*/
-/*-------------------------------------------------------------------*/
+/*--------------------------------------------------------------*/
+/*-AUTHOR:      Incarnation.P Lee                               */
+/*-DATE:        08122013                                        */
+/*-WHAT:        Homework chapter 1.1                            */
+/*-REVISION:                                                    */
+/*- DATE ------------------------ DESCRIPTION ------------------*/
+/*- 08122013    CHAPTER 1-1                                    -*/
+/*--------------------------------------------------------------*/
 void
 chapt_1_1(void)
 {
   register int *pos;
   int dsize[] = {10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 500, 
 	  1000, 5000, 10000, 50000, 100000, 500000, 1000000, 5000000, 
-		10000000, 20000000, 30000000, 40000000, 50000000, 
-		60000000, 70000000, 80000000, 90000000, 100000000,};
-  
-  report_header();
+		10000000, 20000000, 30000000, 40000000, 50000000,};
+
+  entering_frame("chapt_1_1");
+  report_header(stdout);
+  report_header(hwork_rept);
   pos = dsize;
   while(pos < dsize + sizeof(dsize) / sizeof(dsize[0]))
-  {
-    chaptdo_1_1(*pos++);
-  }
+    do_chapter(*pos++);
   
+  leaving_frame();
   return;
 }
 
 
 static void
-chaptdo_1_1(int data_size)
+do_chapter(int data_size)
 {
   int *dinput;
   struct rept_entry entry;
 
+  entering_frame("do_chapter");
   entry.data_size = data_size;
   dinput = data_prepare(data_size);
 
   TIME_START;
-  entry.kvalue = selection_problem(dinput, data_size, data_size >> 1);
+  entry.kvalue = selection_problem(
+    dinput, data_size, data_size >> 1);
   TIME_END(&entry.usec_cost);
 
-  entry.astringent = (double)entry.usec_cost / (log(data_size) * data_size);
-  entry.validate = result_validate(dinput, data_size, entry.kvalue);
+  entry.astringent = (double)entry.usec_cost / 
+    (log(data_size) * data_size);
+  entry.validate = result_validate(
+    dinput, data_size, entry.kvalue);
   report_data(&entry);
    
   free(dinput);
   dinput = NULL;
+
+  leaving_frame();
   return;
 }
 
@@ -57,25 +63,26 @@ selection_problem(int *data, int size, int key)
   int start;
   int index;
  
+  entering_frame("selection_problem");
   assert(NULL != data);
   start = 0;
   data_size = size;
   while(1)
   {
     big_cnt = split_data(data, start, data_size);
-    /*---------------------------------------------------------------*/
-    /* if the count of big part is less than key, reset the data size*/
-    /* and update rest key.                                          */
-    /*---------------------------------------------------------------*/
+    /*----------------------------------------------------------*/
+    /* if the count of big part is less than key, reset the data*/
+    /* and update rest key.                                     */
+    /*----------------------------------------------------------*/
     if(big_cnt < key)
     {
       data_size -= big_cnt;
       key -= big_cnt;
     }
-    /*---------------------------------------------------------------*/
-    /* if the count of big part is more than key, reset the start    */
-    /* index and update data size.                                   */
-    /*---------------------------------------------------------------*/
+    /*----------------------------------------------------------*/
+    /* if the count of big part is more than key, reset start   */
+    /* index and update data size.                              */
+    /*----------------------------------------------------------*/
     else if(big_cnt > key)
     {
       start += (data_size - big_cnt + 1);
@@ -86,12 +93,13 @@ selection_problem(int *data, int size, int key)
   }
   index = start + data_size - big_cnt;
   
+  leaving_frame();
   return data[index];
 }
 
-/*-------------------------------------------------------------------*/
-/* Return the count of big part include the key value.               */
-/*-------------------------------------------------------------------*/
+/*--------------------------------------------------------------*/
+/* Return the count of big part include the key value.          */
+/*--------------------------------------------------------------*/
 static int
 split_data(int *data, int start, int len)
 {
@@ -99,6 +107,7 @@ split_data(int *data, int start, int len)
   int i;
   int j;
 
+  entering_frame("split_data");
   if(len < 0)
     return -1;
 
@@ -117,6 +126,7 @@ split_data(int *data, int start, int len)
   }
   exchange(data + start, data + j);
   
+  leaving_frame();
   return len - (j - start);
 }
 
@@ -127,6 +137,7 @@ data_prepare(int data_size)
   register int *pos;
   int *random_data;
 
+  entering_frame("data_prepare");
   if(0 >= data_size)
     error_handle("data_prepare");
 
@@ -139,33 +150,31 @@ data_prepare(int data_size)
   while(pos < random_data + data_size)
     *pos++ = ((unsigned)DATA_MAX >> 1) - (rand() % DATA_MAX);
  
+  leaving_frame();
   return random_data;
 }
 
 
 static void
-report_header()
+report_header(FILE *fd)
 {
   time_t date;
+
+  entering_frame("report_header");
   date = time(NULL);
-  fprintf(stdout, "          Chapter 1-1\n\n");
-  fprintf(stdout, 
+  fprintf(fd, "\n-----------------------------");
+  fprintf(fd, "Chapter 1-1");
+  fprintf(fd, "-------------------------------\n\n");
+  fprintf(fd, 
     "                               Selection problem\n\n");
-  fprintf(stdout, "TIME: %s", ctime((const time_t *)&date));
-	fprintf(stdout, "ASTRINGENT: O(N*logN)\n");
+  fprintf(fd, "TIME: %s", ctime((const time_t *)&date));
+	fprintf(fd, "ASTRINGENT: O(N*logN)\n");
 
-  fprintf(stdout, 
+  fprintf(fd, 
     "No.     DATA_SIZE         KVALUE:VALIDATION     "
 		"TIME(usec)=>ASTRINGENT\n");
 
-  fprintf(hwork_rept, "          Chapter 1-1\n\n");
-  fprintf(hwork_rept,
-    "                               Selection problem\n\n");
-  fprintf(hwork_rept, "TIME: %s", ctime((const time_t *)&date));
-	fprintf(hwork_rept, "ASTRINGENT: O(N*logN)\n");
-  fprintf(hwork_rept,
-    "No.     DATA_SIZE         KVALUE:VALIDATION     "
-		"TIME(usec)=>ASTRINGENT\n");
+  leaving_frame();
   return;
 }
 
@@ -175,6 +184,7 @@ report_data(struct rept_entry *rept)
 {
   static int number = 1;
 
+  entering_frame("report_data");
   fprintf(stdout, 
     "%2d     %10d     %10d:%10d     %10u=>%10.6f\n",
     number, rept->data_size, rept->kvalue,
@@ -186,6 +196,8 @@ report_data(struct rept_entry *rept)
     rept->validate, rept->usec_cost, rept->astringent);
 
   number++;
+
+  leaving_frame();
   return;
 }
 
@@ -196,6 +208,7 @@ result_validate(int *data, int len, int key)
   register int *pos;
   int cnt;
 
+  entering_frame("result_validate");
   assert(NULL != data);
   pos = data;
   
@@ -206,6 +219,7 @@ result_validate(int *data, int len, int key)
       cnt++;
   }
   
+  leaving_frame();
   return cnt;
 }
 

@@ -10,6 +10,10 @@ extern void
 timing_end(unsigned *);
 extern void
 exchange(int *, int *);
+extern void
+leaving_frame(void);
+extern void
+entering_frame(const char *);
 
 extern FILE *hwork_rept;
 
@@ -24,15 +28,14 @@ selection_problem(int *, int, int);
 static int
 split_data(int *, int, int);
 static void
-report_header(void);
+report_header(FILE *);
 static int 
 result_validate(int *, int, int);
 static void
 report_data(struct rept_entry *);
 static void
-chaptdo_1_1(int);
+do_chapter(int);
 
 
 
 #endif
-

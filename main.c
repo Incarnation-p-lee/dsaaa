@@ -1,11 +1,13 @@
-/*-------------------------------------------------------------------*/
-/*-AUTHOR:      Incarnation.P Lee                                    */
-/*-DATE:        08042013                                             */
-/*-WHAT:        Homework of DSAAA                                    */
-/*-REVISION:                                                         */
-/*- DATE ------------------------ DESCRIPTION -----------------------*/
-/*- 08042013    CHAPTER 1. Initilize the program.                   -*/
-/*-------------------------------------------------------------------*/
+/*--------------------------------------------------------------*/
+/*-AUTHOR:      Incarnation.P Lee                               */
+/*-DATE:        08042013                                        */
+/*-WHAT:        Homework of DSAAA                               */
+/*-REVISION:                                                    */
+/*- DATE ------------------------ DESCRIPTION ------------------*/
+/*- 08042013    CHAPTER 1. Initilize the program.              -*/
+/*- 10242013    CHAPTER 1. Add function pointer.               -*/
+/*-                        Start chapter1.2                    -*/
+/*--------------------------------------------------------------*/
 #include "include.h"
 #include "defs.h"
 #include "vars.h"
@@ -14,9 +16,16 @@
 int
 main(int argc, char **argv)
 {
+  register HOMEWORK *hw_entry = homework;
+  
+  entering_frame("main");
   filepointer_init();
-  chapt_1_1();
+  
+  while(hw_entry < homework + sizeof(homework) / sizeof(HOMEWORK))
+    (*hw_entry++)();
+
   filepointer_close();
+  leaving_frame();
 
   return EXIT_SUCCESS;
 }

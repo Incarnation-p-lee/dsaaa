@@ -3,17 +3,16 @@
 
 
 extern void
-chapt1_1(void);
+chapt_1_1(void);
 
 struct timeval timePoint_start;
 struct timeval timePoint_end;
 FILE *hwork_rept;
 
-/*
-static HOMEWORK homework[][] = {
-  {chapt1_1,},
 
+static HOMEWORK homework[] = {
+  &chapt_1_1,
 };
-*/
+
 
 #endif
