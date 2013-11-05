@@ -1,6 +1,6 @@
 main.o: main.c inc/include.h inc/defs.h inc/vars.h inc/externals.h
 chapter_1.o: chapter_1.c inc/include.h inc/defs.h inc/chapter_1.h \
- src/chapter_1_1.c
+ src/chapter_1_1.c src/chapter_1_4.c
 evaluation.o: evaluation.c inc/include.h inc/defs.h inc/evaluation.h \
  src/timing.c
 utilize.o: utilize.c inc/defs.h inc/include.h inc/utilize.h \

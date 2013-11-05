@@ -15,11 +15,11 @@ chapt_1_1(void)
 		10000000, 20000000, 30000000, 40000000, 50000000,};
 
   entering_frame("chapt_1_1");
-  report_header(stdout);
-  report_header(hwork_rept);
+  report_header1_1(stdout);
+  report_header1_1(hwork_rept);
   pos = dsize;
   while(pos < dsize + sizeof(dsize) / sizeof(dsize[0]))
-    do_chapter(*pos++);
+    dochapter1_1(*pos++);
   
   leaving_frame();
   return;
@@ -27,7 +27,7 @@ chapt_1_1(void)
 
 
 static void
-do_chapter(int data_size)
+dochapter1_1(int data_size)
 {
   int *dinput;
   struct rept_entry entry;
@@ -156,7 +156,7 @@ data_prepare(int data_size)
 
 
 static void
-report_header(FILE *fd)
+report_header1_1(FILE *fd)
 {
   time_t date;
 

@@ -2,8 +2,11 @@
 #define DEFINES_H
 
 
-#define DATA_MAX         1024000
-#define TRACE_DEPTH      4098
+#define DATA_MAX                   1024000
+#define TRACE_DEPTH                4098
+#define MAX_WIDTH_OF_LINE          120
+#define FULL_NAME_LENGTH           256
+#define FILENAME_SPLITER           "\"< >"
 
 #define TIME_START       timing_start()
 #define TIME_END(usec)   timing_end(usec)

@@ -28,13 +28,4 @@
 #include <pthread.h>
 
 #endif
-
-
-#ifdef WIN32
-#include <winsock2.h>
-#include <process.h>
-#pragma comment(lib, "ws2_32.lib")
-#endif
-
-
 #endif

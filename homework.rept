@@ -1,32 +1,97 @@
 
------------------------------Chapter 1-1-------------------------------
+-----------------------------Chapter 1-4-------------------------------
 
-                               Selection problem
+                               Expanding #include
 
-TIME: Thu Oct 31 22:37:23 2013
-ASTRINGENT: O(N*logN)
-No.     DATA_SIZE         KVALUE:VALIDATION     TIME(usec)=>ASTRINGENT
- 1             10         202425:         5              2=>  0.086859
- 2             20          31331:        10              1=>  0.016690
- 3             30        -147425:        15              3=>  0.029401
- 4             40        -147425:        20              2=>  0.013554
- 5             50        -118827:        25              3=>  0.015337
- 6             60           7379:        30              4=>  0.016283
- 7             70           7379:        35              5=>  0.016813
- 8             80           -706:        40              6=>  0.017115
- 9             90        -107941:        45              6=>  0.014815
-10            100         -70801:        50              7=>  0.015200
-11            500          -2122:       250             29=>  0.009333
-12           1000           5176:       500             56=>  0.008107
-13           5000          -7679:      2500           1299=>  0.030503
-14          10000           -706:      5000            548=>  0.005950
-15          50000           2845:     25000           7766=>  0.014355
-16         100000           2059:     50000           2953=>  0.002565
-17         500000           1019:    250000          16982=>  0.002588
-18        1000000           -197:    500001          42975=>  0.003111
-19        5000000             69:   2500007         104965=>  0.001361
-20       10000000             81:   5000001         290876=>  0.001805
-21       20000000             75:  10000012         649789=>  0.001933
-22       30000000             58:  15000037         913947=>  0.001769
-23       40000000             33:  20000036         941001=>  0.001344
-24       50000000            -35:  25000016        1102887=>  0.001244
+
+=======> main.c <=======/*--------------------------------------------------------------*/
+/*-AUTHOR:      Incarnation.P Lee                               */
+/*-DATE:        08042013                                        */
+/*-WHAT:        Homework of DSAAA                               */
+/*-REVISION:                                                    */
+/*- DATE ------------------------ DESCRIPTION ------------------*/
+/*- 08042013    CHAPTER 1. Initilize the program.              -*/
+/*- 10242013    CHAPTER 1. Add function pointer.               -*/
+/*-                        Start chapter1.2                    -*/
+/*--------------------------------------------------------------*/
+#include "include.h"
+ +include.h
+  +stdio.h
+  +string.h
+  +stddef.h
+  +assert.h
+  +limits.h
+  +stdlib.h
+  +stdarg.h
+  +errno.h
+  +time.h
+  +ctype.h
+  +math.h
+  +sys/types.h
+  +sys/stat.h
+  +sys/wait.h
+  +sys/time.h
+  +sys/mman.h
+  +unistd.h
+  +fcntl.h
+  +netinet/in.h
+  +sys/socket.h
+  +arpa/inet.h
+  +pthread.h
+#include "defs.h"
+ +defs.h
+#include "vars.h"
+ +vars.h
+#include "externals.h"
+ +externals.h
+
+int
+main(int argc, char **argv)
+{
+  register HOMEWORK *hw_entry = homework;
+  
+  entering_frame("main");
+  filepointer_init();
+  
+  while(hw_entry < homework + sizeof(homework) / sizeof(HOMEWORK))
+    (*hw_entry++)();
+
+  filepointer_close();
+  leaving_frame();
+
+  return EXIT_SUCCESS;
+}
+
+=======> chapter_1.c <=======#include "include.h"
+ +include.h
+  +stdio.h
+  +string.h
+  +stddef.h
+  +assert.h
+  +limits.h
+  +stdlib.h
+  +stdarg.h
+  +errno.h
+  +time.h
+  +ctype.h
+  +math.h
+  +sys/types.h
+  +sys/stat.h
+  +sys/wait.h
+  +sys/time.h
+  +sys/mman.h
+  +unistd.h
+  +fcntl.h
+  +netinet/in.h
+  +sys/socket.h
+  +arpa/inet.h
+  +pthread.h
+#include "defs.h"
+ +defs.h
+#include "chapter_1.h"
+ +chapter_1.h
+
+#include "chapter_1_1.c"
+ +chapter_1_1.c
+#include "chapter_1_4.c"
+ +chapter_1_4.c
