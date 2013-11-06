@@ -49,8 +49,7 @@ dochapter1_4()
   while(filename < 
     sourcefiles + sizeof(sourcefiles) / sizeof(sourcefiles[0]))
   {
-    fprintf(stdout, "\n>>>>>>>> %s <<<<<<<<\n", *filename);
-    fprintf(hwork_rept, "\n>>>>>>>> %s <<<<<<<<", *filename);
+	  print_result("\n>>>>>>>> %s <<<<<<<<\n", *filename);
     expand_file(*filename++);
   }
   
@@ -71,8 +70,7 @@ expand_file(char *filename)
   fd = find_quoted_file(filename);
   if(NULL == fd)
 	{
-    fprintf(stdout, "No Such[%s] File.\n", filename);
-    fprintf(hwork_rept, "No Such[%s] File.\n", filename);
+    print_result("No Such[%s] File.\n", filename);
     goto LEAVE;
 	}
 
@@ -81,18 +79,14 @@ expand_file(char *filename)
   while(!feof(fd))
   {
     if(!depth)
-    {
-      fprintf(stdout, "%s", each_line);
-      fprintf(hwork_rept, "%s", each_line);
-    }
+      print_result("%s", each_line);
 
     current = isinclude(each_line);
     if(current)
     {
       memset(name, 0, MAX_WIDTH_OF_LINE);
       include_name(name, current);
-      fprintf(stdout, " %.*s+%s\n", depth, blank, name);
-      fprintf(hwork_rept, " %.*s+%s\n", depth, blank, name);
+      print_result(" %.*s+%s\n", depth, blank, name);
       if(isvalid_headfile(name))
         expand_file(name);
     }
@@ -268,3 +262,18 @@ pop_expand_stack(int top)
   return;
 }
 #endif
+
+static void
+print_result(char *fmt, ...)
+{
+  va_list vl;
+  entering_frame("print_result");
+
+  va_start(vl, fmt);
+  fprintf(stdout, fmt, vl);
+  fprintf(hwork_rept, fmt, vl);
+	va_end(vl);
+
+  leaving_frame();
+  return;
+}

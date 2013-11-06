@@ -96,6 +96,8 @@ static int
 keyword_valid(char *);
 static int
 isvalid_headfile(const char *);
+static void
+print_result(char *fmt, ...);
 
 
 #endif

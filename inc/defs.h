@@ -2,7 +2,7 @@
 #define DEFINES_H
 
 
-//#define STD_INCLUDED
+#define STD_INCLUDED
 #define DATA_MAX                   1024000
 #define TRACE_DEPTH                4098
 #define MAX_WIDTH_OF_LINE          120
