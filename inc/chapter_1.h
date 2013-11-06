@@ -4,6 +4,7 @@
 
 extern FILE *hwork_rept;
 extern const char *blank;
+
 static char *include_path[] = {
   "./",
   "./inc/",
@@ -11,6 +12,9 @@ static char *include_path[] = {
   "/usr/include/",
   "/usr/include/x86_64-linux-gnu/",
 };
+static int depth = -1;
+
+#ifdef STD_INCLUDED
 static char *std_head[] = {
   "assert.h",
   "stdio.h",
@@ -38,7 +42,11 @@ static char *std_head[] = {
   "pthread.h",
 #endif
 };
-
+#else
+static char expand_stack[EXPAND_DEPTH][FILENAME_LENGTH];
+static void
+pop_expand_stack(int);
+#endif
 
 extern void
 error_handle(const char *);
@@ -87,7 +95,7 @@ find_quoted_file(const char *);
 static int
 keyword_valid(char *);
 static int
-isstd_headfile(const char *);
+isvalid_headfile(const char *);
 
 
 #endif

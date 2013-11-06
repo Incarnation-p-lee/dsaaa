@@ -23,7 +23,6 @@ chapt_1_4(void)
 static void
 report_header1_4(FILE *fd)
 {
-  
   entering_frame("report_header");
 
   fprintf(fd, "\n-----------------------------");
@@ -50,8 +49,8 @@ dochapter1_4()
   while(filename < 
     sourcefiles + sizeof(sourcefiles) / sizeof(sourcefiles[0]))
   {
-    fprintf(stdout, "\n=======> %s <=======\n", *filename);
-    fprintf(hwork_rept, "\n=======> %s <=======", *filename);
+    fprintf(stdout, "\n>>>>>>>> %s <<<<<<<<\n", *filename);
+    fprintf(hwork_rept, "\n>>>>>>>> %s <<<<<<<<", *filename);
     expand_file(*filename++);
   }
   
@@ -66,19 +65,22 @@ expand_file(char *filename)
   char each_line[MAX_WIDTH_OF_LINE];
   char name[MAX_WIDTH_OF_LINE];
   char *current;
-  static int indent = -1;
   entering_frame("expand_file");
 
+  depth++;
   fd = find_quoted_file(filename);
   if(NULL == fd)
-    error_handle("find_quote_file");
+	{
+    fprintf(stdout, "No Such[%s] File.\n", filename);
+    fprintf(hwork_rept, "No Such[%s] File.\n", filename);
+    goto LEAVE;
+	}
 
-  indent++;
   memset(each_line, 0, MAX_WIDTH_OF_LINE);
   fgets(each_line, MAX_WIDTH_OF_LINE, fd);
   while(!feof(fd))
   {
-    if(!indent)
+    if(!depth)
     {
       fprintf(stdout, "%s", each_line);
       fprintf(hwork_rept, "%s", each_line);
@@ -89,9 +91,9 @@ expand_file(char *filename)
     {
       memset(name, 0, MAX_WIDTH_OF_LINE);
       include_name(name, current);
-      fprintf(stdout, " %.*s+%s\n", indent, blank, name);
-      fprintf(hwork_rept, " %.*s+%s\n", indent, blank, name);
-      if(!isstd_headfile(name))
+      fprintf(stdout, " %.*s+%s\n", depth, blank, name);
+      fprintf(hwork_rept, " %.*s+%s\n", depth, blank, name);
+      if(isvalid_headfile(name))
         expand_file(name);
     }
     memset(each_line, 0, MAX_WIDTH_OF_LINE);
@@ -99,7 +101,13 @@ expand_file(char *filename)
   } 
   
   fclose(fd);
-  indent--;
+
+LEAVE:
+#ifdef STD_INCLUDED
+  depth--;
+#else
+  pop_expand_stack(depth--);
+#endif
 
   leaving_frame();
   return;
@@ -199,12 +207,13 @@ include_name(char *filename, char *start)
   return;
 }
 
+#ifdef STD_INCLUDED
 static int
-isstd_headfile(const char *filename)
+isvalid_headfile(const char *filename)
 {
   register char **stdname;
   int standard;
-  entering_frame("isstd_headfile");
+  entering_frame("isvalid_headfile");
 
   standard = 0;
   stdname = std_head;
@@ -219,5 +228,43 @@ isstd_headfile(const char *filename)
   }
 
   leaving_frame();
-  return standard;
+  return !standard;
 }
+
+#else
+static int
+isvalid_headfile(const char *filename)
+{
+  register char (*stack_top)[FILENAME_LENGTH];
+  int repeated;
+  entering_frame("isvalid_headfile");
+
+  repeated = 0;
+  stack_top = expand_stack;
+  while(stack_top < expand_stack + depth)
+  {
+    if(!strcmp(filename, *stack_top++))
+    {
+      repeated = 1;
+      break;
+    }
+  }
+
+  if(!repeated)
+    memcpy(expand_stack[depth], filename, strlen(filename));
+
+  leaving_frame();
+  return !repeated;
+}
+
+static void
+pop_expand_stack(int top)
+{
+  entering_frame("pop_expand_stack");
+
+  memset(expand_stack[top], 0, FILENAME_LENGTH);
+
+  leaving_frame();
+  return;
+}
+#endif
