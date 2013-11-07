@@ -13,7 +13,6 @@ static char *include_path[] = {
   "/usr/include/x86_64-linux-gnu/",
 };
 static int depth = -1;
-static int exstack_top = 0;
 
 #ifdef STD_HEAD_FILE
 static char *std_head[] = {
@@ -46,6 +45,7 @@ static char *std_head[] = {
 #endif
 
 #ifdef NO_STD_HEAD_FILE
+static int exstack_top = 0;
 static char expand_stack[EXPAND_DEPTH][FILENAME_LENGTH];
 static void
 pop_expand_stack(void);

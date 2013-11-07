@@ -2,7 +2,7 @@
 #define DEFINES_H
 
 
-#if 0
+#if 1
 #define STD_HEAD_FILE
 #else
 #define NO_STD_HEAD_FILE

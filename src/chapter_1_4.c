@@ -23,6 +23,7 @@ chapt_1_4(void)
 static void
 report_header1_4(FILE *fd)
 {
+  time_t date;
   entering_frame("report_header");
 
   fprintf(fd, "\n-----------------------------");
@@ -30,6 +31,7 @@ report_header1_4(FILE *fd)
   fprintf(fd, "-------------------------------\n\n");
   fprintf(fd, 
     "                               Expanding #include\n\n");
+  fprintf(fd, "TIME: %s", ctime((const time_t *)&date));
   
   leaving_frame();
   return;

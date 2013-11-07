@@ -168,7 +168,7 @@ report_header1_1(FILE *fd)
   fprintf(fd, 
     "                               Selection problem\n\n");
   fprintf(fd, "TIME: %s", ctime((const time_t *)&date));
-	fprintf(fd, "ASTRINGENT: O(N*logN)\n");
+	fprintf(fd, "\nASTRINGENT: O(N*logN)\n");
 
   fprintf(fd, 
     "No.     DATA_SIZE         KVALUE:VALIDATION     "
