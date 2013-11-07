@@ -5,6 +5,7 @@ SHELL         =/bin/sh
 CC            =gcc
 SRC           =main.c chapter_1.c evaluation.c utilize.c
 
+COVERAGE      =-fprofile-arcs -ftest-coverage
 OBJ           =$(patsubst %.c, %.o, $(SRC))
 INCH          =./inc
 INCS          =./src
@@ -12,7 +13,8 @@ INC           =-I$(INCH) -I$(INCS)
 TARGET        =dsaaa.out
 FDPS          =fdependent
 OBJDIR        =obj
-CFLAG         =-c -ggdb -Wall -Werror
+CFLAG         =-c -g -Wall -pg -Werror $(COVERAGE)
+LFLAG         =-pg $(COVERAGE)
 EXRLIB        =-lm
 
 vpath %.o $(OBJDIR)
@@ -37,8 +39,9 @@ $(OBJ):%.o:%.c
 	mv $@ $(OBJDIR)
 
 link:$(OBJ)
-	$(CC) $(INC) -o $(TARGET) $^ $(EXRLIB)
+	$(CC) $(INC) $(LFLAG) -o $(TARGET) $^ $(EXRLIB)
 
 
 clean:
 	-rm -rf $(TARGET) $(OBJDIR)/* $(FDPS)
+	-rm -rf report *.gcda *.gcno

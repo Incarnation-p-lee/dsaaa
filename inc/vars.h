@@ -14,8 +14,8 @@ const char *blank =
 "                                               ";
 
 static HOMEWORK homework[] = {
+  &chapt_1_1,
   &chapt_1_4,
-//  &chapt_1_1,
 };
 
 
