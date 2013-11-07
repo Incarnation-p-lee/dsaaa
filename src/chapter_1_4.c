@@ -248,7 +248,8 @@ isvalid_headfile(const char *filename)
   }
 
   if(!repeated)
-    memcpy(expand_stack[exstack_top++], filename, strlen(filename));
+    memcpy(expand_stack[exstack_top++], 
+      filename, strlen(filename));
 
   leaving_frame();
   return !repeated;
