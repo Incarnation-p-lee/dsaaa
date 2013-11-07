@@ -2,7 +2,14 @@
 #define DEFINES_H
 
 
-#define STD_INCLUDED
+#if 0
+#define STD_HEAD_FILE
+#else
+#define NO_STD_HEAD_FILE
+#endif
+
+
+
 #define DATA_MAX                   1024000
 #define TRACE_DEPTH                4098
 #define MAX_WIDTH_OF_LINE          120
@@ -13,7 +20,7 @@
 #define TIME_END(usec)   timing_end(usec)
 
 
-#ifndef STD_INCLUDED
+#ifdef NO_STD_HEAD_FILE
 #define EXPAND_DEPTH               128
 #define FILENAME_LENGTH            32
 #endif

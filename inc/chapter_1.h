@@ -13,8 +13,9 @@ static char *include_path[] = {
   "/usr/include/x86_64-linux-gnu/",
 };
 static int depth = -1;
+static int exstack_top = 0;
 
-#ifdef STD_INCLUDED
+#ifdef STD_HEAD_FILE
 static char *std_head[] = {
   "assert.h",
   "stdio.h",
@@ -28,7 +29,7 @@ static char *std_head[] = {
   "ctype.h",
   "math.h",
 
-#ifdef __linux__
+  #ifdef __linux__
   "sys/types.h",
   "sys/stat.h",
   "sys/wait.h",
@@ -40,12 +41,14 @@ static char *std_head[] = {
   "sys/socket.h",
   "arpa/inet.h",
   "pthread.h",
-#endif
+  #endif
 };
-#else
+#endif
+
+#ifdef NO_STD_HEAD_FILE
 static char expand_stack[EXPAND_DEPTH][FILENAME_LENGTH];
 static void
-pop_expand_stack(int);
+pop_expand_stack(void);
 #endif
 
 extern void

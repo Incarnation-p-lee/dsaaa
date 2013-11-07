@@ -12,7 +12,7 @@ INC           =-I$(INCH) -I$(INCS)
 TARGET        =dsaaa.out
 FDPS          =fdependent
 OBJDIR        =obj
-CFLAG         =-c -g -Wall
+CFLAG         =-c -ggdb -Wall -Werror
 EXRLIB        =-lm
 
 vpath %.o $(OBJDIR)

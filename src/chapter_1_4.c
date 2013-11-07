@@ -42,6 +42,7 @@ dochapter1_4()
   char *sourcefiles[] = {
     "main.c",
     "chapter_1.c",
+    "externals.h",
   };
   entering_frame("dochapter1_4");
 
@@ -69,10 +70,11 @@ expand_file(char *filename)
   depth++;
   fd = find_quoted_file(filename);
   if(NULL == fd)
-	{
-    print_result("No Such[%s] File.\n", filename);
+  {
+    print_result("%.*s=No Such[%s] File.\n", 
+      depth, blank, filename);
     goto LEAVE;
-	}
+  }
 
   memset(each_line, 0, MAX_WIDTH_OF_LINE);
   fgets(each_line, MAX_WIDTH_OF_LINE, fd);
@@ -84,7 +86,6 @@ expand_file(char *filename)
     current = isinclude(each_line);
     if(current)
     {
-      memset(name, 0, MAX_WIDTH_OF_LINE);
       include_name(name, current);
       print_result(" %.*s+%s\n", depth, blank, name);
       if(isvalid_headfile(name))
@@ -97,10 +98,9 @@ expand_file(char *filename)
   fclose(fd);
 
 LEAVE:
-#ifdef STD_INCLUDED
   depth--;
-#else
-  pop_expand_stack(depth--);
+#ifdef NO_STD_HEAD_FILE
+  pop_expand_stack();
 #endif
 
   leaving_frame();
@@ -201,7 +201,7 @@ include_name(char *filename, char *start)
   return;
 }
 
-#ifdef STD_INCLUDED
+#ifdef STD_HEAD_FILE
 static int
 isvalid_headfile(const char *filename)
 {
@@ -224,8 +224,9 @@ isvalid_headfile(const char *filename)
   leaving_frame();
   return !standard;
 }
+#endif
 
-#else
+#ifdef NO_STD_HEAD_FILE
 static int
 isvalid_headfile(const char *filename)
 {
@@ -235,7 +236,7 @@ isvalid_headfile(const char *filename)
 
   repeated = 0;
   stack_top = expand_stack;
-  while(stack_top < expand_stack + depth)
+  while(stack_top < expand_stack + exstack_top)
   {
     if(!strcmp(filename, *stack_top++))
     {
@@ -245,19 +246,19 @@ isvalid_headfile(const char *filename)
   }
 
   if(!repeated)
-    memcpy(expand_stack[depth], filename, strlen(filename));
+    memcpy(expand_stack[exstack_top++], filename, strlen(filename));
 
   leaving_frame();
   return !repeated;
 }
 
 static void
-pop_expand_stack(int top)
+pop_expand_stack(void)
 {
   entering_frame("pop_expand_stack");
 
-  memset(expand_stack[top], 0, FILENAME_LENGTH);
-
+  memset(expand_stack[--exstack_top], 0, FILENAME_LENGTH);
+  
   leaving_frame();
   return;
 }
@@ -267,12 +268,15 @@ static void
 print_result(char *fmt, ...)
 {
   va_list vl;
+  va_list vl_cp;
   entering_frame("print_result");
 
   va_start(vl, fmt);
-  fprintf(stdout, fmt, vl);
-  fprintf(hwork_rept, fmt, vl);
+  va_copy(vl_cp, vl);
+  vfprintf(stdout, fmt, vl);
+  vfprintf(hwork_rept, fmt, vl_cp);
 	va_end(vl);
+  va_end(vl_cp);
 
   leaving_frame();
   return;
