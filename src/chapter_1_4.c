@@ -29,10 +29,10 @@ report_header1_4(FILE *fd)
   fprintf(fd, "\n-----------------------------");
   fprintf(fd, "Chapter 1-4");
   fprintf(fd, "-------------------------------\n\n");
-  fprintf(fd, 
+  fprintf(fd,
     "                               Expanding #include\n\n");
   fprintf(fd, "TIME: %s", ctime((const time_t *)&date));
-  
+
   leaving_frame();
   return;
 }
@@ -52,10 +52,10 @@ dochapter1_4()
   while(filename < 
     sourcefiles + sizeof(sourcefiles) / sizeof(sourcefiles[0]))
   {
-	  print_result("\n>>>>>>>> %s <<<<<<<<\n", *filename);
+    print_result("\n>>>>>>>> %s <<<<<<<<\n", *filename);
     expand_file(*filename++);
   }
-  
+
   leaving_frame();
   return;
 }
@@ -73,7 +73,7 @@ expand_file(char *filename)
   fd = find_quoted_file(filename);
   if(NULL == fd)
   {
-    print_result("%.*s=No Such[%s] File.\n", 
+    print_result("%.*s=No Such[%s] File.\n",
       depth, blank, filename);
     goto LEAVE;
   }
@@ -95,8 +95,8 @@ expand_file(char *filename)
     }
     memset(each_line, 0, MAX_WIDTH_OF_LINE);
     fgets(each_line, MAX_WIDTH_OF_LINE, fd);
-  } 
-  
+  }
+
   fclose(fd);
 
 LEAVE:
@@ -141,7 +141,7 @@ isinclude(char *line)
   char *index;
   register char *start;
   entering_frame("isinclude");
-  
+
   assert(NULL != line);
   start = line;
   index = NULL;
@@ -261,7 +261,7 @@ pop_expand_stack(void)
   entering_frame("pop_expand_stack");
 
   memset(expand_stack[--exstack_top], 0, FILENAME_LENGTH);
-  
+
   leaving_frame();
   return;
 }
@@ -278,7 +278,7 @@ print_result(char *fmt, ...)
   va_copy(vl_cp, vl);
   vfprintf(stdout, fmt, vl);
   vfprintf(hwork_rept, fmt, vl_cp);
-	va_end(vl);
+  va_end(vl);
   va_end(vl_cp);
 
   leaving_frame();

@@ -10,9 +10,9 @@ void
 chapt_1_1(void)
 {
   register int *pos;
-  int dsize[] = {10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 500, 
-	  1000, 5000, 10000, 50000, 100000, 500000, 1000000, 5000000, 
-		10000000, 20000000, 30000000, 40000000, 50000000,};
+  int dsize[] = {10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 500,
+   1000, 5000, 10000, 50000, 100000, 500000, 1000000, 5000000,
+   10000000, 20000000, 30000000, 40000000, 50000000,};
 
   entering_frame("chapt_1_1");
   report_header1_1(stdout);
@@ -20,7 +20,7 @@ chapt_1_1(void)
   pos = dsize;
   while(pos < dsize + sizeof(dsize) / sizeof(dsize[0]))
     dochapter1_1(*pos++);
-  
+
   leaving_frame();
   return;
 }
@@ -46,7 +46,7 @@ dochapter1_1(int data_size)
   entry.validate = result_validate(
     dinput, data_size, entry.kvalue);
   report_data(&entry);
-   
+
   free(dinput);
   dinput = NULL;
 
@@ -62,7 +62,7 @@ selection_problem(int *data, int size, int key)
   int data_size;
   int start;
   int index;
- 
+
   entering_frame("selection_problem");
   assert(NULL != data);
   start = 0;
@@ -92,7 +92,7 @@ selection_problem(int *data, int size, int key)
       break;
   }
   index = start + data_size - big_cnt;
-  
+
   leaving_frame();
   return data[index];
 }
@@ -125,7 +125,7 @@ split_data(int *data, int start, int len)
     exchange(data + i, data + j);
   }
   exchange(data + start, data + j);
-  
+
   leaving_frame();
   return len - (j - start);
 }
@@ -144,12 +144,12 @@ data_prepare(int data_size)
   random_data = calloc(sizeof(int), data_size);
   if(NULL == random_data)
     error_handle("calloc");
-  
+
   pos = random_data;
   srand((unsigned)time(NULL));
   while(pos < random_data + data_size)
     *pos++ = ((unsigned)DATA_MAX >> 1) - (rand() % DATA_MAX);
- 
+
   leaving_frame();
   return random_data;
 }
@@ -165,14 +165,14 @@ report_header1_1(FILE *fd)
   fprintf(fd, "\n-----------------------------");
   fprintf(fd, "Chapter 1-1");
   fprintf(fd, "-------------------------------\n\n");
-  fprintf(fd, 
+  fprintf(fd,
     "                               Selection problem\n\n");
   fprintf(fd, "TIME: %s", ctime((const time_t *)&date));
-	fprintf(fd, "\nASTRINGENT: O(N*logN)\n");
+  fprintf(fd, "\nASTRINGENT: O(N*logN)\n");
 
-  fprintf(fd, 
+  fprintf(fd,
     "No.     DATA_SIZE         KVALUE:VALIDATION     "
-		"TIME(usec)=>ASTRINGENT\n");
+    "TIME(usec)=>ASTRINGENT\n");
 
   leaving_frame();
   return;
@@ -185,12 +185,12 @@ report_data(struct rept_entry *rept)
   static int number = 1;
 
   entering_frame("report_data");
-  fprintf(stdout, 
+  fprintf(stdout,
     "%2d     %10d     %10d:%10d     %10u=>%10.6f\n",
     number, rept->data_size, rept->kvalue,
     rept->validate, rept->usec_cost, rept->astringent);
 
-  fprintf(hwork_rept, 
+  fprintf(hwork_rept,
     "%2d     %10d     %10d:%10d     %10u=>%10.6f\n",
     number, rept->data_size, rept->kvalue,
     rept->validate, rept->usec_cost, rept->astringent);
@@ -211,15 +211,14 @@ result_validate(int *data, int len, int key)
   entering_frame("result_validate");
   assert(NULL != data);
   pos = data;
-  
+
   cnt = 0;
   while(pos < data + len)
   {
     if(*pos++ >= key)
       cnt++;
   }
-  
+
   leaving_frame();
   return cnt;
 }
-

@@ -32,7 +32,7 @@ print_stack_traces(void)
   {
     if(NULL != *start_stack)
     {
-      fprintf(stdout, "%.*s => [%d]%s\n", count, indent, 
+      fprintf(stdout, "%.*s => [%d]%s\n", count, indent,
         count, *start_stack);
     }
     start_stack++;

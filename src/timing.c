@@ -14,13 +14,13 @@ timing_start()
   return;
 }
 
-void 
+void
 timing_end(unsigned *usec)
 {
   gettimeofday(&timePoint_end,NULL);
   *usec = timing_cost();
 
-  return; 
+  return;
 }
 
 static unsigned

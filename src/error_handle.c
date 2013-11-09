@@ -13,7 +13,7 @@ error_handle(const char *message)
 
   if(NULL == message)
     message = unknown;
-   
+
   fprintf(stdout, "break at %s. ", message);
   fprintf(stdout, "%02d =>%s\n", errno, strerror(errno));
   print_stack_traces();
