@@ -3,6 +3,8 @@
 
 extern struct timeval timePoint_start;
 extern struct timeval timePoint_end;
+extern void enter(const char *);
+extern void leave(void);
 
 
 void

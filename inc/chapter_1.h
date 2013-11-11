@@ -60,13 +60,17 @@ timing_end(unsigned *);
 extern void
 exchange(int *, int *);
 extern void
-leaving_frame(void);
+leave(void);
 extern void
-entering_frame(const char *);
+enter(const char *);
+extern void
+print_report_header(FILE *, const char *, int, int);
 
 
 void
 chapt_1_1(void);
+void
+chapt_1_4(void);
 
 
 static int *
@@ -75,11 +79,7 @@ static int
 selection_problem(int *, int, int);
 static int
 split_data(int *, int, int);
-static void
-report_header1_1(FILE *);
-static void
-report_header1_4(FILE *);
-static int 
+static int
 result_validate(int *, int, int);
 static void
 report_data(struct rept_entry *);
@@ -101,6 +101,8 @@ static int
 isvalid_headfile(const char *);
 static void
 print_result(char *fmt, ...);
+static void
+print_algo_info(FILE *);
 
 
 #endif

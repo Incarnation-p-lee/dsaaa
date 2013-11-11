@@ -17,15 +17,15 @@ int
 main(int argc, char **argv)
 {
   register HOMEWORK *hw_entry = homework;
-  
-  entering_frame("main");
+
+  enter("main");
   filepointer_init();
-  
+
   while(hw_entry < homework + sizeof(homework) / sizeof(HOMEWORK))
     (*hw_entry++)();
 
   filepointer_close();
-  leaving_frame();
+  leave();
 
   return EXIT_SUCCESS;
 }

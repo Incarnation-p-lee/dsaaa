@@ -9,7 +9,6 @@
 #endif
 
 
-
 #define DATA_MAX                   1024000
 #define TRACE_DEPTH                4098
 #define MAX_WIDTH_OF_LINE          120
@@ -25,6 +24,7 @@
 #define FILENAME_LENGTH            32
 #endif
 
+
 typedef void (*HOMEWORK)(void);
 
 typedef struct rept_entry{
@@ -34,5 +34,14 @@ typedef struct rept_entry{
   unsigned usec_cost;
   double   astringent;
 }REPT_entry;
+
+typedef struct gen_random_report{
+  unsigned usec;
+  int      dimension;
+  char     *outline;
+  int      start;
+  int      end;
+}GR_report;
+
 
 #endif

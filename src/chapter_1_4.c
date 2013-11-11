@@ -9,36 +9,19 @@
 void
 chapt_1_4(void)
 {
-  entering_frame("chapt_1_4");
+  enter("chapt_1_4");
 
-  report_header1_4(stdout);
-  report_header1_4(hwork_rept);
+  print_report_header(stdout, "Expanding Header Files", 1, 4);
+  print_report_header(hwork_rept, "Expanding Header Files", 1, 4);
   dochapter1_4();
 
-  leaving_frame();
+  leave();
   return;
 }
 
 
 static void
-report_header1_4(FILE *fd)
-{
-  time_t date;
-  entering_frame("report_header");
-
-  fprintf(fd, "\n-----------------------------");
-  fprintf(fd, "Chapter 1-4");
-  fprintf(fd, "-------------------------------\n\n");
-  fprintf(fd,
-    "                               Expanding #include\n\n");
-  fprintf(fd, "TIME: %s", ctime((const time_t *)&date));
-
-  leaving_frame();
-  return;
-}
-
-static void
-dochapter1_4()
+dochapter1_4(void)
 {
   register char **filename;
   char *sourcefiles[] = {
@@ -46,7 +29,7 @@ dochapter1_4()
     "chapter_1.c",
     "externals.h",
   };
-  entering_frame("dochapter1_4");
+  enter("dochapter1_4");
 
   filename = sourcefiles;
   while(filename < 
@@ -56,7 +39,7 @@ dochapter1_4()
     expand_file(*filename++);
   }
 
-  leaving_frame();
+  leave();
   return;
 }
 
@@ -67,7 +50,7 @@ expand_file(char *filename)
   char each_line[MAX_WIDTH_OF_LINE];
   char name[MAX_WIDTH_OF_LINE];
   char *current;
-  entering_frame("expand_file");
+  enter("expand_file");
 
   depth++;
   fd = find_quoted_file(filename);
@@ -105,7 +88,7 @@ LEAVE:
   pop_expand_stack();
 #endif
 
-  leaving_frame();
+  leave();
   return;
 }
 
@@ -115,7 +98,7 @@ find_quoted_file(const char *filename)
   FILE *fd;
   char **paths;
   char fullname[FULL_NAME_LENGTH];
-  entering_frame("find_quote_file");
+  enter("find_quote_file");
 
   fd = NULL;
   paths = include_path;
@@ -131,7 +114,7 @@ find_quoted_file(const char *filename)
     paths++;
   }
 
-  leaving_frame();
+  leave();
   return fd;
 }
 
@@ -140,7 +123,7 @@ isinclude(char *line)
 {
   char *index;
   register char *start;
-  entering_frame("isinclude");
+  enter("isinclude");
 
   assert(NULL != line);
   start = line;
@@ -156,7 +139,7 @@ isinclude(char *line)
     }
   }
 
-  leaving_frame();
+  leave();
   return index;
 }
 
@@ -166,7 +149,7 @@ keyword_valid(char *index)
   char line[MAX_WIDTH_OF_LINE];
   char *key_word;
   int valid;
-  entering_frame("keyword_valid");
+  enter("keyword_valid");
 
   memset(line, 0, MAX_WIDTH_OF_LINE);
   memcpy(line, index, strlen(index));
@@ -179,7 +162,7 @@ keyword_valid(char *index)
   else
     valid = 0;
 
-  leaving_frame();
+  leave();
   return valid;
 }
 
@@ -188,7 +171,7 @@ include_name(char *filename, char *start)
 {
   char *index;
   char raw[MAX_WIDTH_OF_LINE];
-  entering_frame("include_name");
+  enter("include_name");
 
   memset(raw, 0, MAX_WIDTH_OF_LINE);
   memcpy(raw, start, strlen(start));
@@ -199,7 +182,7 @@ include_name(char *filename, char *start)
   memset(filename, 0, MAX_WIDTH_OF_LINE);
   memcpy(filename, index, strlen(index));
 
-  leaving_frame();
+  leave();
   return;
 }
 
@@ -209,7 +192,7 @@ isvalid_headfile(const char *filename)
 {
   register char **stdname;
   int standard;
-  entering_frame("isvalid_headfile");
+  enter("isvalid_headfile");
 
   standard = 0;
   stdname = std_head;
@@ -223,7 +206,7 @@ isvalid_headfile(const char *filename)
     }
   }
 
-  leaving_frame();
+  leave();
   return !standard;
 }
 #endif
@@ -234,7 +217,7 @@ isvalid_headfile(const char *filename)
 {
   register char (*stack_top)[FILENAME_LENGTH];
   int repeated;
-  entering_frame("isvalid_headfile");
+  enter("isvalid_headfile");
 
   repeated = 0;
   stack_top = expand_stack;
@@ -251,18 +234,18 @@ isvalid_headfile(const char *filename)
     memcpy(expand_stack[exstack_top++], 
       filename, strlen(filename));
 
-  leaving_frame();
+  leave();
   return !repeated;
 }
 
 static void
 pop_expand_stack(void)
 {
-  entering_frame("pop_expand_stack");
+  enter("pop_expand_stack");
 
   memset(expand_stack[--exstack_top], 0, FILENAME_LENGTH);
 
-  leaving_frame();
+  leave();
   return;
 }
 #endif
@@ -272,7 +255,7 @@ print_result(char *fmt, ...)
 {
   va_list vl;
   va_list vl_cp;
-  entering_frame("print_result");
+  enter("print_result");
 
   va_start(vl, fmt);
   va_copy(vl_cp, vl);
@@ -281,6 +264,6 @@ print_result(char *fmt, ...)
   va_end(vl);
   va_end(vl_cp);
 
-  leaving_frame();
+  leave();
   return;
 }

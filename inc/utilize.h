@@ -3,6 +3,8 @@
 
 
 extern FILE *hwork_rept;
+extern void enter(const char *);
+extern void leave();
 
 
 void
@@ -17,6 +19,13 @@ void
 leaving_frame(void);
 void
 print_stack_traces(void);
+void
+print_report_header(FILE *, const char *, int, int);
+void
+malloc_initial(void **, unsigned int);
+void
+saft_free(void **);
+
 
 static const char *stack_traces[TRACE_DEPTH];
 static int top_index = 0;

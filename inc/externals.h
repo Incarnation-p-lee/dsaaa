@@ -3,9 +3,9 @@
 
 
 extern void
-entering_frame(const char *);
+enter(const char *);
 extern void
-leaving_frame(void);
+leave(void);
 extern void
 filepointer_init(void);
 extern void

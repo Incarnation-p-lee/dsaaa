@@ -3,7 +3,8 @@
 .SUFFIXES: .o .a .so .c .h .s
 SHELL         =/bin/sh
 CC            =gcc
-SRC           =main.c chapter_1.c evaluation.c utilize.c
+SRC           =main.c chapter_1.c evaluation.c utilize.c\
+               chapter_2.c
 
 COVERAGE      =-fprofile-arcs -ftest-coverage
 OBJ           =$(patsubst %.c, %.o, $(SRC))
@@ -13,7 +14,7 @@ INC           =-I$(INCH) -I$(INCS)
 TARGET        =dsaaa.out
 FDPS          =fdependent
 OBJDIR        =obj
-CFLAG         =-c -g -Wall -pg -Werror $(COVERAGE)
+CFLAG         =-c -g -Wall -pg $(COVERAGE)
 LFLAG         =-pg $(COVERAGE)
 EXRLIB        =-lm
 
