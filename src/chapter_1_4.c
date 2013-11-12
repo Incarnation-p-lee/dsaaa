@@ -36,7 +36,7 @@ dochapter1_4(void)
   while(filename < 
     sourcefiles + sizeof(sourcefiles) / sizeof(sourcefiles[0]))
   {
-    print_result("\n>>>>>>>> %s <<<<<<<<\n", *filename);
+    expand_report("\n>>>>>>>> %s <<<<<<<<\n", *filename);
     expand_file(*filename++);
   }
 
@@ -54,10 +54,10 @@ expand_file(char *filename)
   enter("expand_file");
 
   depth++;
-  fd = find_quoted_file(filename);
+  fd = open_included_file(filename);
   if(NULL == fd)
   {
-    print_result("%.*s=No Such[%s] File.\n",
+    expand_report("%.*s=No Such[%s] File.\n",
       depth, blank, filename);
     goto LEAVE;
   }
@@ -67,14 +67,14 @@ expand_file(char *filename)
   while(!feof(fd))
   {
     if(!depth)
-      print_result("%s", each_line);
+      expand_report("%s", each_line);
 
-    current = isinclude(each_line);
+    current = include_line(each_line);
     if(current)
     {
-      include_name(name, current);
-      print_result(" %.*s+%s\n", depth, blank, name);
-      if(isvalid_headfile(name))
+      include_filename(name, current);
+      expand_report(" %.*s+%s\n", depth, blank, name);
+      if(expand_file_filter(name))
         expand_file(name);
     }
     memset(each_line, 0, MAX_WIDTH_OF_LINE);
@@ -94,7 +94,7 @@ LEAVE:
 }
 
 static FILE *
-find_quoted_file(const char *filename)
+open_included_file(const char *filename)
 {
   FILE *fd;
   char **paths;
@@ -120,11 +120,11 @@ find_quoted_file(const char *filename)
 }
 
 static char *
-isinclude(char *line)
+include_line(char *line)
 {
   char *index;
   register char *start;
-  enter("isinclude");
+  enter("include_line");
 
   assert(NULL != line);
   start = line;
@@ -134,7 +134,7 @@ isinclude(char *line)
     if('#' == *start++)
     {
       index = start;
-      if(!keyword_valid(index))
+      if(!isvalid_include(index))
         index = NULL;
       break;
     }
@@ -145,12 +145,12 @@ isinclude(char *line)
 }
 
 static int
-keyword_valid(char *index)
+isvalid_include(char *index)
 {
   char line[MAX_WIDTH_OF_LINE];
   char *key_word;
   int valid;
-  enter("keyword_valid");
+  enter("isvalid_include");
 
   memset(line, 0, MAX_WIDTH_OF_LINE);
   memcpy(line, index, strlen(index));
@@ -168,11 +168,11 @@ keyword_valid(char *index)
 }
 
 static void
-include_name(char *filename, char *start)
+include_filename(char *filename, char *start)
 {
   char *index;
   char raw[MAX_WIDTH_OF_LINE];
-  enter("include_name");
+  enter("include_filename");
 
   memset(raw, 0, MAX_WIDTH_OF_LINE);
   memcpy(raw, start, strlen(start));
@@ -189,11 +189,11 @@ include_name(char *filename, char *start)
 
 #ifdef STD_HEAD_FILE
 static int
-isvalid_headfile(const char *filename)
+expand_file_filter(const char *filename)
 {
   register char **stdname;
   int standard;
-  enter("isvalid_headfile");
+  enter("expand_file_filter");
 
   standard = 0;
   stdname = std_head;
@@ -214,11 +214,11 @@ isvalid_headfile(const char *filename)
 
 #ifdef NO_STD_HEAD_FILE
 static int
-isvalid_headfile(const char *filename)
+expand_file_filter(const char *filename)
 {
   register char (*stack_top)[FILENAME_LENGTH];
   int repeated;
-  enter("isvalid_headfile");
+  enter("expand_file_filter");
 
   repeated = 0;
   stack_top = expand_stack;
@@ -252,11 +252,11 @@ pop_expand_stack(void)
 #endif
 
 static void
-print_result(char *fmt, ...)
+expand_report(char *fmt, ...)
 {
   va_list vl;
   va_list vl_cp;
-  enter("print_result");
+  enter("expand_report");
 
   va_start(vl, fmt);
   va_copy(vl_cp, vl);

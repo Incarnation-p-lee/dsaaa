@@ -74,15 +74,15 @@ chapt_1_4(void);
 
 
 static int *
-data_prepare(int);
+selection_data_prepare(int);
 static int
 selection_problem(int *, int, int);
 static int
-split_data(int *, int, int);
+selection_split(int *, int, int);
 static int
-result_validate(int *, int, int);
+selection_validate(int *, int, int);
 static void
-report_data(struct rept_entry *);
+selection_data(struct rept_entry *);
 static void
 dochapter1_1(int);
 static void
@@ -90,17 +90,17 @@ dochapter1_4(void);
 static void
 expand_file(char *);
 static char *
-isinclude(char*);
+include_line(char*);
 static void
-include_name(char *, char *);
+include_filename(char *, char *);
 static FILE *
-find_quoted_file(const char *);
+open_included_file(const char *);
 static int
-keyword_valid(char *);
+isvalid_include(char *);
 static int
-isvalid_headfile(const char *);
+expand_file_filter(const char *);
 static void
-print_result(char *fmt, ...);
+expand_report(char *fmt, ...);
 static void
 print_algo_info(FILE *);
 

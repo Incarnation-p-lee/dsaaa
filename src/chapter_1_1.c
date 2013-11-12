@@ -52,7 +52,7 @@ dochapter1_1(int data_size)
 
   enter("do_chapter");
   entry.data_size = data_size;
-  dinput = data_prepare(data_size);
+  dinput = selection_data_prepare(data_size);
 
   TIME_START;
   entry.kvalue = selection_problem(
@@ -61,10 +61,10 @@ dochapter1_1(int data_size)
 
   entry.astringent = (double)entry.usec_cost / 
     (log(data_size) * data_size);
-  entry.validate = result_validate(
+  entry.validate = selection_validate(
     dinput, data_size, entry.kvalue);
 
-  report_data(&entry);
+  selection_data(&entry);
 
   free(dinput);
   dinput = NULL;
@@ -88,7 +88,7 @@ selection_problem(int *data, int size, int key)
   data_size = size;
   while(1)
   {
-    big_cnt = split_data(data, start, data_size);
+    big_cnt = selection_split(data, start, data_size);
     /*----------------------------------------------------------*/
     /* if the count of big part is less than key, reset the data*/
     /* and update rest key.                                     */
@@ -121,13 +121,13 @@ selection_problem(int *data, int size, int key)
 /* Return the count of big part include the key value.          */
 /*--------------------------------------------------------------*/
 static int
-split_data(int *data, int start, int len)
+selection_split(int *data, int start, int len)
 {
   int key;
   int i;
   int j;
 
-  enter("split_data");
+  enter("selection_split");
   if(len < 0)
     return -1;
 
@@ -152,14 +152,14 @@ split_data(int *data, int start, int len)
 
 
 static int*
-data_prepare(int data_size)
+selection_data_prepare(int data_size)
 {
   register int *pos;
   int *random_data;
 
-  enter("data_prepare");
+  enter("selection_data_prepare");
   if(0 >= data_size)
-    error_handle("data_prepare");
+    error_handle("selection_data_prepare");
 
   random_data = calloc(sizeof(int), data_size);
   if(NULL == random_data)
@@ -176,11 +176,11 @@ data_prepare(int data_size)
 
 
 static void
-report_data(struct rept_entry *rept)
+selection_data(struct rept_entry *rept)
 {
   static int number = 1;
 
-  enter("report_data");
+  enter("selection_data");
   fprintf(stdout,
     "%2d     %10d     %10d:%10d     %10u=>%10.6f\n",
     number, rept->data_size, rept->kvalue,
@@ -199,12 +199,12 @@ report_data(struct rept_entry *rept)
 
 
 static int
-result_validate(int *data, int len, int key)
+selection_validate(int *data, int len, int key)
 {
   register int *pos;
   int cnt;
 
-  enter("result_validate");
+  enter("selection_validate");
   assert(NULL != data);
   pos = data;
 

@@ -36,8 +36,6 @@ random_sequence(int, int);
 static void
 generate_random(int *, int, int,
   int (*)(const int *, int, int));
-static int
-isrepeated_util(const int *, int, int);
 static void
 print_random_title(FILE *);
 static void
@@ -48,7 +46,7 @@ static int (*repeats[])(const int *, int, int) = {
   &isrepeated_util,
 };
 
-static char *vechile_name[] = {
+static char *vehicle_name[] = {
   "Until Diffence",
 };
 

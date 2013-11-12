@@ -68,7 +68,7 @@ random_sequence(int start, int end)
   data.end = end;
 
   iterator = repeats;
-  title = vechile_name;
+  title = vehicle_name;
   while(iterator < repeats + sizeof(repeats) / sizeof(repeats[0]))
   {
     malloc_initial((void **)&seq_array,

@@ -15,7 +15,6 @@ my $dst_word;
 
 sub get_all_files{
   my $dir = shift @_;
-  say "=>Progressing directory " . "[$dir]" . ".";
   opendir START_DIR, $dir or
     die "Failed to open directory.\n  $!";
 
@@ -25,8 +24,7 @@ sub get_all_files{
     if(-d $fullname){
 		  &get_all_files($fullname);
 		}else{
-			if(/\w\.[c|h]m?$/a){
-        say "Operating on $_";
+			if(/\w\.[c|h|m]$/a){
         &read_source_file($fullname);
         &write_source_file($fullname);
         @lines = undef;
@@ -50,19 +48,29 @@ sub write_source_file{
 }
 
 sub read_source_file{
+  my $line = 0;
   my $filename = shift @_;
+  my $print_once = undef;
 
   open SOURCE_FILE, '<', $filename or
     die "Failed to open source file: [$filename].\n  $!";
   
   while(<SOURCE_FILE>){
-    s/$raw_word/$dst_word/g;
+    $line++;
+    if(/$raw_word/){
+      if(!$print_once){
+        $print_once = "printed";
+        say "operating $filename ...";
+      }
+      printf " -%4d $_", $line;
+      s/$raw_word/$dst_word/g;
+      printf " +%4d $_", $line;
+    }
     push @lines, $_;
   }
 
   close(SOURCE_FILE);
 }
-
 
 sub option_check{
   $raw_word = shift @ARGV;
