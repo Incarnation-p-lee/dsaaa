@@ -27,6 +27,7 @@ dochapter2_7(void)
     1,    10,
     10,   20,
     1,   100,
+    100, 600,
     10, 1000,
     20, 3000,
   };
@@ -35,6 +36,7 @@ dochapter2_7(void)
 
   print_random_title(stdout);
   print_random_title(hwork_rept);
+  srand((unsigned)time(NULL));
 
   iterator = ranges;
   while(iterator < ranges + sizeof(ranges) / sizeof(ranges[0]))
@@ -56,9 +58,9 @@ random_sequence(int start, int end)
   int (**iterator)(const int *, int, int);
   struct gen_random_report data;
   char **title;
+  int loc;
   enter("random_replacement");
 
-  srand((unsigned)time(NULL));
   if(start > end)
     error_handle("Index out of range");
 
@@ -75,13 +77,16 @@ random_sequence(int start, int end)
       seq_size * sizeof(*seq_array));
     data.outline = *title++;
 
+    loc = -1;
     TIME_START;
-    generate_random(seq_array, start, end, *iterator++);
+    while(loc++ < REPEAT_COUNT)
+      generate_random(seq_array, start, end, *iterator);
     TIME_END(&data.usec);
 
     print_random_report(stdout, seq_array, &data);
     print_random_report(hwork_rept, seq_array, &data);
     saft_free((void **)&seq_array);
+    iterator++;
   }
 
   leave();
@@ -94,7 +99,7 @@ print_random_title(FILE *fd)
   enter("print_random_title");
 
   fprintf(fd, "\nNUM_START      END  DIMENSION  "
-    "TIME(usec)  DESCRIPTION\n");
+    "  TIME(usec)  DESCRIPTION\n");
 
   leave();
   return;
@@ -106,10 +111,9 @@ print_random_report(FILE *fd, int *data,
 {
   enter("print_random_report");
 
-
-  fprintf(fd, " %8d %8d   %8d    %8d  %s\n",
+  fprintf(fd, " %8d %8d   %8d    %10.4f  %s\n",
     rreport->start, rreport->end,
-    rreport->dimension, rreport->usec,
+    rreport->dimension, (double)rreport->usec / REPEAT_COUNT,
     rreport->outline);
 
   leave();
@@ -131,9 +135,8 @@ generate_random(int *seq, int start, int end,
   {
     while(1)
     {
-      raw_value = rand() % (end + 1);
-      raw_value = (raw_value + start) % (end + 1);
-      if(!isrepeated(seq, iterator - seq + 1, raw_value))
+      raw_value = rand() % (end - start + 1) + start;
+      if(!isrepeated(seq, iterator - seq, raw_value))
       {
         *iterator++ = raw_value;
         break;
@@ -160,7 +163,10 @@ isrepeated_util(const int *seq, int size, int raw)
   while(iterator < seq + size)
   {
     if(*iterator++ == raw)
+    {
       repeated = 1;
+      break;
+    }
   }
 
   leave();

@@ -13,6 +13,7 @@
 #define TRACE_DEPTH                4098
 #define MAX_WIDTH_OF_LINE          120
 #define FULL_NAME_LENGTH           256
+#define REPEAT_COUNT               100
 #define FILENAME_SPLITER           "\"< >"
 
 #define TIME_START       timing_start()
@@ -32,6 +33,7 @@ typedef struct rept_entry{
   int      data_size;
   int      validate;
   unsigned usec_cost;
+  int      count;
   double   astringent;
 }REPT_entry;
 
