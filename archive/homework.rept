@@ -3,42 +3,179 @@
 
                                Selection Problem
 
-TIME: Tue Nov 12 11:04:19 2013
+TIME: Tue Nov 12 11:19:54 2013
 
 ASTRINGENT: O(N*logN)
 No.     DATA_SIZE         KVALUE:VALIDATION     TIME(usec)=>ASTRINGENT
- 1             10          40482:         5              2=>  0.086859
- 2             20         168889:        10              2=>  0.033381
- 3             30         -13397:        15              3=>  0.029401
- 4             40          40482:        20              3=>  0.020331
- 5             50         -17615:        25              4=>  0.020450
- 6             60         -17615:        30              3=>  0.012212
- 7             70         -13397:        35              6=>  0.020175
- 8             80          32979:        40              7=>  0.019968
- 9             90           6292:        45              6=>  0.014815
-10            100         -17615:        50              4=>  0.008686
-11            500         -24315:       250             38=>  0.012229
-12           1000         -33164:       500             66=>  0.009554
-13           5000          -2880:      2500            283=>  0.006645
-14          10000           2105:      5000            755=>  0.008197
-15          50000           -883:     25000           2667=>  0.004930
-16         100000           -145:     50000           4976=>  0.004322
-17         500000            441:    250000          11113=>  0.001694
-18        1000000             84:    500000          29042=>  0.002102
-19        5000000           -150:   2500009          73043=>  0.000947
-20       10000000            -86:   5000002         299944=>  0.001861
+ 1             10         250242:         5              2=>  0.086859
+ 2             20         224707:        10              2=>  0.033381
+ 3             30         247036:        15              2=>  0.019601
+ 4             40          54306:        20              5=>  0.033886
+ 5             50          53109:        25              2=>  0.010225
+ 6             60          10831:        30              5=>  0.020353
+ 7             70          10831:        35              5=>  0.016813
+ 8             80          42705:        40              6=>  0.017115
+ 9             90          42705:        45              7=>  0.017285
+10            100          42705:        50              7=>  0.015200
+11            500          21142:       250             25=>  0.008046
+12           1000           4513:       500             57=>  0.008252
+13           5000         -12691:      2500            335=>  0.007866
+14          10000          -4641:      5000            709=>  0.007698
+15          50000            309:     25000           3478=>  0.006429
+16         100000            309:     50000           5544=>  0.004815
+17         500000            566:    250002          14107=>  0.002150
+18        1000000            -92:    500000          28146=>  0.002037
+19        5000000           -133:   2500002         133250=>  0.001728
+20       10000000             46:   5000000         275909=>  0.001712
 
 -----------------------------Chapter 01-04-------------------------------
 
                                Expanding Header Fil
 
-TIME: Tue Nov 12 11:04:20 2013
+TIME: Tue Nov 12 11:19:55 2013
 
->>>>>>>> main.c <<<<<<<<
-=No Such[main.c] File.
+>>>>>>>> main.m <<<<<<<<
+/*--------------------------------------------------------------*/
+/*-AUTHOR:      Incarnation.P Lee                               */
+/*-DATE:        08042013                                        */
+/*-WHAT:        Homework of DSAAA                               */
+/*-REVISION:                                                    */
+/*- DATE ------------------------ DESCRIPTION ------------------*/
+/*- 08042013    CHAPTER 1. Initilize the program.              -*/
+/*- 10242013    CHAPTER 1. Add function pointer.               -*/
+/*-                        Start chapter1.2                    -*/
+/*--------------------------------------------------------------*/
+#include "include.h"
+ +include.h
+  +stdio.h
+  +string.h
+  +stddef.h
+  +assert.h
+  +limits.h
+  +stdlib.h
+  +stdarg.h
+  +errno.h
+  +time.h
+  +ctype.h
+  +math.h
+  +sys/types.h
+  +sys/stat.h
+  +sys/wait.h
+  +sys/time.h
+  +sys/mman.h
+  +unistd.h
+  +fcntl.h
+  +netinet/in.h
+  +sys/socket.h
+  +arpa/inet.h
+  +pthread.h
+#include "defs.h"
+ +defs.h
+#include "vars.h"
+ +vars.h
+#include "externals.h"
+ +externals.h
 
->>>>>>>> chapter_1.c <<<<<<<<
-=No Such[chapter_1.c] File.
+int
+main(int argc, char **argv)
+{
+  register HOMEWORK *hw_entry = homework;
+
+  enter("main");
+  filepointer_init();
+
+  while(hw_entry < homework + sizeof(homework) / sizeof(HOMEWORK))
+    (*hw_entry++)();
+
+  filepointer_close();
+  leave();
+
+  return EXIT_SUCCESS;
+}
+
+>>>>>>>> chapter_1.m <<<<<<<<
+#include "include.h"
+ +include.h
+  +stdio.h
+  +string.h
+  +stddef.h
+  +assert.h
+  +limits.h
+  +stdlib.h
+  +stdarg.h
+  +errno.h
+  +time.h
+  +ctype.h
+  +math.h
+  +sys/types.h
+  +sys/stat.h
+  +sys/wait.h
+  +sys/time.h
+  +sys/mman.h
+  +unistd.h
+  +fcntl.h
+  +netinet/in.h
+  +sys/socket.h
+  +arpa/inet.h
+  +pthread.h
+#include "defs.h"
+ +defs.h
+#include "chapter_1.h"
+ +chapter_1.h
+
+#include "chapter_1_1.c"
+ +chapter_1_1.c
+#include "chapter_1_4.c"
+ +chapter_1_4.c
+
+>>>>>>>> defs.h <<<<<<<<
+#ifndef DEFINES_H
+#define DEFINES_H
+
+
+#if 1
+#define STD_HEAD_FILE
+#else
+#define NO_STD_HEAD_FILE
+#endif
+
+
+#define DATA_MAX                   1024000
+#define TRACE_DEPTH                4098
+#define MAX_WIDTH_OF_LINE          120
+#define FULL_NAME_LENGTH           256
+#define FILENAME_SPLITER           "\"< >"
+
+#define TIME_START       timing_start()
+#define TIME_END(usec)   timing_end(usec)
+
+
+#ifdef NO_STD_HEAD_FILE
+#define EXPAND_DEPTH               128
+#define FILENAME_LENGTH            32
+#endif
+
+
+typedef void (*HOMEWORK)(void);
+
+typedef struct rept_entry{
+  int      kvalue;
+  int      data_size;
+  int      validate;
+  unsigned usec_cost;
+  double   astringent;
+}REPT_entry;
+
+typedef struct gen_random_report{
+  unsigned usec;
+  int      dimension;
+  char     *outline;
+  int      start;
+  int      end;
+}GR_report;
+
+
+#endif
 
 >>>>>>>> externals.h <<<<<<<<
 #ifndef EXTERNALS_H
@@ -65,11 +202,11 @@ chapt_1_4(void);
 
                                Random Generation
 
-TIME: Tue Nov 12 11:04:20 2013
+TIME: Tue Nov 12 11:19:55 2013
 
 NUM_START      END  DIMENSION  TIME(usec)  DESCRIPTION
-        1       10         10           4  Until Diffence
+        1       10         10           2  Until Diffence
        10       20         11           1  Until Diffence
-        1      100        100          98  Until Diffence
-       10     1000        991        6956  Until Diffence
-       20     3000       2981       65838  Until Diffence
+        1      100        100          89  Until Diffence
+       10     1000        991        6662  Until Diffence
+       20     3000       2981       56626  Until Diffence

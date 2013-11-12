@@ -25,8 +25,9 @@ dochapter1_4(void)
 {
   register char **filename;
   char *sourcefiles[] = {
-    "main.c",
-    "chapter_1.c",
+    "main.m",
+    "chapter_1.m",
+    "defs.h",
     "externals.h",
   };
   enter("dochapter1_4");
