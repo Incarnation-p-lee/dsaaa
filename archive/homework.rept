@@ -1,0 +1,75 @@
+
+-----------------------------Chapter 01-01-------------------------------
+
+                               Selection Problem
+
+TIME: Tue Nov 12 11:04:19 2013
+
+ASTRINGENT: O(N*logN)
+No.     DATA_SIZE         KVALUE:VALIDATION     TIME(usec)=>ASTRINGENT
+ 1             10          40482:         5              2=>  0.086859
+ 2             20         168889:        10              2=>  0.033381
+ 3             30         -13397:        15              3=>  0.029401
+ 4             40          40482:        20              3=>  0.020331
+ 5             50         -17615:        25              4=>  0.020450
+ 6             60         -17615:        30              3=>  0.012212
+ 7             70         -13397:        35              6=>  0.020175
+ 8             80          32979:        40              7=>  0.019968
+ 9             90           6292:        45              6=>  0.014815
+10            100         -17615:        50              4=>  0.008686
+11            500         -24315:       250             38=>  0.012229
+12           1000         -33164:       500             66=>  0.009554
+13           5000          -2880:      2500            283=>  0.006645
+14          10000           2105:      5000            755=>  0.008197
+15          50000           -883:     25000           2667=>  0.004930
+16         100000           -145:     50000           4976=>  0.004322
+17         500000            441:    250000          11113=>  0.001694
+18        1000000             84:    500000          29042=>  0.002102
+19        5000000           -150:   2500009          73043=>  0.000947
+20       10000000            -86:   5000002         299944=>  0.001861
+
+-----------------------------Chapter 01-04-------------------------------
+
+                               Expanding Header Fil
+
+TIME: Tue Nov 12 11:04:20 2013
+
+>>>>>>>> main.c <<<<<<<<
+=No Such[main.c] File.
+
+>>>>>>>> chapter_1.c <<<<<<<<
+=No Such[chapter_1.c] File.
+
+>>>>>>>> externals.h <<<<<<<<
+#ifndef EXTERNALS_H
+#define EXTERNALS_H
+
+
+extern void
+enter(const char *);
+extern void
+leave(void);
+extern void
+filepointer_init(void);
+extern void
+filepointer_close(void);
+
+extern void
+chapt_1_1(void);
+extern void
+chapt_1_4(void);
+
+#endif
+
+-----------------------------Chapter 02-07-------------------------------
+
+                               Random Generation
+
+TIME: Tue Nov 12 11:04:20 2013
+
+NUM_START      END  DIMENSION  TIME(usec)  DESCRIPTION
+        1       10         10           4  Until Diffence
+       10       20         11           1  Until Diffence
+        1      100        100          98  Until Diffence
+       10     1000        991        6956  Until Diffence
+       20     3000       2981       65838  Until Diffence

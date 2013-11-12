@@ -6,7 +6,7 @@ rawdatafile="coverage.info"
 basedir="./"
 binary="dsaaa.out"
 reportname="report.tar.gz"
-sourcefile=
+archivedir="archive/"
 
 if [ ! -x "$reportdir" ];then
   mkdir "$reportdir"
@@ -17,9 +17,12 @@ mv *.gcno "$reportdir"
 
 lcov --capture --directory "$reportdir" --base-directory "$basedir" --output-file "$rawdatafile" --test-name "$binary"
 
+mv "$rawdatafile" "$archivedir"
+
 if [ -x "$reportdir$ouputdir" ];then
   rm -rf "$reportdir$outputdir"
 fi
 
-genhtml --output-directory "$reportdir$outputdir" --title "DSAAA" --show-details --legend "$rawdatafile"
+genhtml --output-directory "$reportdir$outputdir" --title "DSAAA" --show-details --legend "$archivedir$rawdatafile"
 tar -zcvf "$reportname" "$reportdir$outputdir"
+mv "$reportname" "$archivedir"

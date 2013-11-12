@@ -1,26 +1,31 @@
 # This is the Makefile for GCC compiler. Only you need to update outest.
 .SUFFIXES:
-.SUFFIXES: .o .a .so .c .h .s
+.SUFFIXES: .o .a .so .c .h .s .cm
 SHELL         =/bin/sh
 CC            =gcc
-SRC           =main.c chapter_1.c evaluation.c utilize.c\
-               chapter_2.c
+
+SRC           =main.m chapter_1.m evaluation.m utilize.m \
+               chapter_2.m
 
 COVERAGE      =-fprofile-arcs -ftest-coverage
-OBJ           =$(patsubst %.c, %.o, $(SRC))
+OBJ           =$(patsubst %.m, %.o, $(SRC))
 INCH          =./inc
 INCS          =./src
 INC           =-I$(INCH) -I$(INCS)
 TARGET        =dsaaa.out
 FDPS          =fdependent
 OBJDIR        =obj
-CFLAG         =-c -g -Wall -pg $(COVERAGE)
+ADIR          =archive
+IDIR          =inc
+SDIR          =src
+MFLAG         =-x c
+CFLAG         =$(MFLAG) -c -g -Wall -pg $(COVERAGE)
 LFLAG         =-pg $(COVERAGE)
 EXRLIB        =-lm
 
 vpath %.o $(OBJDIR)
 
-.phony:link clean
+.phony:link clean run
 
 $(TARGET):$(OBJ)
 	$(MAKE) link
@@ -28,20 +33,34 @@ $(TARGET):$(OBJ)
 -include $(FDPS)
 
 $(FDPS):$(SRC)
-	$(CC) $(INC) -MM $^ >$@
+	$(CC) $(INC) $(MFLAG) -MM $^ >$@
 
 ifneq ($(OBJDIR), $(wildcard $(OBJDIR)))
 	mkdir $(OBJDIR)
 endif
 
+ifneq ($(ADIR), $(wildcard $(ADIR)))
+	mkdir $(ADIR)
+endif
 
-$(OBJ):%.o:%.c
+ifneq ($(IDIR), $(wildcard $(IDIR)))
+	mkdir $(IDIR)
+endif
+
+ifneq ($(SDIR), $(wildcard $(SDIR)))
+	mkdir $(SDIR)
+endif
+
+$(OBJ):%.o:%.m
 	$(CC) $(INC) $(CFLAG) -o $@ $<
 	mv $@ $(OBJDIR)
 
 link:$(OBJ)
 	$(CC) $(INC) $(LFLAG) -o $(TARGET) $^ $(EXRLIB)
 
+run:$(TARGET)
+	./$(TARGET)
+	sh genCoverage.sh
 
 clean:
 	-rm -rf $(TARGET) $(OBJDIR)/* $(FDPS)
