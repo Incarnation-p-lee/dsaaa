@@ -50,12 +50,11 @@ dochapter2_7(void)
 }
 
 
-static int *
+static void
 random_sequence(int start, int end)
 {
-  int *seq_array;
-  int seq_size;
-  int (**iterator)(const int *, int, int);
+  int size_r;
+  enum repeat_vehicle *iterator;
   struct gen_random_report data;
   char **title;
   int loc;
@@ -64,8 +63,8 @@ random_sequence(int start, int end)
   if(start > end)
     error_handle("Index out of range");
 
-  seq_size = end - start + 1;
-  data.dimension = seq_size;
+  size_r = end - start + 1;
+  data.dimension = size_r;
   data.start = start;
   data.end = end;
 
@@ -73,24 +72,24 @@ random_sequence(int start, int end)
   title = vehicle_name;
   while(iterator < repeats + sizeof(repeats) / sizeof(repeats[0]))
   {
-    malloc_initial((void **)&seq_array,
-      seq_size * sizeof(*seq_array));
     data.outline = *title++;
+    malloc_initial((void **)&sequence_data,
+      size_r * sizeof(*sequence_data));
 
     loc = -1;
     TIME_START;
     while(loc++ < REPEAT_COUNT)
-      generate_random(seq_array, start, end, *iterator);
+      generate_random(start, end, *iterator);
     TIME_END(&data.usec);
 
-    print_random_report(stdout, seq_array, &data);
-    print_random_report(hwork_rept, seq_array, &data);
-    saft_free((void **)&seq_array);
+    print_random_report(stdout, &data);
+    print_random_report(hwork_rept, &data);
+    saft_free((void **)&sequence_data);
     iterator++;
   }
 
   leave();
-  return seq_array;
+  return;
 }
 
 static void
@@ -106,42 +105,105 @@ print_random_title(FILE *fd)
 }
 
 static void
-print_random_report(FILE *fd, int *data,
-  struct gen_random_report *rreport)
+print_random_report(FILE *fd, struct gen_random_report *rrpt)
 {
   enter("print_random_report");
 
   fprintf(fd, " %8d %8d   %8d    %10.4f  %s\n",
-    rreport->start, rreport->end,
-    rreport->dimension, (double)rreport->usec / REPEAT_COUNT,
-    rreport->outline);
+    rrpt->start, rrpt->end, rrpt->dimension,
+    (double)rrpt->usec / REPEAT_COUNT, rrpt->outline);
 
   leave();
   return;
 }
 
 static void
-generate_random(int *seq, int start, int end,
-  int (*isrepeated)(const int *, int, int))
+generate_random(int start, int end, enum repeat_vehicle type)
 {
-  int seq_size;
+  int size_r;
   int raw_value;
+  int repeated;
   register int *iterator;
   enter("generate_random");
 
-  seq_size = end - start + 1;
-  iterator = seq;
-  while(iterator < seq + seq_size)
+  size_r = end - start + 1;
+  iterator = sequence_data;
+  repeat_assist_init(size_r, type);
+
+  while(iterator < sequence_data + size_r)
   {
     while(1)
     {
       raw_value = rand() % (end - start + 1) + start;
-      if(!isrepeated(seq, iterator - seq, raw_value))
+      switch(type)
       {
-        *iterator++ = raw_value;
-        break;
+        case UTIL:
+          repeated = isrepeated_util(
+            iterator - sequence_data, raw_value);
+          break;
+        case USED:
+          repeated = isrepeated_used(start, raw_value);
+          break;
+        default:
+          error_handle("Unresolved enum value detected.");
+          break;
       }
+      if(NOT_REPEATED == repeated)
+        break;
     }
+    *iterator++ = raw_value;
+  }
+
+  repeat_assist_clear(type);
+
+  leave();
+  return;
+}
+
+static void
+repeat_assist_init(int parm, enum repeat_vehicle type)
+{
+  int size_r;
+  int ittr;
+  enter("repeat_assist_init");
+  
+  switch(type)
+  {
+    case UTIL:
+      break;
+    case USED:
+      ittr = 0;
+      size_r = parm;
+      malloc_initial((void **)&used_number,
+        sizeof(*used_number) * size_r);
+
+      while(ittr < parm)
+        used_number[ittr++] = REPEAT_UNUSED;
+      break;
+    default:
+      error_handle("Unresolved enum value detected.");
+      break;
+  }
+
+  leave();
+  return;
+}
+
+static void
+repeat_assist_clear(enum repeat_vehicle type)
+{
+  enter("repeat_assist_clear");
+  
+  switch(type)
+  {
+    case UTIL:
+      break;
+    case USED:
+      saft_free((void **)&used_number);
+      break;
+    default:
+      error_handle("Unresolved enum value detected.");
+      break;
   }
 
   leave();
@@ -149,7 +211,7 @@ generate_random(int *seq, int start, int end,
 }
 
 static int
-isrepeated_util(const int *seq, int size, int raw)
+isrepeated_util(int size, int raw)
 {
   int repeated;
   int *iterator;
@@ -158,15 +220,39 @@ isrepeated_util(const int *seq, int size, int raw)
   if(0 > size)
     error_handle("Invalid data dimension");
 
-  repeated = 0;
-  iterator = (int *)seq;
-  while(iterator < seq + size)
+  repeated = NOT_REPEATED;
+  iterator = (int *)sequence_data;
+  while(iterator < sequence_data + size)
   {
     if(*iterator++ == raw)
     {
-      repeated = 1;
+      repeated = REPEATED;
       break;
     }
+  }
+
+  leave();
+  return repeated;
+}
+
+static int
+isrepeated_used(int start, int raw)
+{
+  int repeated;
+  enter("isrepeated_used");
+  
+  switch(used_number[raw - start])
+  {
+    case REPEAT_UNUSED:
+      used_number[raw - start] = REPEAT_USED;
+      repeated = NOT_REPEATED;
+      break;
+    case REPEAT_USED:
+      repeated = REPEATED;
+      break;
+    default:
+      error_handle("Invalid definition value detected");
+      break;
   }
 
   leave();

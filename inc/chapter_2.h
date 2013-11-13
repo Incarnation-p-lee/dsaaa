@@ -27,27 +27,37 @@ void
 chapt_2_7(void);
 
 
-static int
-isrepeated_util(const int *, int, int);
 static void
 dochapter2_7(void);
-static int *
+static void
 random_sequence(int, int);
 static void
-generate_random(int *, int, int,
-  int (*)(const int *, int, int));
+generate_random(int, int, enum repeat_vehicle);
+static int
+isrepeated_util(int, int);
+static int
+isrepeated_used(int, int);
 static void
 print_random_title(FILE *);
 static void
-print_random_report(FILE *, int *, struct gen_random_report *);
+print_random_report(FILE *, struct gen_random_report *);
+static void
+repeat_assist_init(int, enum repeat_vehicle);
+static void
+repeat_assist_clear(enum repeat_vehicle);
 
 
-static int (*repeats[])(const int *, int, int) = {
-  &isrepeated_util,
+static enum repeat_vehicle repeats[] = {
+  UTIL,
+  USED,
 };
 
 static char *vehicle_name[] = {
   "Until Diffence",
+  "Used Buffering",
 };
+
+static int *sequence_data;
+static int *used_number;
 
 #endif

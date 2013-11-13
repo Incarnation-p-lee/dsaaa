@@ -15,6 +15,10 @@
 #define FULL_NAME_LENGTH           256
 #define REPEAT_COUNT               100
 #define FILENAME_SPLITER           "\"< >"
+#define REPEAT_USED                0x1010
+#define REPEAT_UNUSED              0x0101
+#define REPEATED                   0xA0A0
+#define NOT_REPEATED               0x0A0A
 
 #define TIME_START       timing_start()
 #define TIME_END(usec)   timing_end(usec)
@@ -27,6 +31,10 @@
 
 
 typedef void (*HOMEWORK)(void);
+typedef enum repeat_vehicle{
+  UTIL,
+  USED,
+}Rept_v;
 
 typedef struct rept_entry{
   int      kvalue;
