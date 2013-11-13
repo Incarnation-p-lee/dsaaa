@@ -57,7 +57,7 @@ sub read_source_file{
   
   while(<SOURCE_FILE>){
     $line++;
-    if(/$raw_word/){
+    if(/([^\w])$raw_word([^\w])/){
       if(!$print_once){
         $print_once = "printed";
         say "operating $filename ...";

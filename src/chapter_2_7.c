@@ -59,7 +59,7 @@ random_sequence(int start, int end)
   enum repeat_vehicle *iterator;
   struct gen_random_report data;
   char **title;
-  int loc;
+  int counts;
   enter("random_replacement");
 
   if(start > end)
@@ -79,9 +79,9 @@ random_sequence(int start, int end)
     malloc_initial((void **)&sequence_data,
       size_r * sizeof(*sequence_data));
 
-    loc = REPEAT_COUNT;
+    counts = REPEAT_COUNT;
     TIME_START;
-    SEQ_PERFORMANCE(loc, generate_random, start, end, *iterator);
+    SEQ_PERFORMANCE(counts, generate_random, start, end, *iterator);
     TIME_END(&data.usec);
 
     print_random_report(stdout, &data);
@@ -158,13 +158,13 @@ generate_random(int start, int end, enum repeat_vehicle type)
   enter("generate_random");
 
   size_r = end - start + 1;
-  iterator = sequence_data;
   repeat_assist_init(start, size_r, type);
 
   switch(type)
   {
     case UTIL:
     case USED:
+      iterator = sequence_data;
       while(iterator < sequence_data + size_r)
       {
         while(1)
