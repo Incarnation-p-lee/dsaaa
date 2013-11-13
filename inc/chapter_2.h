@@ -58,7 +58,7 @@ static enum repeat_vehicle repeats[] = {
   SWAP,
 };
 
-static char *vehicle_name[] = {
+static char *repeat_description[] = {
   "UNTIL Diffence",
   "USED Buffering",
   "SWAP Randomly ",

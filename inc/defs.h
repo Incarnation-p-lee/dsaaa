@@ -30,6 +30,13 @@
 #endif
 
 
+#define SEQ_PERFORMANCE(times, func, start, end, type) \
+do \
+{  \
+  func(start, end, type); \
+}while(times-- > 0)
+
+
 typedef void (*HOMEWORK)(void);
 typedef enum repeat_vehicle{
   UTIL,

@@ -9,8 +9,9 @@ chapt_1_4(void);
 extern void
 chapt_2_7(void);
 
-struct timeval timePoint_start;
-struct timeval timePoint_end;
+struct timeval ts_begin;
+struct timeval ts_end;
+
 FILE *hwork_rept;
 const char *blank = 
 "                                               ";

@@ -63,7 +63,7 @@ sub read_source_file{
         say "operating $filename ...";
       }
       printf " -%4d $_", $line;
-      s/$raw_word/$dst_word/g;
+      s/([^\w])$raw_word([^\w])/\1$dst_word\2/g;
       printf " +%4d $_", $line;
     }
     push @lines, $_;

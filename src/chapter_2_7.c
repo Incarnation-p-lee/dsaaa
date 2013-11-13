@@ -13,6 +13,7 @@ chapt_2_7(void)
 
   print_report_header(stdout, "Random Generation", 2, 7);
   print_report_header(hwork_rept, "Random Generation", 2, 7);
+
   dochapter2_7();
 
   leave();
@@ -23,13 +24,14 @@ chapt_2_7(void)
 static void
 dochapter2_7(void)
 {
-  int ranges[] = {
-    1,    10,
-    10,   20,
-    1,   100,
-    100, 600,
-    10, 1000,
-    20, 3000,
+  int cases[] = {
+    1,      10,
+    11,     20,
+    1,     100,
+    201,   400,
+    101,   600,
+    11,   1000,
+    1001, 2000,
   };
   int *iterator;
   enter("dochapter2_7");
@@ -38,8 +40,8 @@ dochapter2_7(void)
   print_random_title(hwork_rept);
   srand((unsigned)time(NULL));
 
-  iterator = ranges;
-  while(iterator < ranges + sizeof(ranges) / sizeof(ranges[0]))
+  iterator = cases;
+  while(iterator < cases + sizeof(cases) / sizeof(cases[0]))
   {
     random_sequence(*iterator, *(iterator + 1));
     iterator += 2;
@@ -69,18 +71,17 @@ random_sequence(int start, int end)
   data.end = end;
 
   iterator = repeats;
-  title = vehicle_name;
+  title = repeat_description;
   while(iterator < repeats + sizeof(repeats) / sizeof(repeats[0]))
   {
-    expected_init(&data, size_r, *iterator);
     data.outline = *title++;
+    expected_init(&data, size_r, *iterator);
     malloc_initial((void **)&sequence_data,
       size_r * sizeof(*sequence_data));
 
-    loc = -1;
+    loc = REPEAT_COUNT;
     TIME_START;
-    while(loc++ < REPEAT_COUNT)
-      generate_random(start, end, *iterator);
+    SEQ_PERFORMANCE(loc, generate_random, start, end, *iterator);
     TIME_END(&data.usec);
 
     print_random_report(stdout, &data);
@@ -99,7 +100,7 @@ expected_init(struct gen_random_report *data_r, int size_r,
 {
   double exp;
   enter("expected_init");
-  
+
   switch(type)
   {
     case UTIL:
@@ -160,40 +161,40 @@ generate_random(int start, int end, enum repeat_vehicle type)
   iterator = sequence_data;
   repeat_assist_init(start, size_r, type);
 
-	switch(type)
-	{
-		case UTIL:
-		case USED:
-			while(iterator < sequence_data + size_r)
-			{
-				while(1)
-				{
-			    raw_value = rand() % (end - start + 1) + start;
-					switch(type)
-					{
-						case UTIL:
-							repeated = isrepeated_util(
-									iterator - sequence_data, raw_value);
-							break;
-						case USED:
-							repeated = isrepeated_used(start, raw_value);
-							break;
+  switch(type)
+  {
+    case UTIL:
+    case USED:
+      while(iterator < sequence_data + size_r)
+      {
+        while(1)
+        {
+          raw_value = rand() % (end - start + 1) + start;
+          switch(type)
+          {
+            case UTIL:
+              repeated = isrepeated_util(
+                  iterator - sequence_data, raw_value);
+              break;
+            case USED:
+              repeated = isrepeated_used(start, raw_value);
+              break;
             case SWAP:
               break;
-					}
-					if(NOT_REPEATED == repeated)
-						break;
-				}
-			  *iterator++ = raw_value;
-			}
-			break;
-		case SWAP:
-			random_swap(size_r);
-			break;
-		default:
-			error_handle("Unresolved enum value detected.");
-			break;
-	}
+          }
+          if(NOT_REPEATED == repeated)
+            break;
+        }
+        *iterator++ = raw_value;
+      }
+      break;
+    case SWAP:
+      random_swap(size_r);
+      break;
+    default:
+      error_handle("Unresolved enum value detected.");
+      break;
+  }
 
   repeat_assist_clear(type);
 
@@ -202,11 +203,12 @@ generate_random(int start, int end, enum repeat_vehicle type)
 }
 
 static void
-repeat_assist_init(int start, int size_r, enum repeat_vehicle type)
+repeat_assist_init(int start, int size_r,
+  enum repeat_vehicle type)
 {
   int ittr;
   enter("repeat_assist_init");
-  
+
   ittr = 0;
   switch(type)
   {
@@ -220,7 +222,7 @@ repeat_assist_init(int start, int size_r, enum repeat_vehicle type)
       break;
     case SWAP:
       while(ittr < size_r)
-        sequence_data[ittr++] = start;
+        sequence_data[ittr++] = start++;
       break;
     default:
       error_handle("Unresolved enum value detected.");
@@ -235,7 +237,7 @@ static void
 repeat_assist_clear(enum repeat_vehicle type)
 {
   enter("repeat_assist_clear");
-  
+
   switch(type)
   {
     case UTIL:
@@ -284,7 +286,7 @@ isrepeated_used(int start, int raw)
 {
   int repeated;
   enter("isrepeated_used");
-  
+
   switch(used_number[raw - start])
   {
     case REPEAT_UNUSED:

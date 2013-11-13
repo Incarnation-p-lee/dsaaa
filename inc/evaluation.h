@@ -1,8 +1,8 @@
 #ifndef EVALUATION_H
 #define EVALUATION_H
 
-extern struct timeval timePoint_start;
-extern struct timeval timePoint_end;
+extern struct timeval ts_begin;
+extern struct timeval ts_end;
 extern void enter(const char *);
 extern void leave(void);
 
