@@ -12,32 +12,37 @@
 1	report/output/dsaaa/src/stack_trace.c.gcov.html	/^<a name="1"><span class="lineNum">       1 <\/span>                :            : \/*--------------------------------------------------------------*\/<\/a>$/;"	a
 1	report/output/dsaaa/src/timing.c.gcov.html	/^<a name="1"><span class="lineNum">       1 <\/span>                :            : \/*-------------------------------------------------------------------*\/<\/a>$/;"	a
 1	report/output/dsaaa/src/util.c.gcov.html	/^<a name="1"><span class="lineNum">       1 <\/span>                :            : \/*---------------------------------------------------------------*\/<\/a>$/;"	a
-102	report/output/dsaaa/src/chapter_2_7.c.gcov.html	/^<a name="102"><span class="lineNum">     102 <\/span>                :            : <\/a>$/;"	a
-118	report/output/dsaaa/src/chapter_2_7.c.gcov.html	/^<a name="118"><span class="lineNum">     118 <\/span>                :            : <\/a>$/;"	a
-120	report/output/dsaaa/src/chapter_1_4.c.gcov.html	/^<a name="120"><span class="lineNum">     120 <\/span>                :            : <\/a>$/;"	a
+121	report/output/dsaaa/src/chapter_1_4.c.gcov.html	/^<a name="121"><span class="lineNum">     121 <\/span>                :            : <\/a>$/;"	a
 122	report/output/dsaaa/src/chapter_1_1.c.gcov.html	/^<a name="122"><span class="lineNum">     122 <\/span>                :            : \/*--------------------------------------------------------------*\/<\/a>$/;"	a
-145	report/output/dsaaa/src/chapter_1_4.c.gcov.html	/^<a name="145"><span class="lineNum">     145 <\/span>                :            : <\/a>$/;"	a
-147	report/output/dsaaa/src/chapter_2_7.c.gcov.html	/^<a name="147"><span class="lineNum">     147 <\/span>                :            : <\/a>$/;"	a
+123	report/output/dsaaa/src/chapter_2_7.c.gcov.html	/^<a name="123"><span class="lineNum">     123 <\/span>                :            : <\/a>$/;"	a
+135	report/output/dsaaa/src/chapter_2_7.c.gcov.html	/^<a name="135"><span class="lineNum">     135 <\/span>                :            : <\/a>$/;"	a
+146	report/output/dsaaa/src/chapter_1_4.c.gcov.html	/^<a name="146"><span class="lineNum">     146 <\/span>                :            : <\/a>$/;"	a
+149	report/output/dsaaa/src/chapter_2_7.c.gcov.html	/^<a name="149"><span class="lineNum">     149 <\/span>                :            : <\/a>$/;"	a
 15	report/output/dsaaa/main.m.gcov.html	/^<a name="15"><span class="lineNum">      15 <\/span>                :            : <\/a>$/;"	a
 15	report/output/dsaaa/src/stack_trace.c.gcov.html	/^<a name="15"><span class="lineNum">      15 <\/span>                :            : <\/a>$/;"	a
 153	report/output/dsaaa/src/chapter_1_1.c.gcov.html	/^<a name="153"><span class="lineNum">     153 <\/span>                :            : <\/a>$/;"	a
-168	report/output/dsaaa/src/chapter_1_4.c.gcov.html	/^<a name="168"><span class="lineNum">     168 <\/span>                :            : <\/a>$/;"	a
+169	report/output/dsaaa/src/chapter_1_4.c.gcov.html	/^<a name="169"><span class="lineNum">     169 <\/span>                :            : <\/a>$/;"	a
 177	report/output/dsaaa/src/chapter_1_1.c.gcov.html	/^<a name="177"><span class="lineNum">     177 <\/span>                :            : <\/a>$/;"	a
 18	report/output/dsaaa/src/timing.c.gcov.html	/^<a name="18"><span class="lineNum">      18 <\/span>                :            : <\/a>$/;"	a
-189	report/output/dsaaa/src/chapter_1_4.c.gcov.html	/^<a name="189"><span class="lineNum">     189 <\/span>                :            : #ifdef STD_HEAD_FILE<\/a>$/;"	a
+190	report/output/dsaaa/src/chapter_1_4.c.gcov.html	/^<a name="190"><span class="lineNum">     190 <\/span>                :            : #ifdef STD_HEAD_FILE<\/a>$/;"	a
 200	report/output/dsaaa/src/chapter_1_1.c.gcov.html	/^<a name="200"><span class="lineNum">     200 <\/span>                :            : <\/a>$/;"	a
+203	report/output/dsaaa/src/chapter_2_7.c.gcov.html	/^<a name="203"><span class="lineNum">     203 <\/span>                :            : <\/a>$/;"	a
 22	report/output/dsaaa/src/chapter_1_4.c.gcov.html	/^<a name="22"><span class="lineNum">      22 <\/span>                :            : <\/a>$/;"	a
 22	report/output/dsaaa/src/chapter_2_7.c.gcov.html	/^<a name="22"><span class="lineNum">      22 <\/span>                :            : <\/a>$/;"	a
 22	report/output/dsaaa/src/stack_trace.c.gcov.html	/^<a name="22"><span class="lineNum">      22 <\/span>                :            : <\/a>$/;"	a
 22	report/output/dsaaa/src/util.c.gcov.html	/^<a name="22"><span class="lineNum">      22 <\/span>                :            : <\/a>$/;"	a
-252	report/output/dsaaa/src/chapter_1_4.c.gcov.html	/^<a name="252"><span class="lineNum">     252 <\/span>                :            : <\/a>$/;"	a
+233	report/output/dsaaa/src/chapter_2_7.c.gcov.html	/^<a name="233"><span class="lineNum">     233 <\/span>                :            : <\/a>$/;"	a
+253	report/output/dsaaa/src/chapter_1_4.c.gcov.html	/^<a name="253"><span class="lineNum">     253 <\/span>                :            : <\/a>$/;"	a
+256	report/output/dsaaa/src/chapter_2_7.c.gcov.html	/^<a name="256"><span class="lineNum">     256 <\/span>                :            : <\/a>$/;"	a
+281	report/output/dsaaa/src/chapter_2_7.c.gcov.html	/^<a name="281"><span class="lineNum">     281 <\/span>                :            : <\/a>$/;"	a
 29	report/output/dsaaa/src/timing.c.gcov.html	/^<a name="29"><span class="lineNum">      29 <\/span>                :            : <\/a>$/;"	a
+305	report/output/dsaaa/src/chapter_2_7.c.gcov.html	/^<a name="305"><span class="lineNum">     305 <\/span>                :            : <\/a>$/;"	a
 31	report/output/dsaaa/src/chapter_1_1.c.gcov.html	/^<a name="31"><span class="lineNum">      31 <\/span>                :            : <\/a>$/;"	a
 33	report/output/dsaaa/src/util.c.gcov.html	/^<a name="33"><span class="lineNum">      33 <\/span>                :            : <\/a>$/;"	a
 41	report/output/dsaaa/src/util.c.gcov.html	/^<a name="41"><span class="lineNum">      41 <\/span>                :            : <\/a>$/;"	a
-45	report/output/dsaaa/src/chapter_1_4.c.gcov.html	/^<a name="45"><span class="lineNum">      45 <\/span>                :            : <\/a>$/;"	a
 46	report/output/dsaaa/src/chapter_1_1.c.gcov.html	/^<a name="46"><span class="lineNum">      46 <\/span>                :            : <\/a>$/;"	a
-50	report/output/dsaaa/src/chapter_2_7.c.gcov.html	/^<a name="50"><span class="lineNum">      50 <\/span>                :            : <\/a>$/;"	a
+46	report/output/dsaaa/src/chapter_1_4.c.gcov.html	/^<a name="46"><span class="lineNum">      46 <\/span>                :            : <\/a>$/;"	a
+52	report/output/dsaaa/src/chapter_2_7.c.gcov.html	/^<a name="52"><span class="lineNum">      52 <\/span>                :            : <\/a>$/;"	a
 60	report/output/dsaaa/src/util.c.gcov.html	/^<a name="60"><span class="lineNum">      60 <\/span>                :            : <\/a>$/;"	a
 75	report/output/dsaaa/src/util.c.gcov.html	/^<a name="75"><span class="lineNum">      75 <\/span>                :            : <\/a>$/;"	a
 76	report/output/dsaaa/src/chapter_1_1.c.gcov.html	/^<a name="76"><span class="lineNum">      76 <\/span>                :            : <\/a>$/;"	a
@@ -48,8 +53,8 @@
 8	report/output/dsaaa/src/stack_trace.c.gcov.html	/^<a name="8"><span class="lineNum">       8 <\/span>                :            : \/*--------------------------------------------------------------*\/<\/a>$/;"	a
 8	report/output/dsaaa/src/timing.c.gcov.html	/^<a name="8"><span class="lineNum">       8 <\/span>                :            : \/*-------------------------------------------------------------------*\/<\/a>$/;"	a
 8	report/output/dsaaa/src/util.c.gcov.html	/^<a name="8"><span class="lineNum">       8 <\/span>                :            : \/*---------------------------------------------------------------*\/<\/a>$/;"	a
-90	report/output/dsaaa/src/chapter_2_7.c.gcov.html	/^<a name="90"><span class="lineNum">      90 <\/span>                :            : <\/a>$/;"	a
-94	report/output/dsaaa/src/chapter_1_4.c.gcov.html	/^<a name="94"><span class="lineNum">      94 <\/span>                :            : <\/a>$/;"	a
+95	report/output/dsaaa/src/chapter_1_4.c.gcov.html	/^<a name="95"><span class="lineNum">      95 <\/span>                :            : <\/a>$/;"	a
+95	report/output/dsaaa/src/chapter_2_7.c.gcov.html	/^<a name="95"><span class="lineNum">      95 <\/span>                :            : <\/a>$/;"	a
 ADIR	Makefile	/^ADIR          =archive$/;"	m
 CC	Makefile	/^CC            =gcc$/;"	m
 CFLAG	Makefile	/^CFLAG         =$(MFLAG) -c -g -Wall -pg $(COVERAGE)$/;"	m
@@ -59,12 +64,12 @@ COVERAGE	Makefile	/^COVERAGE      =-fprofile-arcs -ftest-coverage$/;"	m
 DATA_MAX	inc/defs.h	12;"	d
 DEFINES_H	inc/defs.h	2;"	d
 EVALUATION_H	inc/evaluation.h	2;"	d
-EXPAND_DEPTH	inc/defs.h	23;"	d
+EXPAND_DEPTH	inc/defs.h	28;"	d
 EXRLIB	Makefile	/^EXRLIB        =-lm$/;"	m
 EXTERNALS_H	inc/externals.h	2;"	d
 FDPS	Makefile	/^FDPS          =fdependent$/;"	m
-FILENAME_LENGTH	inc/defs.h	24;"	d
-FILENAME_SPLITER	inc/defs.h	16;"	d
+FILENAME_LENGTH	inc/defs.h	29;"	d
+FILENAME_SPLITER	inc/defs.h	17;"	d
 FULL_NAME_LENGTH	inc/defs.h	15;"	d
 GR_report	inc/defs.h	/^}GR_report;$/;"	t	typeref:struct:gen_random_report
 HOMEWORK	inc/defs.h	/^typedef void (*HOMEWORK)(void);$/;"	t
@@ -76,18 +81,27 @@ INCS	Makefile	/^INCS          =.\/src$/;"	m
 LFLAG	Makefile	/^LFLAG         =-pg $(COVERAGE)$/;"	m
 MAX_WIDTH_OF_LINE	inc/defs.h	14;"	d
 MFLAG	Makefile	/^MFLAG         =-x c$/;"	m
+NOT_REPEATED	inc/defs.h	21;"	d
 NO_STD_HEAD_FILE	inc/defs.h	8;"	d
 OBJ	Makefile	/^OBJ           =$(patsubst %.m, %.o, $(SRC))$/;"	m
 OBJDIR	Makefile	/^OBJDIR        =obj$/;"	m
+REPEATED	inc/defs.h	20;"	d
+REPEAT_COUNT	inc/defs.h	16;"	d
+REPEAT_UNUSED	inc/defs.h	19;"	d
+REPEAT_USED	inc/defs.h	18;"	d
 REPT_entry	inc/defs.h	/^}REPT_entry;$/;"	t	typeref:struct:rept_entry
+Rept_v	inc/defs.h	/^}Rept_v;$/;"	t	typeref:enum:repeat_vehicle
 SDIR	Makefile	/^SDIR          =src$/;"	m
 SHELL	Makefile	/^SHELL         =\/bin\/sh$/;"	m
 SRC	Makefile	/^SRC           =main.m chapter_1.m evaluation.m utilize.m \\$/;"	m
 STD_HEAD_FILE	inc/defs.h	6;"	d
+SWAP	inc/defs.h	/^  SWAP,$/;"	e	enum:repeat_vehicle
 TARGET	Makefile	/^TARGET        =dsaaa.out$/;"	m
-TIME_END	inc/defs.h	19;"	d
-TIME_START	inc/defs.h	18;"	d
+TIME_END	inc/defs.h	24;"	d
+TIME_START	inc/defs.h	23;"	d
 TRACE_DEPTH	inc/defs.h	13;"	d
+USED	inc/defs.h	/^  USED,$/;"	e	enum:repeat_vehicle
+UTIL	inc/defs.h	/^  UTIL,$/;"	e	enum:repeat_vehicle
 UTILISZE_H	inc/utilize.h	2;"	d
 VARIABLE_H	inc/vars.h	2;"	d
 astringent	inc/defs.h	/^  double   astringent;$/;"	m	struct:rept_entry
@@ -95,7 +109,7 @@ blank	inc/vars.h	/^const char *blank = $/;"	v
 chapt_1_1	src/chapter_1_1.c	/^chapt_1_1(void)$/;"	f
 chapt_1_4	src/chapter_1_4.c	/^chapt_1_4(void)$/;"	f
 chapt_2_7	src/chapter_2_7.c	/^chapt_2_7(void)$/;"	f
-data_prepare	src/chapter_1_1.c	/^data_prepare(int data_size)$/;"	f	file:
+count	inc/defs.h	/^  int      count;$/;"	m	struct:rept_entry
 data_size	inc/defs.h	/^  int      data_size;$/;"	m	struct:rept_entry
 depth	inc/chapter_1.h	/^static int depth = -1;$/;"	v
 dimension	inc/defs.h	/^  int      dimension;$/;"	m	struct:gen_random_report
@@ -107,43 +121,52 @@ enter	src/stack_trace.c	/^enter(const char *fuc_name)$/;"	f
 error_handle	src/error_handle.c	/^error_handle(const char *message)$/;"	f
 exchange	src/util.c	/^exchange(int *a, int *b)$/;"	f
 expand_file	src/chapter_1_4.c	/^expand_file(char *filename)$/;"	f	file:
+expand_file_filter	src/chapter_1_4.c	/^expand_file_filter(const char *filename)$/;"	f	file:
+expand_report	src/chapter_1_4.c	/^expand_report(char *fmt, ...)$/;"	f	file:
 expand_stack	inc/chapter_1.h	/^static char expand_stack[EXPAND_DEPTH][FILENAME_LENGTH];$/;"	v
+expected	inc/defs.h	/^  double   expected;$/;"	m	struct:gen_random_report
+expected_init	src/chapter_2_7.c	/^expected_init(struct gen_random_report *data_r, int size_r,$/;"	f	file:
 exstack_top	inc/chapter_1.h	/^static int exstack_top = 0;$/;"	v
 filepointer_close	src/util.c	/^filepointer_close()$/;"	f
 filepointer_init	src/util.c	/^filepointer_init()$/;"	f
-find_quoted_file	src/chapter_1_4.c	/^find_quoted_file(const char *filename)$/;"	f	file:
 gen_random_report	inc/defs.h	/^typedef struct gen_random_report{$/;"	s
-generate_random	src/chapter_2_7.c	/^generate_random(int *seq, int start, int end,$/;"	f	file:
+generate_random	src/chapter_2_7.c	/^generate_random(int start, int end, enum repeat_vehicle type)$/;"	f	file:
 get_all_files	script/rf_rename.plx	/^sub get_all_files{$/;"	s
 homework	inc/vars.h	/^static HOMEWORK homework[] = {$/;"	v
 hwork_rept	inc/vars.h	/^FILE *hwork_rept;$/;"	v
-include_name	src/chapter_1_4.c	/^include_name(char *filename, char *start)$/;"	f	file:
+include_filename	src/chapter_1_4.c	/^include_filename(char *filename, char *start)$/;"	f	file:
+include_line	src/chapter_1_4.c	/^include_line(char *line)$/;"	f	file:
 include_path	inc/chapter_1.h	/^static char *include_path[] = {$/;"	v
-isinclude	src/chapter_1_4.c	/^isinclude(char *line)$/;"	f	file:
-isrepeated_util	src/chapter_2_7.c	/^isrepeated_util(const int *seq, int size, int raw)$/;"	f	file:
-isvalid_headfile	src/chapter_1_4.c	/^isvalid_headfile(const char *filename)$/;"	f	file:
-keyword_valid	src/chapter_1_4.c	/^keyword_valid(char *index)$/;"	f	file:
+isrepeated_used	src/chapter_2_7.c	/^isrepeated_used(int start, int raw)$/;"	f	file:
+isrepeated_util	src/chapter_2_7.c	/^isrepeated_util(int size_r, int raw)$/;"	f	file:
+isvalid_include	src/chapter_1_4.c	/^isvalid_include(char *index)$/;"	f	file:
 kvalue	inc/defs.h	/^  int      kvalue;$/;"	m	struct:rept_entry
 leave	src/stack_trace.c	/^leave(void)$/;"	f
 malloc_initial	src/util.c	/^malloc_initial(void **pointer, unsigned int length)$/;"	f
+open_included_file	src/chapter_1_4.c	/^open_included_file(const char *filename)$/;"	f	file:
 option_check	script/rf_rename.plx	/^sub option_check{$/;"	s
 outline	inc/defs.h	/^  char     *outline;$/;"	m	struct:gen_random_report
 pop_expand_stack	src/chapter_1_4.c	/^pop_expand_stack(void)$/;"	f	file:
 print_algo_info	src/chapter_1_1.c	/^print_algo_info(FILE *fd)$/;"	f	file:
-print_random_report	src/chapter_2_7.c	/^print_random_report(FILE *fd, int *data,$/;"	f	file:
+print_random_report	src/chapter_2_7.c	/^print_random_report(FILE *fd, struct gen_random_report *rrpt)$/;"	f	file:
 print_random_title	src/chapter_2_7.c	/^print_random_title(FILE *fd)$/;"	f	file:
 print_report_header	src/util.c	/^print_report_header(FILE *fd, const char *title,$/;"	f
-print_result	src/chapter_1_4.c	/^print_result(char *fmt, ...)$/;"	f	file:
 print_stack_traces	src/stack_trace.c	/^print_stack_traces(void)$/;"	f
 random_sequence	src/chapter_2_7.c	/^random_sequence(int start, int end)$/;"	f	file:
+random_swap	src/chapter_2_7.c	/^random_swap(int size_r)$/;"	f	file:
 read_source_file	script/rf_rename.plx	/^sub read_source_file{$/;"	s
-repeats	inc/chapter_2.h	/^static int (*repeats[])(const int *, int, int) = {$/;"	v
-report_data	src/chapter_1_1.c	/^report_data(struct rept_entry *rept)$/;"	f	file:
+repeat_assist_clear	src/chapter_2_7.c	/^repeat_assist_clear(enum repeat_vehicle type)$/;"	f	file:
+repeat_assist_init	src/chapter_2_7.c	/^repeat_assist_init(int start, int size_r, enum repeat_vehicle type)$/;"	f	file:
+repeat_vehicle	inc/defs.h	/^typedef enum repeat_vehicle{$/;"	g
+repeats	inc/chapter_2.h	/^static enum repeat_vehicle repeats[] = {$/;"	v	typeref:enum:repeat_vehicle
 rept_entry	inc/defs.h	/^typedef struct rept_entry{$/;"	s
-result_validate	src/chapter_1_1.c	/^result_validate(int *data, int len, int key)$/;"	f	file:
 saft_free	src/util.c	/^saft_free(void **pointer)$/;"	f
+selection_data	src/chapter_1_1.c	/^selection_data(struct rept_entry *rept)$/;"	f	file:
+selection_data_prepare	src/chapter_1_1.c	/^selection_data_prepare(int data_size)$/;"	f	file:
 selection_problem	src/chapter_1_1.c	/^selection_problem(int *data, int size, int key)$/;"	f	file:
-split_data	src/chapter_1_1.c	/^split_data(int *data, int start, int len)$/;"	f	file:
+selection_split	src/chapter_1_1.c	/^selection_split(int *data, int start, int len)$/;"	f	file:
+selection_validate	src/chapter_1_1.c	/^selection_validate(int *data, int len, int key)$/;"	f	file:
+sequence_data	inc/chapter_2.h	/^static int *sequence_data;$/;"	v
 stack_traces	inc/utilize.h	/^static const char *stack_traces[TRACE_DEPTH];$/;"	v
 start	inc/defs.h	/^  int      start;$/;"	m	struct:gen_random_report
 std_head	inc/chapter_1.h	/^static char *std_head[] = {$/;"	v
@@ -155,6 +178,7 @@ timing_start	src/timing.c	/^timing_start()$/;"	f
 top_index	inc/utilize.h	/^static int top_index = 0;$/;"	v
 usec	inc/defs.h	/^  unsigned usec;$/;"	m	struct:gen_random_report
 usec_cost	inc/defs.h	/^  unsigned usec_cost;$/;"	m	struct:rept_entry
+used_number	inc/chapter_2.h	/^static int *used_number;$/;"	v
 validate	inc/defs.h	/^  int      validate;$/;"	m	struct:rept_entry
-vechile_name	inc/chapter_2.h	/^static char *vechile_name[] = {$/;"	v
+vehicle_name	inc/chapter_2.h	/^static char *vehicle_name[] = {$/;"	v
 write_source_file	script/rf_rename.plx	/^sub write_source_file{$/;"	s

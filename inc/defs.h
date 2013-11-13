@@ -34,6 +34,7 @@ typedef void (*HOMEWORK)(void);
 typedef enum repeat_vehicle{
   UTIL,
   USED,
+  SWAP,
 }Rept_v;
 
 typedef struct rept_entry{
@@ -51,6 +52,7 @@ typedef struct gen_random_report{
   char     *outline;
   int      start;
   int      end;
+  double   expected;
 }GR_report;
 
 

@@ -51,7 +51,7 @@ print_report_header(FILE *fd, const char *title,
   fprintf(fd, "Chapter %02d-%02d", chapter, item);
   fprintf(fd, "-------------------------------\n\n");
   fprintf(fd,
-    "                               %.20s\n\n", title);
+    "                               %.30s\n\n", title);
   fprintf(fd, "TIME: %s", ctime((const time_t *)&date));
 
   leave();

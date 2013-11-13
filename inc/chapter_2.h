@@ -42,19 +42,26 @@ print_random_title(FILE *);
 static void
 print_random_report(FILE *, struct gen_random_report *);
 static void
-repeat_assist_init(int, enum repeat_vehicle);
+repeat_assist_init(int, int, enum repeat_vehicle);
 static void
 repeat_assist_clear(enum repeat_vehicle);
+static void
+random_swap(int);
+static void
+expected_init(struct gen_random_report *, int,
+  enum repeat_vehicle);
 
 
 static enum repeat_vehicle repeats[] = {
   UTIL,
   USED,
+  SWAP,
 };
 
 static char *vehicle_name[] = {
-  "Until Diffence",
-  "Used Buffering",
+  "UNTIL Diffence",
+  "USED Buffering",
+  "SWAP Randomly ",
 };
 
 static int *sequence_data;

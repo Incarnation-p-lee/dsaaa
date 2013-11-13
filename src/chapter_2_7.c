@@ -72,6 +72,7 @@ random_sequence(int start, int end)
   title = vehicle_name;
   while(iterator < repeats + sizeof(repeats) / sizeof(repeats[0]))
   {
+    expected_init(&data, size_r, *iterator);
     data.outline = *title++;
     malloc_initial((void **)&sequence_data,
       size_r * sizeof(*sequence_data));
@@ -93,12 +94,40 @@ random_sequence(int start, int end)
 }
 
 static void
+expected_init(struct gen_random_report *data_r, int size_r,
+  enum repeat_vehicle type)
+{
+  double exp;
+  enter("expected_init");
+  
+  switch(type)
+  {
+    case UTIL:
+      exp = 3.0;
+      break;
+    case USED:
+      exp = 2.0;
+      break;
+    case SWAP:
+      exp = 1.0;
+      break;
+    default:
+      error_handle("Unresolved enum value detected.");
+      break;
+  }
+  data_r->expected = pow((double)size_r, exp);
+
+  leave();
+  return;
+}
+
+static void
 print_random_title(FILE *fd)
 {
   enter("print_random_title");
 
   fprintf(fd, "\nNUM_START      END  DIMENSION  "
-    "  TIME(usec)  DESCRIPTION\n");
+    "  TIME(usec)  DESCRIPTION     ASTRINGENT\n");
 
   leave();
   return;
@@ -109,9 +138,10 @@ print_random_report(FILE *fd, struct gen_random_report *rrpt)
 {
   enter("print_random_report");
 
-  fprintf(fd, " %8d %8d   %8d    %10.4f  %s\n",
+  fprintf(fd, " %8d %8d   %8d    %10.4f  %.16s  %10.7f\n",
     rrpt->start, rrpt->end, rrpt->dimension,
-    (double)rrpt->usec / REPEAT_COUNT, rrpt->outline);
+    (double)rrpt->usec / REPEAT_COUNT, rrpt->outline,
+    (double)rrpt->usec / rrpt->expected);
 
   leave();
   return;
@@ -128,31 +158,42 @@ generate_random(int start, int end, enum repeat_vehicle type)
 
   size_r = end - start + 1;
   iterator = sequence_data;
-  repeat_assist_init(size_r, type);
+  repeat_assist_init(start, size_r, type);
 
-  while(iterator < sequence_data + size_r)
-  {
-    while(1)
-    {
-      raw_value = rand() % (end - start + 1) + start;
-      switch(type)
-      {
-        case UTIL:
-          repeated = isrepeated_util(
-            iterator - sequence_data, raw_value);
-          break;
-        case USED:
-          repeated = isrepeated_used(start, raw_value);
-          break;
-        default:
-          error_handle("Unresolved enum value detected.");
-          break;
-      }
-      if(NOT_REPEATED == repeated)
-        break;
-    }
-    *iterator++ = raw_value;
-  }
+	switch(type)
+	{
+		case UTIL:
+		case USED:
+			while(iterator < sequence_data + size_r)
+			{
+				while(1)
+				{
+			    raw_value = rand() % (end - start + 1) + start;
+					switch(type)
+					{
+						case UTIL:
+							repeated = isrepeated_util(
+									iterator - sequence_data, raw_value);
+							break;
+						case USED:
+							repeated = isrepeated_used(start, raw_value);
+							break;
+            case SWAP:
+              break;
+					}
+					if(NOT_REPEATED == repeated)
+						break;
+				}
+			  *iterator++ = raw_value;
+			}
+			break;
+		case SWAP:
+			random_swap(size_r);
+			break;
+		default:
+			error_handle("Unresolved enum value detected.");
+			break;
+	}
 
   repeat_assist_clear(type);
 
@@ -161,24 +202,25 @@ generate_random(int start, int end, enum repeat_vehicle type)
 }
 
 static void
-repeat_assist_init(int parm, enum repeat_vehicle type)
+repeat_assist_init(int start, int size_r, enum repeat_vehicle type)
 {
-  int size_r;
   int ittr;
   enter("repeat_assist_init");
   
+  ittr = 0;
   switch(type)
   {
     case UTIL:
       break;
     case USED:
-      ittr = 0;
-      size_r = parm;
       malloc_initial((void **)&used_number,
         sizeof(*used_number) * size_r);
-
-      while(ittr < parm)
+      while(ittr < size_r)
         used_number[ittr++] = REPEAT_UNUSED;
+      break;
+    case SWAP:
+      while(ittr < size_r)
+        sequence_data[ittr++] = start;
       break;
     default:
       error_handle("Unresolved enum value detected.");
@@ -201,6 +243,8 @@ repeat_assist_clear(enum repeat_vehicle type)
     case USED:
       saft_free((void **)&used_number);
       break;
+    case SWAP:
+      break;
     default:
       error_handle("Unresolved enum value detected.");
       break;
@@ -211,18 +255,18 @@ repeat_assist_clear(enum repeat_vehicle type)
 }
 
 static int
-isrepeated_util(int size, int raw)
+isrepeated_util(int size_r, int raw)
 {
   int repeated;
   int *iterator;
   enter("isrepeated_util");
 
-  if(0 > size)
+  if(0 > size_r)
     error_handle("Invalid data dimension");
 
   repeated = NOT_REPEATED;
   iterator = (int *)sequence_data;
-  while(iterator < sequence_data + size)
+  while(iterator < sequence_data + size_r)
   {
     if(*iterator++ == raw)
     {
@@ -257,4 +301,23 @@ isrepeated_used(int start, int raw)
 
   leave();
   return repeated;
+}
+
+static void
+random_swap(int size_r)
+{
+  int *data_r;
+  int ittr;
+  enter("isrepeated_swap");
+
+  data_r = sequence_data;
+  ittr = 1;
+  while(ittr < size_r)
+  {
+    exchange(data_r + ittr, data_r + rand() % ittr);
+    ittr++;
+  }
+
+  leave();
+  return;
 }
