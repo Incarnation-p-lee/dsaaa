@@ -8,6 +8,8 @@ extern void
 chapt_1_4(void);
 extern void
 chapt_2_7(void);
+extern void
+chapt_2_11(void);
 
 struct timeval ts_begin;
 struct timeval ts_end;
@@ -20,6 +22,7 @@ static HOMEWORK homework[] = {
   &chapt_1_1,
   &chapt_1_4,
   &chapt_2_7,
+  &chapt_2_11,
 };
 
 

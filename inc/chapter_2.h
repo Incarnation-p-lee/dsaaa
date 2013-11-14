@@ -67,4 +67,25 @@ static char *repeat_description[] = {
 static int *sequence_data;
 static int *used_number;
 
+
+
+void
+chapt_2_11(void);
+
+
+static void
+dochapter2_11(void);
+static void
+specified_contains(int, int, int, int);
+static int *
+prepare_raw_data(int, int, int);
+static void
+clear_raw_data(int *);
+static int
+iscontains(int, int *, int);
+static void
+print_contains_title(FILE *);
+static void
+print_contains_report(FILE *, struct iscontains_report *);
+
 #endif

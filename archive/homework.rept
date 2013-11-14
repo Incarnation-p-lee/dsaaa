@@ -3,36 +3,36 @@
 
                                Selection Problem
 
-TIME: Wed Nov 13 22:50:29 2013
+TIME: Thu Nov 14 16:44:41 2013
 
 ASTRINGENT: O(N*logN)
 No.     DATA_SIZE         KVALUE:VALIDATION     TIME(usec)=>ASTRINGENT
- 1             10          70504:         5              2=>  0.086859
- 2             20        -130244:        10              1=>  0.016690
- 3             30        -130244:        15              1=>  0.009800
- 4             40        -130244:        20              1=>  0.006777
- 5             50        -105812:        25              2=>  0.010225
- 6             60         -80588:        30              2=>  0.008141
- 7             70         -80588:        35              2=>  0.006725
- 8             80         -57904:        40              4=>  0.011410
- 9             90         -57904:        45              4=>  0.009877
-10            100         -64924:        50              5=>  0.010857
-11            500            367:       250             21=>  0.006758
-12           1000         -16191:       500             45=>  0.006514
-13           5000           3337:      2500            201=>  0.004720
-14          10000           8053:      5000            495=>  0.005374
-15          50000           -975:     25000           1839=>  0.003399
-16         100000           1457:     50000           4419=>  0.003838
-17         500000            656:    250000          27617=>  0.004209
-18        1000000            304:    500000          47501=>  0.003438
-19        5000000            270:   2500007         169091=>  0.002192
-20       10000000             61:   5000002         266774=>  0.001655
+ 1             10         -42498:         5              3=>  0.130288
+ 2             20        -115524:        10              3=>  0.050071
+ 3             30         -65285:        15              1=>  0.009800
+ 4             40           8335:        20              4=>  0.027109
+ 5             50          28792:        25              5=>  0.025562
+ 6             60          46059:        30              3=>  0.012212
+ 7             70          29806:        35              3=>  0.010088
+ 8             80          11819:        40              6=>  0.017115
+ 9             90          11819:        45              8=>  0.019754
+10            100          11819:        50              8=>  0.017372
+11            500           2232:       250             26=>  0.008367
+12           1000          -4996:       500             60=>  0.008686
+13           5000           4055:      2500            392=>  0.009205
+14          10000           2849:      5000            559=>  0.006069
+15          50000           1692:     25000           2445=>  0.004520
+16         100000           1190:     50000           2439=>  0.002118
+17         500000           -275:    250001          12376=>  0.001886
+18        1000000           -113:    500001          24912=>  0.001803
+19        5000000            -80:   2500002         118393=>  0.001535
+20       10000000             14:   5000000         191161=>  0.001186
 
 -----------------------------Chapter 01-04-------------------------------
 
                                Expanding Header Files
 
-TIME: Wed Nov 13 22:50:30 2013
+TIME: Thu Nov 14 16:44:41 2013
 
 >>>>>>>> main.m <<<<<<<<
 /*--------------------------------------------------------------*/
@@ -140,6 +140,7 @@ main(int argc, char **argv)
 #endif
 
 
+#define MIN_STEP_WIDTH             1
 #define DATA_MAX                   1024000
 #define TRACE_DEPTH                4098
 #define MAX_WIDTH_OF_LINE          120
@@ -150,9 +151,9 @@ main(int argc, char **argv)
 #define REPEAT_UNUSED              0x0101
 #define REPEATED                   0xA0A0
 #define NOT_REPEATED               0x0A0A
-
-#define TIME_START       timing_start()
-#define TIME_END(usec)   timing_end(usec)
+#define CONTAINED                  0x1234
+#define NOT_CONTAINED              0x4321
+#define CONTAINS_COUNT             10000
 
 
 #ifdef NO_STD_HEAD_FILE
@@ -161,11 +162,19 @@ main(int argc, char **argv)
 #endif
 
 
+#define TIME_START       timing_start()
+#define TIME_END(usec)   timing_end(usec)
 #define SEQ_PERFORMANCE(times, func, start, end, type) \
-do \
+while((times)-- > 0) \
 {  \
-  func(start, end, type); \
-}while(times-- > 0)
+  (*(func))((start), (end), (type)); \
+} 
+#define CON_PERFORMANCE(times, func, specified, raw_data, size_c) \
+(*(func))((specified), (raw_data), (size_c)); \
+while(--(times) > 0) \
+{  \
+  (*(func))((specified), (raw_data), (size_c)); \
+}
 
 
 typedef void (*HOMEWORK)(void);
@@ -193,6 +202,14 @@ typedef struct gen_random_report{
   double   expected;
 }GR_report;
 
+typedef struct iscontains_report{
+  unsigned usec;
+  int      min;
+  int      size_c;
+  double   astringent;
+  int      result;
+}IC_report;
+
 
 #endif
 
@@ -216,6 +233,8 @@ extern void
 chapt_1_4(void);
 extern void
 chapt_2_7(void);
+extern void
+chapt_2_11(void);
 
 #endif
 
@@ -223,27 +242,49 @@ chapt_2_7(void);
 
                                Random Generation
 
-TIME: Wed Nov 13 22:50:30 2013
+TIME: Thu Nov 14 16:44:41 2013
 
 NUM_START      END  DIMENSION    TIME(usec)  DESCRIPTION     ASTRINGENT
-        1       10         10        0.5900  UNTIL Diffence   0.0590000
-        1       10         10        1.3500  USED Buffering   1.3500000
-        1       10         10        0.4100  SWAP Randomly    4.1000000
-       11       20         10        2.1800  UNTIL Diffence   0.2180000
-       11       20         10        1.6500  USED Buffering   1.6500000
-       11       20         10        0.4000  SWAP Randomly    4.0000000
-        1      100        100      101.2800  UNTIL Diffence   0.0101280
-        1      100        100       92.3300  USED Buffering   0.9233000
-        1      100        100        3.3200  SWAP Randomly    3.3200000
-      201      400        200      556.8400  UNTIL Diffence   0.0069605
-      201      400        200      213.7900  USED Buffering   0.5344750
-      201      400        200        8.0800  SWAP Randomly    4.0400000
-      101      600        500     2283.7200  UNTIL Diffence   0.0018270
-      101      600        500      202.2500  USED Buffering   0.0809000
-      101      600        500       15.8200  SWAP Randomly    3.1640000
-       11     1000        990     8939.6700  UNTIL Diffence   0.0009213
-       11     1000        990      542.4500  USED Buffering   0.0553464
-       11     1000        990       30.3400  SWAP Randomly    3.0646465
-     1001     2000       1000     9313.0400  UNTIL Diffence   0.0009313
-     1001     2000       1000      553.7800  USED Buffering   0.0553780
-     1001     2000       1000       38.1800  SWAP Randomly    3.8180000
+        1       10         10        1.7300  UNTIL Diffence   0.1730000
+        1       10         10        1.3600  USED Buffering   1.3600000
+        1       10         10        0.3300  SWAP Randomly    3.3000000
+       11       20         10        1.7300  UNTIL Diffence   0.1730000
+       11       20         10        1.3500  USED Buffering   1.3500000
+       11       20         10        0.3200  SWAP Randomly    3.2000000
+        1      100        100       63.3000  UNTIL Diffence   0.0063300
+        1      100        100       21.6200  USED Buffering   0.2162000
+        1      100        100        3.0700  SWAP Randomly    3.0700000
+      201      400        200      233.0500  UNTIL Diffence   0.0029131
+      201      400        200       45.6400  USED Buffering   0.1141000
+      201      400        200        4.5600  SWAP Randomly    2.2800000
+      101      600        500     1460.0800  UNTIL Diffence   0.0011681
+      101      600        500      136.0700  USED Buffering   0.0544280
+      101      600        500       11.2200  SWAP Randomly    2.2440000
+       11     1000        990     6182.0000  UNTIL Diffence   0.0006371
+       11     1000        990      286.4800  USED Buffering   0.0292297
+       11     1000        990       22.1100  SWAP Randomly    2.2333333
+     1001     2000       1000     6416.5600  UNTIL Diffence   0.0006417
+     1001     2000       1000      290.4700  USED Buffering   0.0290470
+     1001     2000       1000       22.7000  SWAP Randomly    2.2700000
+
+-----------------------------Chapter 02-11-------------------------------
+
+                               Specified Contains
+
+TIME: Thu Nov 14 16:44:43 2013
+
+NUMBER(MIN)  DIMENSION   TIME(usec)    RESULT      ASTRINGENT
+EXPECTED: O[log(N)]
+         1          10         381     NO_CONTAINS 165.466198
+        11          20         428     NO_CONTAINS 142.869910
+         1         100         514     NO_CONTAINS 111.613682
+       201         400         642     NO_CONTAINS 107.152432
+       101         600         670     CONTAINS    104.737747
+        11        1000         706     NO_CONTAINS 102.203968
+      1001       12000         911     NO_CONTAINS  96.990609
+         1       42000         996     CONTAINS     93.561319
+       101       82000        1046     NO_CONTAINS  92.447952
+      2001       62000         954     CONTAINS     86.453062
+       121      122000        1054     NO_CONTAINS  89.994888
+        11     3452000        1302     NO_CONTAINS  86.485973
+      9001     8622000        1249     CONTAINS     78.209986

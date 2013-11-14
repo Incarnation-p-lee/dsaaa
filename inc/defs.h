@@ -9,6 +9,7 @@
 #endif
 
 
+#define MIN_STEP_WIDTH             1
 #define DATA_MAX                   1024000
 #define TRACE_DEPTH                4098
 #define MAX_WIDTH_OF_LINE          120
@@ -19,9 +20,9 @@
 #define REPEAT_UNUSED              0x0101
 #define REPEATED                   0xA0A0
 #define NOT_REPEATED               0x0A0A
-
-#define TIME_START       timing_start()
-#define TIME_END(usec)   timing_end(usec)
+#define CONTAINED                  0x1234
+#define NOT_CONTAINED              0x4321
+#define CONTAINS_COUNT             10000
 
 
 #ifdef NO_STD_HEAD_FILE
@@ -30,11 +31,19 @@
 #endif
 
 
+#define TIME_START       timing_start()
+#define TIME_END(usec)   timing_end(usec)
 #define SEQ_PERFORMANCE(times, func, start, end, type) \
-do \
+while((times)-- > 0) \
 {  \
-  func(start, end, type); \
-}while(times-- > 0)
+  (*(func))((start), (end), (type)); \
+} 
+#define CON_PERFORMANCE(times, func, specified, raw_data, size_c) \
+(*(func))((specified), (raw_data), (size_c)); \
+while(--(times) > 0) \
+{  \
+  (*(func))((specified), (raw_data), (size_c)); \
+}
 
 
 typedef void (*HOMEWORK)(void);
@@ -61,6 +70,14 @@ typedef struct gen_random_report{
   int      end;
   double   expected;
 }GR_report;
+
+typedef struct iscontains_report{
+  unsigned usec;
+  int      min;
+  int      size_c;
+  double   astringent;
+  int      result;
+}IC_report;
 
 
 #endif
