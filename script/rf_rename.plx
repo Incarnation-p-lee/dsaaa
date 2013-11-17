@@ -57,13 +57,13 @@ sub read_source_file{
   
   while(<SOURCE_FILE>){
     $line++;
-    if(/([^\w])$raw_word([^\w])/){
+    if(/([^\w]|^)$raw_word([^\w])/){
       if(!$print_once){
         $print_once = "printed";
         say "operating $filename ...";
       }
       printf " -%4d $_", $line;
-      s/([^\w])$raw_word([^\w])/\1$dst_word\2/g;
+      s/([^\w]|^)$raw_word([^\w])/\1$dst_word\2/g;
       printf " +%4d $_", $line;
     }
     push @lines, $_;
@@ -82,3 +82,5 @@ sub option_check{
 
   say "Refactorring->Rename: [$raw_word] => [$dst_word].";
 }
+
+1;
