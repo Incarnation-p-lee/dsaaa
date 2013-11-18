@@ -18,14 +18,14 @@ main(int argc, char **argv)
 {
   register HOMEWORK *hw_entry = homework;
 
-  enter("main");
+  ENTER("main");
   filepointer_init();
 
   while(hw_entry < homework + sizeof(homework) / sizeof(HOMEWORK))
     (*hw_entry++)();
 
   filepointer_close();
-  leave();
+  LEAVE();
 
   return EXIT_SUCCESS;
 }

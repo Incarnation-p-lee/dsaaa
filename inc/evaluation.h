@@ -3,8 +3,8 @@
 
 extern struct timeval ts_begin;
 extern struct timeval ts_end;
-extern void enter(const char *);
-extern void leave(void);
+extern void ENTER(const char *);
+extern void LEAVE(void);
 
 
 void

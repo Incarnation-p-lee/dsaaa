@@ -9,21 +9,21 @@
 void
 timing_start()
 {
-  enter("timing_start");
+  ENTER("timing_start");
   gettimeofday(&ts_begin,NULL);
 
-  leave();
+  LEAVE();
   return;
 }
 
 void
 timing_end(unsigned *usec)
 {
-  enter("timing_end");
+  ENTER("timing_end");
   gettimeofday(&ts_end,NULL);
   *usec = timing_cost();
 
-  leave();
+  LEAVE();
   return;
 }
 
@@ -31,11 +31,11 @@ static unsigned
 timing_cost()
 {
   unsigned usec;
-  enter("timing_cost");
+  ENTER("timing_cost");
 
   usec = (ts_end.tv_sec - ts_begin.tv_sec) * 1000000;
   usec += (unsigned)(ts_end.tv_usec - ts_begin.tv_usec);
 
-  leave();
+  LEAVE();
   return usec;
 }

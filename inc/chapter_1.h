@@ -60,9 +60,9 @@ timing_end(unsigned *);
 extern void
 exchange(int *, int *);
 extern void
-leave(void);
+LEAVE(void);
 extern void
-enter(const char *);
+ENTER(const char *);
 extern void
 print_report_header(FILE *, const char *, int, int);
 
@@ -84,9 +84,9 @@ selection_validate(int *, int, int);
 static void
 selection_data(struct rept_entry *);
 static void
-dochapter1_1(int);
+dochapt_1_1(int);
 static void
-dochapter1_4(void);
+dochapt_1_4(void);
 static void
 expand_file(char *);
 static char *

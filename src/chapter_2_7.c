@@ -9,20 +9,20 @@
 void
 chapt_2_7(void)
 {
-  enter("chapter_2_7");
+  ENTER("chapter_2_7");
 
   print_report_header(stdout, "Random Generation", 2, 7);
   print_report_header(hwork_rept, "Random Generation", 2, 7);
 
-  dochapter2_7();
+  dochapt_2_7();
 
-  leave();
+  LEAVE();
   return;
 }
 
 
 static void
-dochapter2_7(void)
+dochapt_2_7(void)
 {
   int cases[] = {
     1,      10,
@@ -34,7 +34,7 @@ dochapter2_7(void)
     1001, 2000,
   };
   int *iterator;
-  enter("dochapter2_7");
+  ENTER("dochapt_2_7");
 
   print_random_title(stdout);
   print_random_title(hwork_rept);
@@ -47,7 +47,7 @@ dochapter2_7(void)
     iterator += 2;
   }
 
-  leave();
+  LEAVE();
   return;
 }
 
@@ -60,7 +60,7 @@ random_sequence(int start, int end)
   struct gen_random_report data;
   char **title;
   int counts;
-  enter("random_replacement");
+  ENTER("random_replacement");
 
   if(start > end)
     error_handle("Index out of range");
@@ -90,7 +90,7 @@ random_sequence(int start, int end)
     iterator++;
   }
 
-  leave();
+  LEAVE();
   return;
 }
 
@@ -99,7 +99,7 @@ expected_init(struct gen_random_report *data_r, int size_r,
   enum repeat_vehicle type)
 {
   double exp;
-  enter("expected_init");
+  ENTER("expected_init");
 
   switch(type)
   {
@@ -118,33 +118,33 @@ expected_init(struct gen_random_report *data_r, int size_r,
   }
   data_r->expected = pow((double)size_r, exp);
 
-  leave();
+  LEAVE();
   return;
 }
 
 static void
 print_random_title(FILE *fd)
 {
-  enter("print_random_title");
+  ENTER("print_random_title");
 
   fprintf(fd, "\nNUM_START      END  DIMENSION  "
     "  TIME(usec)  DESCRIPTION     ASTRINGENT\n");
 
-  leave();
+  LEAVE();
   return;
 }
 
 static void
 print_random_report(FILE *fd, struct gen_random_report *rrpt)
 {
-  enter("print_random_report");
+  ENTER("print_random_report");
 
   fprintf(fd, " %8d %8d   %8d    %10.4f  %.16s  %10.7f\n",
     rrpt->start, rrpt->end, rrpt->dimension,
     (double)rrpt->usec / REPEAT_COUNT, rrpt->outline,
     (double)rrpt->usec / rrpt->expected);
 
-  leave();
+  LEAVE();
   return;
 }
 
@@ -155,7 +155,7 @@ generate_random(int start, int end, enum repeat_vehicle type)
   int raw_value;
   int repeated;
   register int *iterator;
-  enter("generate_random");
+  ENTER("generate_random");
 
   size_r = end - start + 1;
   repeat_assist_init(start, size_r, type);
@@ -198,7 +198,7 @@ generate_random(int start, int end, enum repeat_vehicle type)
 
   repeat_assist_clear(type);
 
-  leave();
+  LEAVE();
   return;
 }
 
@@ -207,7 +207,7 @@ repeat_assist_init(int start, int size_r,
   enum repeat_vehicle type)
 {
   int ittr;
-  enter("repeat_assist_init");
+  ENTER("repeat_assist_init");
 
   ittr = 0;
   switch(type)
@@ -229,14 +229,14 @@ repeat_assist_init(int start, int size_r,
       break;
   }
 
-  leave();
+  LEAVE();
   return;
 }
 
 static void
 repeat_assist_clear(enum repeat_vehicle type)
 {
-  enter("repeat_assist_clear");
+  ENTER("repeat_assist_clear");
 
   switch(type)
   {
@@ -252,7 +252,7 @@ repeat_assist_clear(enum repeat_vehicle type)
       break;
   }
 
-  leave();
+  LEAVE();
   return;
 }
 
@@ -261,7 +261,7 @@ isrepeated_util(int size_r, int raw)
 {
   int repeated;
   int *iterator;
-  enter("isrepeated_util");
+  ENTER("isrepeated_util");
 
   if(0 > size_r)
     error_handle("Invalid data dimension");
@@ -277,7 +277,7 @@ isrepeated_util(int size_r, int raw)
     }
   }
 
-  leave();
+  LEAVE();
   return repeated;
 }
 
@@ -285,7 +285,7 @@ static int
 isrepeated_used(int start, int raw)
 {
   int repeated;
-  enter("isrepeated_used");
+  ENTER("isrepeated_used");
 
   switch(used_number[raw - start])
   {
@@ -301,7 +301,7 @@ isrepeated_used(int start, int raw)
       break;
   }
 
-  leave();
+  LEAVE();
   return repeated;
 }
 
@@ -310,7 +310,7 @@ random_swap(int size_r)
 {
   int *data_r;
   int ittr;
-  enter("isrepeated_swap");
+  ENTER("isrepeated_swap");
 
   data_r = sequence_data;
   ittr = 1;
@@ -320,6 +320,6 @@ random_swap(int size_r)
     ittr++;
   }
 
-  leave();
+  LEAVE();
   return;
 }

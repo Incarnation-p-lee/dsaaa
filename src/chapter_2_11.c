@@ -9,20 +9,20 @@
 void
 chapt_2_11(void)
 {
-  enter("chapter_2_11");
+  ENTER("chapt_2_11");
 
   print_report_header(stdout, "Specified Contains", 2, 11);
   print_report_header(hwork_rept, "Specified Contains", 2, 11);
 
-  dochapter2_11();
+  dochapt_2_11();
 
-  leave();
+  LEAVE();
   return;
 }
 
 
 static void
-dochapter2_11(void)
+dochapt_2_11(void)
 {
   int cases[] = {
   /*- cases format: [specified, min, size, step width]         -*/
@@ -41,7 +41,7 @@ dochapter2_11(void)
     722345, 9001, 8622000,  2,
   };
   int *iterator;
-  enter("dochapter2_11");
+  ENTER("dochapt_2_11");
 
   print_contains_title(stdout);
   print_contains_title(hwork_rept);
@@ -55,7 +55,7 @@ dochapter2_11(void)
     iterator += 4;
   }
 
-  leave();
+  LEAVE();
   return;
 }
 
@@ -66,7 +66,7 @@ specified_contains(int specified, int min, int size_c, int width)
   int *raw_data;
   int counts;
   struct iscontains_report data_r;
-  enter("specified_contains");
+  ENTER("specified_contains");
 
   counts = CONTAINS_COUNT;
   data_r.size_c = size_c;
@@ -83,7 +83,7 @@ specified_contains(int specified, int min, int size_c, int width)
   print_contains_report(hwork_rept, &data_r);
   clear_raw_data(raw_data);
 
-  leave();
+  LEAVE();
   return;
 }
 
@@ -93,7 +93,7 @@ prepare_raw_data(int min, int size_c, int step_width)
   int *raw_data;
   int last;
   register int *iterator;
-  enter("prepare_raw_data");
+  ENTER("prepare_raw_data");
 
   malloc_initial((void **)&raw_data, sizeof(*raw_data) * size_c);
   raw_data[0] = min;
@@ -105,18 +105,18 @@ prepare_raw_data(int min, int size_c, int step_width)
       rand() % (step_width - MIN_STEP_WIDTH + 1);
   }
 
-  leave();
+  LEAVE();
   return raw_data;
 }
 
 static void
 clear_raw_data(int *raw_data)
 {
-  enter("clear_raw_data");
+  ENTER("clear_raw_data");
 
   saft_free((void **)&raw_data);
 
-  leave();
+  LEAVE();
   return;
 }
 
@@ -127,7 +127,7 @@ iscontains(int specified, int *raw_data, int size_c)
   int begin_i;
   int end_i;
   int mid_i;
-  enter("iscontains");
+  ENTER("iscontains");
 
   result = NOT_CONTAINED;
   begin_i = 0;
@@ -149,20 +149,20 @@ iscontains(int specified, int *raw_data, int size_c)
       break;
   }
 
-  leave();
+  LEAVE();
   return result;
 }
 
 static void
 print_contains_title(FILE *fd)
 {
-  enter("print_contains_title");
+  ENTER("print_contains_title");
 
   fprintf(fd, "\nNUMBER(MIN)  DIMENSION   TIME(usec)"
     "    RESULT      ASTRINGENT\n");
   fprintf(fd, "EXPECTED: O[log(N)]\n");
 
-  leave();
+  LEAVE();
   return;
 }
 
@@ -174,7 +174,7 @@ print_contains_report(FILE *fd, struct iscontains_report *data_r)
     "CONTAINS   ",
   };
   char *descript;
-  enter("print_contains_report");
+  ENTER("print_contains_report");
 
   switch(data_r->result)
   {
@@ -193,6 +193,6 @@ print_contains_report(FILE *fd, struct iscontains_report *data_r)
     data_r->min, data_r->size_c, data_r->usec,
     descript, data_r->usec / data_r->astringent);
   
-  leave();
+  LEAVE();
   return;
 }

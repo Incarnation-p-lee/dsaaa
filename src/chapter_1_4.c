@@ -9,19 +9,19 @@
 void
 chapt_1_4(void)
 {
-  enter("chapt_1_4");
+  ENTER("chapt_1_4");
 
   print_report_header(stdout, "Expanding Header Files", 1, 4);
   print_report_header(hwork_rept, "Expanding Header Files", 1, 4);
-  dochapter1_4();
+  dochapt_1_4();
 
-  leave();
+  LEAVE();
   return;
 }
 
 
 static void
-dochapter1_4(void)
+dochapt_1_4(void)
 {
   register char **filename;
   char *sourcefiles[] = {
@@ -30,7 +30,7 @@ dochapter1_4(void)
     "defs.h",
     "externals.h",
   };
-  enter("dochapter1_4");
+  ENTER("dochapt_1_4");
 
   filename = sourcefiles;
   while(filename < 
@@ -40,7 +40,7 @@ dochapter1_4(void)
     expand_file(*filename++);
   }
 
-  leave();
+  LEAVE();
   return;
 }
 
@@ -51,7 +51,7 @@ expand_file(char *filename)
   char each_line[MAX_WIDTH_OF_LINE];
   char name[MAX_WIDTH_OF_LINE];
   char *current;
-  enter("expand_file");
+  ENTER("expand_file");
 
   depth++;
   fd = open_included_file(filename);
@@ -89,7 +89,7 @@ LEAVE:
   pop_expand_stack();
 #endif
 
-  leave();
+  LEAVE();
   return;
 }
 
@@ -99,7 +99,7 @@ open_included_file(const char *filename)
   FILE *fd;
   char **paths;
   char fullname[FULL_NAME_LENGTH];
-  enter("find_quote_file");
+  ENTER("find_quote_file");
 
   fd = NULL;
   paths = include_path;
@@ -115,7 +115,7 @@ open_included_file(const char *filename)
     paths++;
   }
 
-  leave();
+  LEAVE();
   return fd;
 }
 
@@ -124,7 +124,7 @@ include_line(char *line)
 {
   char *index;
   register char *start;
-  enter("include_line");
+  ENTER("include_line");
 
   assert(NULL != line);
   start = line;
@@ -140,7 +140,7 @@ include_line(char *line)
     }
   }
 
-  leave();
+  LEAVE();
   return index;
 }
 
@@ -150,7 +150,7 @@ isvalid_include(char *index)
   char line[MAX_WIDTH_OF_LINE];
   char *key_word;
   int valid;
-  enter("isvalid_include");
+  ENTER("isvalid_include");
 
   memset(line, 0, MAX_WIDTH_OF_LINE);
   memcpy(line, index, strlen(index));
@@ -163,7 +163,7 @@ isvalid_include(char *index)
   else
     valid = 0;
 
-  leave();
+  LEAVE();
   return valid;
 }
 
@@ -172,7 +172,7 @@ include_filename(char *filename, char *start)
 {
   char *index;
   char raw[MAX_WIDTH_OF_LINE];
-  enter("include_filename");
+  ENTER("include_filename");
 
   memset(raw, 0, MAX_WIDTH_OF_LINE);
   memcpy(raw, start, strlen(start));
@@ -183,7 +183,7 @@ include_filename(char *filename, char *start)
   memset(filename, 0, MAX_WIDTH_OF_LINE);
   memcpy(filename, index, strlen(index));
 
-  leave();
+  LEAVE();
   return;
 }
 
@@ -193,7 +193,7 @@ expand_file_filter(const char *filename)
 {
   register char **stdname;
   int standard;
-  enter("expand_file_filter");
+  ENTER("expand_file_filter");
 
   standard = 0;
   stdname = std_head;
@@ -207,7 +207,7 @@ expand_file_filter(const char *filename)
     }
   }
 
-  leave();
+  LEAVE();
   return !standard;
 }
 #endif
@@ -218,7 +218,7 @@ expand_file_filter(const char *filename)
 {
   register char (*stack_top)[FILENAME_LENGTH];
   int repeated;
-  enter("expand_file_filter");
+  ENTER("expand_file_filter");
 
   repeated = 0;
   stack_top = expand_stack;
@@ -235,18 +235,18 @@ expand_file_filter(const char *filename)
     memcpy(expand_stack[exstack_top++], 
       filename, strlen(filename));
 
-  leave();
+  LEAVE();
   return !repeated;
 }
 
 static void
 pop_expand_stack(void)
 {
-  enter("pop_expand_stack");
+  ENTER("pop_expand_stack");
 
   memset(expand_stack[--exstack_top], 0, FILENAME_LENGTH);
 
-  leave();
+  LEAVE();
   return;
 }
 #endif
@@ -256,7 +256,7 @@ expand_report(char *fmt, ...)
 {
   va_list vl;
   va_list vl_cp;
-  enter("expand_report");
+  ENTER("expand_report");
 
   va_start(vl, fmt);
   va_copy(vl_cp, vl);
@@ -265,6 +265,6 @@ expand_report(char *fmt, ...)
   va_end(vl);
   va_end(vl_cp);
 
-  leave();
+  LEAVE();
   return;
 }

@@ -31,6 +31,8 @@
 #endif
 
 
+#define ENTER(fname)     enter(#fname)
+#define LEAVE            leave()
 #define TIME_START       timing_start()
 #define TIME_END(usec)   timing_end(usec)
 #define SEQ_PERFORMANCE(times, func, start, end, type) \

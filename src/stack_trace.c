@@ -7,14 +7,14 @@
 /*- 10312013    Tracing and print stack path.                  -*/
 /*--------------------------------------------------------------*/
 void
-enter(const char *fuc_name)
+ENTER(const char *fuc_name)
 {
   stack_traces[top_index++] = fuc_name;
   return;
 }
 
 void
-leave(void)
+LEAVE(void)
 {
   stack_traces[top_index--] = NULL;
   return;

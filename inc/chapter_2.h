@@ -12,9 +12,9 @@ timing_end(unsigned *);
 extern void
 exchange(int *, int *);
 extern void
-leave(void);
+LEAVE(void);
 extern void
-enter(const char *);
+ENTER(const char *);
 extern void
 print_report_header(FILE *, const char *, int, int);
 extern void
@@ -28,7 +28,7 @@ chapt_2_7(void);
 
 
 static void
-dochapter2_7(void);
+dochapt_2_7(void);
 static void
 random_sequence(int, int);
 static void
@@ -74,7 +74,7 @@ chapt_2_11(void);
 
 
 static void
-dochapter2_11(void);
+dochapt_2_11(void);
 static void
 specified_contains(int, int, int, int);
 static int *

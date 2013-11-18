@@ -10,7 +10,7 @@ void
 error_handle(const char *message)
 {
   char *unknown = "Unknown location.";
-  enter("error_handle");
+  ENTER("error_handle");
 
   if(NULL == message)
     message = unknown;
@@ -19,6 +19,6 @@ error_handle(const char *message)
   fprintf(stdout, "%02d =>%s\n", errno, strerror(errno));
   print_stack_traces();
 
-  leave();
+  LEAVE();
   exit(1);
 }

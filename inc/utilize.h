@@ -3,8 +3,8 @@
 
 
 extern FILE *hwork_rept;
-extern void enter(const char *);
-extern void leave();
+extern void ENTER(const char *);
+extern void LEAVE();
 
 
 void

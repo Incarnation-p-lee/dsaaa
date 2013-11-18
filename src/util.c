@@ -44,7 +44,7 @@ print_report_header(FILE *fd, const char *title,
   int chapter, int item)
 {
   time_t date;
-  enter("print_report_header");
+  ENTER("print_report_header");
 
   time(&date);
   fprintf(fd, "\n-----------------------------");
@@ -54,14 +54,14 @@ print_report_header(FILE *fd, const char *title,
     "                               %.30s\n\n", title);
   fprintf(fd, "TIME: %s", ctime((const time_t *)&date));
 
-  leave();
+  LEAVE();
   return;
 }
 
 void
 malloc_initial(void **pointer, unsigned int length)
 {
-  enter("malloc_initial");
+  ENTER("malloc_initial");
 
   *pointer = malloc(length);
   if(NULL == *pointer)
@@ -69,18 +69,18 @@ malloc_initial(void **pointer, unsigned int length)
 
   memset(*pointer, 0, length);
 
-  leave();
+  LEAVE();
   return;
 }
 
 void
 saft_free(void **pointer)
 {
-  enter("saft_free");
+  ENTER("saft_free");
 
   free(*pointer);
   *pointer = NULL;
 
-  leave();
+  LEAVE();
   return;
 }
