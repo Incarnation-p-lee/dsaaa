@@ -6,4 +6,4 @@ evaluation.o: evaluation.m inc/include.h inc/defs.h inc/evaluation.h \
 utilize.o: utilize.m inc/defs.h inc/include.h inc/utilize.h \
  src/error_handle.c src/util.c src/stack_trace.c
 chapter_2.o: chapter_2.m inc/include.h inc/defs.h inc/chapter_2.h \
- src/chapter_2_7.c src/chapter_2_11.c
+ src/chapter_2_7.c src/chapter_2_11.c src/chapter_2_12.c

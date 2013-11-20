@@ -1,290 +1,32 @@
 
------------------------------Chapter 01-01-------------------------------
+-----------------------------Chapter 02-12-------------------------------
 
-                               Selection Problem
+                               Sub Sequences
 
-TIME: Mon Nov 18 16:31:46 2013
+TIME: Wed Nov 20 16:31:37 2013
 
-ASTRINGENT: O(N*logN)
-No.     DATA_SIZE         KVALUE:VALIDATION     TIME(usec)=>ASTRINGENT
- 1             10         -74609:         5              4=>  0.173718
- 2             20          75661:        10              5=>  0.083452
- 3             30           -494:        15              4=>  0.039202
- 4             40         -78803:        20              5=>  0.033886
- 5             50         -78803:        25              5=>  0.025562
- 6             60         -11068:        30              5=>  0.020353
- 7             70         -52417:        35              5=>  0.016813
- 8             80         -11068:        40              6=>  0.017115
- 9             90         -29783:        45              6=>  0.014815
-10            100         -34117:        50             11=>  0.023886
-11            500          24416:       250             25=>  0.008046
-12           1000          18255:       500             49=>  0.007093
-13           5000          11643:      2500            123=>  0.002888
-14          10000           1046:      5000            712=>  0.007730
-15          50000           -814:     25000          13531=>  0.025012
-16         100000             26:     50000           4001=>  0.003475
-17         500000           -110:    250000          47834=>  0.007290
-18        1000000              7:    500001         122458=>  0.008864
-19        5000000           -144:   2500000         216822=>  0.002811
-20       10000000           -432:   5000005         486770=>  0.003020
-
------------------------------Chapter 01-04-------------------------------
-
-                               Expanding Header Files
-
-TIME: Mon Nov 18 16:31:49 2013
-
->>>>>>>> main.m <<<<<<<<
-/*--------------------------------------------------------------*/
-/*-AUTHOR:      Incarnation.P Lee                               */
-/*-DATE:        08042013                                        */
-/*-WHAT:        Homework of DSAAA                               */
-/*-REVISION:                                                    */
-/*- DATE ------------------------ DESCRIPTION ------------------*/
-/*- 08042013    CHAPTER 1. Initilize the program.              -*/
-/*- 10242013    CHAPTER 1. Add function pointer.               -*/
-/*-                        Start chapter1.2                    -*/
-/*--------------------------------------------------------------*/
-#include "include.h"
- +include.h
-  +stdio.h
-  +string.h
-  +stddef.h
-  +assert.h
-  +limits.h
-  +stdlib.h
-  +stdarg.h
-  +errno.h
-  +time.h
-  +ctype.h
-  +math.h
-  +sys/types.h
-  +sys/stat.h
-  +sys/wait.h
-  +sys/time.h
-  +sys/mman.h
-  +unistd.h
-  +fcntl.h
-  +netinet/in.h
-  +sys/socket.h
-  +arpa/inet.h
-  +pthread.h
-#include "defs.h"
- +defs.h
-#include "vars.h"
- +vars.h
-#include "externals.h"
- +externals.h
-
-int
-main(int argc, char **argv)
-{
-  register HOMEWORK *hw_entry = homework;
-
-  enter("main");
-  filepointer_init();
-
-  while(hw_entry < homework + sizeof(homework) / sizeof(HOMEWORK))
-    (*hw_entry++)();
-
-  filepointer_close();
-  leave();
-
-  return EXIT_SUCCESS;
-}
-
->>>>>>>> chapter_1.m <<<<<<<<
-#include "include.h"
- +include.h
-  +stdio.h
-  +string.h
-  +stddef.h
-  +assert.h
-  +limits.h
-  +stdlib.h
-  +stdarg.h
-  +errno.h
-  +time.h
-  +ctype.h
-  +math.h
-  +sys/types.h
-  +sys/stat.h
-  +sys/wait.h
-  +sys/time.h
-  +sys/mman.h
-  +unistd.h
-  +fcntl.h
-  +netinet/in.h
-  +sys/socket.h
-  +arpa/inet.h
-  +pthread.h
-#include "defs.h"
- +defs.h
-#include "chapter_1.h"
- +chapter_1.h
-
-#include "chapter_1_1.c"
- +chapter_1_1.c
-#include "chapter_1_4.c"
- +chapter_1_4.c
-
->>>>>>>> defs.h <<<<<<<<
-#ifndef DEFINES_H
-#define DEFINES_H
-
-
-#if 1
-#define STD_HEAD_FILE
-#else
-#define NO_STD_HEAD_FILE
-#endif
-
-
-#define MIN_STEP_WIDTH             1
-#define DATA_MAX                   1024000
-#define TRACE_DEPTH                4098
-#define MAX_WIDTH_OF_LINE          120
-#define FULL_NAME_LENGTH           256
-#define REPEAT_COUNT               100
-#define FILENAME_SPLITER           "\"< >"
-#define REPEAT_USED                0x1010
-#define REPEAT_UNUSED              0x0101
-#define REPEATED                   0xA0A0
-#define NOT_REPEATED               0x0A0A
-#define CONTAINED                  0x1234
-#define NOT_CONTAINED              0x4321
-#define CONTAINS_COUNT             10000
-
-
-#ifdef NO_STD_HEAD_FILE
-#define EXPAND_DEPTH               128
-#define FILENAME_LENGTH            32
-#endif
-
-
-#define TIME_START       timing_start()
-#define TIME_END(usec)   timing_end(usec)
-#define SEQ_PERFORMANCE(times, func, start, end, type) \
-while((times)-- > 0) \
-{  \
-  (*(func))((start), (end), (type)); \
-} 
-#define CON_PERFORMANCE(times, func, specified, raw_data, size_c) \
-(*(func))((specified), (raw_data), (size_c)); \
-while(--(times) > 0) \
-{  \
-  (*(func))((specified), (raw_data), (size_c)); \
-}
-
-
-typedef void (*HOMEWORK)(void);
-typedef enum repeat_vehicle{
-  UTIL,
-  USED,
-  SWAP,
-}Rept_v;
-
-typedef struct rept_entry{
-  int      kvalue;
-  int      data_size;
-  int      validate;
-  unsigned usec_cost;
-  int      count;
-  double   astringent;
-}REPT_entry;
-
-typedef struct gen_random_report{
-  unsigned usec;
-  int      dimension;
-  char     *outline;
-  int      start;
-  int      end;
-  double   expected;
-}GR_report;
-
-typedef struct iscontains_report{
-  unsigned usec;
-  int      min;
-  int      size_c;
-  double   astringent;
-  int      result;
-}IC_report;
-
-
-#endif
-
->>>>>>>> externals.h <<<<<<<<
-#ifndef EXTERNALS_H
-#define EXTERNALS_H
-
-
-extern void
-enter(const char *);
-extern void
-leave(void);
-extern void
-filepointer_init(void);
-extern void
-filepointer_close(void);
-
-extern void
-chapt_1_1(void);
-extern void
-chapt_1_4(void);
-extern void
-chapt_2_7(void);
-extern void
-chapt_2_11(void);
-
-#endif
-
------------------------------Chapter 02-07-------------------------------
-
-                               Random Generation
-
-TIME: Mon Nov 18 16:31:49 2013
-
-NUM_START      END  DIMENSION    TIME(usec)  DESCRIPTION     ASTRINGENT
-        1       10         10        2.8800  UNTIL Diffence   0.2880000
-        1       10         10        2.1500  USED Buffering   2.1500000
-        1       10         10        0.5600  SWAP Randomly    5.6000000
-       11       20         10        2.4500  UNTIL Diffence   0.2450000
-       11       20         10        2.2700  USED Buffering   2.2700000
-       11       20         10        0.5700  SWAP Randomly    5.7000000
-        1      100        100      348.0800  UNTIL Diffence   0.0348080
-        1      100        100       34.1700  USED Buffering   0.3417000
-        1      100        100        9.5600  SWAP Randomly    9.5600000
-      201      400        200      859.0100  UNTIL Diffence   0.0107376
-      201      400        200      243.9800  USED Buffering   0.6099500
-      201      400        200        8.3100  SWAP Randomly    4.1550000
-      101      600        500     5673.6100  UNTIL Diffence   0.0045389
-      101      600        500      562.4500  USED Buffering   0.2249800
-      101      600        500       78.5400  SWAP Randomly   15.7080000
-       11     1000        990    18022.8100  UNTIL Diffence   0.0018574
-       11     1000        990     1106.3800  USED Buffering   0.1128844
-       11     1000        990       82.1100  SWAP Randomly    8.2939394
-     1001     2000       1000    13862.1100  UNTIL Diffence   0.0013862
-     1001     2000       1000     1032.8500  USED Buffering   0.1032850
-     1001     2000       1000      186.0600  SWAP Randomly   18.6060000
-
------------------------------Chapter 02-11-------------------------------
-
-                               Specified Contains
-
-TIME: Mon Nov 18 16:31:53 2013
-
-NUMBER(MIN)  DIMENSION   TIME(usec)    RESULT      ASTRINGENT
-EXPECTED: O[log(N)]
-         1          10         616     NO_CONTAINS 267.525401
-        11          20        1709     NO_CONTAINS 570.478215
-         1         100        1012     CONTAINS    219.753008
-       201         400        1354     CONTAINS    225.988152
-       101         600        1314     CONTAINS    205.411044
-        11        1000         980     NO_CONTAINS 141.869531
-      1001       12000        1892     NO_CONTAINS 201.433844
-         1       42000        2432     NO_CONTAINS 228.454949
-       101       82000        4145     CONTAINS    366.344897
-      2001       62000        1205     NO_CONTAINS 109.199098
-       121      122000        1448     NO_CONTAINS 123.636241
-        11     3452000        6145     NO_CONTAINS 408.184567
-      9001     8622000        1757     CONTAINS    110.019973
+SUB-SEQUENCE *ASTRINGENT => O[N]
+Input Data:
+INDEX  [00] [01] [02] [03] [04] [05] [06] [07] [08] [09] [10] [11] [12] [13] [14] [15]
+   0.   -1   -2    3   -9   13    9   -2   -6   -4  -11   18    1    2    7   -1   -3 
+   1.   11    2    8    2    3    7   22    6    1   12    9    8    3    8   21   19 
+   2.    1    1    1    1    1    1    1    1    1    1    1    1    1    1    1    1 
+   3.   -1    1   -1    1   -1    1   -1    1   -1    1   -1    1   -1    1   -1    1 
+   4.   -1   -7   -8  -72  -28   -7  -27   -6  -31  -32  -89   -8   -5   -2  -41  -39 
+   5.   21   17   -3  -43  -83    8   -7   -9  -33  -18   89   38   -1   -8   51  -48 
+   6.    8    0   -1  -13    0    7    0   19    0   -8    0    4    0   68    0  -42 
+   7.    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0 
+   8.    1    0    2    0    3    0    4    0    5    0    6    0    7    0    8    0 
+   9.    1   -2    3   -4    5   -6    7   -8    9  -10   11  -12   13  -14   15  -16 
+Report:
+INDEX MINIMUN    START      END   TIME(usec)   ASTRINGENT
+   0.     -23        6        9     0.160156    10.250000
+   1.       1        9        9     0.168945    10.812500
+   2.       1        1        1     0.219727    14.062500
+   3.      -1        0        0     0.164062    10.500000
+   4.    -403        0       15     0.175781    11.250000
+   5.    -188        2        9     0.158203    10.125000
+   6.     -42       15       15     0.159180    10.187500
+   7.       0        1        1     0.182617    11.687500
+   8.       0        2        2     0.184570    11.812500
+   9.     -16       15       15     0.166992    10.687500

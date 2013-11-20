@@ -22,15 +22,15 @@ sub get_all_files{
     next if(/^\.\.?|\.git/);
     my $fullname = $dir . "/" . $_;
     if(-d $fullname){
-		  &get_all_files($fullname);
-		}else{
-			if(/\w\.[c|h|m]$/a){
+      &get_all_files($fullname);
+    }else{
+        if(/\w\.[c|h|m]$/a){
         &read_source_file($fullname);
         &write_source_file($fullname);
         @lines = undef;
-			}
-		}
-	}
+      }
+    }
+  }
   closedir(START_DIR);
 }
 
@@ -77,7 +77,7 @@ sub option_check{
   $dst_word = shift @ARGV;
 
   if(($raw_word eq "") && ($dst_word eq "")){
-    die "\nusage perl refactor_rename.plx dest source.\n";
+    die "\nusage \"perl rf_rename.plx [dest] [source].\"\n\n";
   }
 
   say "Refactorring->Rename: [$raw_word] => [$dst_word].";

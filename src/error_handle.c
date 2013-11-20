@@ -19,6 +19,6 @@ error_handle(const char *message)
   fprintf(stdout, "%02d =>%s\n", errno, strerror(errno));
   print_stack_traces();
 
-  LEAVE();
+  LEAVE;
   exit(1);
 }

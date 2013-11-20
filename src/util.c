@@ -54,7 +54,7 @@ print_report_header(FILE *fd, const char *title,
     "                               %.30s\n\n", title);
   fprintf(fd, "TIME: %s", ctime((const time_t *)&date));
 
-  LEAVE();
+  LEAVE;
   return;
 }
 
@@ -69,7 +69,7 @@ malloc_initial(void **pointer, unsigned int length)
 
   memset(*pointer, 0, length);
 
-  LEAVE();
+  LEAVE;
   return;
 }
 
@@ -81,6 +81,6 @@ saft_free(void **pointer)
   free(*pointer);
   *pointer = NULL;
 
-  LEAVE();
+  LEAVE;
   return;
 }

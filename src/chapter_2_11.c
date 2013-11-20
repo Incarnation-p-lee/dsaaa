@@ -16,7 +16,7 @@ chapt_2_11(void)
 
   dochapt_2_11();
 
-  LEAVE();
+  LEAVE;
   return;
 }
 
@@ -55,7 +55,7 @@ dochapt_2_11(void)
     iterator += 4;
   }
 
-  LEAVE();
+  LEAVE;
   return;
 }
 
@@ -83,7 +83,7 @@ specified_contains(int specified, int min, int size_c, int width)
   print_contains_report(hwork_rept, &data_r);
   clear_raw_data(raw_data);
 
-  LEAVE();
+  LEAVE;
   return;
 }
 
@@ -105,7 +105,7 @@ prepare_raw_data(int min, int size_c, int step_width)
       rand() % (step_width - MIN_STEP_WIDTH + 1);
   }
 
-  LEAVE();
+  LEAVE;
   return raw_data;
 }
 
@@ -116,7 +116,7 @@ clear_raw_data(int *raw_data)
 
   saft_free((void **)&raw_data);
 
-  LEAVE();
+  LEAVE;
   return;
 }
 
@@ -149,7 +149,7 @@ iscontains(int specified, int *raw_data, int size_c)
       break;
   }
 
-  LEAVE();
+  LEAVE;
   return result;
 }
 
@@ -162,7 +162,7 @@ print_contains_title(FILE *fd)
     "    RESULT      ASTRINGENT\n");
   fprintf(fd, "EXPECTED: O[log(N)]\n");
 
-  LEAVE();
+  LEAVE;
   return;
 }
 
@@ -193,6 +193,6 @@ print_contains_report(FILE *fd, struct iscontains_report *data_r)
     data_r->min, data_r->size_c, data_r->usec,
     descript, data_r->usec / data_r->astringent);
   
-  LEAVE();
+  LEAVE;
   return;
 }

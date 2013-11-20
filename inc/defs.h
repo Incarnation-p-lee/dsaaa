@@ -15,6 +15,8 @@
 #define MAX_WIDTH_OF_LINE          120
 #define FULL_NAME_LENGTH           256
 #define REPEAT_COUNT               100
+#define SUB_CASES_COUNT            1024
+#define MAX_SUB_DATA_SIZE          16
 #define FILENAME_SPLITER           "\"< >"
 #define REPEAT_USED                0x1010
 #define REPEAT_UNUSED              0x0101
@@ -35,6 +37,7 @@
 #define LEAVE            leave()
 #define TIME_START       timing_start()
 #define TIME_END(usec)   timing_end(usec)
+
 #define SEQ_PERFORMANCE(times, func, start, end, type) \
 while((times)-- > 0) \
 {  \
@@ -45,6 +48,12 @@ while((times)-- > 0) \
 while(--(times) > 0) \
 {  \
   (*(func))((specified), (raw_data), (size_c)); \
+}
+#define SUB_PERFORMANCE(times, func, data_in, size_s, st, ed) \
+(*(func))((data_in), (size_s), (st), (ed)); \
+while(--(times) > 0) \
+{ \
+  (*(func))((data_in), (size_s), (st), (ed)); \
 }
 
 
@@ -81,5 +90,12 @@ typedef struct iscontains_report{
   int      result;
 }IC_report;
 
+typedef struct sub_sequence{
+  signed   min;
+  unsigned usec;
+  int      st;
+  int      ed;
+  double   astringent;
+}SU_seq;
 
 #endif

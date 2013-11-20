@@ -12,7 +12,7 @@ timing_start()
   ENTER("timing_start");
   gettimeofday(&ts_begin,NULL);
 
-  LEAVE();
+  LEAVE;
   return;
 }
 
@@ -23,7 +23,7 @@ timing_end(unsigned *usec)
   gettimeofday(&ts_end,NULL);
   *usec = timing_cost();
 
-  LEAVE();
+  LEAVE;
   return;
 }
 
@@ -36,6 +36,6 @@ timing_cost()
   usec = (ts_end.tv_sec - ts_begin.tv_sec) * 1000000;
   usec += (unsigned)(ts_end.tv_usec - ts_begin.tv_usec);
 
-  LEAVE();
+  LEAVE;
   return usec;
 }

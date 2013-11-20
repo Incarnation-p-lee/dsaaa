@@ -24,7 +24,7 @@ chapt_1_1(void)
   while(pos < dsize + sizeof(dsize) / sizeof(dsize[0]))
     dochapt_1_1(*pos++);
 
-  LEAVE();
+  LEAVE;
   return;
 }
 
@@ -39,7 +39,7 @@ print_algo_info(FILE *fd)
     "No.     DATA_SIZE         KVALUE:VALIDATION     "
     "TIME(usec)=>ASTRINGENT\n");
 
-  LEAVE();
+  LEAVE;
   return;
 }
 
@@ -69,7 +69,7 @@ dochapt_1_1(int data_size)
   free(dinput);
   dinput = NULL;
 
-  LEAVE();
+  LEAVE;
   return;
 }
 
@@ -112,7 +112,7 @@ selection_problem(int *data, int size, int key)
   }
   index = start + data_size - big_cnt;
 
-  LEAVE();
+  LEAVE;
   return data[index];
 }
 
@@ -146,7 +146,7 @@ selection_split(int *data, int start, int len)
   }
   exchange(data + start, data + j);
 
-  LEAVE();
+  LEAVE;
   return len - (j - start);
 }
 
@@ -170,7 +170,7 @@ selection_data_prepare(int data_size)
   while(pos < random_data + data_size)
     *pos++ = ((unsigned)DATA_MAX >> 1) - (rand() % DATA_MAX);
 
-  LEAVE();
+  LEAVE;
   return random_data;
 }
 
@@ -193,7 +193,7 @@ selection_data(struct rept_entry *rept)
 
   number++;
 
-  LEAVE();
+  LEAVE;
   return;
 }
 
@@ -215,6 +215,6 @@ selection_validate(int *data, int len, int key)
       cnt++;
   }
 
-  LEAVE();
+  LEAVE;
   return cnt;
 }

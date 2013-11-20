@@ -9,20 +9,25 @@
 void
 chapt_2_7(void)
 {
+  enum repeat_vehicle *iterator;
   ENTER("chapter_2_7");
 
   print_report_header(stdout, "Random Generation", 2, 7);
   print_report_header(hwork_rept, "Random Generation", 2, 7);
+  print_random_title(stdout);
+  print_random_title(hwork_rept);
 
-  dochapt_2_7();
+  iterator = repeats;
+  while(iterator < repeats + sizeof(repeats) / sizeof(repeats[0]))
+    dochapt_2_7(*iterator++);
 
-  LEAVE();
+  LEAVE;
   return;
 }
 
 
 static void
-dochapt_2_7(void)
+dochapt_2_7(enum repeat_vehicle type)
 {
   int cases[] = {
     1,      10,
@@ -36,29 +41,25 @@ dochapt_2_7(void)
   int *iterator;
   ENTER("dochapt_2_7");
 
-  print_random_title(stdout);
-  print_random_title(hwork_rept);
   srand((unsigned)time(NULL));
 
   iterator = cases;
   while(iterator < cases + sizeof(cases) / sizeof(cases[0]))
   {
-    random_sequence(*iterator, *(iterator + 1));
+    random_sequence(*iterator, *(iterator + 1), type);
     iterator += 2;
   }
 
-  LEAVE();
+  LEAVE;
   return;
 }
 
 
 static void
-random_sequence(int start, int end)
+random_sequence(int start, int end, enum repeat_vehicle type)
 {
   int size_r;
-  enum repeat_vehicle *iterator;
   struct gen_random_report data;
-  char **title;
   int counts;
   ENTER("random_replacement");
 
@@ -69,28 +70,22 @@ random_sequence(int start, int end)
   data.dimension = size_r;
   data.start = start;
   data.end = end;
+  data.outline = repeat_description[type];
 
-  iterator = repeats;
-  title = repeat_description;
-  while(iterator < repeats + sizeof(repeats) / sizeof(repeats[0]))
-  {
-    data.outline = *title++;
-    expected_init(&data, size_r, *iterator);
-    malloc_initial((void **)&sequence_data,
-      size_r * sizeof(*sequence_data));
+  expected_init(&data, size_r, type);
+  malloc_initial((void **)&sequence_data,
+    size_r * sizeof(*sequence_data));
 
-    counts = REPEAT_COUNT;
-    TIME_START;
-    SEQ_PERFORMANCE(counts, generate_random, start, end, *iterator);
-    TIME_END(&data.usec);
+  counts = REPEAT_COUNT;
+  TIME_START;
+  SEQ_PERFORMANCE(counts, generate_random, start, end, type);
+  TIME_END(&data.usec);
 
-    print_random_report(stdout, &data);
-    print_random_report(hwork_rept, &data);
-    saft_free((void **)&sequence_data);
-    iterator++;
-  }
+  print_random_report(stdout, &data);
+  print_random_report(hwork_rept, &data);
+  saft_free((void **)&sequence_data);
 
-  LEAVE();
+  LEAVE;
   return;
 }
 
@@ -118,7 +113,7 @@ expected_init(struct gen_random_report *data_r, int size_r,
   }
   data_r->expected = pow((double)size_r, exp);
 
-  LEAVE();
+  LEAVE;
   return;
 }
 
@@ -127,10 +122,10 @@ print_random_title(FILE *fd)
 {
   ENTER("print_random_title");
 
-  fprintf(fd, "\nNUM_START      END  DIMENSION  "
+  fprintf(fd, "NUM_START      END  DIMENSION  "
     "  TIME(usec)  DESCRIPTION     ASTRINGENT\n");
 
-  LEAVE();
+  LEAVE;
   return;
 }
 
@@ -144,7 +139,7 @@ print_random_report(FILE *fd, struct gen_random_report *rrpt)
     (double)rrpt->usec / REPEAT_COUNT, rrpt->outline,
     (double)rrpt->usec / rrpt->expected);
 
-  LEAVE();
+  LEAVE;
   return;
 }
 
@@ -198,7 +193,7 @@ generate_random(int start, int end, enum repeat_vehicle type)
 
   repeat_assist_clear(type);
 
-  LEAVE();
+  LEAVE;
   return;
 }
 
@@ -229,7 +224,7 @@ repeat_assist_init(int start, int size_r,
       break;
   }
 
-  LEAVE();
+  LEAVE;
   return;
 }
 
@@ -252,7 +247,7 @@ repeat_assist_clear(enum repeat_vehicle type)
       break;
   }
 
-  LEAVE();
+  LEAVE;
   return;
 }
 
@@ -277,7 +272,7 @@ isrepeated_util(int size_r, int raw)
     }
   }
 
-  LEAVE();
+  LEAVE;
   return repeated;
 }
 
@@ -301,7 +296,7 @@ isrepeated_used(int start, int raw)
       break;
   }
 
-  LEAVE();
+  LEAVE;
   return repeated;
 }
 
@@ -320,6 +315,6 @@ random_swap(int size_r)
     ittr++;
   }
 
-  LEAVE();
+  LEAVE;
   return;
 }

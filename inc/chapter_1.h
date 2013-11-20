@@ -60,9 +60,9 @@ timing_end(unsigned *);
 extern void
 exchange(int *, int *);
 extern void
-LEAVE(void);
+leave(void);
 extern void
-ENTER(const char *);
+enter(const char *);
 extern void
 print_report_header(FILE *, const char *, int, int);
 

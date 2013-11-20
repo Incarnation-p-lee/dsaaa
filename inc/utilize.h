@@ -3,8 +3,11 @@
 
 
 extern FILE *hwork_rept;
-extern void ENTER(const char *);
-extern void LEAVE();
+
+extern void
+enter(const char *);
+extern void
+leave(void);
 
 
 void
@@ -14,9 +17,9 @@ exchange(int *, int *);
 void
 filepointer_init(void);
 void
-entering_frame(const char *);
+enter(const char *);
 void
-leaving_frame(void);
+leave(void);
 void
 print_stack_traces(void);
 void

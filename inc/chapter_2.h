@@ -12,9 +12,9 @@ timing_end(unsigned *);
 extern void
 exchange(int *, int *);
 extern void
-LEAVE(void);
+leave(void);
 extern void
-ENTER(const char *);
+enter(const char *);
 extern void
 print_report_header(FILE *, const char *, int, int);
 extern void
@@ -22,15 +22,14 @@ malloc_initial(void **, unsigned int);
 extern void
 saft_free(void **);
 
-
+/*-     CHAPTER 02-07                                          -*/
 void
 chapt_2_7(void);
 
-
 static void
-dochapt_2_7(void);
+dochapt_2_7(enum repeat_vehicle);
 static void
-random_sequence(int, int);
+random_sequence(int, int, enum repeat_vehicle);
 static void
 generate_random(int, int, enum repeat_vehicle);
 static int
@@ -51,27 +50,23 @@ static void
 expected_init(struct gen_random_report *, int,
   enum repeat_vehicle);
 
-
 static enum repeat_vehicle repeats[] = {
   UTIL,
   USED,
   SWAP,
 };
-
 static char *repeat_description[] = {
   "UNTIL Diffence",
   "USED Buffering",
   "SWAP Randomly ",
 };
-
 static int *sequence_data;
 static int *used_number;
 
 
-
+/*-     CHAPTER 02-11                                          -*/
 void
 chapt_2_11(void);
-
 
 static void
 dochapt_2_11(void);
@@ -87,5 +82,25 @@ static void
 print_contains_title(FILE *);
 static void
 print_contains_report(FILE *, struct iscontains_report *);
+
+
+/*-     CHAPTER 02-12                                          -*/
+void
+chapt_2_12(void);
+
+static void
+dochapt_2_12(signed (*)(signed *, int, int *, int *));
+static signed
+submin_sequence(signed *, signed, int *, int*);
+static void
+print_submin_report(FILE *, struct sub_sequence *);
+static void
+print_submin_title(FILE *, int);
+static void
+print_data_in(FILE *, signed (*)[MAX_SUB_DATA_SIZE], int);
+
+static signed (*func_name[])(signed *, int, int *, int *) = {
+  &submin_sequence,
+};
 
 #endif

@@ -15,7 +15,7 @@ chapt_1_4(void)
   print_report_header(hwork_rept, "Expanding Header Files", 1, 4);
   dochapt_1_4();
 
-  LEAVE();
+  LEAVE;
   return;
 }
 
@@ -40,7 +40,7 @@ dochapt_1_4(void)
     expand_file(*filename++);
   }
 
-  LEAVE();
+  LEAVE;
   return;
 }
 
@@ -59,7 +59,7 @@ expand_file(char *filename)
   {
     expand_report("%.*s=No Such[%s] File.\n",
       depth, blank, filename);
-    goto LEAVE;
+    goto EXIT_NOFILE;
   }
 
   memset(each_line, 0, MAX_WIDTH_OF_LINE);
@@ -83,13 +83,13 @@ expand_file(char *filename)
 
   fclose(fd);
 
-LEAVE:
+EXIT_NOFILE:
   depth--;
 #ifdef NO_STD_HEAD_FILE
   pop_expand_stack();
 #endif
 
-  LEAVE();
+  LEAVE;
   return;
 }
 
@@ -115,7 +115,7 @@ open_included_file(const char *filename)
     paths++;
   }
 
-  LEAVE();
+  LEAVE;
   return fd;
 }
 
@@ -140,7 +140,7 @@ include_line(char *line)
     }
   }
 
-  LEAVE();
+  LEAVE;
   return index;
 }
 
@@ -163,7 +163,7 @@ isvalid_include(char *index)
   else
     valid = 0;
 
-  LEAVE();
+  LEAVE;
   return valid;
 }
 
@@ -183,7 +183,7 @@ include_filename(char *filename, char *start)
   memset(filename, 0, MAX_WIDTH_OF_LINE);
   memcpy(filename, index, strlen(index));
 
-  LEAVE();
+  LEAVE;
   return;
 }
 
@@ -207,7 +207,7 @@ expand_file_filter(const char *filename)
     }
   }
 
-  LEAVE();
+  LEAVE;
   return !standard;
 }
 #endif
@@ -235,7 +235,7 @@ expand_file_filter(const char *filename)
     memcpy(expand_stack[exstack_top++], 
       filename, strlen(filename));
 
-  LEAVE();
+  LEAVE;
   return !repeated;
 }
 
@@ -246,7 +246,7 @@ pop_expand_stack(void)
 
   memset(expand_stack[--exstack_top], 0, FILENAME_LENGTH);
 
-  LEAVE();
+  LEAVE;
   return;
 }
 #endif
@@ -265,6 +265,6 @@ expand_report(char *fmt, ...)
   va_end(vl);
   va_end(vl_cp);
 
-  LEAVE();
+  LEAVE;
   return;
 }
