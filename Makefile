@@ -65,3 +65,4 @@ run:$(TARGET)
 clean:
 	-rm -rf $(TARGET) $(OBJDIR)/* $(FDPS)
 	-rm -rf report *.gcda *.gcno
+	-rm -rf $(ADIR)/*

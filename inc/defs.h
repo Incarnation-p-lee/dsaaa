@@ -42,7 +42,7 @@
 while((times)-- > 0) \
 {  \
   (*(func))((start), (end), (type)); \
-} 
+}
 #define CON_PERFORMANCE(times, func, specified, raw_data, size_c) \
 (*(func))((specified), (raw_data), (size_c)); \
 while(--(times) > 0) \
@@ -63,6 +63,10 @@ typedef enum repeat_vehicle{
   USED,
   SWAP,
 }Rept_v;
+typedef enum minsub_sequence{
+  MIN_SUB,
+  MIN_POSITIVE_SUB,
+}MinSub_seq;
 
 typedef struct rept_entry{
   int      kvalue;
@@ -98,4 +102,8 @@ typedef struct sub_sequence{
   double   astringent;
 }SU_seq;
 
+typedef struct navi_entry{
+  signed navi_value;
+  int    ed_index;
+}NA_entry;
 #endif

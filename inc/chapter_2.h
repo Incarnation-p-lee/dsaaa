@@ -89,18 +89,30 @@ void
 chapt_2_12(void);
 
 static void
-dochapt_2_12(signed (*)(signed *, int, int *, int *));
+dochapt_2_12(void);
+static void
+find_minsub_seq(signed (*)[MAX_SUB_DATA_SIZE], int, int,
+  signed (*)(signed *, int, int *, int *));
 static signed
-submin_sequence(signed *, signed, int *, int*);
+min_subsequence(signed *, signed, int *, int*);
+static signed
+min_posi_subsequence(signed *, signed, int *, int *);
 static void
 print_submin_report(FILE *, struct sub_sequence *);
 static void
-print_submin_title(FILE *, int);
+print_submin_title(FILE *, int, enum minsub_sequence);
 static void
 print_data_in(FILE *, signed (*)[MAX_SUB_DATA_SIZE], int);
+static int
+minimun_composed(signed *, signed, struct navi_entry *, int);
 
 static signed (*func_name[])(signed *, int, int *, int *) = {
-  &submin_sequence,
+ // &min_subsequence,
+  &min_posi_subsequence,
+};
+static enum minsub_sequence minsub_type[] = {
+  MIN_SUB,
+  MIN_POSITIVE_SUB,
 };
 
 #endif

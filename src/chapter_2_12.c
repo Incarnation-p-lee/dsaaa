@@ -9,30 +9,24 @@
 void
 chapt_2_12(void)
 {
-  signed (**iterator)(signed *, int, int *, int *);
   ENTER("chapt_2_12");
 
   print_report_header(stdout, "Sub Sequences", 2, 12);
   print_report_header(hwork_rept, "Sub Sequences", 2, 12);
-
-  iterator = func_name;
-  while(iterator < func_name + 
-    sizeof(func_name) / sizeof(func_name[0]))
-    dochapt_2_12(*iterator++);
+  dochapt_2_12();
 
   LEAVE;
   return;
 }
 
-
 static void
-dochapt_2_12(signed (*entry)(signed *, int, int *, int *))
+dochapt_2_12(void)
 {
-  register signed int (*iterator)[MAX_SUB_DATA_SIZE];
-  struct sub_sequence su_rpt;
-  int size_s;
-  int counts;
-  signed int cases[][MAX_SUB_DATA_SIZE] = {
+  signed (**iterator)(signed *, int, int *, int *);
+  enum minsub_sequence *min_type;
+  int data_size;
+  int data_cnt;
+  static signed int cases[][MAX_SUB_DATA_SIZE] = {
     {-1, -2, 3, -9, 13, 9, -2,-6, -4,-11, 18,  1,  2,  7, -1, -3},
     {11,  2, 8,  2,  3, 7, 22, 6,  1, 12,  9,  8,  3,  8, 21, 19},
     { 1,  1, 1,  1,  1, 1,  1, 1,  1,  1,  1,  1,  1,  1,  1,  1},
@@ -46,23 +40,46 @@ dochapt_2_12(signed (*entry)(signed *, int, int *, int *))
   };
   ENTER("dochapt_2_12");
 
-  size_s = sizeof(cases[0]) / sizeof(cases[0][0]);
-  print_submin_title(stdout, size_s);
-  print_submin_title(hwork_rept, size_s);
   print_data_in(stdout, cases, sizeof(cases) / sizeof(cases[0]));
   print_data_in(hwork_rept, cases, sizeof(cases) / sizeof(cases[0]));
 
+  data_size = sizeof(cases[0]) / sizeof(cases[0][0]);
+  data_cnt = sizeof(cases) / sizeof(cases[0]);
+
+  iterator = func_name;
+  min_type = minsub_type;
+  while(iterator < func_name + 
+    sizeof(func_name) / sizeof(func_name[0]))
+  {
+    print_submin_title(stdout, data_size, *min_type);
+    print_submin_title(hwork_rept, data_size, *min_type++);
+    find_minsub_seq(cases, data_cnt, data_size, *iterator++);
+  }
+
+  LEAVE;
+  return;
+}
+
+static void
+find_minsub_seq(signed (*cases)[MAX_SUB_DATA_SIZE], int data_cnt,
+  int data_size, signed (*entry)(signed *, int, int *, int *))
+{
+  register signed (*iterator)[MAX_SUB_DATA_SIZE];
+  struct sub_sequence su_rpt;
+  int counts;
+  ENTER("find_minsub_seq");
+
   iterator = cases;
-  su_rpt.astringent = size_s;
-  while(iterator < cases + sizeof(cases) / sizeof(cases[0]))
+  su_rpt.astringent = data_size;
+  while(iterator < cases + data_cnt)
   {
     counts = SUB_CASES_COUNT;
-     
+
     TIME_START;
     su_rpt.min = SUB_PERFORMANCE(counts, entry,
-      *iterator, size_s, &su_rpt.st, &su_rpt.ed);
+      *iterator, data_size, &su_rpt.st, &su_rpt.ed);
     TIME_END(&su_rpt.usec);
-    
+
     print_submin_report(stdout, &su_rpt);
     print_submin_report(hwork_rept, &su_rpt);
     iterator++;
@@ -89,11 +106,24 @@ print_submin_report(FILE *fd, struct sub_sequence *rpt)
 }
 
 static void
-print_submin_title(FILE *fd, int size_s)
+print_submin_title(FILE *fd, int size_s,
+  enum minsub_sequence type)
 {
   ENTER("print_submin_title");
 
-  fprintf(fd, "\nSUB-SEQUENCE *ASTRINGENT => O[N]");
+  switch(type)
+  {
+    case MIN_SUB:
+      fprintf(fd, "MINIMUN-SUB SEQUENCE *ASTRINGENT => O[N]\n");
+      break;
+    case MIN_POSITIVE_SUB:
+      fprintf(fd, "MINIMUN POSITIVE SUB SEQUENCE"
+        " *ASTRINGENT => O[N]\n");
+      break;
+    default:
+      error_handle("Unresolved enum value detected.");
+      break;
+  }
 
   LEAVE;
   return;
@@ -110,7 +140,7 @@ print_data_in(FILE *fd,
   ENTER("print_data_in");
 
   fprintf(fd, "\nInput Data:\n");
-  
+
   index = 0;
   fprintf(fd, "INDEX ");
   while(index < MAX_SUB_DATA_SIZE)
@@ -124,7 +154,7 @@ print_data_in(FILE *fd,
     fprintf(fd, "%4d. ", (int)(itt_o - data));
     while(itt_i < *itt_o + MAX_SUB_DATA_SIZE)
       fprintf(fd, "%4d ", *itt_i++);
-    
+
     fprintf(fd, "\n");
     itt_o++;
   }
@@ -138,7 +168,7 @@ print_data_in(FILE *fd,
 
 
 static signed
-submin_sequence(signed *data, signed size_s, int *st, int *ed)
+min_subsequence(signed *data, signed size_s, int *st, int *ed)
 {
   signed min;
   signed sum;
@@ -146,7 +176,7 @@ submin_sequence(signed *data, signed size_s, int *st, int *ed)
   int single_index;
   int st_index;
   register signed *iterator;
-  ENTER("submin_sequence");
+  ENTER("min_subsequence");
 
   iterator = data;
   min = sum = *st = *ed = st_index = 0;
@@ -164,7 +194,7 @@ submin_sequence(signed *data, signed size_s, int *st, int *ed)
       if(single > sum)
       {
         single = sum;
-        single_index = st_index;
+        single_index = st_index - 1;
       }
       sum = 0;
     }
@@ -176,6 +206,7 @@ submin_sequence(signed *data, signed size_s, int *st, int *ed)
     }
   }
 
+  /*- if all positive numbers, use the smallest one as min.    -*/
   if(0 == min)
   {
     min = single;
@@ -186,3 +217,129 @@ submin_sequence(signed *data, signed size_s, int *st, int *ed)
   return min;
 }
 
+#if 1
+static signed
+min_posi_subsequence(signed *data, signed size_s, int *st, int *ed)
+{
+  signed min_posi;
+  signed min_composed;
+  signed sum;
+  signed *iterator;
+  struct navi_entry nav_vi[size_s];
+  int nav_top;
+  ENTER("min_posi_subsequence");
+
+  memset(nav_vi, 0, sizeof(nav_vi));
+  iterator = data;
+  nav_top = sum = min_composed = 0;
+  min_posi = INT_MAX;
+  while(iterator < data + size_s)
+  {
+    sum += *iterator;
+    if(sum < 0)
+    {
+      nav_vi[nav_top].navi_value = sum;
+      nav_vi[nav_top++].ed_index = iterator - data;
+      sum = 0;
+    }
+
+    if(sum > 0)
+    {
+      *st  = minimun_composed(&min_composed, sum, nav_vi, nav_top);
+      if(min_composed < min_posi)
+      {
+        min_posi = min_composed;
+        *ed = iterator - data;
+      }
+      if(*iterator > 0 && min_posi > *iterator)
+      {
+        min_posi = *iterator;
+        *st = iterator - data;
+      }
+    }
+    iterator++;
+  }
+
+  /*- if all negative numbers, reset the min, st and ed to 0.  -*/
+  if(INT_MAX == min_posi)
+  {
+    min_posi = 0;
+    *st = *ed = 0;
+  }
+
+  LEAVE;
+  return min_posi;
+}
+#else
+
+static signed
+min_posi_subsequence(signed *data, signed size_s, int *st, int *ed)
+{
+  signed min_posi;
+  signed sum;
+  signed *iterator;
+  signed nav_sum[size_s];
+  int nav_top;
+  int st_index;
+  ENTER("min_posi_subsequence");
+
+  memset(nav_sum, 0, sizeof(nav_sum));
+  iterator = data;
+  nav_top = sum = st_index = 0;
+  min_posi = INT_MAX;
+  while(iterator < data + size_s)
+  {
+    sum += *iterator;
+    if(sum < 0)
+    {
+      sum = 0;
+    }
+
+    if(sum > 0 && min_posi > sum)
+    {
+      min_posi = sum;
+    }
+    iterator++;
+  }
+
+  /*- if all negative numbers, reset the min, st and ed to 0.  -*/
+  if(INT_MAX == min_posi)
+  {
+    min_posi = 0;
+  }
+  *st = *ed = 0;
+
+  LEAVE;
+  return min_posi;
+}
+
+#endif
+
+static int
+minimun_composed(signed *min_composed, signed sum,
+  struct navi_entry *nav_sum, int size)
+{
+  signed result;
+  int st_index;
+  register struct navi_entry *iterator;
+  ENTER("minimun_composed");
+
+  result = sum;
+  st_index = 0;
+  iterator = nav_sum + size - 1;
+  while(iterator >= nav_sum)
+  {
+    result += iterator->navi_value;
+    if(0 >= result)
+    {
+      result -= iterator->navi_value;
+      st_index = iterator->ed_index + 1;
+      break;
+    }
+    iterator--;
+  }
+
+  *min_composed = result;
+  LEAVE;
+  return st_index;
+}
