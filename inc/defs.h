@@ -102,8 +102,4 @@ typedef struct sub_sequence{
   double   astringent;
 }SU_seq;
 
-typedef struct navi_entry{
-  signed navi_value;
-  int    ed_index;
-}NA_entry;
 #endif

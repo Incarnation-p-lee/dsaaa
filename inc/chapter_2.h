@@ -92,7 +92,10 @@ static void
 dochapt_2_12(void);
 static void
 find_minsub_seq(signed (*)[MAX_SUB_DATA_SIZE], int, int,
-  signed (*)(signed *, int, int *, int *));
+  signed (*)(signed *, int, int *, int *),
+  enum minsub_sequence);
+static void
+astringent_init(struct sub_sequence *, int, enum minsub_sequence);
 static signed
 min_subsequence(signed *, signed, int *, int*);
 static signed
@@ -103,11 +106,11 @@ static void
 print_submin_title(FILE *, int, enum minsub_sequence);
 static void
 print_data_in(FILE *, signed (*)[MAX_SUB_DATA_SIZE], int);
-static int
-minimun_composed(signed *, signed, struct navi_entry *, int);
+static void
+min_posi_assist(signed *, signed *, int);
 
 static signed (*func_name[])(signed *, int, int *, int *) = {
- // &min_subsequence,
+  &min_subsequence,
   &min_posi_subsequence,
 };
 static enum minsub_sequence minsub_type[] = {

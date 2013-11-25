@@ -21,13 +21,13 @@ const char *blank =
 "                                               ";
 
 static HOMEWORK homework[] = {
-#if 0
+#if 1
   &chapt_1_1,
   &chapt_1_4,
   &chapt_2_7,
   &chapt_2_11,
-#else
   &chapt_2_12,
+#else
 #endif
 };
 

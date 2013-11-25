@@ -1,32 +1,354 @@
 
+-----------------------------Chapter 01-01-------------------------------
+
+                               Selection Problem
+
+TIME: Mon Nov 25 16:37:20 2013
+
+ASTRINGENT: O(N*logN)
+No.     DATA_SIZE         KVALUE:VALIDATION     TIME(usec)=>ASTRINGENT
+ 1             10         -89969:         5              2=>  0.086859
+ 2             20         -20588:        10              3=>  0.050071
+ 3             30         -14738:        15              4=>  0.039202
+ 4             40          39357:        20              4=>  0.027109
+ 5             50         -51604:        25              4=>  0.020450
+ 6             60         -20588:        30              5=>  0.020353
+ 7             70          41829:        35              5=>  0.016813
+ 8             80          17118:        40              7=>  0.019968
+ 9             90         -20588:        45              5=>  0.012346
+10            100         -20588:        50              7=>  0.015200
+11            500          17118:       250             46=>  0.014804
+12           1000           6021:       500             48=>  0.006949
+13           5000          -7881:      2500            270=>  0.006340
+14          10000          -7938:      5000            612=>  0.006645
+15          50000          -1047:     25000           2485=>  0.004593
+16         100000           -704:     50000           3193=>  0.002773
+17         500000          -1143:    250000          15648=>  0.002385
+18        1000000           -629:    500001          24514=>  0.001774
+19        5000000            117:   2500001         138310=>  0.001793
+20       10000000            163:   5000006         287360=>  0.001783
+
+-----------------------------Chapter 01-04-------------------------------
+
+                               Expanding Header Files
+
+TIME: Mon Nov 25 16:37:21 2013
+
+>>>>>>>> main.m <<<<<<<<
+/*--------------------------------------------------------------*/
+/*-AUTHOR:      Incarnation.P Lee                               */
+/*-DATE:        08042013                                        */
+/*-WHAT:        Homework of DSAAA                               */
+/*-REVISION:                                                    */
+/*- DATE ------------------------ DESCRIPTION ------------------*/
+/*- 08042013    CHAPTER 1. Initilize the program.              -*/
+/*- 10242013    CHAPTER 1. Add function pointer.               -*/
+/*-                        Start chapter1.2                    -*/
+/*--------------------------------------------------------------*/
+#include "include.h"
+ +include.h
+  +stdio.h
+  +string.h
+  +stddef.h
+  +assert.h
+  +limits.h
+  +stdlib.h
+  +stdarg.h
+  +errno.h
+  +time.h
+  +ctype.h
+  +math.h
+  +sys/types.h
+  +sys/stat.h
+  +sys/wait.h
+  +sys/time.h
+  +sys/mman.h
+  +unistd.h
+  +fcntl.h
+  +netinet/in.h
+  +sys/socket.h
+  +arpa/inet.h
+  +pthread.h
+#include "defs.h"
+ +defs.h
+#include "vars.h"
+ +vars.h
+#include "externals.h"
+ +externals.h
+
+int
+main(int argc, char **argv)
+{
+  register HOMEWORK *hw_entry = homework;
+  ENTER("main");
+
+  filepointer_init();
+
+  while(hw_entry < homework + sizeof(homework) / sizeof(HOMEWORK))
+    (*hw_entry++)();
+
+  filepointer_close();
+
+  LEAVE;
+  return EXIT_SUCCESS;
+}
+
+>>>>>>>> chapter_1.m <<<<<<<<
+#include "include.h"
+ +include.h
+  +stdio.h
+  +string.h
+  +stddef.h
+  +assert.h
+  +limits.h
+  +stdlib.h
+  +stdarg.h
+  +errno.h
+  +time.h
+  +ctype.h
+  +math.h
+  +sys/types.h
+  +sys/stat.h
+  +sys/wait.h
+  +sys/time.h
+  +sys/mman.h
+  +unistd.h
+  +fcntl.h
+  +netinet/in.h
+  +sys/socket.h
+  +arpa/inet.h
+  +pthread.h
+#include "defs.h"
+ +defs.h
+#include "chapter_1.h"
+ +chapter_1.h
+
+#include "chapter_1_1.c"
+ +chapter_1_1.c
+#include "chapter_1_4.c"
+ +chapter_1_4.c
+
+>>>>>>>> defs.h <<<<<<<<
+#ifndef DEFINES_H
+#define DEFINES_H
+
+
+#if 1
+#define STD_HEAD_FILE
+#else
+#define NO_STD_HEAD_FILE
+#endif
+
+
+#define MIN_STEP_WIDTH             1
+#define DATA_MAX                   1024000
+#define TRACE_DEPTH                4098
+#define MAX_WIDTH_OF_LINE          120
+#define FULL_NAME_LENGTH           256
+#define REPEAT_COUNT               100
+#define SUB_CASES_COUNT            1024
+#define MAX_SUB_DATA_SIZE          16
+#define FILENAME_SPLITER           "\"< >"
+#define REPEAT_USED                0x1010
+#define REPEAT_UNUSED              0x0101
+#define REPEATED                   0xA0A0
+#define NOT_REPEATED               0x0A0A
+#define CONTAINED                  0x1234
+#define NOT_CONTAINED              0x4321
+#define CONTAINS_COUNT             10000
+
+
+#ifdef NO_STD_HEAD_FILE
+#define EXPAND_DEPTH               128
+#define FILENAME_LENGTH            32
+#endif
+
+
+#define ENTER(fname)     enter(#fname)
+#define LEAVE            leave()
+#define TIME_START       timing_start()
+#define TIME_END(usec)   timing_end(usec)
+
+#define SEQ_PERFORMANCE(times, func, start, end, type) \
+while((times)-- > 0) \
+{  \
+  (*(func))((start), (end), (type)); \
+}
+#define CON_PERFORMANCE(times, func, specified, raw_data, size_c) \
+(*(func))((specified), (raw_data), (size_c)); \
+while(--(times) > 0) \
+{  \
+  (*(func))((specified), (raw_data), (size_c)); \
+}
+#define SUB_PERFORMANCE(times, func, data_in, size_s, st, ed) \
+(*(func))((data_in), (size_s), (st), (ed)); \
+while(--(times) > 0) \
+{ \
+  (*(func))((data_in), (size_s), (st), (ed)); \
+}
+
+
+typedef void (*HOMEWORK)(void);
+typedef enum repeat_vehicle{
+  UTIL,
+  USED,
+  SWAP,
+}Rept_v;
+typedef enum minsub_sequence{
+  MIN_SUB,
+  MIN_POSITIVE_SUB,
+}MinSub_seq;
+
+typedef struct rept_entry{
+  int      kvalue;
+  int      data_size;
+  int      validate;
+  unsigned usec_cost;
+  int      count;
+  double   astringent;
+}REPT_entry;
+
+typedef struct gen_random_report{
+  unsigned usec;
+  int      dimension;
+  char     *outline;
+  int      start;
+  int      end;
+  double   expected;
+}GR_report;
+
+typedef struct iscontains_report{
+  unsigned usec;
+  int      min;
+  int      size_c;
+  double   astringent;
+  int      result;
+}IC_report;
+
+typedef struct sub_sequence{
+  signed   min;
+  unsigned usec;
+  int      st;
+  int      ed;
+  double   astringent;
+}SU_seq;
+
+#endif
+
+>>>>>>>> externals.h <<<<<<<<
+#ifndef EXTERNALS_H
+#define EXTERNALS_H
+
+
+extern void
+enter(const char *);
+extern void
+leave(void);
+extern void
+filepointer_init(void);
+extern void
+filepointer_close(void);
+
+extern void
+chapt_1_1(void);
+extern void
+chapt_1_4(void);
+extern void
+chapt_2_7(void);
+extern void
+chapt_2_11(void);
+
+#endif
+
+-----------------------------Chapter 02-07-------------------------------
+
+                               Random Generation
+
+TIME: Mon Nov 25 16:37:21 2013
+NUM_START      END  DIMENSION    TIME(usec)  DESCRIPTION     ASTRINGENT
+        1       10         10        1.6300  UNTIL Diffence   0.1630000
+       11       20         10        1.6900  UNTIL Diffence   0.1690000
+        1      100        100       67.8600  UNTIL Diffence   0.0067860
+      201      400        200      256.7300  UNTIL Diffence   0.0032091
+      101      600        500     1606.1100  UNTIL Diffence   0.0012849
+       11     1000        990     6603.7000  UNTIL Diffence   0.0006806
+     1001     2000       1000     6791.2700  UNTIL Diffence   0.0006791
+        1       10         10        1.3600  USED Buffering   1.3600000
+       11       20         10        1.4500  USED Buffering   1.4500000
+        1      100        100       21.1500  USED Buffering   0.2115000
+      201      400        200       46.9900  USED Buffering   0.1174750
+      101      600        500      135.2300  USED Buffering   0.0540920
+       11     1000        990      288.9000  USED Buffering   0.0294766
+     1001     2000       1000      292.5900  USED Buffering   0.0292590
+        1       10         10        0.3300  SWAP Randomly    3.3000000
+       11       20         10        0.3300  SWAP Randomly    3.3000000
+        1      100        100        2.3300  SWAP Randomly    2.3300000
+      201      400        200        4.5200  SWAP Randomly    2.2600000
+      101      600        500       11.1000  SWAP Randomly    2.2200000
+       11     1000        990       21.8800  SWAP Randomly    2.2101010
+     1001     2000       1000       22.0600  SWAP Randomly    2.2060000
+
+-----------------------------Chapter 02-11-------------------------------
+
+                               Specified Contains
+
+TIME: Mon Nov 25 16:37:22 2013
+
+NUMBER(MIN)  DIMENSION   TIME(usec)    RESULT      ASTRINGENT
+EXPECTED: O[log(N)]
+         1          10         383     NO_CONTAINS 166.334787
+        11          20         434     NO_CONTAINS 144.872759
+         1         100         566     NO_CONTAINS 122.905338
+       201         400         646     NO_CONTAINS 107.820049
+       101         600         668     CONTAINS    104.425097
+        11        1000         657     CONTAINS     95.110492
+      1001       12000         895     NO_CONTAINS  95.287151
+         1       42000         941     NO_CONTAINS  88.394781
+       101       82000         991     NO_CONTAINS  87.586922
+      2001       62000        1014     NO_CONTAINS  91.890361
+       121      122000        1060     NO_CONTAINS  90.507193
+        11     3452000        1309     NO_CONTAINS  86.950952
+      9001     8622000        1331     NO_CONTAINS  83.344669
+
 -----------------------------Chapter 02-12-------------------------------
 
                                Sub Sequences
 
-TIME: Fri Nov 22 16:50:37 2013
+TIME: Mon Nov 25 16:37:22 2013
 
 Input Data:
 INDEX  [00] [01] [02] [03] [04] [05] [06] [07] [08] [09] [10] [11] [12] [13] [14] [15]
    0.   -1   -2    3   -9   13    9   -2   -6   -4  -11   18    1    2    7   -1   -3 
-   1.   11    2    8    2    3    7   22    6    1   12    9    8    3    8   21   19 
-   2.    1    1    1    1    1    1    1    1    1    1    1    1    1    1    1    1 
-   3.   -1    1   -1    1   -1    1   -1    1   -1    1   -1    1   -1    1   -1    1 
-   4.   -1   -7   -8  -72  -28   -7  -27   -6  -31  -32  -89   -8   -5   -2  -41  -39 
-   5.   21   17   -3  -43  -83    8   -7   -9  -33  -18   89   38   -1   -8   51  -48 
+   1.   21   17   -3   43   83    8    7    9   33  -18   89   38   -1    5   51   48 
+   2.   11    2    8    2    3    7   22    6    1   12    9    8    3    8   21   19 
+   3.    1    1    1    1    1    1    1    1    1    1    1    1    1    1    1    1 
+   4.   -1    1   -1    1   -1    1   -1    1   -1    1   -1    1   -1    1   -1    1 
+   5.   -1   -7   -8  -72  -28   -7  -27   -6  -31  -32  -89   -8   -5   -2  -41  -39 
    6.    8    0   -1  -13    0    7    0   19    0   -8    0    4    0   68    0  -42 
    7.    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0 
    8.    1    0    2    0    3    0    4    0    5    0    6    0    7    0    8    0 
    9.    1   -2    3   -4    5   -6    7   -8    9  -10   11  -12   13  -14   15  -16 
 Report:
 INDEX MINIMUN    START      END   TIME(usec)   ASTRINGENT
-MINIMUN-SUB SEQUENCE *ASTRINGENT => O[N]
-   0.       1        0        2     0.506836    32.437500
-   1.       1        0        0     0.573242    36.687500
-   2.       1        0        0     0.587891    37.625000
-   3.       1        1        1     0.331055    21.187500
-   4.       0        0        0     0.105469     6.750000
-   5.       1        5        6     0.572266    36.625000
-   6.       1        0        5     0.548828    35.125000
-   7.       0        0        0     0.091797     5.875000
-   8.       1        0        0     0.564453    36.125000
-   9.       1        0        0     0.376953    24.125000
+MINIMUN SUB SEQUENCE *ASTRINGENT => O[N]
+   0.     -23        6        9     0.085938     5.500000
+   1.     -18        9        9     0.098633     6.312500
+   2.       1        8        8     0.081055     5.187500
+   3.       1        0        0     0.078125     5.000000
+   4.      -1        0        0     0.074219     4.750000
+   5.    -403        0       15     0.075195     4.812500
+   6.     -42       15       15     0.068359     4.375000
+   7.       0        0        0     0.083984     5.375000
+   8.       0        1        1     0.092773     5.937500
+   9.     -16       15       15     0.081055     5.187500
+MINIMUN POSITIVE SUB SEQUENCE *ASTRINGENT => O[N^2]
+  10.       1        0        8     0.561523     2.246094
+  11.       4       12       13     0.578125     2.312500
+  12.       1        8        8     0.570312     2.281250
+  13.       1        0        0     0.593750     2.375000
+  14.       1        1        1     0.498047     1.992188
+  15.       0        0        0     0.517578     2.070312
+  16.       1        0        5     0.544922     2.179688
+  17.       0        0        0     0.504883     2.019531
+  18.       1        0        0     0.557617     2.230469
+  19.       1        0        0     0.506836     2.027344
