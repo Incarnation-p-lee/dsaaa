@@ -242,6 +242,15 @@ min_subsequence(signed *data, signed size_s, int *st, int *ed)
   return min;
 }
 
+/*- Assume Y[i] i = (0 ... N) [size == N -1], raw input X[i].  -*/
+/*- POSTULATION:                                               -*/
+/*- Y[0] = 0.                                                  -*/
+/*- Y[1] = X[0].                                               -*/
+/*- Y[2] = X[0] + X[1].                                        -*/
+/*- Y[N] = X[0] + X[1] + ... + X[N - 1].                       -*/
+/*- Then the minimum sub positive sequence has two conditions: -*/
+/*-   1. Y[i] - Y[j] > 0 && i > j                              -*/
+/*-   2. (Y[i] - Y[j]) is the smallest positive                -*/
 static signed
 min_posi_subsequence(signed *data, signed size_s, int *st, int *ed)
 {
@@ -259,6 +268,8 @@ min_posi_subsequence(signed *data, signed size_s, int *st, int *ed)
   min_posi = INT_MAX;
   sum_cad = 0;
   iterator_1 = iterator_2 = data_ass;
+
+  /* size of Y[N] == size of X[N] + 1                          -*/
   while(iterator_1 < data_ass + size_s + 1)
   {
     iterator_2 = iterator_1 + 1;
@@ -276,13 +287,14 @@ min_posi_subsequence(signed *data, signed size_s, int *st, int *ed)
     iterator_1++;
   }
 
+  /* For there is no positive number in raw input data.        -*/
   if(INT_MAX == min_posi)
   {
     min_posi = 0;
     *st = *ed = 0;
   }
-
   saft_free((void **)&data_ass);
+
   LEAVE;
   return min_posi;
 }
