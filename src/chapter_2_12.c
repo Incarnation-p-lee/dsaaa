@@ -316,3 +316,13 @@ min_posi_assist(signed *assist, signed *raw, int size)
   LEAVE;
   return;
 }
+
+static signed
+max_muli_subsequence(signed *data, signed size_s, int *st, int *ed)
+{
+  signed max_mult;
+  ENTER("max_muli_subsequence");
+
+  LEAVE;
+  return max_mult;
+}
