@@ -154,7 +154,6 @@ print_submin_title(FILE *fd, int size_s,
   return;
 }
 
-
 static void
 print_data_in(FILE *fd,
   signed (*data)[MAX_SUB_DATA_SIZE], int size_s)
@@ -190,7 +189,6 @@ print_data_in(FILE *fd,
   LEAVE;
   return;
 }
-
 
 static signed
 min_subsequence(signed *data, signed size_s, int *st, int *ed)
@@ -242,7 +240,7 @@ min_subsequence(signed *data, signed size_s, int *st, int *ed)
   return min;
 }
 
-/*- Assume Y[i] i = (0 ... N) [size == N -1], raw input X[i].  -*/
+/*- Assume Y[i] i = (0 ... N) [size == N + 1], raw input X[i]. -*/
 /*- POSTULATION:                                               -*/
 /*- Y[0] = 0.                                                  -*/
 /*- Y[1] = X[0].                                               -*/
