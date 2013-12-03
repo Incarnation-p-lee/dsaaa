@@ -306,13 +306,13 @@ min_posi_subsequence(double *data, int size_s, int *st, int *ed)
 static void
 min_posi_assist(double *assist, double *raw, int size)
 {
-  int sum;
+  double sum;
   register double *iterator;
   ENTER("min_posi_assist");
 
   iterator = raw;
-  sum = 0;
-  *assist++ = 0;
+  sum = 0.0;
+  *assist++ = 0.0;
   while(iterator < raw + size)
   {
     sum += *iterator++;

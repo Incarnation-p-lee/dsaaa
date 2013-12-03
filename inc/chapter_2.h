@@ -119,6 +119,7 @@ static double (*func_name[])(double *, int, int *, int *) = {
 static enum minsub_sequence minsub_type[] = {
   MIN_SUB,
   MIN_POSITIVE_SUB,
+  MAX_MULTI_SUB,
 };
 
 #endif
