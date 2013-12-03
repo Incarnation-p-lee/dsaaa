@@ -16,7 +16,7 @@
 #define FULL_NAME_LENGTH           256
 #define REPEAT_COUNT               100
 #define SUB_CASES_COUNT            1024
-#define MAX_SUB_DATA_SIZE          16
+#define MAX_SUB_DATA_SIZE          10
 #define FILENAME_SPLITER           "\"< >"
 #define REPEAT_USED                0x1010
 #define REPEAT_UNUSED              0x0101
@@ -25,6 +25,7 @@
 #define CONTAINED                  0x1234
 #define NOT_CONTAINED              0x4321
 #define CONTAINS_COUNT             10000
+#define MIN_DOUBLE                 0.000001f
 
 
 #ifdef NO_STD_HEAD_FILE
@@ -66,6 +67,7 @@ typedef enum repeat_vehicle{
 typedef enum minsub_sequence{
   MIN_SUB,
   MIN_POSITIVE_SUB,
+  MAX_MULTI_SUB,
 }MinSub_seq;
 
 typedef struct rept_entry{
@@ -95,7 +97,7 @@ typedef struct iscontains_report{
 }IC_report;
 
 typedef struct sub_sequence{
-  signed   min;
+  double   min;
   unsigned usec;
   int      st;
   int      ed;

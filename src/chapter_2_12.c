@@ -22,26 +22,27 @@ chapt_2_12(void)
 static void
 dochapt_2_12(void)
 {
-  signed (**iterator)(signed *, int, int *, int *);
+  double (**iterator)(double *, int, int *, int *);
   enum minsub_sequence *min_type;
   int data_size;
   int data_cnt;
-  static signed int cases[][MAX_SUB_DATA_SIZE] = {
-    {-1, -2, 3, -9, 13, 9, -2,-6, -4,-11, 18,  1,  2,  7, -1, -3},
-    {21, 17,-3, 43, 83, 8,  7, 9, 33,-18, 89, 38, -1,  5, 51, 48},
-    {11,  2, 8,  2,  3, 7, 22, 6,  1, 12,  9,  8,  3,  8, 21, 19},
-    { 1,  1, 1,  1,  1, 1,  1, 1,  1,  1,  1,  1,  1,  1,  1,  1},
-    {-1,  1,-1,  1, -1, 1, -1, 1, -1,  1, -1,  1, -1,  1, -1,  1},
-    {-1, -7,-8,-72,-28,-7,-27,-6,-31,-32,-89, -8, -5, -2,-41,-39},
-    { 8,  0,-1,-13,  0, 7,  0,19,  0, -8,  0,  4,  0, 68,  0,-42},
-    { 0,  0, 0,  0,  0, 0,  0, 0,  0,  0,  0,  0,  0,  0,  0,  0},
-    { 1,  0, 2,  0,  3, 0,  4, 0,  5,  0,  6,  0,  7,  0,  8,  0},
-    { 1, -2, 3, -4,  5,-6,  7,-8,  9,-10, 11,-12, 13,-14, 15,-16},
+  static double cases[][MAX_SUB_DATA_SIZE] = {
+    { 0.1,  0.2, 0.0,  0.3, 0.4, 0.5,  0.6,  0.9,  0.8, 0.7,},
+    {-0.1, -2.1, 3.8, -0.9, 1.3, 9.0, -2.1, -6.0, -0.4,-1.1,},
+    {-0.1, -0.1,-2.8, -1.9,-0.3,-1.3, -7.1, -2.0, -0.3,-2.7,},
+    { 0.0,  0.0, 0.0,  0.0, 0.0, 0.0,  0.0,  0.0,  0.0, 0.0,},
+    { 1.1,  1.1, 1.1,  1.1, 1.1, 1.1,  1.1,  1.1,  1.1, 1.1,},
+    {-0.1,  0.2,-0.3,  0.4,-0.5, 0.6, -0.7,  0.8, -0.8, 0.9,},
+    {-0.2, -0.8, 1.3, -1.9, 0.7,-2.1, -3.2,  2.3,  3.4,-1.1,},
+    {-2.1, -8.3,-0.8, -0.4, 7.3, 2.3, -8.2, -2.7, -1.5,-0.1,},
+    {-3.3, -2.2, 1.3, -4.7, 2.1, 0.7, -3.4, -2.8, -1.4,-8.1,},
+    {-0.1, -2.9, 4.2, -1.9, 2.9, 7.3, -1.4, -6.2, -1.4,-0.1,},
   };
   ENTER("dochapt_2_12");
 
   print_data_in(stdout, cases, sizeof(cases) / sizeof(cases[0]));
-  print_data_in(hwork_rept, cases, sizeof(cases) / sizeof(cases[0]));
+  print_data_in(hwork_rept, cases,
+    sizeof(cases) / sizeof(cases[0]));
 
   data_size = sizeof(cases[0]) / sizeof(cases[0][0]);
   data_cnt = sizeof(cases) / sizeof(cases[0]);
@@ -62,11 +63,11 @@ dochapt_2_12(void)
 }
 
 static void
-find_minsub_seq(signed (*cases)[MAX_SUB_DATA_SIZE], int data_cnt,
-  int data_size, signed (*entry)(signed *, int, int *, int *),
+find_minsub_seq(double (*cases)[MAX_SUB_DATA_SIZE], int data_cnt,
+  int data_size, double (*entry)(double *, int, int *, int *),
   enum minsub_sequence type)
 {
-  register signed (*iterator)[MAX_SUB_DATA_SIZE];
+  register double (*iterator)[MAX_SUB_DATA_SIZE];
   struct sub_sequence su_rpt;
   int counts;
   ENTER("find_minsub_seq");
@@ -101,6 +102,7 @@ astringent_init(struct sub_sequence *su_rpt, int dimension,
   switch(type)
   {
     case MIN_SUB:
+    case MAX_MULTI_SUB:
       su_rpt->astringent = dimension;
       break;
     case MIN_POSITIVE_SUB:
@@ -121,7 +123,7 @@ print_submin_report(FILE *fd, struct sub_sequence *rpt)
   static int index = 0;
   ENTER("print_submin_report");
 
-  fprintf(fd, "%4d. %7d  %7d  %7d  %11.6f  %11.6f\n",
+  fprintf(fd, "%4d. %10.4f  %7d  %7d  %11.6f  %11.6f\n",
     index++ >> 1, rpt->min, rpt->st, rpt->ed,
     (double)rpt->usec / SUB_CASES_COUNT,
     rpt->usec / rpt->astringent);
@@ -145,6 +147,10 @@ print_submin_title(FILE *fd, int size_s,
       fprintf(fd, "MINIMUN POSITIVE SUB SEQUENCE"
         " *ASTRINGENT => O[N^2]\n");
       break;
+    case MAX_MULTI_SUB:
+      fprintf(fd, "MAXIMUN MULTIPLE SUB SEQUENCE"
+        " *ASTRINGENT => O[N]\n");
+      break;
     default:
       error_handle("Unresolved enum value detected.");
       break;
@@ -156,10 +162,10 @@ print_submin_title(FILE *fd, int size_s,
 
 static void
 print_data_in(FILE *fd,
-  signed (*data)[MAX_SUB_DATA_SIZE], int size_s)
+  double (*data)[MAX_SUB_DATA_SIZE], int size_s)
 {
-  register signed *itt_i;
-  register signed (*itt_o)[MAX_SUB_DATA_SIZE];
+  register double *itt_i;
+  register double (*itt_o)[MAX_SUB_DATA_SIZE];
   int index;
   ENTER("print_data_in");
 
@@ -175,30 +181,30 @@ print_data_in(FILE *fd,
   while(itt_o < data + size_s)
   {
     itt_i = *itt_o;
-    fprintf(fd, "%4d. ", (int)(itt_o - data));
+    fprintf(fd, "%4d.  ", (int)(itt_o - data));
     while(itt_i < *itt_o + MAX_SUB_DATA_SIZE)
-      fprintf(fd, "%4d ", *itt_i++);
+      fprintf(fd, "%4.1f ", *itt_i++);
 
     fprintf(fd, "\n");
     itt_o++;
   }
 
-  fprintf(fd, "Report:\nINDEX MINIMUN    START      END   "
+  fprintf(fd, "Report:\nINDEX    MINIMUN    START      END   "
     "TIME(usec)   ASTRINGENT\n");
 
   LEAVE;
   return;
 }
 
-static signed
-min_subsequence(signed *data, signed size_s, int *st, int *ed)
+static double
+min_subsequence(double *data, int size_s, int *st, int *ed)
 {
-  signed min;
-  signed sum;
-  signed single;
+  double min;
+  double sum;
+  double single;
   int single_index;
   int st_index;
-  register signed *iterator;
+  register double *iterator;
   ENTER("min_subsequence");
 
   iterator = data;
@@ -249,14 +255,14 @@ min_subsequence(signed *data, signed size_s, int *st, int *ed)
 /*- Then the minimum sub positive sequence has two conditions: -*/
 /*-   1. Y[i] - Y[j] > 0 && i > j                              -*/
 /*-   2. (Y[i] - Y[j]) is the smallest positive                -*/
-static signed
-min_posi_subsequence(signed *data, signed size_s, int *st, int *ed)
+static double
+min_posi_subsequence(double *data, int size_s, int *st, int *ed)
 {
-  signed min_posi;
-  signed sum_cad;
-  signed *iterator_1;
-  signed *iterator_2;
-  signed *data_ass;
+  double min_posi;
+  double sum_cad;
+  double *iterator_1;
+  double *iterator_2;
+  double *data_ass;
   ENTER("min_posi_subsequence");
 
   malloc_initial((void **)&data_ass,
@@ -298,10 +304,10 @@ min_posi_subsequence(signed *data, signed size_s, int *st, int *ed)
 }
 
 static void
-min_posi_assist(signed *assist, signed *raw, int size)
+min_posi_assist(double *assist, double *raw, int size)
 {
   int sum;
-  register signed *iterator;
+  register double *iterator;
   ENTER("min_posi_assist");
 
   iterator = raw;
@@ -317,12 +323,53 @@ min_posi_assist(signed *assist, signed *raw, int size)
   return;
 }
 
-static signed
-max_muli_subsequence(signed *data, signed size_s, int *st, int *ed)
+static double
+max_multi_subsequence(double *data, int size_s, int *st, int *ed)
 {
-  signed max_mult;
+  double single;
+  double multi_max;
+  double multi_sub;
+  double abs_multi;
+  int st_index;
+  int single_index;
+  register double *iterator;
   ENTER("max_muli_subsequence");
 
+  multi_max = multi_sub = 1.0;
+  single = 0.0;
+  iterator = data;
+  st_index = single_index = 0;
+  while(iterator < data + size_s)
+  {
+    multi_sub *= *iterator++;
+    abs_multi = fabs(multi_sub);
+    if(abs_multi < 1)
+    {
+      /*- For all positive number who's value less than 1.0.   -*/
+      if(multi_sub > single)
+      {
+        single = multi_sub;
+        single_index = iterator - data - 1;
+      }
+      st_index = iterator - data;
+      multi_sub = 1.0;
+    }
+    if(multi_sub > multi_max)
+    {
+      multi_max = multi_sub;
+      *st = st_index;
+      *ed = iterator - data - 1;
+    }
+  }
+
+  /*- If all values less than 1.0.(including all zeros)        -*/
+  if(multi_max - 1.0 < MIN_DOUBLE)
+  {
+    multi_max = single;
+    *st = *ed = single_index;
+  }
+
   LEAVE;
-  return max_mult;
+  return multi_max;
 }
+

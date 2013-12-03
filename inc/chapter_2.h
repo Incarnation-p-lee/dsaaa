@@ -91,27 +91,30 @@ chapt_2_12(void);
 static void
 dochapt_2_12(void);
 static void
-find_minsub_seq(signed (*)[MAX_SUB_DATA_SIZE], int, int,
-  signed (*)(signed *, int, int *, int *),
+find_minsub_seq(double (*)[MAX_SUB_DATA_SIZE], int, int,
+  double (*)(double *, int, int *, int *),
   enum minsub_sequence);
 static void
 astringent_init(struct sub_sequence *, int, enum minsub_sequence);
-static signed
-min_subsequence(signed *, signed, int *, int*);
-static signed
-min_posi_subsequence(signed *, signed, int *, int *);
+static double
+min_subsequence(double *, int, int *, int*);
+static double
+min_posi_subsequence(double *, int, int *, int *);
+static double
+max_multi_subsequence(double *, int, int *, int *);
 static void
 print_submin_report(FILE *, struct sub_sequence *);
 static void
 print_submin_title(FILE *, int, enum minsub_sequence);
 static void
-print_data_in(FILE *, signed (*)[MAX_SUB_DATA_SIZE], int);
+print_data_in(FILE *, double (*)[MAX_SUB_DATA_SIZE], int);
 static void
-min_posi_assist(signed *, signed *, int);
+min_posi_assist(double *, double *, int);
 
-static signed (*func_name[])(signed *, int, int *, int *) = {
+static double (*func_name[])(double *, int, int *, int *) = {
   &min_subsequence,
   &min_posi_subsequence,
+  &max_multi_subsequence,
 };
 static enum minsub_sequence minsub_type[] = {
   MIN_SUB,
