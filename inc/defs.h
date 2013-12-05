@@ -26,6 +26,11 @@
 #define NOT_CONTAINED              0x4321
 #define CONTAINS_COUNT             10000
 #define MIN_DOUBLE                 0.000001f
+#define PRIMED                     0xA349
+#define NOT_PRIMED                 0x3B21
+#define PRIME_REPEAT_COUNT         10000
+#define RIGHT_MOST_BIT_MASK        1
+#define INTEGRATE_ODD              0x2321
 
 
 #ifdef NO_STD_HEAD_FILE
@@ -34,10 +39,12 @@
 #endif
 
 
-#define ENTER(fname)     enter(#fname)
-#define LEAVE            leave()
-#define TIME_START       timing_start()
-#define TIME_END(usec)   timing_end(usec)
+#define ENTER(fname)               enter(#fname)
+#define LEAVE                      leave()
+#define TIME_START                 timing_start()
+#define TIME_END(usec)             timing_end(usec)
+
+#define MACRO_TO_STRING(symbol)    #symbol
 
 #define SEQ_PERFORMANCE(times, func, start, end, type) \
 while((times)-- > 0) \
@@ -56,7 +63,12 @@ while(--(times) > 0) \
 { \
   (*(func))((data_in), (size_s), (st), (ed)); \
 }
-
+#define PRIME_PERFORMANCE(times, func, raw_data) \
+(*(func))((raw_data)); \
+while(--(times) > 0) \
+{ \
+  (*(func))((raw_data)); \
+}
 
 typedef void (*HOMEWORK)(void);
 typedef enum repeat_vehicle{
@@ -104,4 +116,10 @@ typedef struct sub_sequence{
   double   astringent;
 }SU_seq;
 
+typedef struct prime_num_report{
+  int      raw_data;
+  int      isprimed;
+  unsigned usec;
+  double   astringent;
+}PMN_report;
 #endif

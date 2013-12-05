@@ -122,4 +122,20 @@ static enum minsub_sequence minsub_type[] = {
   MAX_MULTI_SUB,
 };
 
+
+/*-     CHAPTER 02-13                                          -*/
+void
+chapt_2_13(void);
+
+static void
+dochapt_2_13(void);
+static int
+isprime_number(int);
+static void
+print_prime_title(FILE *);
+static void
+print_prime_report(FILE *, struct prime_num_report *);
+static int
+isodd_number(int);
+
 #endif
