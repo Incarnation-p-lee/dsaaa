@@ -6,6 +6,8 @@ extern FILE *hwork_rept;
 extern void
 error_handle(const char *);
 extern void
+warn_prompt(const char *);
+extern void
 timing_start(void);
 extern void
 timing_end(unsigned *);
@@ -20,7 +22,11 @@ print_report_header(FILE *, const char *, int, int);
 extern void
 malloc_initial(void **, unsigned int);
 extern void
+realloc_initial(void **, unsigned int);
+extern void
 saft_free(void **);
+extern int
+get_bit_length(unsigned int);
 
 /*-     CHAPTER 02-07                                          -*/
 void
@@ -137,5 +143,30 @@ static void
 print_prime_report(FILE *, struct prime_num_report *);
 static int
 isodd_number(int);
+
+
+
+/*-     CHAPTER 02-16                                          -*/
+void
+chapt_2_16(void);
+static void
+dochapt_2_16(void);
+static int
+cal_mult_counts(int);
+static int
+cal_fast_power(unsigned, int);
+static void
+update_power_buffer(unsigned, int);
+static void
+initial_power_buffer(unsigned);
+static void
+filling_power_buffer(unsigned, int);
+static void
+print_power_title(FILE*);
+static void
+print_power_report(FILE*, unsigned, int, struct fast_power_report*);
+
+
+static struct buffered_power *pbuf;
 
 #endif

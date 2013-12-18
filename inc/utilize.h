@@ -13,6 +13,8 @@ leave(void);
 void
 error_handle(const char *);
 void
+warn_prompt(const char *);
+void
 exchange(int *, int *);
 void
 filepointer_init(void);
@@ -27,7 +29,11 @@ print_report_header(FILE *, const char *, int, int);
 void
 malloc_initial(void **, unsigned int);
 void
+realloc_initial(void **, unsigned int);
+void
 saft_free(void **);
+int
+get_bit_length(unsigned int);
 
 
 static const char *stack_traces[TRACE_DEPTH];

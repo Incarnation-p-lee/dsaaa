@@ -65,7 +65,23 @@ malloc_initial(void **pointer, unsigned int length)
 
   *pointer = malloc(length);
   if(NULL == *pointer)
-    error_handle("malloc");
+    error_handle("malloc failed to get suffient memory");
+
+  memset(*pointer, 0, length);
+
+  LEAVE;
+  return;
+}
+
+
+void
+realloc_initial(void **pointer, unsigned int length)
+{
+  ENTER("realloc_initial");
+
+  *pointer = realloc(*pointer, length);
+  if(NULL == *pointer)
+    error_handle("realloc failed to update memory");
 
   memset(*pointer, 0, length);
 
@@ -83,4 +99,22 @@ saft_free(void **pointer)
 
   LEAVE;
   return;
+}
+
+int
+get_bit_length(unsigned int n)
+{
+  int result;
+  ENTER("get_bit_length");
+
+  if(!n)
+    result = 0;
+  else
+    result = 1;
+
+  while((n >>= 1))
+    result++;
+
+  LEAVE;
+  return result;
 }

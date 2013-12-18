@@ -22,3 +22,19 @@ error_handle(const char *message)
   LEAVE;
   exit(1);
 }
+
+void
+warn_prompt(const char *message)
+{
+  char *unknown = "Unknown location.";
+  ENTER("warn_handle");
+
+  if(NULL == message)
+    message = unknown;
+
+  fprintf(stdout, "warning at %s. ", message);
+  print_stack_traces();
+
+  LEAVE;
+  return;
+}

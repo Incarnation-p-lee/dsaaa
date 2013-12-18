@@ -29,8 +29,13 @@
 #define PRIMED                     0xA349
 #define NOT_PRIMED                 0x3B21
 #define PRIME_REPEAT_COUNT         10000
-#define RIGHT_MOST_BIT_MASK        1
+#define RIGHT_MOST_BIT_MASK        1U
 #define INTEGRATE_ODD              0x2321
+#define MAX_EXP_COUNT              10
+#define UNMARKED                   0x3842;
+#define MARKED                     0x2759;
+#define DEFAULT_BASE               2
+#define FPOWER_REPEATS             1000U
 
 
 #ifdef NO_STD_HEAD_FILE
@@ -68,6 +73,12 @@ while(--(times) > 0) \
 while(--(times) > 0) \
 { \
   (*(func))((raw_data)); \
+}
+#define FPOWER_PERFORMANCE(times, func, base, exp) \
+(*(func))((base), (exp)); \
+while(--(times) > 0) \
+{ \
+  (*(func))((base), (exp)); \
 }
 
 typedef void (*HOMEWORK)(void);
@@ -122,4 +133,18 @@ typedef struct prime_num_report{
   unsigned usec;
   double   astringent;
 }PMN_report;
+
+typedef struct buffered_power{
+  int dimension;
+  int value;
+}FT_power;
+
+typedef struct fast_power_report{
+  unsigned result;
+  int      mult_counts;
+  unsigned usec;
+  double   astringent;
+}FP_report;
+
+
 #endif
