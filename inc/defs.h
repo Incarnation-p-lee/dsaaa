@@ -36,6 +36,9 @@
 #define MARKED                     0x2759;
 #define DEFAULT_BASE               2
 #define FPOWER_REPEATS             1000U
+#define PRIN_DATA_SIZE             128
+#define PRIN_VALUE_SIZE            4
+#define PRINT_LINE_MAX             16
 
 
 #ifdef NO_STD_HEAD_FILE

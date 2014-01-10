@@ -28,10 +28,10 @@ saft_free(void **);
 extern int
 get_bit_length(unsigned int);
 
+
 /*-     CHAPTER 02-07                                          -*/
 void
 chapt_2_7(void);
-
 static void
 dochapt_2_7(enum repeat_vehicle);
 static void
@@ -73,7 +73,6 @@ static int *used_number;
 /*-     CHAPTER 02-11                                          -*/
 void
 chapt_2_11(void);
-
 static void
 dochapt_2_11(void);
 static void
@@ -166,7 +165,13 @@ print_power_title(FILE*);
 static void
 print_power_report(FILE*, unsigned, int, struct fast_power_report*);
 
-
 static struct buffered_power *pbuf;
 
+
+
+/*-     CHAPTER 02-19                                          -*/
+void
+chapt_2_19(void);
+static void
+dochapt_2_19(void);
 #endif
