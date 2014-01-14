@@ -68,7 +68,7 @@ print_prin_title(FILE *fd)
 {
   ENTER("print_prin_title");
 
-  fprintf(fd, "Find Principle element: O[log(N)]\n");
+  fprintf(fd, "Find Principle element: O[2N]\n");
   fprintf(fd, "INDEX  DIMENSION          RESULT"
     "  TIME(usec)  ASTRINGEND\n");
 
@@ -99,7 +99,7 @@ print_prin_report(FILE *fd, int size,
   }
   fprintf(fd, "%5d     %6d   %13s    %8d  %10.4f\n",
     (index++) >> 1, report->dimension, result,
-    report->usec, (double)report->usec / log(size));
+    report->usec, (double)report->usec / (size << 1));
 
   LEAVE;
   return;
@@ -122,9 +122,16 @@ static void
 print_raw_data(FILE *fd, int *dt_in, int size)
 {
   register int *iterator;
+  int ind;
   ENTER("print_raw_data");
 
   fprintf(fd, "Raw Data[%d]:\n", size);
+
+  ind = 0;
+  while(ind < PRINT_LINE_MAX)
+    fprintf(fd, "%03d ", ind++);
+  fprintf(fd, "\n");
+
   iterator = dt_in;
   while(iterator < dt_in + size)
   {
@@ -172,8 +179,6 @@ principle_element_iter(int *data_out, int *data_in, int size)
   int candidate;
   ENTER("principle_element");
 
-  //fprintf(stdout, "size AA = %d\n", size);
-  //getchar();
   if(0 == size)
   {
     candidate = -1;
@@ -197,13 +202,15 @@ principle_element_iter(int *data_out, int *data_in, int size)
   }
 
   if(iseven)
-    if(*data_in == *iter_in)
+    /*- If size is even, compare the last element with both    -*/
+    /*- the second last one and the first one for 2 cases.     -*/
+    /*- Case1: 1,0,1,0,1.                                      -*/
+    /*- Case2: 0,1,0,1,1.                                      -*/
+    if(*data_in == *iter_in || *iter_in == *(iter_in - 1))
       *iter_out++ = *iter_in;
 
   candidate = principle_element_iter(data_in, data_out,
     iter_out - data_out);
-  //fprintf(stdout, "size BB = %d\n", iter_out - data_out);
-  //getchar();
 
 ITER_END:
   LEAVE;
