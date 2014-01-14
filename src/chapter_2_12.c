@@ -169,7 +169,7 @@ print_data_in(FILE *fd,
   int index;
   ENTER("print_data_in");
 
-  fprintf(fd, "\nInput Data:\n");
+  fprintf(fd, "Input Data:\n");
 
   index = 0;
   fprintf(fd, "INDEX ");

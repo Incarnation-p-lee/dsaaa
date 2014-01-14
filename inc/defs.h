@@ -37,8 +37,11 @@
 #define DEFAULT_BASE               2
 #define FPOWER_REPEATS             1000U
 #define PRIN_DATA_SIZE             128
-#define PRIN_VALUE_SIZE            4
+#define PRIN_VALUE_SIZE            3
 #define PRINT_LINE_MAX             16
+#define PRINCIPLE_ELE              0x1253
+#define NOT_PRINCIPLE              0x3748
+#define PRIN_REPEATS               10000
 
 
 #ifdef NO_STD_HEAD_FILE
@@ -82,6 +85,12 @@ while(--(times) > 0) \
 while(--(times) > 0) \
 { \
   (*(func))((base), (exp)); \
+}
+#define PRINCIPLE_PERFORMANCE(times, func, data_in, size) \
+(*(func))((data_in), size); \
+while(--(times) > 0) \
+{ \
+  (*(func))((data_in), size); \
 }
 
 typedef void (*HOMEWORK)(void);
@@ -144,10 +153,17 @@ typedef struct buffered_power{
 
 typedef struct fast_power_report{
   unsigned result;
-  int      mult_counts;
   unsigned usec;
+  int      mult_counts;
   double   astringent;
 }FP_report;
+
+typedef struct principle_ele_report{
+  unsigned usec;
+  unsigned dimension;
+  int      result;
+  double   astringent;
+}PPE_report;
 
 
 #endif

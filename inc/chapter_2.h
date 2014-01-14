@@ -174,4 +174,18 @@ void
 chapt_2_19(void);
 static void
 dochapt_2_19(void);
+static void
+print_prin_title(FILE*);
+static void
+print_prin_report(FILE*, int, struct principle_ele_report*);
+static void
+data_init(int*, int);
+static void
+print_raw_data(FILE*, int*, int);
+static int
+principle_element(int*, int);
+static int
+principle_element_iter(int*, int*, int);
+static int
+isprinciple(int*, int, int);
 #endif
