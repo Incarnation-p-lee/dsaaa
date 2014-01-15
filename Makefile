@@ -1,7 +1,7 @@
 # This is the Makefile for GCC compiler. Only you need to update outest.
 .SUFFIXES:
 .SUFFIXES: .o .a .so .c .h .s .cm
-SHELL         =/bin/sh
+SHELL         =/bin/bash
 CC            =gcc
 
 SRC           =main.m chapter_1.m evaluation.m utilize.m \
@@ -31,7 +31,6 @@ $(TARGET):$(OBJ)
 	$(MAKE) link
 
 -include $(FDPS)
-
 $(FDPS):$(SRC)
 	$(CC) $(INC) $(MFLAG) -MM $^ >$@
 
