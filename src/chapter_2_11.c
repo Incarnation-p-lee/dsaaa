@@ -12,7 +12,7 @@ chapt_2_11(void)
   ENTER("chapt_2_11");
 
   print_report_header(stdout, "Specified Contains", 2, 11);
-  print_report_header(hwork_rept, "Specified Contains", 2, 11);
+  print_report_header(dsaaa_report, "Specified Contains", 2, 11);
 
   dochapt_2_11();
 
@@ -44,7 +44,7 @@ dochapt_2_11(void)
   ENTER("dochapt_2_11");
 
   print_contains_title(stdout);
-  print_contains_title(hwork_rept);
+  print_contains_title(dsaaa_report);
   srand((unsigned)time(NULL));
 
   iterator = cases;
@@ -80,7 +80,7 @@ specified_contains(int specified, int min, int size_c, int width)
   TIME_END(&data_r.usec);
 
   print_contains_report(stdout, &data_r);
-  print_contains_report(hwork_rept, &data_r);
+  print_contains_report(dsaaa_report, &data_r);
   clear_raw_data(raw_data);
 
   LEAVE;

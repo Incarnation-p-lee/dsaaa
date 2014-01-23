@@ -24,8 +24,8 @@ void
 filepointer_init()
 {
   char *rept_fname = "./archive/homework.rept";
-  hwork_rept = fopen(rept_fname, "w+");
-  if(NULL == hwork_rept)
+  dsaaa_report = fopen(rept_fname, "w+");
+  if(NULL == dsaaa_report)
     error_handle("fopen");
 
   return;
@@ -34,7 +34,7 @@ filepointer_init()
 void
 filepointer_close()
 {
-  fclose(hwork_rept);
+  fclose(dsaaa_report);
 
   return;
 }

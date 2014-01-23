@@ -12,7 +12,7 @@ chapt_2_19(void)
   ENTER("chapt_2_19");
 
   print_report_header(stdout, "Principle Element", 2, 19);
-  print_report_header(hwork_rept, "Principle Element", 2, 19);
+  print_report_header(dsaaa_report, "Principle Element", 2, 19);
 
   dochapt_2_19();
 
@@ -40,9 +40,9 @@ dochapt_2_19(void)
   data_init(raw_data, PRIN_DATA_SIZE);
 
   print_raw_data(stdout, raw_data, PRIN_DATA_SIZE);
-  print_raw_data(hwork_rept, raw_data, PRIN_DATA_SIZE);
+  print_raw_data(dsaaa_report, raw_data, PRIN_DATA_SIZE);
   print_prin_title(stdout);
-  print_prin_title(hwork_rept);
+  print_prin_title(dsaaa_report);
 
   iter = cases;
   repeats = PRIN_REPEATS;
@@ -55,7 +55,7 @@ dochapt_2_19(void)
       raw_data, *iter);
     TIME_END(&prin_rpt.usec);
     print_prin_report(stdout, *iter, &prin_rpt);
-    print_prin_report(hwork_rept, *iter++, &prin_rpt);
+    print_prin_report(dsaaa_report, *iter++, &prin_rpt);
   }
 
   saft_free((void**)&raw_data);

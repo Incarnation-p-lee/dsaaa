@@ -1,7 +1,7 @@
 #ifndef CHAPTER2_H
 #define CHAPTER2_H
 
-extern FILE *hwork_rept;
+extern FILE *dsaaa_report;
 
 extern void
 error_handle(const char *);

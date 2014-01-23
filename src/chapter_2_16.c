@@ -12,7 +12,7 @@ chapt_2_16(void)
   ENTER("chapt_2_16");
 
   print_report_header(stdout, "Fast Power", 2, 16);
-  print_report_header(hwork_rept, "Fast Power", 2, 16);
+  print_report_header(dsaaa_report, "Fast Power", 2, 16);
 
   dochapt_2_16();
 
@@ -37,7 +37,7 @@ dochapt_2_16(void)
   ENTER("dochapt_2_16");
 
   print_power_title(stdout);
-  print_power_title(hwork_rept);
+  print_power_title(dsaaa_report);
 
   srand((unsigned)time(NULL));
   initial_power_buffer(DEFAULT_BASE);
@@ -59,7 +59,7 @@ dochapt_2_16(void)
 
       print_power_report(stdout, *base_iterator, *exp_iterator,
         &fp_report);
-      print_power_report(hwork_rept, *base_iterator, *exp_iterator,
+      print_power_report(dsaaa_report, *base_iterator, *exp_iterator,
         &fp_report);
       exp_iterator++;
     }

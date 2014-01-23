@@ -12,7 +12,7 @@ chapt_2_12(void)
   ENTER("chapt_2_12");
 
   print_report_header(stdout, "Sub Sequences", 2, 12);
-  print_report_header(hwork_rept, "Sub Sequences", 2, 12);
+  print_report_header(dsaaa_report, "Sub Sequences", 2, 12);
   dochapt_2_12();
 
   LEAVE;
@@ -41,7 +41,7 @@ dochapt_2_12(void)
   ENTER("dochapt_2_12");
 
   print_data_in(stdout, cases, sizeof(cases) / sizeof(cases[0]));
-  print_data_in(hwork_rept, cases,
+  print_data_in(dsaaa_report, cases,
     sizeof(cases) / sizeof(cases[0]));
 
   data_size = sizeof(cases[0]) / sizeof(cases[0][0]);
@@ -53,7 +53,7 @@ dochapt_2_12(void)
     sizeof(func_name) / sizeof(func_name[0]))
   {
     print_submin_title(stdout, data_size, *min_type);
-    print_submin_title(hwork_rept, data_size, *min_type);
+    print_submin_title(dsaaa_report, data_size, *min_type);
     find_minsub_seq(cases, data_cnt, data_size,
       *iterator++, *min_type++);
   }
@@ -85,7 +85,7 @@ find_minsub_seq(double (*cases)[MAX_SUB_DATA_SIZE], int data_cnt,
     TIME_END(&su_rpt.usec);
 
     print_submin_report(stdout, &su_rpt);
-    print_submin_report(hwork_rept, &su_rpt);
+    print_submin_report(dsaaa_report, &su_rpt);
     iterator++;
   }
 

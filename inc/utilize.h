@@ -2,7 +2,7 @@
 #define UTILISZE_H
 
 
-extern FILE *hwork_rept;
+extern FILE *dsaaa_report;
 
 extern void
 enter(const char *);

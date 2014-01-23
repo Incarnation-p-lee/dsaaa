@@ -12,7 +12,7 @@ chapt_2_13(void)
   ENTER("chapt_2_13");
 
   print_report_header(stdout, "IS Prime Number", 2, 13);
-  print_report_header(hwork_rept, "IS Prime Number", 2, 13);
+  print_report_header(dsaaa_report, "IS Prime Number", 2, 13);
   dochapt_2_13();
 
   LEAVE;
@@ -33,7 +33,7 @@ dochapt_2_13(void)
   ENTER("dochapt_2_13");
 
   print_prime_title(stdout);
-  print_prime_title(hwork_rept);
+  print_prime_title(dsaaa_report);
 
   iterator = raw_data;
   while(iterator < raw_data +
@@ -49,7 +49,7 @@ dochapt_2_13(void)
     TIME_END(&pn_rpt.usec);
 
     print_prime_report(stdout, &pn_rpt);
-    print_prime_report(hwork_rept, &pn_rpt);
+    print_prime_report(dsaaa_report, &pn_rpt);
   }
 
   LEAVE;

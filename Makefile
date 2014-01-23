@@ -5,7 +5,7 @@ SHELL         =/bin/bash
 CC            =gcc
 
 SRC           =main.m chapter_1.m evaluation.m utilize.m \
-               chapter_2.m
+               chapter_2.m chapter_3.m
 
 COVERAGE      =-fprofile-arcs -ftest-coverage
 OBJ           =$(patsubst %.m, %.o, $(SRC))

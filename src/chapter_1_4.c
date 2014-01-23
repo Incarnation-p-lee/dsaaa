@@ -12,7 +12,7 @@ chapt_1_4(void)
   ENTER("chapt_1_4");
 
   print_report_header(stdout, "Expanding Header Files", 1, 4);
-  print_report_header(hwork_rept, "Expanding Header Files", 1, 4);
+  print_report_header(dsaaa_report, "Expanding Header Files", 1, 4);
   dochapt_1_4();
 
   LEAVE;
@@ -261,7 +261,7 @@ expand_report(char *fmt, ...)
   va_start(vl, fmt);
   va_copy(vl_cp, vl);
   vfprintf(stdout, fmt, vl);
-  vfprintf(hwork_rept, fmt, vl_cp);
+  vfprintf(dsaaa_report, fmt, vl_cp);
   va_end(vl);
   va_end(vl_cp);
 
