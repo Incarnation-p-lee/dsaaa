@@ -13,9 +13,9 @@ chapt_2_7(void)
   ENTER("chapter_2_7");
 
   print_report_header(stdout, "Random Generation", 2, 7);
-  print_report_header(hwork_rept, "Random Generation", 2, 7);
+  print_report_header(dsaaa_report, "Random Generation", 2, 7);
   print_random_title(stdout);
-  print_random_title(hwork_rept);
+  print_random_title(dsaaa_report);
 
   iterator = repeats;
   while(iterator < repeats + sizeof(repeats) / sizeof(repeats[0]))
@@ -82,7 +82,7 @@ random_sequence(int start, int end, enum repeat_vehicle type)
   TIME_END(&data.usec);
 
   print_random_report(stdout, &data);
-  print_random_report(hwork_rept, &data);
+  print_random_report(dsaaa_report, &data);
   saft_free((void **)&sequence_data);
 
   LEAVE;

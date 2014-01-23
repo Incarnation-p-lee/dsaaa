@@ -2,7 +2,7 @@
 #define CHAPTER11_H
 
 
-extern FILE *hwork_rept;
+extern FILE *dsaaa_report;
 extern const char *blank;
 
 static char *include_path[] = {

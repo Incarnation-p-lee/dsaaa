@@ -6,7 +6,7 @@
 struct timeval ts_begin;
 struct timeval ts_end;
 
-FILE *hwork_rept;
+FILE *dsaaa_report;
 const char *blank = 
 "                                               ";
 
@@ -20,8 +20,9 @@ static HOMEWORK homework[] = {
   &chapt_2_13,
   &chapt_2_16,
   &chapt_2_19,
+  &chapt_3_1,
 #else
-  &chapt_2_19,
+  &chapt_3_1,
 #endif
 };
 

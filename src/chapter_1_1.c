@@ -16,9 +16,9 @@ chapt_1_1(void)
   ENTER("chapt_1_1");
 
   print_report_header(stdout, "Selection Problem", 1, 1);
-  print_report_header(hwork_rept, "Selection Problem", 1, 1);
+  print_report_header(dsaaa_report, "Selection Problem", 1, 1);
   print_algo_info(stdout);
-  print_algo_info(hwork_rept);
+  print_algo_info(dsaaa_report);
 
   pos = dsize;
   while(pos < dsize + sizeof(dsize) / sizeof(dsize[0]))
@@ -186,7 +186,7 @@ selection_data(struct rept_entry *rept)
     number, rept->data_size, rept->kvalue,
     rept->validate, rept->usec_cost, rept->astringent);
 
-  fprintf(hwork_rept,
+  fprintf(dsaaa_report,
     "%2d     %10d     %10d:%10d     %10u=>%10.6f\n",
     number, rept->data_size, rept->kvalue,
     rept->validate, rept->usec_cost, rept->astringent);
