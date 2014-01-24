@@ -3,36 +3,36 @@
 
                                Selection Problem
 
-TIME: Thu Jan 23 13:27:32 2014
+TIME: Fri Jan 24 14:01:48 2014
 
 ASTRINGENT: O(N*logN)
-No.     DATA_SIZE         KVALUE:VALIDATION     TIME(usec)=>ASTRINGENT
- 1             10           3066:         5              1=>  0.043429
- 2             20           3066:        10              1=>  0.016690
- 3             30         -69477:        15              1=>  0.009800
- 4             40         -74185:        20              1=>  0.006777
- 5             50         -85887:        25              2=>  0.010225
- 6             60         -74185:        30              2=>  0.008141
- 7             70         -66967:        35              2=>  0.006725
- 8             80         -39079:        40              3=>  0.008558
- 9             90         -38368:        45              3=>  0.007408
-10            100         -14636:        50              2=>  0.004343
-11            500          -5984:       250             15=>  0.004827
-12           1000           1619:       500             25=>  0.003619
-13           5000          12612:      2500            126=>  0.002959
-14          10000           8504:      5000            233=>  0.002530
-15          50000           3207:     25000            796=>  0.001471
-16         100000           1072:     50000           5303=>  0.004606
-17         500000           -106:    250000          11737=>  0.001789
-18        1000000            310:    500000          18309=>  0.001325
-19        5000000           -330:   2500003          92629=>  0.001201
-20       10000000           -207:   5000005         211870=>  0.001314
+No.     DATA_SIZE         KVALUE:VALIDATION     TIME(usec)  ASTRINGENT
+ 0             10           4480:         5              3    0.130288
+ 1             20        -104716:        10              3    0.050071
+ 2             30        -107533:        15              5    0.049002
+ 3             40         -83609:        20              7    0.047440
+ 4             50        -104716:        25              7    0.035787
+ 5             60         -83609:        30             12    0.048848
+ 6             70         -83609:        35              8    0.026900
+ 7             80         -83284:        40             13    0.037083
+ 8             90         -98507:        45             13    0.032100
+ 9            100        -101002:        50             16    0.034744
+10            500         -52846:       250             62    0.019953
+11           1000         -11157:       500            190    0.027505
+12           5000         -10075:      2500           1217    0.028577
+13          10000          -4289:      5000           2033    0.022073
+14          50000          -1453:     25000          11564    0.021376
+15         100000          -1416:     50000          12925    0.011227
+16         500000           -326:    250000          58528    0.008920
+17        1000000           -810:    500000         181105    0.013109
+18        5000000           -188:   2500001         848561    0.011002
+19       10000000             38:   5000010        2353765    0.014603
 
 -----------------------------Chapter 01-04-------------------------------
 
                                Expanding Header Files
 
-TIME: Thu Jan 23 13:27:33 2014
+TIME: Fri Jan 24 14:01:52 2014
 
 >>>>>>>> main.m <<<<<<<<
 /*--------------------------------------------------------------*/
@@ -133,170 +133,14 @@ main(int argc, char **argv)
 #ifndef DEFINES_H
 #define DEFINES_H
 
-
-#if 1
-#define STD_HEAD_FILE
-#else
-#define NO_STD_HEAD_FILE
-#endif
-
-
-#define MIN_STEP_WIDTH             1
-#define DATA_MAX                   1024000
-#define TRACE_DEPTH                4098
-#define MAX_WIDTH_OF_LINE          120
-#define FULL_NAME_LENGTH           256
-#define REPEAT_COUNT               100
-#define SUB_CASES_COUNT            1024
-#define MAX_SUB_DATA_SIZE          10
-#define FILENAME_SPLITER           "\"< >"
-#define REPEAT_USED                0x1010
-#define REPEAT_UNUSED              0x0101
-#define REPEATED                   0xA0A0
-#define NOT_REPEATED               0x0A0A
-#define CONTAINED                  0x1234
-#define NOT_CONTAINED              0x4321
-#define CONTAINS_COUNT             10000
-#define MIN_DOUBLE                 0.000001f
-#define PRIMED                     0xA349
-#define NOT_PRIMED                 0x3B21
-#define PRIME_REPEAT_COUNT         10000
-#define RIGHT_MOST_BIT_MASK        1U
-#define INTEGRATE_ODD              0x2321
-#define MAX_EXP_COUNT              10
-#define UNMARKED                   0x3842;
-#define MARKED                     0x2759;
-#define DEFAULT_BASE               2
-#define FPOWER_REPEATS             1000U
-#define PRIN_DATA_SIZE             128
-#define PRIN_VALUE_SIZE            3
-#define PRINT_LINE_MAX             16
-#define PRINCIPLE_ELE              0x1253
-#define NOT_PRINCIPLE              0x3748
-#define PRIN_REPEATS               10000
-
-
-#ifdef NO_STD_HEAD_FILE
-#define EXPAND_DEPTH               128
-#define FILENAME_LENGTH            32
-#endif
-
-
+#define RIGHT_MOST_BIT_MASK    1
 #define ENTER(fname)               enter(#fname)
 #define LEAVE                      leave()
 #define TIME_START                 timing_start()
 #define TIME_END(usec)             timing_end(usec)
-
 #define MACRO_TO_STRING(symbol)    #symbol
 
-#define SEQ_PERFORMANCE(times, func, start, end, type) \
-while((times)-- > 0) \
-{  \
-  (*(func))((start), (end), (type)); \
-}
-#define CON_PERFORMANCE(times, func, specified, raw_data, size_c) \
-(*(func))((specified), (raw_data), (size_c)); \
-while(--(times) > 0) \
-{  \
-  (*(func))((specified), (raw_data), (size_c)); \
-}
-#define SUB_PERFORMANCE(times, func, data_in, size_s, st, ed) \
-(*(func))((data_in), (size_s), (st), (ed)); \
-while(--(times) > 0) \
-{ \
-  (*(func))((data_in), (size_s), (st), (ed)); \
-}
-#define PRIME_PERFORMANCE(times, func, raw_data) \
-(*(func))((raw_data)); \
-while(--(times) > 0) \
-{ \
-  (*(func))((raw_data)); \
-}
-#define FPOWER_PERFORMANCE(times, func, base, exp) \
-(*(func))((base), (exp)); \
-while(--(times) > 0) \
-{ \
-  (*(func))((base), (exp)); \
-}
-#define PRINCIPLE_PERFORMANCE(times, func, data_in, size) \
-(*(func))((data_in), size); \
-while(--(times) > 0) \
-{ \
-  (*(func))((data_in), size); \
-}
-
 typedef void (*HOMEWORK)(void);
-typedef enum repeat_vehicle{
-  UTIL,
-  USED,
-  SWAP,
-}Rept_v;
-typedef enum minsub_sequence{
-  MIN_SUB,
-  MIN_POSITIVE_SUB,
-  MAX_MULTI_SUB,
-}MinSub_seq;
-
-typedef struct rept_entry{
-  int      kvalue;
-  int      data_size;
-  int      validate;
-  unsigned usec_cost;
-  int      count;
-  double   astringent;
-}REPT_entry;
-
-typedef struct gen_random_report{
-  unsigned usec;
-  int      dimension;
-  char     *outline;
-  int      start;
-  int      end;
-  double   expected;
-}GR_report;
-
-typedef struct iscontains_report{
-  unsigned usec;
-  int      min;
-  int      size_c;
-  double   astringent;
-  int      result;
-}IC_report;
-
-typedef struct sub_sequence{
-  double   min;
-  unsigned usec;
-  int      st;
-  int      ed;
-  double   astringent;
-}SU_seq;
-
-typedef struct prime_num_report{
-  int      raw_data;
-  int      isprimed;
-  unsigned usec;
-  double   astringent;
-}PMN_report;
-
-typedef struct buffered_power{
-  int dimension;
-  int value;
-}FT_power;
-
-typedef struct fast_power_report{
-  unsigned result;
-  unsigned usec;
-  int      mult_counts;
-  double   astringent;
-}FP_report;
-
-typedef struct principle_ele_report{
-  unsigned usec;
-  unsigned dimension;
-  int      result;
-  double   astringent;
-}PPE_report;
-
 
 #endif
 
@@ -339,57 +183,57 @@ chapt_3_1(void);
 
                                Random Generation
 
-TIME: Thu Jan 23 13:27:33 2014
+TIME: Fri Jan 24 14:01:52 2014
 NUM_START      END  DIMENSION    TIME(usec)  DESCRIPTION     ASTRINGENT
-        1       10         10        1.7800  UNTIL Diffence   0.1780000
-       11       20         10        1.7100  UNTIL Diffence   0.1710000
-        1      100        100       68.0200  UNTIL Diffence   0.0068020
-      201      400        200      247.2100  UNTIL Diffence   0.0030901
-      101      600        500     1581.0300  UNTIL Diffence   0.0012648
-       11     1000        990     6500.4100  UNTIL Diffence   0.0006699
-     1001     2000       1000     6634.7300  UNTIL Diffence   0.0006635
-        1       10         10        1.4600  USED Buffering   1.4600000
-       11       20         10        1.4300  USED Buffering   1.4300000
-        1      100        100       20.4500  USED Buffering   0.2045000
-      201      400        200       45.6000  USED Buffering   0.1140000
-      101      600        500      135.2700  USED Buffering   0.0541080
-       11     1000        990      282.7200  USED Buffering   0.0288460
-     1001     2000       1000      283.5600  USED Buffering   0.0283560
+        1       10         10        1.6100  UNTIL Diffence   0.1610000
+       11       20         10        1.5500  UNTIL Diffence   0.1550000
+        1      100        100       69.3000  UNTIL Diffence   0.0069300
+      201      400        200      253.5600  UNTIL Diffence   0.0031695
+      101      600        500     1606.3700  UNTIL Diffence   0.0012851
+       11     1000        990     6487.7100  UNTIL Diffence   0.0006686
+     1001     2000       1000     6775.7400  UNTIL Diffence   0.0006776
+        1       10         10        1.4000  USED Buffering   1.4000000
+       11       20         10        1.3600  USED Buffering   1.3600000
+        1      100        100       21.2200  USED Buffering   0.2122000
+      201      400        200       47.3800  USED Buffering   0.1184500
+      101      600        500      134.0200  USED Buffering   0.0536080
+       11     1000        990      283.5300  USED Buffering   0.0289287
+     1001     2000       1000      289.3200  USED Buffering   0.0289320
         1       10         10        0.3300  SWAP Randomly    3.3000000
-       11       20         10        0.3200  SWAP Randomly    3.2000000
-        1      100        100        2.3000  SWAP Randomly    2.3000000
-      201      400        200        4.4400  SWAP Randomly    2.2200000
-      101      600        500       10.9200  SWAP Randomly    2.1840000
-       11     1000        990       21.5000  SWAP Randomly    2.1717172
-     1001     2000       1000       21.7200  SWAP Randomly    2.1720000
+       11       20         10        0.3300  SWAP Randomly    3.3000000
+        1      100        100        2.4300  SWAP Randomly    2.4300000
+      201      400        200        4.7600  SWAP Randomly    2.3800000
+      101      600        500       11.7200  SWAP Randomly    2.3440000
+       11     1000        990       23.0300  SWAP Randomly    2.3262626
+     1001     2000       1000       23.3000  SWAP Randomly    2.3300000
 
 -----------------------------Chapter 02-11-------------------------------
 
                                Specified Contains
 
-TIME: Thu Jan 23 13:27:34 2014
+TIME: Fri Jan 24 14:01:53 2014
 
 NUMBER(MIN)  DIMENSION   TIME(usec)    RESULT      ASTRINGENT
 EXPECTED: O[log(N)]
-         1          10         412     NO_CONTAINS 178.929327
-        11          20         457     NO_CONTAINS 152.550348
-         1         100         539     NO_CONTAINS 117.042363
-       201         400         681     CONTAINS    113.661692
-       101         600         686     CONTAINS    107.238947
-        11        1000         729     NO_CONTAINS 105.533559
-      1001       12000         878     NO_CONTAINS  93.477228
-         1       42000         995     NO_CONTAINS  93.467382
-       101       82000        1078     NO_CONTAINS  95.276188
-      2001       62000        1022     NO_CONTAINS  92.615335
-       121      122000         914     CONTAINS     78.041108
-        11     3452000        1325     NO_CONTAINS  88.013759
-      9001     8622000        1361     CONTAINS     85.223212
+         1          10         382     NO_CONTAINS 165.900492
+        11          20         432     NO_CONTAINS 144.205143
+         1         100         584     CONTAINS    126.813989
+       201         400         672     CONTAINS    112.159555
+       101         600         792     CONTAINS    123.809396
+        11        1000         711     NO_CONTAINS 102.927792
+      1001       12000         879     NO_CONTAINS  93.583694
+         1       42000         961     NO_CONTAINS  90.273522
+       101       82000        1005     NO_CONTAINS  88.824275
+      2001       62000         996     NO_CONTAINS  90.259172
+       121      122000        1045     NO_CONTAINS  89.226431
+        11     3452000        1292     NO_CONTAINS  85.821719
+      9001     8622000        1451     CONTAINS     90.858839
 
 -----------------------------Chapter 02-12-------------------------------
 
                                Sub Sequences
 
-TIME: Thu Jan 23 13:27:34 2014
+TIME: Fri Jan 24 14:01:53 2014
 Input Data:
 INDEX  [00] [01] [02] [03] [04] [05] [06] [07] [08] [09]
    0.   0.1  0.2  0.0  0.3  0.4  0.5  0.6  0.9  0.8  0.7 
@@ -404,204 +248,204 @@ INDEX  [00] [01] [02] [03] [04] [05] [06] [07] [08] [09]
    9.  -0.1 -2.9  4.2 -1.9  2.9  7.3 -1.4 -6.2 -1.4 -0.1 
 Report:
 INDEX    MINIMUN    START      END   TIME(usec)   ASTRINGENT
-MINIMUN SUB SEQUENCE *ASTRINGENT => O[N]
-   0.     0.0000        2        2     0.062500     6.400000
-   1.    -9.6000        6        9     0.060547     6.200000
-   2.   -18.6000        0        9     0.062500     6.400000
-   3.     0.0000        0        0     0.062500     6.400000
-   4.     1.1000        0        0     0.061523     6.300000
-   5.    -0.8000        8        8     0.062500     6.400000
-   6.    -6.5000        3        6     0.058594     6.000000
-   7.   -14.5000        0        9     0.060547     6.200000
-   8.   -21.8000        0        9     0.060547     6.200000
-   9.    -9.1000        6        9     0.060547     6.200000
-MINIMUN POSITIVE SUB SEQUENCE *ASTRINGENT => O[N^2]
-  10.     0.1000        0        0     0.329102     3.370000
-  11.     0.4000        3        4     0.320312     3.280000
-  12.     0.0000        0        0     0.289062     2.960000
-  13.     0.0000        0        0     0.287109     2.940000
-  14.     1.1000        4        4     0.328125     3.360000
-  15.     0.1000        8        9     0.311523     3.190000
-  16.     0.1000        2        4     0.301758     3.090000
-  17.     0.1000        1        5     0.296875     3.040000
-  18.     0.7000        5        5     0.291992     2.990000
-  19.     0.4000        0        9     0.315430     3.230000
-MAXIMUN MULTIPLE SUB SEQUENCE *ASTRINGENT => O[N]
-  20.     0.9000        7        7     0.070312     7.200000
-  21.  1058.7704        1        7     0.060547     6.200000
-  22.    29.4622        2        7     0.060547     6.200000
-  23.     0.0000        0        0     0.062500     6.400000
+MINIMUN SUB SEQUENCE *ASTRINGENT : O[N]
+   0.     0.0000        2        2     0.061523     6.300000
+   1.    -9.6000        6        9     0.058594     6.000000
+   2.   -18.6000        0        9     0.061523     6.300000
+   3.     0.0000        0        0     0.059570     6.100000
+   4.     1.1000        0        0     0.060547     6.200000
+   5.    -0.8000        8        8     0.061523     6.300000
+   6.    -6.5000        3        6     0.057617     5.900000
+   7.   -14.5000        0        9     0.059570     6.100000
+   8.   -21.8000        0        9     0.059570     6.100000
+   9.    -9.1000        6        9     0.058594     6.000000
+MINIMUN POSITIVE SUB SEQUENCE *ASTRINGENT : O[N^2]
+  10.     0.1000        0        0     0.337891     3.460000
+  11.     0.4000        3        4     0.328125     3.360000
+  12.     0.0000        0        0     0.298828     3.060000
+  13.     0.0000        0        0     0.299805     3.070000
+  14.     1.1000        4        4     0.339844     3.480000
+  15.     0.1000        8        9     0.320312     3.280000
+  16.     0.1000        2        4     0.311523     3.190000
+  17.     0.1000        1        5     0.305664     3.130000
+  18.     0.7000        5        5     0.302734     3.100000
+  19.     0.4000        0        9     0.325195     3.330000
+MAXIMUN MULTIPLE SUB SEQUENCE *ASTRINGENT : O[N]
+  20.     0.9000        7        7     0.067383     6.900000
+  21.  1058.7704        1        7     0.072266     7.400000
+  22.    29.4622        2        7     0.070312     7.200000
+  23.     0.0000        0        0     0.061523     6.300000
   24.     2.5937        0        9     0.064453     6.600000
-  25.     0.9000        9        9     0.068359     7.000000
-  26.    99.9456        2        9     0.061523     6.300000
-  27.  2073.3646        0        7     0.061523     6.300000
+  25.     0.9000        9        9     0.065430     6.700000
+  26.    99.9456        2        9     0.060547     6.200000
+  27.  2073.3646        0        7     0.072266     7.400000
   28.   869.0808        0        8     0.060547     6.200000
-  29.  4252.4721        1        7     0.060547     6.200000
+  29.  4252.4721        1        7     0.072266     7.400000
 
 -----------------------------Chapter 02-13-------------------------------
 
                                IS Prime Number
 
-TIME: Thu Jan 23 13:27:34 2014
+TIME: Fri Jan 24 14:01:53 2014
 PRIME NUMBER VALIDATION: O[sqrt(N)]
 INDEX   DATA_IN   IS_PRIMED  TIME(usec)  ASTRINGEND
-   0.         2      PRIMED    0.05500    388.90873
-   1.         3      PRIMED    0.05910    341.21401
-   2.         4  NOT_PRIMED    0.05530    276.50000
-   3.         5      PRIMED    0.05670    253.57011
+   0.         2      PRIMED    0.05560    393.15137
+   1.         3      PRIMED    0.05680    327.93495
+   2.         4  NOT_PRIMED    0.05580    279.00000
+   3.         5      PRIMED    0.05680    254.01732
    4.         6  NOT_PRIMED    0.05530    225.76130
-   5.         7      PRIMED    0.05850    221.10922
+   5.         7      PRIMED    0.05680    214.68382
    6.         8  NOT_PRIMED    0.05530    195.51502
-   7.         9  NOT_PRIMED    0.06020    200.66667
-   8.        10  NOT_PRIMED    0.05550    175.50641
-   9.        11      PRIMED    0.06120    184.52494
-  10.        12  NOT_PRIMED    0.05530    159.63735
-  11.        13      PRIMED    0.06130    170.01561
+   7.         9  NOT_PRIMED    0.05840    194.66667
+   8.        10  NOT_PRIMED    0.05530    174.87395
+   9.        11      PRIMED    0.05900    177.89169
+  10.        12  NOT_PRIMED    0.05520    159.34867
+  11.        13      PRIMED    0.05860    162.52716
   12.        14  NOT_PRIMED    0.05520    147.52821
-  13.        15  NOT_PRIMED    0.06020    155.43573
-  14.        16  NOT_PRIMED    0.05530    138.25000
-  15.        17      PRIMED    0.06150    149.15941
-  16.        18  NOT_PRIMED    0.05530    130.34335
-  17.        19      PRIMED    0.06130    140.63184
-  18.       101      PRIMED    0.06890     68.55806
-  19.       201  NOT_PRIMED    0.05940     41.89753
-  20.       301  NOT_PRIMED    0.06760     38.96399
-  21.       601      PRIMED    0.09190     37.48679
-  22.       901  NOT_PRIMED    0.08080     26.91838
-  23.      1021      PRIMED    0.10450     32.70419
-  24.      7341  NOT_PRIMED    0.05970      6.96782
-  25.     12371  NOT_PRIMED    0.19030     17.10946
-  26.     19127  NOT_PRIMED    0.10240      7.40417
-  27.     23761      PRIMED    0.29480     19.12472
-  28.     86117      PRIMED    0.50310     17.14391
-  29.     86269      PRIMED    0.50300     17.12540
-  30.     86477      PRIMED    0.50300     17.10479
-  31.     86579      PRIMED    0.50340     17.10830
-  32.     86587      PRIMED    0.50300     17.09392
-  33.     84461  NOT_PRIMED    0.07460      2.56691
+  13.        15  NOT_PRIMED    0.05830    150.52995
+  14.        16  NOT_PRIMED    0.05520    138.00000
+  15.        17      PRIMED    0.05870    142.36841
+  16.        18  NOT_PRIMED    0.05540    130.57905
+  17.        19      PRIMED    0.05860    134.43762
+  18.       101      PRIMED    0.06740     67.06551
+  19.       201  NOT_PRIMED    0.05840     41.19218
+  20.       301  NOT_PRIMED    0.06400     36.88899
+  21.       601      PRIMED    0.08890     36.26307
+  22.       901  NOT_PRIMED    0.07980     26.58523
+  23.      1021      PRIMED    0.10130     31.70272
+  24.      7341  NOT_PRIMED    0.05840      6.81609
+  25.     12371  NOT_PRIMED    0.19060     17.13644
+  26.     19127  NOT_PRIMED    0.10100      7.30294
+  27.     23761      PRIMED    0.29850     19.36475
+  28.     86117      PRIMED    0.51440     17.52897
+  29.     86269      PRIMED    0.51430     17.51012
+  30.     86477      PRIMED    0.51440     17.49245
+  31.     86579      PRIMED    0.51460     17.48894
+  32.     86587      PRIMED    0.52340     17.78719
+  33.     84461  NOT_PRIMED    0.07690      2.64605
 
 -----------------------------Chapter 02-16-------------------------------
 
                                Fast Power
 
-TIME: Thu Jan 23 13:27:35 2014
+TIME: Fri Jan 24 14:01:53 2014
 FAST POWER CALULATION: O[log(N)]
 INDEX   BASE   EXPONENT       RESULT  MULT(cnt) TIME(usec)  ASTRINGEND
-    0      2          2            4          1         96      0.1385
-    1      2          3            8          2         98      0.0892
-    2      2          4           16          2        100      0.0721
-    3      2          5           32          3        108      0.0671
-    4      2          6           64          3         99      0.0553
-    5      2          7          128          4        100      0.0514
-    6      2          8          256          3        102      0.0491
-    7      2          9          512          4        102      0.0464
-    8      2         10         1024          4        102      0.0443
-    9      2         11         2048          5        102      0.0425
-   10      2         12         4096          5        106      0.0427
-   11      2         13         8192          6        107      0.0417
-   12      2         14        16384          6        102      0.0387
-   13      2         15        32768          7        100      0.0369
-   14      2         16        65536          4        105      0.0379
-   15      3          2            9          1        100      0.1443
-   16      3          3           27          2         97      0.0883
-   17      3          4           81          2        100      0.0721
-   18      3          5          243          3        100      0.0621
-   19      3          6          729          3        100      0.0558
-   20      3          7         2187          4        100      0.0514
-   21      3          8         6561          3        103      0.0495
-   22      3          9        19683          4        102      0.0464
-   23      3         10        59049          4        102      0.0443
-   24      3         11       177147          5        101      0.0421
-   25      3         12       531441          5        107      0.0431
-   26      3         13      1594323          6        102      0.0398
-   27      3         14      4782969          6        102      0.0387
-   28      3         15     14348907          7        101      0.0373
-   29      3         16     43046721          4        105      0.0379
-   30      4          2           16          1         98      0.1414
-   31      4          3           64          2         98      0.0892
-   32      4          4          256          2        100      0.0721
-   33      4          5         1024          3        108      0.0671
-   34      4          6         4096          3        100      0.0558
-   35      4          7        16384          4         99      0.0509
-   36      4          8        65536          3        103      0.0495
-   37      4          9       262144          4        102      0.0464
-   38      4         10      1048576          4        102      0.0443
-   39      4         11      4194304          5        102      0.0425
-   40      4         12     16777216          5        107      0.0431
+    0      2          2            4          1        106      0.1529
+    1      2          3            8          2         86      0.0783
+    2      2          4           16          2         89      0.0642
+    3      2          5           32          3         88      0.0547
+    4      2          6           64          3         89      0.0497
+    5      2          7          128          4         88      0.0452
+    6      2          8          256          3         91      0.0438
+    7      2          9          512          4         90      0.0410
+    8      2         10         1024          4         99      0.0430
+    9      2         11         2048          5        100      0.0417
+   10      2         12         4096          5         91      0.0366
+   11      2         13         8192          6         90      0.0351
+   12      2         14        16384          6        141      0.0534
+   13      2         15        32768          7        109      0.0403
+   14      2         16        65536          4         93      0.0335
+   15      3          2            9          1         90      0.1298
+   16      3          3           27          2         86      0.0783
+   17      3          4           81          2         89      0.0642
+   18      3          5          243          3        107      0.0665
+   19      3          6          729          3        106      0.0592
+   20      3          7         2187          4         89      0.0457
+   21      3          8         6561          3         91      0.0438
+   22      3          9        19683          4         91      0.0414
+   23      3         10        59049          4         90      0.0391
+   24      3         11       177147          5         91      0.0379
+   25      3         12       531441          5         91      0.0366
+   26      3         13      1594323          6         91      0.0355
+   27      3         14      4782969          6         90      0.0341
+   28      3         15     14348907          7        108      0.0399
+   29      3         16     43046721          4        104      0.0375
+   30      4          2           16          1         89      0.1284
+   31      4          3           64          2         89      0.0810
+   32      4          4          256          2        110      0.0793
+   33      4          5         1024          3         90      0.0559
+   34      4          6         4096          3         91      0.0508
+   35      4          7        16384          4         91      0.0468
+   36      4          8        65536          3         93      0.0447
+   37      4          9       262144          4         93      0.0423
+   38      4         10      1048576          4         92      0.0400
+   39      4         11      4194304          5         92      0.0384
+   40      4         12     16777216          5         93      0.0374
    41      4         13     67108864          6        102      0.0398
-   42      4         14    268435456          6        102      0.0387
-   43      4         15   1073741824          7        101      0.0373
-   44      4         16            0          4        105      0.0379
+   42      4         14    268435456          6        120      0.0455
+   43      4         15   1073741824          7         92      0.0340
+   44      4         16            0          4         95      0.0343
 
 -----------------------------Chapter 02-19-------------------------------
 
                                Principle Element
 
-TIME: Thu Jan 23 13:27:35 2014
+TIME: Fri Jan 24 14:01:53 2014
 Raw Data[128]:
 000 001 002 003 004 005 006 007 008 009 010 011 012 013 014 015 
-  2,  3,  3,  1,  2,  3,  3,  2,  2,  2,  2,  1,  3,  1,  1,  3,
-  1,  1,  3,  2,  1,  2,  1,  2,  3,  1,  2,  2,  2,  1,  1,  3,
-  2,  1,  2,  1,  3,  2,  2,  2,  1,  1,  3,  1,  3,  1,  3,  3,
-  1,  3,  1,  1,  1,  2,  1,  2,  2,  2,  3,  1,  1,  3,  1,  2,
-  1,  3,  2,  1,  1,  1,  2,  1,  2,  2,  1,  1,  3,  1,  2,  3,
-  3,  2,  2,  1,  2,  2,  2,  3,  1,  2,  1,  1,  2,  2,  3,  3,
-  1,  2,  1,  2,  3,  3,  3,  2,  2,  3,  3,  1,  3,  1,  1,  3,
-  1,  2,  3,  2,  3,  3,  2,  1,  2,  3,  2,  3,  1,  2,  3,  2,
+  3,  2,  1,  1,  3,  2,  2,  1,  2,  2,  2,  3,  3,  3,  2,  2,
+  1,  1,  2,  3,  3,  3,  2,  1,  3,  1,  3,  3,  3,  2,  1,  3,
+  3,  1,  1,  1,  3,  3,  2,  1,  1,  3,  3,  3,  3,  2,  1,  3,
+  2,  3,  2,  3,  1,  1,  3,  1,  1,  1,  3,  1,  2,  1,  3,  2,
+  1,  2,  3,  3,  1,  1,  3,  2,  1,  3,  1,  3,  2,  3,  2,  2,
+  2,  1,  1,  3,  1,  1,  3,  2,  1,  1,  2,  3,  1,  3,  3,  2,
+  1,  2,  2,  2,  1,  3,  3,  2,  3,  3,  2,  2,  3,  3,  3,  3,
+  2,  1,  2,  3,  1,  2,  2,  3,  2,  1,  3,  2,  3,  2,  1,  3,
 Find Principle element: O[2N]
 INDEX  DIMENSION          RESULT  TIME(usec)  ASTRINGEND
-    0          1   PRINCIPLE_ELE        2535   1267.5000
-    1          2   NOT_PRINCIPLE        2598    649.5000
-    2          3   PRINCIPLE_ELE        2935    489.1667
-    3          4   NOT_PRINCIPLE        2612    326.5000
-    4          5   NOT_PRINCIPLE        2899    289.9000
-    5          6   NOT_PRINCIPLE        2595    216.2500
-    6          7   PRINCIPLE_ELE        3127    223.3571
-    7          8   NOT_PRINCIPLE        2647    165.4375
-    8          9   NOT_PRINCIPLE        3023    167.9444
-    9         10   NOT_PRINCIPLE        3176    158.8000
-   10         11   PRINCIPLE_ELE        3704    168.3636
-   11         12   NOT_PRINCIPLE        3098    129.0833
-   12         13   NOT_PRINCIPLE        3120    120.0000
-   13         14   NOT_PRINCIPLE        3153    112.6071
-   14         15   NOT_PRINCIPLE        3218    107.2667
-   15         16   NOT_PRINCIPLE        3192     99.7500
-   16         17   NOT_PRINCIPLE        3235     95.1471
-   17         18   NOT_PRINCIPLE        3258     90.5000
-   18         19   NOT_PRINCIPLE        3265     85.9211
-   19         20   NOT_PRINCIPLE        3265     81.6250
-   20         30   NOT_PRINCIPLE        3983     66.3833
-   21         40   NOT_PRINCIPLE        4614     57.6750
-   22         50   NOT_PRINCIPLE        4822     48.2200
-   23         60   NOT_PRINCIPLE        5214     43.4500
-   24         70   NOT_PRINCIPLE        5482     39.1571
-   25         80   NOT_PRINCIPLE        5728     35.8000
-   26         90   NOT_PRINCIPLE        5951     33.0611
-   27        100   NOT_PRINCIPLE        6267     31.3350
+    0          1   PRINCIPLE_ELE        2715   1357.5000
+    1          2   NOT_PRINCIPLE        2872    718.0000
+    2          3   NOT_PRINCIPLE        2869    478.1667
+    3          4   NOT_PRINCIPLE        3152    394.0000
+    4          5   NOT_PRINCIPLE        3355    335.5000
+    5          6   NOT_PRINCIPLE        3323    276.9167
+    6          7   NOT_PRINCIPLE        3374    241.0000
+    7          8   NOT_PRINCIPLE        3257    203.5625
+    8          9   NOT_PRINCIPLE        3263    181.2778
+    9         10   NOT_PRINCIPLE        3400    170.0000
+   10         11   PRINCIPLE_ELE        3920    178.1818
+   11         12   NOT_PRINCIPLE        3414    142.2500
+   12         13   NOT_PRINCIPLE        3416    131.3846
+   13         14   NOT_PRINCIPLE        3432    122.5714
+   14         15   NOT_PRINCIPLE        3495    116.5000
+   15         16   NOT_PRINCIPLE        3540    110.6250
+   16         17   NOT_PRINCIPLE        3481    102.3824
+   17         18   NOT_PRINCIPLE        4210    116.9444
+   18         19   NOT_PRINCIPLE        4136    108.8421
+   19         20   NOT_PRINCIPLE        4167    104.1750
+   20         30   NOT_PRINCIPLE        4328     72.1333
+   21         40   NOT_PRINCIPLE        3946     49.3250
+   22         50   NOT_PRINCIPLE        4967     49.6700
+   23         60   NOT_PRINCIPLE        4817     40.1417
+   24         70   NOT_PRINCIPLE        4897     34.9786
+   25         80   NOT_PRINCIPLE        5010     31.3125
+   26         90   NOT_PRINCIPLE        6689     37.1611
+   27        100   NOT_PRINCIPLE        5140     25.7000
 
 -----------------------------Chapter 03-01-------------------------------
 
                                Traversal Single Linked List
 
-TIME: Thu Jan 23 13:27:35 2014
+TIME: Fri Jan 24 14:01:54 2014
 Traversal Single Linked List: O[N]
 INDEX  DIMENSION       SUM  TIME(usec)  ASTRINGEND
-    0         10        55         473     47.3000
+    0         10        55         491     49.1000
     1         20       210         741     37.0500
-    2         30       465        1175     39.1667
-    3         40       820        1470     36.7500
-    4         50      1275        1735     34.7000
-    5         60      1830        2021     33.6833
-    6         70      2485        2314     33.0571
-    7         80      3240        2556     31.9500
-    8         90      4095        2841     31.5667
-    9        100      5050        3118     31.1800
-   10        200     20100        5866     29.3300
-   11        300     45150        8595     28.6500
-   12        400     80200       11339     28.3475
-   13        500    125250       14130     28.2600
-   14        600    180300       16965     28.2750
-   15        700    245350       19616     28.0229
-   16        800    320400       22731     28.4138
-   17        900    405450       25654     28.5044
-   18       1000    500500       28506     28.5060
+    2         30       465        1181     39.3667
+    3         40       820        1469     36.7250
+    4         50      1275        1757     35.1400
+    5         60      1830        1998     33.3000
+    6         70      2485        2285     32.6429
+    7         80      3240        2549     31.8625
+    8         90      4095        2819     31.3222
+    9        100      5050        3082     30.8200
+   10        200     20100        5807     29.0350
+   11        300     45150        8508     28.3600
+   12        400     80200       11277     28.1925
+   13        500    125250       13983     27.9660
+   14        600    180300       16796     27.9933
+   15        700    245350       19511     27.8729
+   16        800    320400       22495     28.1187
+   17        900    405450       25340     28.1556
+   18       1000    500500       28504     28.5040
