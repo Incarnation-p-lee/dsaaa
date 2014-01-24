@@ -1,11 +1,11 @@
-/*--------------------------------------------------------------*/
-/*-AUTHOR:      Incarnation.P Lee                               */
-/*-DATE:        11142013                                        */
-/*-WHAT:        Homework chapter 2.11                           */
-/*-REVISION:                                                    */
-/*- DATE ------------------------ DESCRIPTION ------------------*/
-/*- 11142013    CHAPTER 2-11                                   -*/
-/*--------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
+/*-AUTHOR:      Incarnation.P Lee                                             */
+/*-DATE:        11142013                                                      */
+/*-WHAT:        Homework chapter 2.11                                         */
+/*-REVISION:                                                                  */
+/*- DATE ------------------------ DESCRIPTION --------------------------------*/
+/*- 11142013    CHAPTER 2-11                                                 -*/
+/*----------------------------------------------------------------------------*/
 void
 chapt_2_11(void)
 {
@@ -27,11 +27,11 @@ dochapt_2_11(void)
   int cases[] = {
   /*- cases format: [specified, min, size, step width]         -*/
        123,    1,      10,  2,
-        98,   11,      20,  4, 
+        98,   11,      20,  4,
          9,    1,     100,  6,
        234,  201,     400,  8,
-       101,  101,     600, 10, 
-      1002,   11,    1000, 12, 
+       101,  101,     600, 10,
+      1002,   11,    1000, 12,
       2345, 1001,   12000, 14,
      22345,    1,   42000, 16,
      52345,  101,   82000, 10,
@@ -68,7 +68,7 @@ specified_contains(int specified, int min, int size_c, int width)
   struct iscontains_report data_r;
   ENTER("specified_contains");
 
-  counts = CONTAINS_COUNT;
+  counts = SPECIFIED_REPEAT_CNT;
   data_r.size_c = size_c;
   data_r.min = min;
   data_r.astringent = (double)log(data_r.size_c);
@@ -144,7 +144,7 @@ iscontains(int specified, int *raw_data, int size_c)
       result = CONTAINED;
       break;
     }
-    
+
     if(begin_i > end_i)
       break;
   }
@@ -189,10 +189,9 @@ print_contains_report(FILE *fd, struct iscontains_report *data_r)
       break;
   }
 
-  fprintf(fd, "  %8d    %8d    %8d     %.12s %10.6f\n", 
-    data_r->min, data_r->size_c, data_r->usec,
-    descript, data_r->usec / data_r->astringent);
-  
+  fprintf(fd, "  %8d    %8d    %8d     %.12s %10.6f\n", data_r->min,
+    data_r->size_c, data_r->usec, descript, data_r->usec / data_r->astringent);
+
   LEAVE;
   return;
 }

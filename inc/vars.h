@@ -22,7 +22,7 @@ static HOMEWORK homework[] = {
   &chapt_2_19,
   &chapt_3_1,
 #else
-  &chapt_3_1,
+  &chapt_2_19,
 #endif
 };
 

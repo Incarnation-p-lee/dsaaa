@@ -1,11 +1,11 @@
-/*--------------------------------------------------------------*/
-/*-AUTHOR:      Incarnation.P Lee                               */
-/*-DATE:        08122013                                        */
-/*-WHAT:        Homework chapter 1.1                            */
-/*-REVISION:                                                    */
-/*- DATE ------------------------ DESCRIPTION ------------------*/
-/*- 08122013    CHAPTER 1-1                                    -*/
-/*--------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
+/*-AUTHOR:      Incarnation.P Lee                                             */
+/*-DATE:        08122013                                                      */
+/*-WHAT:        Homework chapter 1.1                                          */
+/*-REVISION:                                                                  */
+/*- DATE ------------------------ DESCRIPTION --------------------------------*/
+/*- 08122013    CHAPTER 1-1                                                  -*/
+/*----------------------------------------------------------------------------*/
 void
 chapt_1_1(void)
 {
@@ -17,8 +17,8 @@ chapt_1_1(void)
 
   print_report_header(stdout, "Selection Problem", 1, 1);
   print_report_header(dsaaa_report, "Selection Problem", 1, 1);
-  print_algo_info(stdout);
-  print_algo_info(dsaaa_report);
+  print_select_title(stdout);
+  print_select_title(dsaaa_report);
 
   pos = dsize;
   while(pos < dsize + sizeof(dsize) / sizeof(dsize[0]))
@@ -28,51 +28,46 @@ chapt_1_1(void)
   return;
 }
 
-
 static void
-print_algo_info(FILE *fd)
+print_select_title(FILE *fd)
 {
-  ENTER("print_algo_info");
+  ENTER("print_select_title");
 
   fprintf(fd, "\nASTRINGENT: O(N*logN)\n");
-  fprintf(fd,
-    "No.     DATA_SIZE         KVALUE:VALIDATION     "
-    "TIME(usec)=>ASTRINGENT\n");
+  fprintf(fd, "No.     DATA_SIZE         KVALUE:VALIDATION     "
+    "TIME(usec)  ASTRINGENT\n");
 
   LEAVE;
   return;
 }
-
 
 static void
 dochapt_1_1(int data_size)
 {
   int *dinput;
-  struct rept_entry entry;
+  int count;
+  struct select_report entry;
+  ENTER("dochapt_1_1");
 
-  ENTER("do_chapter");
   entry.data_size = data_size;
   dinput = selection_data_prepare(data_size);
+  count = SELECT_REPEAT_CNT;
 
   TIME_START;
-  entry.kvalue = selection_problem(
+  entry.kvalue = SELECT_PERFORMANCE(count, selection_problem,
     dinput, data_size, data_size >> 1);
   TIME_END(&entry.usec_cost);
 
-  entry.astringent = (double)entry.usec_cost / 
-    (log(data_size) * data_size);
-  entry.validate = selection_validate(
-    dinput, data_size, entry.kvalue);
+  entry.astringent = (double)entry.usec_cost / (log(data_size) * data_size);
+  entry.validate = selection_validate(dinput, data_size, entry.kvalue);
 
-  selection_data(&entry);
-
-  free(dinput);
-  dinput = NULL;
+  selection_data(stdout, &entry);
+  selection_data(dsaaa_report, &entry);
+  saft_free((void**)&dinput);
 
   LEAVE;
   return;
 }
-
 
 static int
 selection_problem(int *data, int size, int key)
@@ -89,19 +84,19 @@ selection_problem(int *data, int size, int key)
   while(1)
   {
     big_cnt = selection_split(data, start, data_size);
-    /*----------------------------------------------------------*/
-    /* if the count of big part is less than key, reset the data*/
-    /* and update rest key.                                     */
-    /*----------------------------------------------------------*/
+    /*------------------------------------------------------------------------*/
+    /* if the count of big part is less than key, reset the data and update   */
+    /* rest key.                                                              */
+    /*------------------------------------------------------------------------*/
     if(big_cnt < key)
     {
       data_size -= big_cnt;
       key -= big_cnt;
     }
-    /*----------------------------------------------------------*/
-    /* if the count of big part is more than key, reset start   */
-    /* index and update data size.                              */
-    /*----------------------------------------------------------*/
+    /*------------------------------------------------------------------------*/
+    /* if the count of big part is more than key, reset start index and       */
+    /* update data size.                                                      */
+    /*------------------------------------------------------------------------*/
     else if(big_cnt > key)
     {
       start += (data_size - big_cnt + 1);
@@ -116,10 +111,9 @@ selection_problem(int *data, int size, int key)
   return data[index];
 }
 
-
-/*--------------------------------------------------------------*/
-/* Return the count of big part include the key value.          */
-/*--------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
+/* Return the count of big part include the key value.                        */
+/*----------------------------------------------------------------------------*/
 static int
 selection_split(int *data, int start, int len)
 {
@@ -150,8 +144,7 @@ selection_split(int *data, int start, int len)
   return len - (j - start);
 }
 
-
-static int*
+static int *
 selection_data_prepare(int data_size)
 {
   register int *pos;
@@ -161,42 +154,30 @@ selection_data_prepare(int data_size)
   if(0 >= data_size)
     error_handle("selection_data_prepare");
 
-  random_data = calloc(sizeof(int), data_size);
-  if(NULL == random_data)
-    error_handle("calloc");
+  malloc_initial((void**)&random_data, sizeof(int) * data_size);
 
   pos = random_data;
   srand((unsigned)time(NULL));
   while(pos < random_data + data_size)
-    *pos++ = ((unsigned)DATA_MAX >> 1) - (rand() % DATA_MAX);
+    *pos++ = ((unsigned)MAX_SELECT_VALUE >> 1) - (rand() % MAX_SELECT_VALUE);
 
   LEAVE;
   return random_data;
 }
 
-
 static void
-selection_data(struct rept_entry *rept)
+selection_data(FILE *fd, struct select_report *rept)
 {
-  static int number = 1;
+  static int number = 0;
 
   ENTER("selection_data");
-  fprintf(stdout,
-    "%2d     %10d     %10d:%10d     %10u=>%10.6f\n",
-    number, rept->data_size, rept->kvalue,
+  fprintf(fd, "%2d     %10d     %10d:%10d     %10u  %10.6f\n",
+    number++ >> 1, rept->data_size, rept->kvalue,
     rept->validate, rept->usec_cost, rept->astringent);
-
-  fprintf(dsaaa_report,
-    "%2d     %10d     %10d:%10d     %10u=>%10.6f\n",
-    number, rept->data_size, rept->kvalue,
-    rept->validate, rept->usec_cost, rept->astringent);
-
-  number++;
 
   LEAVE;
   return;
 }
-
 
 static int
 selection_validate(int *data, int len, int key)

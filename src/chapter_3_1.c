@@ -1,20 +1,18 @@
-/*--------------------------------------------------------------*/
-/*-AUTHOR:      Incarnation.P Lee                               */
-/*-DATE:        01202014                                        */
-/*-WHAT:        Homework chapter 3-1                           */
-/*-REVISION:                                                    */
-/*- DATE ------------------------ DESCRIPTION ------------------*/
-/*- 01202014    CHAPTER 3-1                                    -*/
-/*--------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
+/*-AUTHOR:      Incarnation.P Lee                                             */
+/*-DATE:        01202014                                                      */
+/*-WHAT:        Homework chapter 3-1                                          */
+/*-REVISION:                                                                  */
+/*- DATE ------------------------ DESCRIPTION --------------------------------*/
+/*- 01202014    CHAPTER 3-1                                                  -*/
+/*----------------------------------------------------------------------------*/
 void
 chapt_3_1(void)
 {
   ENTER("chapt_3_1");
 
-  print_report_header(stdout,
-    "Traversal Single Linked List", 3, 1);
-  print_report_header(dsaaa_report,
-    "Traversal Single Linked List", 3, 1);
+  print_report_header(stdout, "Traversal Single Linked List", 3, 1);
+  print_report_header(dsaaa_report, "Traversal Single Linked List", 3, 1);
 
   dochapt_3_1();
 

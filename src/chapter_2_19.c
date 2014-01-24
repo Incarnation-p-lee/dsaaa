@@ -1,11 +1,11 @@
-/*--------------------------------------------------------------*/
-/*-AUTHOR:      Incarnation.P Lee                               */
-/*-DATE:        01102014                                        */
-/*-WHAT:        Homework chapter 2.19                           */
-/*-REVISION:                                                    */
-/*- DATE ------------------------ DESCRIPTION ------------------*/
-/*- 01102014    CHAPTER 2-19                                   -*/
-/*--------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
+/*-AUTHOR:      Incarnation.P Lee                                             */
+/*-DATE:        01102014                                                      */
+/*-WHAT:        Homework chapter 2.19                                         */
+/*-REVISION:                                                                  */
+/*- DATE ------------------------ DESCRIPTION --------------------------------*/
+/*- 01102014    CHAPTER 2-19                                                 -*/
+/*----------------------------------------------------------------------------*/
 void
 chapt_2_19(void)
 {
@@ -35,8 +35,7 @@ dochapt_2_19(void)
   ENTER("dochapt_2_19");
 
   srand((unsigned)time(NULL));
-  malloc_initial((void**)&raw_data,
-    sizeof(*raw_data) * PRIN_DATA_SIZE);
+  malloc_initial((void**)&raw_data, sizeof(*raw_data) * PRIN_DATA_SIZE);
   data_init(raw_data, PRIN_DATA_SIZE);
 
   print_raw_data(stdout, raw_data, PRIN_DATA_SIZE);
@@ -69,16 +68,14 @@ print_prin_title(FILE *fd)
   ENTER("print_prin_title");
 
   fprintf(fd, "Find Principle element: O[2N]\n");
-  fprintf(fd, "INDEX  DIMENSION          RESULT"
-    "  TIME(usec)  ASTRINGEND\n");
+  fprintf(fd, "INDEX  DIMENSION          RESULT  TIME(usec)  ASTRINGEND\n");
 
   LEAVE;
   return;
 }
 
 static void
-print_prin_report(FILE *fd, int size,
-  struct principle_ele_report *report)
+print_prin_report(FILE *fd, int size, struct principle_ele_report *report)
 {
   static int index = 0;
   const char *result;
@@ -97,9 +94,9 @@ print_prin_report(FILE *fd, int size,
       warn_prompt("Unknown macro name detected.");
       break;
   }
-  fprintf(fd, "%5d     %6d   %13s    %8d  %10.4f\n",
-    (index++) >> 1, report->dimension, result,
-    report->usec, (double)report->usec / (size << 1));
+  fprintf(fd, "%5d     %6d   %13s    %8d  %10.4f\n", (index++) >> 1,
+    report->dimension, result, report->usec,
+    (double)report->usec / (size << 1));
 
   LEAVE;
   return;
@@ -166,6 +163,7 @@ principle_element(int *raw_data, int size)
 
   saft_free((void**)&data_out);
   saft_free((void**)&data_in);
+
   LEAVE;
   return result;
 }
@@ -202,15 +200,16 @@ principle_element_iter(int *data_out, int *data_in, int size)
   }
 
   if(iseven)
-    /*- If size is even, compare the last element with both    -*/
-    /*- the second last one and the first one for 2 cases.     -*/
-    /*- Case1: 1,0,1,0,1.                                      -*/
-    /*- Case2: 0,1,0,1,1.                                      -*/
+    /*------------------------------------------------------------------------*/
+    /*- If size is even, compare the last element with both                  -*/
+    /*- the second last one and the first one for 2 cases.                   -*/
+    /*- Case1: 1,0,1,0,1.                                                    -*/
+    /*- Case2: 0,1,0,1,1.                                                    -*/
+    /*------------------------------------------------------------------------*/
     if(*data_in == *iter_in || *iter_in == *(iter_in - 1))
       *iter_out++ = *iter_in;
 
-  candidate = principle_element_iter(data_in, data_out,
-    iter_out - data_out);
+  candidate = principle_element_iter(data_in, data_out, iter_out - data_out);
 
 ITER_END:
   LEAVE;

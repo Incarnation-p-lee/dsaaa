@@ -9,6 +9,7 @@ enter(const char *);
 extern void
 leave(void);
 
+#define TRACE_DEPTH            4098
 
 void
 error_handle(const char *);
@@ -34,7 +35,6 @@ void
 saft_free(void **);
 int
 get_bit_length(unsigned int);
-
 
 static const char *stack_traces[TRACE_DEPTH];
 static int top_index = 0;

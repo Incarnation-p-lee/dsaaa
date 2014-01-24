@@ -1,11 +1,11 @@
-/*--------------------------------------------------------------*/
-/*-AUTHOR:      Incarnation.P Lee                               */
-/*-DATE:        11142013                                        */
-/*-WHAT:        Homework chapter 2.12                           */
-/*-REVISION:                                                    */
-/*- DATE ------------------------ DESCRIPTION ------------------*/
-/*- 11182013    CHAPTER 2-12                                   -*/
-/*--------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
+/*-AUTHOR:      Incarnation.P Lee                                             */
+/*-DATE:        11142013                                                      */
+/*-WHAT:        Homework chapter 2.12                                         */
+/*-REVISION:                                                                  */
+/*- DATE ------------------------ DESCRIPTION --------------------------------*/
+/*- 11182013    CHAPTER 2-12                                                 -*/
+/*----------------------------------------------------------------------------*/
 void
 chapt_2_12(void)
 {
@@ -41,21 +41,18 @@ dochapt_2_12(void)
   ENTER("dochapt_2_12");
 
   print_data_in(stdout, cases, sizeof(cases) / sizeof(cases[0]));
-  print_data_in(dsaaa_report, cases,
-    sizeof(cases) / sizeof(cases[0]));
+  print_data_in(dsaaa_report, cases, sizeof(cases) / sizeof(cases[0]));
 
   data_size = sizeof(cases[0]) / sizeof(cases[0][0]);
   data_cnt = sizeof(cases) / sizeof(cases[0]);
 
   iterator = func_name;
   min_type = minsub_type;
-  while(iterator < func_name + 
-    sizeof(func_name) / sizeof(func_name[0]))
+  while(iterator < func_name + sizeof(func_name) / sizeof(func_name[0]))
   {
     print_submin_title(stdout, data_size, *min_type);
     print_submin_title(dsaaa_report, data_size, *min_type);
-    find_minsub_seq(cases, data_cnt, data_size,
-      *iterator++, *min_type++);
+    find_minsub_seq(cases, data_cnt, data_size, *iterator++, *min_type++);
   }
 
   LEAVE;
@@ -63,9 +60,8 @@ dochapt_2_12(void)
 }
 
 static void
-find_minsub_seq(double (*cases)[MAX_SUB_DATA_SIZE], int data_cnt,
-  int data_size, double (*entry)(double *, int, int *, int *),
-  enum minsub_sequence type)
+find_minsub_seq(double (*cases)[MAX_SUB_DATA_SIZE], int data_cnt, int data_size,
+  double (*entry)(double *, int, int *, int *), enum minsub_sequence type)
 {
   register double (*iterator)[MAX_SUB_DATA_SIZE];
   struct sub_sequence su_rpt;
@@ -125,8 +121,7 @@ print_submin_report(FILE *fd, struct sub_sequence *rpt)
 
   fprintf(fd, "%4d. %10.4f  %7d  %7d  %11.6f  %11.6f\n",
     index++ >> 1, rpt->min, rpt->st, rpt->ed,
-    (double)rpt->usec / SUB_CASES_COUNT,
-    rpt->usec / rpt->astringent);
+    (double)rpt->usec / SUB_CASES_COUNT, rpt->usec / rpt->astringent);
 
   LEAVE;
   return;
@@ -141,15 +136,13 @@ print_submin_title(FILE *fd, int size_s,
   switch(type)
   {
     case MIN_SUB:
-      fprintf(fd, "MINIMUN SUB SEQUENCE *ASTRINGENT => O[N]\n");
+      fprintf(fd, "MINIMUN SUB SEQUENCE *ASTRINGENT : O[N]\n");
       break;
     case MIN_POSITIVE_SUB:
-      fprintf(fd, "MINIMUN POSITIVE SUB SEQUENCE"
-        " *ASTRINGENT => O[N^2]\n");
+      fprintf(fd, "MINIMUN POSITIVE SUB SEQUENCE *ASTRINGENT : O[N^2]\n");
       break;
     case MAX_MULTI_SUB:
-      fprintf(fd, "MAXIMUN MULTIPLE SUB SEQUENCE"
-        " *ASTRINGENT => O[N]\n");
+      fprintf(fd, "MAXIMUN MULTIPLE SUB SEQUENCE *ASTRINGENT : O[N]\n");
       break;
     default:
       error_handle("Unresolved enum value detected.");
@@ -213,12 +206,15 @@ min_subsequence(double *data, int size_s, int *st, int *ed)
   while(iterator < data + size_s)
   {
     sum += *iterator++;
-    /*- if all zero items of input data, only > may not update -*/
-    /*- start index and single related variable.               -*/
+    /*------------------------------------------------------------------------*/
+    /*- if all zero items of input data, only > may not update start index   -*/
+    /*- and single related variable.                                         -*/
+    /*------------------------------------------------------------------------*/
     if(sum >= 0)
     {
-      /*- if all positive number, keep the smallest and its    -*/
-      /*- index value.                                         -*/
+      /*----------------------------------------------------------------------*/
+      /*- if all positive number, keep the smallest and its index value.     -*/
+      /*----------------------------------------------------------------------*/
       st_index = (int)(iterator - data);
       if(single > sum)
       {
@@ -234,8 +230,9 @@ min_subsequence(double *data, int size_s, int *st, int *ed)
       *ed = (int)(iterator - data) - 1;
     }
   }
-
-  /*- if all positive numbers, use the smallest one as min.    -*/
+  /*--------------------------------------------------------------------------*/
+  /*- if all positive numbers, use the smallest one as min.                  -*/
+  /*--------------------------------------------------------------------------*/
   if(0 == min)
   {
     min = single;
@@ -246,15 +243,17 @@ min_subsequence(double *data, int size_s, int *st, int *ed)
   return min;
 }
 
-/*- Assume Y[i] i = (0 ... N) [size == N + 1], raw input X[i]. -*/
-/*- POSTULATION:                                               -*/
-/*- Y[0] = 0.                                                  -*/
-/*- Y[1] = X[0].                                               -*/
-/*- Y[2] = X[0] + X[1].                                        -*/
-/*- Y[N] = X[0] + X[1] + ... + X[N - 1].                       -*/
-/*- Then the minimum sub positive sequence has two conditions: -*/
-/*-   1. Y[i] - Y[j] > 0 && i > j                              -*/
-/*-   2. (Y[i] - Y[j]) is the smallest positive                -*/
+/*----------------------------------------------------------------------------*/
+/*- Assume Y[i] i = (0 ... N) [size == N + 1], raw input X[i].               -*/
+/*- POSTULATION:                                                             -*/
+/*- Y[0] = 0.                                                                -*/
+/*- Y[1] = X[0].                                                             -*/
+/*- Y[2] = X[0] + X[1].                                                      -*/
+/*- Y[N] = X[0] + X[1] + ... + X[N - 1].                                     -*/
+/*- Then the minimum sub positive sequence has two conditions:               -*/
+/*-   1. Y[i] - Y[j] > 0 && i > j                                            -*/
+/*-   2. (Y[i] - Y[j]) is the smallest positive                              -*/
+/*----------------------------------------------------------------------------*/
 static double
 min_posi_subsequence(double *data, int size_s, int *st, int *ed)
 {
@@ -273,7 +272,6 @@ min_posi_subsequence(double *data, int size_s, int *st, int *ed)
   sum_cad = 0;
   iterator_1 = iterator_2 = data_ass;
 
-  /* size of Y[N] == size of X[N] + 1                          -*/
   while(iterator_1 < data_ass + size_s + 1)
   {
     iterator_2 = iterator_1 + 1;
@@ -291,7 +289,9 @@ min_posi_subsequence(double *data, int size_s, int *st, int *ed)
     iterator_1++;
   }
 
-  /* For there is no positive number in raw input data.        -*/
+  /*--------------------------------------------------------------------------*/
+  /*- For there is no positive number in raw input data.                     -*/
+  /*--------------------------------------------------------------------------*/
   if(INT_MAX == min_posi)
   {
     min_posi = 0;
@@ -345,7 +345,9 @@ max_multi_subsequence(double *data, int size_s, int *st, int *ed)
     abs_multi = fabs(multi_sub);
     if(abs_multi < 1)
     {
-      /*- For all positive number who's value less than 1.0.   -*/
+      /*----------------------------------------------------------------------*/
+      /*- For all positive number who's value less than 1.0.                 -*/
+      /*----------------------------------------------------------------------*/
       if(multi_sub > single)
       {
         single = multi_sub;
@@ -362,7 +364,9 @@ max_multi_subsequence(double *data, int size_s, int *st, int *ed)
     }
   }
 
-  /*- If all values less than 1.0.(including all zeros)        -*/
+  /*--------------------------------------------------------------------------*/
+  /*- If all values less than 1.0.(including all zeros)                      -*/
+  /*--------------------------------------------------------------------------*/
   if(multi_max - 1.0 < MIN_DOUBLE)
   {
     multi_max = single;

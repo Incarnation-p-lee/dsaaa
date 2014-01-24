@@ -1,11 +1,11 @@
-/*--------------------------------------------------------------*/
-/*-AUTHOR:      Incarnation.P Lee                               */
-/*-DATE:        11102013                                        */
-/*-WHAT:        Homework chapter 2.7                            */
-/*-REVISION:                                                    */
-/*- DATE ------------------------ DESCRIPTION ------------------*/
-/*- 11102013    CHAPTER 1-1                                    -*/
-/*--------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
+/*-AUTHOR:      Incarnation.P Lee                                             */
+/*-DATE:        11102013                                                      */
+/*-WHAT:        Homework chapter 2.7                                          */
+/*-REVISION:                                                                  */
+/*- DATE ------------------------ DESCRIPTION --------------------------------*/
+/*- 11102013    CHAPTER 1-1                                                  -*/
+/*----------------------------------------------------------------------------*/
 void
 chapt_2_7(void)
 {
@@ -73,10 +73,9 @@ random_sequence(int start, int end, enum repeat_vehicle type)
   data.outline = repeat_description[type];
 
   expected_init(&data, size_r, type);
-  malloc_initial((void **)&sequence_data,
-    size_r * sizeof(*sequence_data));
+  malloc_initial((void **)&sequence_data, size_r * sizeof(*sequence_data));
 
-  counts = REPEAT_COUNT;
+  counts = RANDOM_REPEAT_CNT;
   TIME_START;
   SEQ_PERFORMANCE(counts, generate_random, start, end, type);
   TIME_END(&data.usec);
@@ -90,8 +89,8 @@ random_sequence(int start, int end, enum repeat_vehicle type)
 }
 
 static void
-expected_init(struct gen_random_report *data_r, int size_r,
-  enum repeat_vehicle type)
+expected_init(struct gen_random_report *data_r,
+  int size_r, enum repeat_vehicle type)
 {
   double exp;
   ENTER("expected_init");
@@ -135,9 +134,8 @@ print_random_report(FILE *fd, struct gen_random_report *rrpt)
   ENTER("print_random_report");
 
   fprintf(fd, " %8d %8d   %8d    %10.4f  %.16s  %10.7f\n",
-    rrpt->start, rrpt->end, rrpt->dimension,
-    (double)rrpt->usec / REPEAT_COUNT, rrpt->outline,
-    (double)rrpt->usec / rrpt->expected);
+    rrpt->start, rrpt->end, rrpt->dimension, (double)rrpt->usec / RANDOM_REPEAT_CNT,
+    rrpt->outline, (double)rrpt->usec / rrpt->expected);
 
   LEAVE;
   return;
@@ -198,8 +196,7 @@ generate_random(int start, int end, enum repeat_vehicle type)
 }
 
 static void
-repeat_assist_init(int start, int size_r,
-  enum repeat_vehicle type)
+repeat_assist_init(int start, int size_r, enum repeat_vehicle type)
 {
   int ittr;
   ENTER("repeat_assist_init");

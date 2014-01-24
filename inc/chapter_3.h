@@ -1,7 +1,7 @@
 #ifndef CHAPTER3_H
 #define CHAPTER3_H
 
-/*-     EXTERNALS                                              -*/
+/*-     EXTERNALS                                                            -*/
 extern FILE *dsaaa_report;
 
 extern void
@@ -28,7 +28,7 @@ extern void
 saft_free(void **);
 
 
-/*-     CHAPTER 03-01                                          -*/
+/*-     CHAPTER 03-01                                                        -*/
 #define NODE_SIZE              1000
 #define TRAVERSAL_CNT          10000
 #define TRAVERSAL_PERFORMANCE(times, func, head) \

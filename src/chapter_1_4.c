@@ -1,11 +1,11 @@
-/*--------------------------------------------------------------*/
-/*-AUTHOR:      Incarnation.P Lee                               */
-/*-DATE:        10272013                                        */
-/*-WHAT:        Homework chapter 1.4                            */
-/*-REVISION:                                                    */
-/*- DATE ------------------------ DESCRIPTION ------------------*/
-/*- 10272013    CHAPTER 1-4                                    -*/
-/*--------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
+/*-AUTHOR:      Incarnation.P Lee                                             */
+/*-DATE:        10272013                                                      */
+/*-WHAT:        Homework chapter 1.4                                          */
+/*-REVISION:                                                                  */
+/*- DATE ------------------------ DESCRIPTION --------------------------------*/
+/*- 10272013    CHAPTER 1-4                                                  -*/
+/*----------------------------------------------------------------------------*/
 void
 chapt_1_4(void)
 {
@@ -33,10 +33,9 @@ dochapt_1_4(void)
   ENTER("dochapt_1_4");
 
   filename = sourcefiles;
-  while(filename < 
-    sourcefiles + sizeof(sourcefiles) / sizeof(sourcefiles[0]))
+  while(filename < sourcefiles + sizeof(sourcefiles) / sizeof(sourcefiles[0]))
   {
-    expand_report("\n>>>>>>>> %s <<<<<<<<\n", *filename);
+    print_expand_report("\n>>>>>>>> %s <<<<<<<<\n", *filename);
     expand_file(*filename++);
   }
 
@@ -57,8 +56,7 @@ expand_file(char *filename)
   fd = open_included_file(filename);
   if(NULL == fd)
   {
-    expand_report("%.*s=No Such[%s] File.\n",
-      depth, blank, filename);
+    print_expand_report("%.*s=No Such[%s] File.\n", depth, blank, filename);
     goto EXIT_NOFILE;
   }
 
@@ -67,13 +65,13 @@ expand_file(char *filename)
   while(!feof(fd))
   {
     if(!depth)
-      expand_report("%s", each_line);
+      print_expand_report("%s", each_line);
 
     current = include_line(each_line);
     if(current)
     {
       include_filename(name, current);
-      expand_report(" %.*s+%s\n", depth, blank, name);
+      print_expand_report(" %.*s+%s\n", depth, blank, name);
       if(expand_file_filter(name))
         expand_file(name);
     }
@@ -103,8 +101,7 @@ open_included_file(const char *filename)
 
   fd = NULL;
   paths = include_path;
-  while(paths < include_path + 
-    sizeof(include_path) / sizeof(include_path[0]))
+  while(paths < include_path + sizeof(include_path) / sizeof(include_path[0]))
   {
     memset(fullname, 0, FULL_NAME_LENGTH);
     memcpy(fullname, *paths, strlen(*paths));
@@ -197,8 +194,7 @@ expand_file_filter(const char *filename)
 
   standard = 0;
   stdname = std_head;
-  while(stdname < std_head + 
-    sizeof(std_head) / sizeof(std_head[0]))
+  while(stdname < std_head + sizeof(std_head) / sizeof(std_head[0]))
   {
     if(!strcmp(filename, *stdname++))
     {
@@ -232,8 +228,7 @@ expand_file_filter(const char *filename)
   }
 
   if(!repeated)
-    memcpy(expand_stack[exstack_top++], 
-      filename, strlen(filename));
+    memcpy(expand_stack[exstack_top++], filename, strlen(filename));
 
   LEAVE;
   return !repeated;
@@ -252,11 +247,11 @@ pop_expand_stack(void)
 #endif
 
 static void
-expand_report(char *fmt, ...)
+print_expand_report(char *fmt, ...)
 {
   va_list vl;
   va_list vl_cp;
-  ENTER("expand_report");
+  ENTER("print_expand_report");
 
   va_start(vl, fmt);
   va_copy(vl_cp, vl);

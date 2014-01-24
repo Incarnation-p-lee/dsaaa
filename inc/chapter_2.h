@@ -1,8 +1,7 @@
 #ifndef CHAPTER2_H
 #define CHAPTER2_H
 
-extern FILE *dsaaa_report;
-
+/*-     EXTERNAL SYMBOLS                                                     -*/
 extern void
 error_handle(const char *);
 extern void
@@ -28,8 +27,36 @@ saft_free(void **);
 extern int
 get_bit_length(unsigned int);
 
+extern FILE *dsaaa_report;
 
-/*-     CHAPTER 02-07                                          -*/
+
+/*-     CHAPTER 02-07                                                        -*/
+#define RANDOM_REPEAT_CNT      100
+#define REPEATED               0xA0A0
+#define NOT_REPEATED           0x0A0A
+#define REPEAT_USED            0x1010
+#define REPEAT_UNUSED          0x0101
+#define SEQ_PERFORMANCE(times, func, start, end, type) \
+while((times)-- > 0)                                   \
+{                                                      \
+  (*(func))((start), (end), (type));                   \
+}
+
+struct gen_random_report{
+  unsigned usec;
+  int      dimension;
+  char     *outline;
+  int      start;
+  int      end;
+  double   expected;
+};
+
+enum repeat_vehicle{
+  UTIL,
+  USED,
+  SWAP,
+};
+
 void
 chapt_2_7(void);
 static void
@@ -70,7 +97,26 @@ static int *sequence_data;
 static int *used_number;
 
 
-/*-     CHAPTER 02-11                                          -*/
+/*-     CHAPTER 02-11                                                        -*/
+#define MIN_STEP_WIDTH         1
+#define CONTAINED              0x1234
+#define NOT_CONTAINED          0x4321
+#define SPECIFIED_REPEAT_CNT   10000
+#define CON_PERFORMANCE(times, func, specified, raw_data, size_c) \
+(*(func))((specified), (raw_data), (size_c)); \
+while(--(times) > 0) \
+{  \
+  (*(func))((specified), (raw_data), (size_c)); \
+}
+
+struct iscontains_report{
+  unsigned usec;
+  int      min;
+  int      size_c;
+  double   astringent;
+  int      result;
+};
+
 void
 chapt_2_11(void);
 static void
@@ -89,16 +135,37 @@ static void
 print_contains_report(FILE *, struct iscontains_report *);
 
 
-/*-     CHAPTER 02-12                                          -*/
+/*-     CHAPTER 02-12                                                        -*/
+#define MIN_DOUBLE             0.000001f
+#define MAX_SUB_DATA_SIZE      10
+#define SUB_CASES_COUNT        1024
+#define SUB_PERFORMANCE(times, func, data_in, size_s, st, ed) \
+(*(func))((data_in), (size_s), (st), (ed));                   \
+while(--(times) > 0)                                          \
+{                                                             \
+  (*(func))((data_in), (size_s), (st), (ed));                 \
+}
+
+enum minsub_sequence{
+  MIN_SUB,
+  MIN_POSITIVE_SUB,
+  MAX_MULTI_SUB,
+};
+struct sub_sequence{
+  double   min;
+  unsigned usec;
+  int      st;
+  int      ed;
+  double   astringent;
+};
+
 void
 chapt_2_12(void);
-
 static void
 dochapt_2_12(void);
 static void
 find_minsub_seq(double (*)[MAX_SUB_DATA_SIZE], int, int,
-  double (*)(double *, int, int *, int *),
-  enum minsub_sequence);
+  double (*)(double *, int, int *, int *), enum minsub_sequence);
 static void
 astringent_init(struct sub_sequence *, int, enum minsub_sequence);
 static double
@@ -128,10 +195,27 @@ static enum minsub_sequence minsub_type[] = {
 };
 
 
-/*-     CHAPTER 02-13                                          -*/
+/*-     CHAPTER 02-13                                                        -*/
+#define PRIME_REPEAT_COUNT     10000
+#define PRIMED                 0xA349
+#define INTEGRATE_ODD          0x2321
+#define NOT_PRIMED             0x3B21
+#define PRIME_PERFORMANCE(times, func, raw_data) \
+(*(func))((raw_data));                           \
+while(--(times) > 0)                             \
+{                                                \
+  (*(func))((raw_data));                         \
+}
+
+struct prime_num_report{
+  int      raw_data;
+  int      isprimed;
+  unsigned usec;
+  double   astringent;
+};
+
 void
 chapt_2_13(void);
-
 static void
 dochapt_2_13(void);
 static int
@@ -144,8 +228,29 @@ static int
 isodd_number(int);
 
 
+/*-     CHAPTER 02-16                                                        -*/
+#define DEFAULT_BASE           2
+#define FPOWER_REPEATS         1000
+#define MAX_EXP_COUNT          10
+#define FPOWER_PERFORMANCE(times, func, base, exp) \
+(*(func))((base), (exp));                          \
+while(--(times) > 0)                               \
+{                                                  \
+  (*(func))((base), (exp));                        \
+}
 
-/*-     CHAPTER 02-16                                          -*/
+struct buffered_power{
+  int dimension;
+  int value;
+};
+
+struct fast_power_report{
+  unsigned result;
+  unsigned usec;
+  int      mult_counts;
+  double   astringent;
+};
+
 void
 chapt_2_16(void);
 static void
@@ -161,31 +266,51 @@ initial_power_buffer(unsigned);
 static void
 filling_power_buffer(unsigned, int);
 static void
-print_power_title(FILE*);
+print_power_title(FILE *);
 static void
-print_power_report(FILE*, unsigned, int, struct fast_power_report*);
+print_power_report(FILE *, unsigned, int, struct fast_power_report *);
 
 static struct buffered_power *pbuf;
 
 
+/*-     CHAPTER 02-19                                                        -*/
+#define PRIN_DATA_SIZE         128
+#define PRIN_VALUE_SIZE        3
+#define PRINT_LINE_MAX         16
+#define PRINCIPLE_ELE          0x1253
+#define NOT_PRINCIPLE          0x3748
+#define PRIN_REPEATS           10000
+#define PRINCIPLE_PERFORMANCE(times, func, data_in, size) \
+(*(func))((data_in), size); \
+while(--(times) > 0) \
+{ \
+  (*(func))((data_in), size); \
+}
 
-/*-     CHAPTER 02-19                                          -*/
+struct principle_ele_report{
+  unsigned usec;
+  unsigned dimension;
+  int      result;
+  double   astringent;
+};
+
 void
 chapt_2_19(void);
 static void
 dochapt_2_19(void);
 static void
-print_prin_title(FILE*);
+print_prin_title(FILE *);
 static void
-print_prin_report(FILE*, int, struct principle_ele_report*);
+print_prin_report(FILE *, int, struct principle_ele_report *);
 static void
-data_init(int*, int);
+data_init(int *, int);
 static void
-print_raw_data(FILE*, int*, int);
+print_raw_data(FILE *, int *, int);
 static int
-principle_element(int*, int);
+principle_element(int *, int);
 static int
-principle_element_iter(int*, int*, int);
+principle_element_iter(int *, int *, int);
 static int
-isprinciple(int*, int, int);
+isprinciple(int *, int, int);
+
 #endif

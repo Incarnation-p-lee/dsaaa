@@ -1,11 +1,11 @@
-/*--------------------------------------------------------------*/
-/*-AUTHOR:      Incarnation.P Lee                               */
-/*-DATE:        12052013                                        */
-/*-WHAT:        Homework chapter 2.13                           */
-/*-REVISION:                                                    */
-/*- DATE ------------------------ DESCRIPTION ------------------*/
-/*- 12052013    CHAPTER 2-13                                   -*/
-/*--------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
+/*-AUTHOR:      Incarnation.P Lee                                             */
+/*-DATE:        12052013                                                      */
+/*-WHAT:        Homework chapter 2.13                                         */
+/*-REVISION:                                                                  */
+/*- DATE ------------------------ DESCRIPTION --------------------------------*/
+/*- 12052013    CHAPTER 2-13                                                 -*/
+/*----------------------------------------------------------------------------*/
 void
 chapt_2_13(void)
 {
@@ -36,16 +36,15 @@ dochapt_2_13(void)
   print_prime_title(dsaaa_report);
 
   iterator = raw_data;
-  while(iterator < raw_data +
-    sizeof(raw_data) / sizeof(*raw_data))
+  while(iterator < raw_data + sizeof(raw_data) / sizeof(*raw_data))
   {
     rcount = PRIME_REPEAT_COUNT;
     pn_rpt.raw_data = *iterator++;
     pn_rpt.astringent = sqrt((double)pn_rpt.raw_data);
 
     TIME_START;
-    pn_rpt.isprimed = PRIME_PERFORMANCE(rcount, isprime_number,
-      pn_rpt.raw_data);
+    pn_rpt.isprimed = PRIME_PERFORMANCE(rcount,
+      isprime_number, pn_rpt.raw_data);
     TIME_END(&pn_rpt.usec);
 
     print_prime_report(stdout, &pn_rpt);
@@ -143,9 +142,8 @@ print_prime_report(FILE *fd, struct prime_num_report *rpt)
       error_handle("Unresolved Prime type detected");
       break;
   }
-  fprintf(fd, "%4d. %9d  %10s %10.5f  %11.5f\n",
-    (index_r++ >> 1), rpt->raw_data, msg_r,
-    (double)rpt->usec / PRIME_REPEAT_COUNT,
+  fprintf(fd, "%4d. %9d  %10s %10.5f  %11.5f\n", (index_r++ >> 1),
+    rpt->raw_data, msg_r, (double)rpt->usec / PRIME_REPEAT_COUNT,
     rpt->usec / rpt->astringent);
 
   LEAVE;

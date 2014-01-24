@@ -1,11 +1,11 @@
-/*--------------------------------------------------------------*/
-/*-AUTHOR:      Incarnation.P Lee                               */
-/*-DATE:        12162013                                        */
-/*-WHAT:        Homework chapter 2.11                           */
-/*-REVISION:                                                    */
-/*- DATE ------------------------ DESCRIPTION ------------------*/
-/*- 11162013    CHAPTER 2-16                                   -*/
-/*--------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
+/*-AUTHOR:      Incarnation.P Lee                                             */
+/*-DATE:        12162013                                                      */
+/*-WHAT:        Homework chapter 2.11                                         */
+/*-REVISION:                                                                  */
+/*- DATE ------------------------ DESCRIPTION --------------------------------*/
+/*- 11162013    CHAPTER 2-16                                                 -*/
+/*----------------------------------------------------------------------------*/
 void
 chapt_2_16(void)
 {
@@ -57,8 +57,7 @@ dochapt_2_16(void)
         *base_iterator, *exp_iterator);
       TIME_END(&fp_report.usec);
 
-      print_power_report(stdout, *base_iterator, *exp_iterator,
-        &fp_report);
+      print_power_report(stdout, *base_iterator, *exp_iterator, &fp_report);
       print_power_report(dsaaa_report, *base_iterator, *exp_iterator,
         &fp_report);
       exp_iterator++;
@@ -83,10 +82,10 @@ cal_mult_counts(int exp)
   result = loc = 0;
   if(exp % 2)
   {
-    /*- If exp equal 1 or 0, there is no multiples.            -*/
+    /*- If exp equal 1 or 0, there is no multiples.                          -*/
     if(exp == exp % 2)
       goto CAL_END;
-    /*- If right most bit is 1, it multiples at least 1 times. -*/
+    /*- If right most bit is 1, it multiples at least 1 times.               -*/
     result = 1;
   }
 
@@ -174,7 +173,7 @@ filling_power_buffer(unsigned base, int buf_size)
   register struct buffered_power *last;
   ENTER("filling_power_buffer");
 
-  /*- Initialize the first entry of struct buffered_power.     -*/
+  /*- Initialize the first entry of struct buffered_power.                   -*/
   iterator = pbuf;
   iterator->dimension = 1;
   iterator->value = base;
@@ -213,8 +212,7 @@ print_power_report(FILE *fd, unsigned base, int exponent,
   static int index = 0;
   ENTER("print_power_report");
 
-  report->astringent = (double)report->usec /
-    (log(exponent) * FPOWER_REPEATS);
+  report->astringent = (double)report->usec / (log(exponent) * FPOWER_REPEATS);
   fprintf(fd, " %4d %6u %10d %12u   %8d  %9d   %9.4f\n",
     (index++) >> 1, base, exponent, report->result,
     report->mult_counts, report->usec, report->astringent);
