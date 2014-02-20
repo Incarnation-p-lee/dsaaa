@@ -19,7 +19,7 @@ ADIR          =archive
 IDIR          =inc
 SDIR          =src
 MFLAG         =-x c
-CFLAG         =$(MFLAG) -c -g -Wall -pg $(COVERAGE)
+CFLAG         =$(MFLAG) -c -g -O3 -Wall -pg $(COVERAGE)
 LFLAG         =-pg $(COVERAGE)
 EXRLIB        =-lm
 
@@ -59,9 +59,13 @@ link:$(OBJ)
 
 run:$(TARGET)
 	./$(TARGET)
-	sh genCoverage.sh
+	$(SHELL) genCoverage.sh
 
 clean:
+	$(cleanall)
+
+define cleanall
 	-rm -rf $(TARGET) $(OBJDIR)/* $(FDPS)
 	-rm -rf report *.gcda *.gcno
 	-rm -rf $(ADIR)/*
+endef

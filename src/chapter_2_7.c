@@ -95,6 +95,7 @@ expected_init(struct gen_random_report *data_r,
   double exp;
   ENTER("expected_init");
 
+  exp = 0.0;
   switch(type)
   {
     case UTIL:
@@ -153,6 +154,7 @@ generate_random(int start, int end, enum repeat_vehicle type)
   size_r = end - start + 1;
   repeat_assist_init(start, size_r, type);
 
+  repeated = NOT_REPEATED;
   switch(type)
   {
     case UTIL:
@@ -279,6 +281,7 @@ isrepeated_used(int start, int raw)
   int repeated;
   ENTER("isrepeated_used");
 
+  repeated = REPEAT_UNUSED;
   switch(used_number[raw - start])
   {
     case REPEAT_UNUSED:

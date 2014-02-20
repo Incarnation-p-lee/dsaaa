@@ -61,7 +61,9 @@ expand_file(char *filename)
   }
 
   memset(each_line, 0, MAX_WIDTH_OF_LINE);
-  fgets(each_line, MAX_WIDTH_OF_LINE, fd);
+  if(NULL == fgets(each_line, MAX_WIDTH_OF_LINE, fd))
+    warn_prompt("Read from file descriptor failed.");
+
   while(!feof(fd))
   {
     if(!depth)
@@ -76,7 +78,8 @@ expand_file(char *filename)
         expand_file(name);
     }
     memset(each_line, 0, MAX_WIDTH_OF_LINE);
-    fgets(each_line, MAX_WIDTH_OF_LINE, fd);
+    if(NULL == fgets(each_line, MAX_WIDTH_OF_LINE, fd))
+      warn_prompt("Read from file descriptor failed.");
   }
 
   fclose(fd);

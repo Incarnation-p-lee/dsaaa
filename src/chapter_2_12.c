@@ -203,6 +203,7 @@ min_subsequence(double *data, int size_s, int *st, int *ed)
   iterator = data;
   min = sum = *st = *ed = st_index = 0;
   single = INT_MAX;
+  single_index = 0;
   while(iterator < data + size_s)
   {
     sum += *iterator++;
