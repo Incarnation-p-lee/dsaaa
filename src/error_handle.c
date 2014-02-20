@@ -1,11 +1,11 @@
-/*--------------------------------------------------------------*/
-/*-AUTHOR:      Incarnation.P Lee                               */
-/*-DATE:        08122013                                        */
-/*-WHAT:        Error handling                                  */
-/*-REVISION:                                                    */
-/*- DATE ------------------------ DESCRIPTION ------------------*/
-/*- 08122013    Generate error handle module                   -*/
-/*--------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
+/*-AUTHOR:      Incarnation.P Lee                                            -*/
+/*-DATE:        08122013                                                     -*/
+/*-WHAT:        Error handling                                               -*/
+/*-REVISION:                                                                 -*/
+/*- DATE ------------------------ DESCRIPTION --------------------------------*/
+/*- 08122013    Generate error handle module                                 -*/
+/*----------------------------------------------------------------------------*/
 void
 error_handle(const char *message)
 {
@@ -33,6 +33,7 @@ warn_prompt(const char *message)
     message = unknown;
 
   fprintf(stdout, "warning at %s. ", message);
+  fprintf(dsaaa_report, "warning at %s. ", message);
   print_stack_traces();
 
   LEAVE;
