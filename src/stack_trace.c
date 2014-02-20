@@ -1,11 +1,11 @@
-/*--------------------------------------------------------------*/
-/*-AUTHOR:      Incarnation.P Lee                               */
-/*-DATE:        10312013                                        */
-/*-WHAT:        Add call stack tracing module.                  */
-/*-REVISION:                                                    */
-/*- DATE ------------------------ DESCRIPTION ------------------*/
-/*- 10312013    Tracing and print stack path.                  -*/
-/*--------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
+/*-AUTHOR:      Incarnation.P Lee                                            -*/
+/*-DATE:        10312013                                                     -*/
+/*-WHAT:        Add call stack tracing module.                               -*/
+/*-REVISION:                                                                 -*/
+/*- DATE ------------------------ DESCRIPTION --------------------------------*/
+/*- 10312013    Tracing and print stack path.                                -*/
+/*----------------------------------------------------------------------------*/
 void
 enter(const char *fuc_name)
 {
@@ -24,15 +24,17 @@ void
 print_stack_traces(void)
 {
   const char **start_stack = stack_traces;
-  const char *indent = 
-    "                                               ";
+  const char *indent = "                                               ";
   int count = 0;
 
+  fprintf(stdout, "\n");
+  fprintf(dsaaa_report, "\n");
   while(start_stack <= stack_traces + top_index)
   {
     if(NULL != *start_stack)
     {
-      fprintf(stdout, "%.*s => [%d]%s\n", count, indent,
+      fprintf(stdout, "%.*s => [%d]%s\n", count, indent, count, *start_stack);
+      fprintf(dsaaa_report, "%.*s => [%d]%s\n", count, indent,
         count, *start_stack);
     }
     start_stack++;
