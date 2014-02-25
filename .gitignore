@@ -1,0 +1,5 @@
+# Ignore intermediate and insignificated file of this dsaaa project.
+*.out
+obj/*
+report/*
+refs

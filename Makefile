@@ -16,12 +16,15 @@ TARGET        =dsaaa.out
 FDPS          =fdependent
 OBJDIR        =obj
 ADIR          =archive
+RDIR          =report
 IDIR          =inc
 SDIR          =src
 MFLAG         =-x c
 CFLAG         =$(MFLAG) -c -g -O3 -Wall -pg $(COVERAGE)
 LFLAG         =-pg $(COVERAGE)
 EXRLIB        =-lm
+ALLDIR        =$(OBJDIR) $(ADIR) $(IDIR) $(SDIR) $(RDIR)
+
 
 vpath %.o $(OBJDIR)
 
@@ -34,21 +37,11 @@ $(TARGET):$(OBJ)
 $(FDPS):$(SRC)
 	$(CC) $(INC) $(MFLAG) -MM $^ >$@
 
-ifneq ($(OBJDIR), $(wildcard $(OBJDIR)))
-	mkdir $(OBJDIR)
+
+ifneq ($(ALLDIR), $(wildcard $(ALLDIR)))
+	mkdir -vp $(filter-out $(wildcard $(ALLDIR)), $(ALLDIR))
 endif
 
-ifneq ($(ADIR), $(wildcard $(ADIR)))
-	mkdir $(ADIR)
-endif
-
-ifneq ($(IDIR), $(wildcard $(IDIR)))
-	mkdir $(IDIR)
-endif
-
-ifneq ($(SDIR), $(wildcard $(SDIR)))
-	mkdir $(SDIR)
-endif
 
 $(OBJ):%.o:%.m
 	$(CC) $(INC) $(CFLAG) -o $@ $<
@@ -66,6 +59,6 @@ clean:
 
 define cleanall
 	-rm -rf $(TARGET) $(OBJDIR)/* $(FDPS)
-	-rm -rf report *.gcda *.gcno
+	-rm -rf $(RDIR)/* *.gcda *.gcno
 	-rm -rf $(ADIR)/*
 endef
