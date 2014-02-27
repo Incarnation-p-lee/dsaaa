@@ -14,6 +14,7 @@ chapt_2_7(void)
 
   print_report_header(stdout, "Random Generation", 2, 7);
   print_report_header(dsaaa_report, "Random Generation", 2, 7);
+
   print_random_title(stdout);
   print_random_title(dsaaa_report);
 

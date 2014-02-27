@@ -4,6 +4,7 @@
 /*-     EXTERNALS                                                            -*/
 extern FILE *dsaaa_report;
 
+/*-     REFERENCE OF GENERATE FUNCTION MODULE                                -*/
 extern void
 error_handle(const char *);
 extern void
@@ -28,6 +29,22 @@ extern void
 saft_free(void **);
 
 
+/*-     REFERENCE OF SINGLE LINKED LIST MODULE                               -*/
+extern struct single_linked_list *
+generate_linked_list(int *, int);
+extern void
+append_linked_list_node(struct single_linked_list *, int);
+extern void
+clear_linked_list(struct single_linked_list **);
+extern int
+lengthof_linked_list(struct single_linked_list *head);
+extern struct single_linked_list *
+accessby_index_linked_list(struct single_linked_list *, int);
+extern void
+print_single_linked_list(FILE *, char *, struct single_linked_list *);
+
+
+
 /*-     CHAPTER 03-01                                                        -*/
 #define NODE_SIZE              1000
 #define TRAVERSAL_CNT          10000
@@ -38,10 +55,6 @@ while(--(times) > 0)                             \
   (*(func))((head));                             \
 }
 
-struct single_linked_list{
-  int value;
-  struct single_linked_list *next;
-};
 struct traversal_report{
   int      sum;
   int      dimension;
@@ -58,12 +71,43 @@ static void
 print_traversal_title(FILE *);
 static void
 print_traversal_report(FILE *, struct traversal_report *);
-static struct single_linked_list *
-generate_linked_list(int *, int);
-static void
-append_linked_list_node(struct single_linked_list *, int);
-static void
-clear_linked_list(struct single_linked_list **);
 static int
 traversal_single_linked_list(struct single_linked_list *);
+static void
+print_lots_title(FILE *);
+
+
+/*-     CHAPTER 03-02                                                        -*/
+#define LOTS_RANDOM_SEED       9876
+#define LOTS_RANDOM_MAX        10000
+#define LOTS_LIST_LEN          128
+#define TEST_LOTS_CNT          1
+#define PRINT_LOTS_PERFORMANCE(times, func, val, ind) \
+while((times)-- > 0)                                  \
+{                                                     \
+  (*(func))((val), (ind));                            \
+}
+
+struct lots_report{
+  int      val_len;
+  int      ind_len;
+  unsigned usec;
+};
+
+void
+chapt_3_2(void);
+static void
+dochapt_3_2(void);
+static void
+init_maxed_array(int *, int, int);
+static void
+print_lots(struct single_linked_list *, struct single_linked_list *);
+static void
+print_lots_title(FILE *);
+static void
+print_lots_report(FILE *, struct lots_report *);
+
+
+
 #endif
+

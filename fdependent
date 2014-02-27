@@ -9,5 +9,9 @@ utilize.o: utilize.m inc/defs.h inc/include.h inc/utilize.h \
 chapter_2.o: chapter_2.m inc/include.h inc/defs.h inc/chapter_2.h \
  src/chapter_2_7.c src/chapter_2_11.c src/chapter_2_12.c \
  src/chapter_2_13.c src/chapter_2_16.c src/chapter_2_19.c
-chapter_3.o: chapter_3.m inc/include.h inc/defs.h inc/chapter_3.h \
- src/chapter_3_1.c
+chapter_3.o: chapter_3.m inc/include.h inc/defs.h \
+ inc/data_structure_types.h inc/chapter_3.h src/chapter_3_1.c \
+ src/chapter_3_2.c
+data_structure.o: data_structure.m inc/defs.h inc/include.h \
+ inc/data_structure_types.h inc/single_linked_list.h \
+ src/single_linked_list.c

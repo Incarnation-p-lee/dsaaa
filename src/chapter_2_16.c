@@ -14,6 +14,9 @@ chapt_2_16(void)
   print_report_header(stdout, "Fast Power", 2, 16);
   print_report_header(dsaaa_report, "Fast Power", 2, 16);
 
+  print_power_title(stdout);
+  print_power_title(dsaaa_report);
+
   dochapt_2_16();
 
   LEAVE;
@@ -35,9 +38,6 @@ dochapt_2_16(void)
     2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
   };
   ENTER("dochapt_2_16");
-
-  print_power_title(stdout);
-  print_power_title(dsaaa_report);
 
   srand((unsigned)time(NULL));
   initial_power_buffer(DEFAULT_BASE);

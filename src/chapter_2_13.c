@@ -13,11 +13,16 @@ chapt_2_13(void)
 
   print_report_header(stdout, "IS Prime Number", 2, 13);
   print_report_header(dsaaa_report, "IS Prime Number", 2, 13);
+
+  print_prime_title(stdout);
+  print_prime_title(dsaaa_report);
+
   dochapt_2_13();
 
   LEAVE;
   return;
 }
+
 
 static void
 dochapt_2_13(void)
@@ -31,9 +36,6 @@ dochapt_2_13(void)
     86117, 86269, 86477, 86579, 86587, 84461,
   };
   ENTER("dochapt_2_13");
-
-  print_prime_title(stdout);
-  print_prime_title(dsaaa_report);
 
   iterator = raw_data;
   while(iterator < raw_data + sizeof(raw_data) / sizeof(*raw_data))
@@ -54,6 +56,7 @@ dochapt_2_13(void)
   LEAVE;
   return;
 }
+
 
 static int
 isprime_number(int num)
@@ -87,6 +90,7 @@ isprime_number(int num)
   return result;
 }
 
+
 static int
 isodd_number(int num)
 {
@@ -110,6 +114,7 @@ isodd_number(int num)
   return result;
 }
 
+
 static void
 print_prime_title(FILE *fd)
 {
@@ -122,6 +127,7 @@ print_prime_title(FILE *fd)
   LEAVE;
   return;
 }
+
 
 static void
 print_prime_report(FILE *fd, struct prime_num_report *rpt)

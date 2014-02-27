@@ -14,6 +14,9 @@ chapt_3_1(void)
   print_report_header(stdout, "Traversal Single Linked List", 3, 1);
   print_report_header(dsaaa_report, "Traversal Single Linked List", 3, 1);
 
+  print_traversal_title(stdout);
+  print_traversal_title(dsaaa_report);
+
   dochapt_3_1();
 
   LEAVE;
@@ -35,8 +38,6 @@ dochapt_3_1(void)
   };
   ENTER("dochapt_3_1");
 
-  print_traversal_title(stdout);
-  print_traversal_title(dsaaa_report);
   init_node_value(values, NODE_SIZE);
 
   iterator = node_size;
@@ -121,67 +122,3 @@ print_traversal_report(FILE *fd, struct traversal_report *report)
   return;
 }
 
-static struct single_linked_list *
-generate_linked_list(int *values, int size)
-{
-  struct single_linked_list *head;
-  struct single_linked_list *node;
-  register int *iterator;
-  ENTER("generate_linked_list");
-
-  iterator = values;
-  malloc_initial((void**)&node, sizeof(*node));
-  node->value = *iterator++;
-  node->next = NULL;
-  head = node;
-
-  while(iterator < values + size)
-  {
-    append_linked_list_node(node, *iterator++);
-    node = node->next;
-  }
-
-  LEAVE;
-  return head;
-}
-
-static void
-append_linked_list_node(struct single_linked_list *node, int value)
-{
-  struct single_linked_list *next;
-  ENTER("append_linked_list_node");
-
-  if(NULL == node)
-  {
-    warn_prompt("Null pointer of current node detected.");
-    goto END;
-  }
-
-  malloc_initial((void**)&next, sizeof(*next));
-  next->value = value;
-  next->next = NULL;
-
-  if(NULL != node->next)
-    next->next = node->next;
-  node->next = next;
-
-END:
-  LEAVE;
-  return;
-}
-
-static void
-clear_linked_list(struct single_linked_list **head)
-{
-  struct single_linked_list *cur;
-  ENTER("clear_linked_list");
-
-  while(NULL != (cur = *head))
-  {
-    head = &(*head)->next;
-    saft_free((void**)&cur);
-  }
-
-  LEAVE;
-  return;
-}

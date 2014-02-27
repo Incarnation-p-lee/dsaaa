@@ -1,14 +1,16 @@
-/*---------------------------------------------------------------*/
-/*-AUTHOR:      Incarnation.P Lee                                */
-/*-DATE:        08132013                                         */
-/*-WHAT:        Homework chapter 1.1                             */
-/*-REVISION:                                                     */
-/*- DATE -------------------- DESCRIPTION -----------------------*/
-/*- 08132013    Generate Function for external invoke           -*/
-/*---------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
+/*-AUTHOR:      Incarnation.P Lee                                            -*/
+/*-DATE:        08132013                                                     -*/
+/*-WHAT:        Homework chapter 1.1                                         -*/
+/*-REVISION:                                                                 -*/
+/*- DATE -------------------- DESCRIPTION ------------------------------------*/
+/*- 08132013    Generate Function for external invoke                        -*/
+/*- 02262014    Add trace function to util, adjusted comments width          -*/
+/*----------------------------------------------------------------------------*/
 void
 exchange(int *a, int *b)
 {
+  ENTER("exchange");
   assert(NULL != a && NULL != b);
 
   if(*a == *b)
@@ -17,6 +19,8 @@ exchange(int *a, int *b)
   *a = *a^*b;
   *b = *a^*b;
   *a = *b^*a;
+
+  LEAVE;
   return;
 }
 
@@ -24,18 +28,23 @@ void
 filepointer_init()
 {
   char *rept_fname = "./archive/homework.rept";
+  ENTER("filepointer_init");
+
   dsaaa_report = fopen(rept_fname, "w+");
   if(NULL == dsaaa_report)
     error_handle("fopen");
 
+  LEAVE;
   return;
 }
 
 void
 filepointer_close()
 {
+  ENTER("filepointer_close");
   fclose(dsaaa_report);
 
+  LEAVE;
   return;
 }
 

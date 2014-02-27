@@ -14,6 +14,9 @@ chapt_2_11(void)
   print_report_header(stdout, "Specified Contains", 2, 11);
   print_report_header(dsaaa_report, "Specified Contains", 2, 11);
 
+  print_contains_title(stdout);
+  print_contains_title(dsaaa_report);
+
   dochapt_2_11();
 
   LEAVE;
@@ -43,8 +46,6 @@ dochapt_2_11(void)
   int *iterator;
   ENTER("dochapt_2_11");
 
-  print_contains_title(stdout);
-  print_contains_title(dsaaa_report);
   srand((unsigned)time(NULL));
 
   iterator = cases;

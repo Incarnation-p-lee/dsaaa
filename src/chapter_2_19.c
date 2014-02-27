@@ -14,6 +14,9 @@ chapt_2_19(void)
   print_report_header(stdout, "Principle Element", 2, 19);
   print_report_header(dsaaa_report, "Principle Element", 2, 19);
 
+  print_prin_title(stdout);
+  print_prin_title(dsaaa_report);
+
   dochapt_2_19();
 
   LEAVE;
@@ -40,8 +43,6 @@ dochapt_2_19(void)
 
   print_raw_data(stdout, raw_data, PRIN_DATA_SIZE);
   print_raw_data(dsaaa_report, raw_data, PRIN_DATA_SIZE);
-  print_prin_title(stdout);
-  print_prin_title(dsaaa_report);
 
   iter = cases;
   repeats = PRIN_REPEATS;
