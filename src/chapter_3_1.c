@@ -45,14 +45,14 @@ dochapt_3_1(void)
   {
     count = TRAVERSAL_CNT;
     tr_report.dimension = *iterator;
-    head = generate_linked_list(values, *iterator++);
+    head = generate_slinked_list(values, *iterator++);
 
     TIME_START;
     tr_report.sum = TRAVERSAL_PERFORMANCE(count,
       traversal_single_linked_list, head);
     TIME_END(&tr_report.usec);
 
-    clear_linked_list(&head);
+    clear_slinked_list(&head);
     print_traversal_report(stdout, &tr_report);
     print_traversal_report(dsaaa_report, &tr_report);
   }

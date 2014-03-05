@@ -45,10 +45,10 @@ dochapt_3_2(void)
 
   srand(LOTS_RANDOM_SEED);
   init_maxed_array(value, LOTS_LIST_LEN, LOTS_RANDOM_MAX);
-  val_list = generate_linked_list(value, LOTS_LIST_LEN);
+  val_list = generate_slinked_list(value, LOTS_LIST_LEN);
 
-  print_single_linked_list(stdout, "Val_List", val_list);
-  print_single_linked_list(dsaaa_report, "Val_List", val_list);
+  print_slinked_list(stdout, "Val_List", val_list);
+  print_slinked_list(dsaaa_report, "Val_List", val_list);
   print_lots_title(stdout);
   print_lots_title(dsaaa_report);
 
@@ -59,8 +59,8 @@ dochapt_3_2(void)
     cnt = TEST_LOTS_CNT;
     report.ind_len = *iterator;
     malloc_initial((void**)&index, sizeof(*index) * (*iterator));
-    init_maxed_array(index, *iterator, lengthof_linked_list(val_list));
-    ind_list = generate_linked_list(index, *iterator++);
+    init_maxed_array(index, *iterator, lengthof_slinked_list(val_list));
+    ind_list = generate_slinked_list(index, *iterator++);
 
     TIME_START;
     PRINT_LOTS_PERFORMANCE(cnt, print_lots, val_list, ind_list);
@@ -68,11 +68,11 @@ dochapt_3_2(void)
 
     print_lots_report(stdout, &report);
     print_lots_report(dsaaa_report, &report);
-    clear_linked_list(&ind_list);
+    clear_slinked_list(&ind_list);
     saft_free((void**)&index);
   }
 
-  clear_linked_list(&val_list);
+  clear_slinked_list(&val_list);
   LEAVE;
   return;
 }
@@ -112,7 +112,7 @@ print_lots(struct single_linked_list *data, struct single_linked_list *index)
   node = index;
   while(NULL != node)
   {
-    accessby_index_linked_list(data, node->value);
+    accessby_index_slinked_list(data, node->value);
     /*- fprintf(stdout, "%d->", rt_node->value);                            -*/
     node = node->next;
   }

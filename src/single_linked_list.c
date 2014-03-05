@@ -7,12 +7,12 @@
 /*- 02262014    Single linked list API for others.                           -*/
 /*----------------------------------------------------------------------------*/
 struct single_linked_list *
-generate_linked_list(int *values, int size)
+generate_slinked_list(int *values, int size)
 {
   struct single_linked_list *head;
   struct single_linked_list *node;
   register int *iterator;
-  ENTER("generate_linked_list");
+  ENTER("generate_slinked_list");
 
   if(NULL == values)
     error_handle("Attempted to access NULL pointer detected");
@@ -28,7 +28,7 @@ generate_linked_list(int *values, int size)
 
   while(iterator < values + size)
   {
-    append_linked_list_node(node, *iterator++);
+    append_slinked_list_node(node, *iterator++);
     node = node->next;
   }
 
@@ -38,10 +38,10 @@ generate_linked_list(int *values, int size)
 
 
 void
-append_linked_list_node(struct single_linked_list *node, int value)
+append_slinked_list_node(struct single_linked_list *node, int value)
 {
   struct single_linked_list *next;
-  ENTER("append_linked_list_node");
+  ENTER("append_slinked_list_node");
 
   if(NULL == node)
   {
@@ -64,10 +64,10 @@ END_OF_APPEND:
 
 
 void
-clear_linked_list(struct single_linked_list **head)
+clear_slinked_list(struct single_linked_list **head)
 {
   struct single_linked_list *cur;
-  ENTER("clear_linked_list");
+  ENTER("clear_slinked_list");
 
   if(NULL == head)
   {
@@ -88,10 +88,10 @@ END_OF_CLEAR:
 
 
 int
-lengthof_linked_list(struct single_linked_list *head)
+lengthof_slinked_list(struct single_linked_list *head)
 {
   int length;
-  ENTER("lengthof_linked_list");
+  ENTER("lengthof_slinked_list");
 
   if(NULL == head)
   {
@@ -114,10 +114,10 @@ END_OF_LENGTHOF:
 
 
 struct single_linked_list *
-accessby_index_linked_list(struct single_linked_list *head, int index)
+accessby_index_slinked_list(struct single_linked_list *head, int index)
 {
   struct single_linked_list *node;
-  ENTER("accessby_index_linked_list");
+  ENTER("accessby_index_slinked_list");
 
   node = NULL;
   if(NULL == head)
@@ -145,12 +145,12 @@ END_OF_ACCESS:
 
 
 void
-print_single_linked_list(FILE *fd, char *msg, struct single_linked_list *head)
+print_slinked_list(FILE *fd, char *msg, struct single_linked_list *head)
 {
   int align;
   register struct single_linked_list *iterator;
   char *default_msg = "Default single linked list";
-  ENTER("print_single_linked_list");
+  ENTER("print_slinked_list");
 
   if(NULL == msg)
     msg = default_msg;

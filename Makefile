@@ -34,6 +34,7 @@ $(TARGET):$(OBJ)
 	$(MAKE) link
 
 -include $(FDPS)
+$(warning Finished include)
 $(FDPS):$(SRC)
 	$(CC) $(INC) $(MFLAG) -MM $^ >$@
 
@@ -41,6 +42,7 @@ $(FDPS):$(SRC)
 ifneq ($(ALLDIR), $(wildcard $(ALLDIR)))
 	mkdir -vp $(filter-out $(wildcard $(ALLDIR)), $(ALLDIR))
 endif
+$(warning Finished directories)
 
 
 $(OBJ):%.o:%.m

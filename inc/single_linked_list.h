@@ -27,16 +27,16 @@ saft_free(void **);
 
 
 struct single_linked_list *
-generate_linked_list(int *, int);
+generate_slinked_list(int *, int);
 void
-append_linked_list_node(struct single_linked_list *, int);
+append_slinked_list_node(struct single_linked_list *, int);
 void
-clear_linked_list(struct single_linked_list **);
+clear_slinked_list(struct single_linked_list **);
 int
-lengthof_linked_list(struct single_linked_list *head);
+lengthof_slinked_list(struct single_linked_list *head);
 struct single_linked_list *
-accessby_index_linked_list(struct single_linked_list *, int);
+accessby_index_slinked_list(struct single_linked_list *, int);
 void
-print_single_linked_list(FILE *, char *, struct single_linked_list *);
+print_slinked_list(FILE *, char *, struct single_linked_list *);
 
 #endif
