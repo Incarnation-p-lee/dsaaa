@@ -39,7 +39,7 @@ sub get_file_lines{
     die "Failed to open source file.\n $!"; 
   my $num = 0;
   $num++ while(<SOURCEFILE>);
-  printf "++ %20s: %6d.\n", $fname, $num;
+  printf "++ %40s: %6d.\n", $fname, $num;
   $num;
 }
 

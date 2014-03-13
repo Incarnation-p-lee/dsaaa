@@ -14,4 +14,5 @@ chapter_3.o: chapter_3.m inc/include.h inc/defs.h \
  src/chapter_3_2.c
 data_structure.o: data_structure.m inc/defs.h inc/include.h \
  inc/data_structure_types.h inc/single_linked_list.h \
- src/single_linked_list.c
+ inc/doubly_linked_list.h src/single_linked_list.c \
+ src/doubly_linked_list.c

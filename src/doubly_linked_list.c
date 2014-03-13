@@ -1,34 +1,34 @@
 /*----------------------------------------------------------------------------*/
 /*-AUTHOR:      Incarnation.P Lee                                            -*/
 /*-DATE:        02262014                                                     -*/
-/*-WHAT:        Homework chapter 1.1                                         -*/
+/*-WHAT:        Doubly linked list API for other modules.                     -*/
 /*-REVISION:                                                                 -*/
 /*- DATE -------------------- DESCRIPTION ------------------------------------*/
-/*- 02262014    Single linked list API for others.                           -*/
+/*- 03052014    Doubly linked list API for others.                           -*/
 /*----------------------------------------------------------------------------*/
-struct single_linked_list *
-generate_slinked_list(int *values, int size)
+struct doubly_linked_list *
+generate_dlinked_list(int *val, int size)
 {
-  struct single_linked_list *head;
-  struct single_linked_list *node;
+  struct doubly_linked_list *head;
+  struct doubly_linked_list *node;
   register int *iterator;
-  ENTER("generate_slinked_list");
+  ENTER("generate_dlinked_list");
 
-  if(NULL == values)
+  if(NULL == val)
     error_handle("Attempted to access NULL pointer detected");
 
   if(size <= 0)
     error_handle("No positive dimension detected");
 
-  iterator = values;
+  iterator = val;
   malloc_initial((void**)&node, sizeof(*node));
   node->value = *iterator++;
-  node->next = NULL;
+  node->previous = node->next = NULL;
   head = node;
 
-  while(iterator < values + size)
+  while(iterator < val + size)
   {
-    append_slinked_list_node(node, *iterator++);
+    append_dlinked_list_node(node, *iterator++);
     node = node->next;
   }
 
@@ -38,36 +38,41 @@ generate_slinked_list(int *values, int size)
 
 
 void
-append_slinked_list_node(struct single_linked_list *node, int value)
+append_dlinked_list_node(struct doubly_linked_list *node, int value)
 {
-  struct single_linked_list *next;
-  ENTER("append_slinked_list_node");
+  struct doubly_linked_list *next;
+  ENTER("append_dlinked_list_node");
 
   if(NULL == node)
   {
     warn_prompt("Null pointer of current node detected");
-    goto END_OF_SAPPEND;
+    goto END_OF_APPEND;
   }
 
   malloc_initial((void**)&next, sizeof(*next));
   next->value = value;
+  next->previous = NULL;
   next->next = NULL;
 
   if(NULL != node->next)
+  {
     next->next = node->next;
+    node->next->previous = next;
+  }
   node->next = next;
+  next->previous = node;
 
-END_OF_SAPPEND:
+END_OF_APPEND:
   LEAVE;
   return;
 }
 
 
 void
-clear_slinked_list(struct single_linked_list **head)
+clear_dlinked_list(struct doubly_linked_list **head)
 {
-  struct single_linked_list *cur;
-  ENTER("clear_slinked_list");
+  struct doubly_linked_list *cur;
+  ENTER("clear_dlinked_list");
 
   if(NULL == head)
   {
@@ -77,7 +82,7 @@ clear_slinked_list(struct single_linked_list **head)
 
   while(NULL != (cur = *head))
   {
-    head = &(*head)->next;
+    head = &cur->next;
     saft_free((void**)&cur);
   }
 
@@ -88,10 +93,10 @@ END_OF_CLEAR:
 
 
 int
-lengthof_slinked_list(struct single_linked_list *head)
+lengthof_dlinked_list(struct doubly_linked_list *head)
 {
   int length;
-  ENTER("lengthof_slinked_list");
+  ENTER("lengthof_dlinked_list");
 
   if(NULL == head)
   {
@@ -113,10 +118,10 @@ END_OF_LENGTHOF:
 }
 
 
-struct single_linked_list *
-accessby_index_slinked_list(struct single_linked_list *head, int index)
+struct doubly_linked_list *
+accessby_index_dlinked_list(struct doubly_linked_list *head, int index)
 {
-  struct single_linked_list *node;
+  struct doubly_linked_list *node;
   ENTER("accessby_index_slinked_list");
 
   node = head;
@@ -144,12 +149,12 @@ END_OF_ACCESS:
 
 
 void
-print_slinked_list(FILE *fd, char *msg, struct single_linked_list *head)
+print_dlinked_list(FILE *fd, char *msg, struct doubly_linked_list *head)
 {
   int align;
-  register struct single_linked_list *iterator;
-  char *default_msg = "Default single linked list";
-  ENTER("print_slinked_list");
+  register struct doubly_linked_list *iterator;
+  char *default_msg = "Default doubly linked list";
+  ENTER("print_dlinked_list");
 
   if(NULL == msg)
     msg = default_msg;
