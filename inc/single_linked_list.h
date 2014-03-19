@@ -38,5 +38,8 @@ struct single_linked_list *
 accessby_index_slinked_list(struct single_linked_list *, int);
 void
 print_slinked_list(FILE *, char *, struct single_linked_list *);
+void
+exchange_slinked_list(struct single_linked_list **,
+  struct single_linked_list *);
 
 #endif

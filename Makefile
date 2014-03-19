@@ -1,12 +1,13 @@
 # This is the Makefile for GCC compiler. Only you need to update outest.
 .SUFFIXES:
 .SUFFIXES: .o .a .so .c .h .s .cm
-SHELL         =/bin/bash
-CC            =gcc
-
-SRC           =main.m chapter_1.m evaluation.m utilize.m \
+SRC_RAW       :=main.m chapter_1.m evaluation.m utilize.m \
                chapter_2.m chapter_3.m data_structure.m
 
+
+SRC           :=$(sort $(SRC_RAW))
+SHELL         =/bin/bash
+CC            =gcc
 COVERAGE      =-fprofile-arcs -ftest-coverage
 OBJ           =$(patsubst %.m, %.o, $(SRC))
 INCH          =./inc
@@ -28,21 +29,27 @@ ALLDIR        =$(OBJDIR) $(ADIR) $(IDIR) $(SDIR) $(RDIR)
 
 vpath %.o $(OBJDIR)
 
-.phony:link clean run
+.phony:link clean run show
 
 $(TARGET):$(OBJ)
 	$(MAKE) link
 
--include $(FDPS)
-$(warning Finished include)
+ifneq "$(MAKECMDGOALS)"  "clean"
+  -include $(FDPS)
+endif
+
+ifneq "$(MAKECMDGOALS)"  "run"
+  -include $(FDPS)
+endif
+
 $(FDPS):$(SRC)
 	$(CC) $(INC) $(MFLAG) -MM $^ >$@
 
 
 ifneq ($(ALLDIR), $(wildcard $(ALLDIR)))
+	@echo "Directory dependency:[" $(ALLDIR) "]"
 	mkdir -vp $(filter-out $(wildcard $(ALLDIR)), $(ALLDIR))
 endif
-$(warning Finished directories)
 
 
 $(OBJ):%.o:%.m
@@ -51,6 +58,8 @@ $(OBJ):%.o:%.m
 
 link:$(OBJ)
 	$(CC) $(INC) $(LFLAG) -o $(TARGET) $^ $(EXRLIB)
+	@echo $(shell date)
+	rm $(FDPS)
 
 run:$(TARGET)
 	./$(TARGET)
@@ -59,8 +68,20 @@ run:$(TARGET)
 clean:
 	$(cleanall)
 
+show:
+	$(call symbol, $(OBJDIR)/main.o)
+	$(call dylink, $(TARGET))
+
 define cleanall
-	-rm -rf $(TARGET) $(OBJDIR)/* $(FDPS)
+	-rm -rf $(TARGET) $(OBJDIR)/*
 	-rm -rf $(RDIR)/* *.gcda *.gcno
 	-rm -rf $(ADIR)/*
+endef
+
+define symbol
+	nm -alp $1
+endef
+
+define dylink
+	ldd $1
 endef

@@ -36,6 +36,9 @@ struct doubly_linked_list *
 accessby_index_dlinked_list(struct doubly_linked_list *, int);
 void
 print_dlinked_list(FILE *, char *, struct doubly_linked_list *);
+void
+exchange_dlinked_list(struct doubly_linked_list **,
+  struct doubly_linked_list *);
 
 #endif
 

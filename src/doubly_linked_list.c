@@ -174,3 +174,58 @@ print_dlinked_list(FILE *fd, char *msg, struct doubly_linked_list *head)
   LEAVE;
   return;
 }
+
+
+void
+exchange_dlinked_list(struct doubly_linked_list **head,
+  struct doubly_linked_list *node)
+{
+  struct doubly_linked_list *cur;
+  ENTER("exchange_dlinked_list");
+
+  if(NULL == head || NULL == *head)
+  {
+    warn_prompt("Null linked list head pointer detected");
+    goto END_OF_DL_EXCHANGE;
+  }
+  if(NULL == node)
+  {
+    warn_prompt("Null pointer of current node detected");
+    goto END_OF_DL_EXCHANGE;
+  }
+  if(*head == node)
+  {
+    warn_prompt("Can not exchange node before head");
+    goto END_OF_DL_EXCHANGE;
+  }
+
+  while((cur = *head))
+  {
+    if(cur->next == node)
+      break;
+    head = &cur->next;
+  }
+
+  if(cur)
+  {
+    /* If cur == *head                                                        */
+    if(cur->previous)
+    {
+      cur->previous->next = node;
+      /* If the last element is node                                          */
+      if(node->next)
+        node->next->previous = cur;
+    }
+    node->previous = cur->previous;
+    cur->previous = node;
+    cur->next = node->next;
+    node->next = cur;
+  }
+  else
+    warn_prompt("Do not find target node in linked list");
+
+END_OF_DL_EXCHANGE:
+  LEAVE;
+  return;
+}
+

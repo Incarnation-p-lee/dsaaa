@@ -42,6 +42,9 @@ extern struct single_linked_list *
 accessby_index_slinked_list(struct single_linked_list *, int);
 extern void
 print_slinked_list(FILE *, char *, struct single_linked_list *);
+extern void
+exchange_slinked_list(struct single_linked_list **,
+  struct single_linked_list *);
 
 
 
@@ -108,6 +111,7 @@ static void
 print_lots_report(FILE *, struct lots_report *);
 
 
+/*-     CHAPTER 03-03                                                        -*/
 
 #endif
 
