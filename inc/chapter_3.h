@@ -8,7 +8,7 @@ extern FILE *dsaaa_report;
 extern void
 error_handle(const char *);
 extern void
-warn_prompt(const char *);
+warning_prompt(char *);
 extern void
 timing_start(void);
 extern void
@@ -30,6 +30,7 @@ saft_free(void **);
 
 
 /*-     REFERENCE OF SINGLE LINKED LIST MODULE                               -*/
+/*-     Single Linked List                                                   -*/
 extern struct single_linked_list *
 generate_slinked_list(int *, int);
 extern void
@@ -45,6 +46,25 @@ print_slinked_list(FILE *, char *, struct single_linked_list *);
 extern void
 exchange_slinked_list(struct single_linked_list **,
   struct single_linked_list *);
+
+/*-     Doubly Linked List                                                   -*/
+extern struct doubly_linked_list *
+generate_dlinked_list(int *, int);
+extern void
+append_dlinked_list_node(struct doubly_linked_list *, int);
+extern void
+clear_dlinked_list(struct doubly_linked_list **);
+extern int
+lengthof_dlinked_list(struct doubly_linked_list *head);
+extern struct doubly_linked_list *
+accessby_index_dlinked_list(struct doubly_linked_list *, int);
+extern void
+print_dlinked_list(FILE *, char *, struct doubly_linked_list *);
+extern void
+print_reverse_dlinked_list(FILE *, char *, struct doubly_linked_list *);
+extern void
+exchange_dlinked_list(struct doubly_linked_list **,
+                      struct doubly_linked_list *);
 
 
 

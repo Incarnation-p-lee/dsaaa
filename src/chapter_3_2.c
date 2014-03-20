@@ -105,14 +105,14 @@ print_lots(struct single_linked_list *data, struct single_linked_list *index)
 
   if(NULL == data || NULL == index)
   {
-    warn_prompt("Null linked list head pointer detected");
+    warning_prompt("Null linked list head pointer detected");
     goto END_OF_PRINT_LOTS;
   }
 
   node = index;
   while(NULL != node)
   {
-    accessby_index_slinked_list(data, node->value);
+    accessby_index_slinked_list(data, node->index);
     /*- fprintf(stdout, "%d->", rt_node->value);                            -*/
     node = node->next;
   }

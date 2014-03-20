@@ -3,6 +3,7 @@
 
 
 extern FILE *dsaaa_report;
+extern char strinfo_buf[STRINFO_BUF_SIZE];
 
 extern void
 enter(const char *);
@@ -14,7 +15,7 @@ leave(void);
 void
 error_handle(const char *);
 void
-warn_prompt(const char *);
+warning_prompt(char *);
 void
 exchange(int *, int *);
 void

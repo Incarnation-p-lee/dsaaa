@@ -133,16 +133,16 @@ static void
 print_prime_report(FILE *fd, struct prime_num_report *rpt)
 {
   static int index_r = 0;
-  char *msg_r;
+  char *msg_r = "UNKNOWN";
   ENTER("print_prime_report");
 
   switch(rpt->isprimed)
   {
     case PRIMED:
-      msg_r = MACRO_TO_STRING(PRIMED);
+      msg_r = SYMBOL_TO_STRING(PRIMED);
       break;
     case NOT_PRIMED:
-      msg_r = MACRO_TO_STRING(NOT_PRIMED);
+      msg_r = SYMBOL_TO_STRING(NOT_PRIMED);
       break;
     default:
       error_handle("Unresolved Prime type detected");

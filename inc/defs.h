@@ -1,12 +1,22 @@
 #ifndef DEFINES_H
 #define DEFINES_H
 
-#define RIGHT_MOST_BIT_MASK    1
+/* DEFINE CONSTANT                                                            */
+#define STRINFO_BUF_SIZE           256
+#define RIGHT_MOST_BIT_MASK        1
 #define ENTER(fname)               enter(#fname)
 #define LEAVE                      leave()
 #define TIME_START                 timing_start()
 #define TIME_END(usec)             timing_end(usec)
-#define MACRO_TO_STRING(symbol)    #symbol
+#define SYMBOL_TO_STRING(symbol)   #symbol
+
+/* DEFINE EXPANDING                                                           */
+#define ADD_TRACE(msg)             (sprintf(strinfo_buf, "[%d] ", __LINE__), \
+          strcat(                                       \
+            strcat(                                     \
+              strcat(strinfo_buf, __FILE__),            \
+                ":"),                                   \
+                  (msg)))
 
 typedef void (*HOMEWORK)(void);
 

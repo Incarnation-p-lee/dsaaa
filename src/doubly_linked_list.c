@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------------*/
 /*-AUTHOR:      Incarnation.P Lee                                            -*/
 /*-DATE:        02262014                                                     -*/
-/*-WHAT:        Doubly linked list API for other modules.                     -*/
+/*-WHAT:        Doubly linked list API for other modules.                    -*/
 /*-REVISION:                                                                 -*/
 /*- DATE -------------------- DESCRIPTION ------------------------------------*/
 /*- 03052014    Doubly linked list API for others.                           -*/
@@ -15,14 +15,14 @@ generate_dlinked_list(int *val, int size)
   ENTER("generate_dlinked_list");
 
   if(NULL == val)
-    error_handle("Attempted to access NULL pointer detected");
+    error_handle(ADD_TRACE(error_digest[0]));
 
   if(size <= 0)
-    error_handle("No positive dimension detected");
+    error_handle(ADD_TRACE(error_digest[1]));
 
   iterator = val;
   malloc_initial((void**)&node, sizeof(*node));
-  node->value = *iterator++;
+  node->index = *iterator++;
   node->previous = node->next = NULL;
   head = node;
 
@@ -45,12 +45,12 @@ append_dlinked_list_node(struct doubly_linked_list *node, int value)
 
   if(NULL == node)
   {
-    warn_prompt("Null pointer of current node detected");
+    warning_prompt(ADD_TRACE(warning_digest[0]));
     goto END_OF_APPEND;
   }
 
   malloc_initial((void**)&next, sizeof(*next));
-  next->value = value;
+  next->index = value;
   next->previous = NULL;
   next->next = NULL;
 
@@ -72,19 +72,23 @@ void
 clear_dlinked_list(struct doubly_linked_list **head)
 {
   struct doubly_linked_list *cur;
+  struct doubly_linked_list **iter;
   ENTER("clear_dlinked_list");
 
   if(NULL == head)
   {
-    warn_prompt("Null pointer of head node detected");
+    warning_prompt(ADD_TRACE(warning_digest[0]));
     goto END_OF_CLEAR;
   }
 
-  while(NULL != (cur = *head))
+  iter = head;
+  while(NULL != (cur = *iter))
   {
-    head = &cur->next;
+    iter = &cur->next;
     saft_free((void**)&cur);
   }
+
+  *head = NULL;
 
 END_OF_CLEAR:
   LEAVE;
@@ -100,7 +104,7 @@ lengthof_dlinked_list(struct doubly_linked_list *head)
 
   if(NULL == head)
   {
-    warn_prompt("Null linked list head detected");
+    warning_prompt(ADD_TRACE(warning_digest[0]));
     length = -1;
     goto END_OF_LENGTHOF;
   }
@@ -127,12 +131,12 @@ accessby_index_dlinked_list(struct doubly_linked_list *head, int index)
   node = head;
   if(NULL == head)
   {
-    warn_prompt("Null linked list head pointer detected");
+    warning_prompt(ADD_TRACE(warning_digest[0]));
     goto END_OF_ACCESS;
   }
   if(0 > index)
   {
-    warn_prompt("Invalid index of linked list detected");
+    warning_prompt(ADD_TRACE(warning_digest[1]));
     goto END_OF_ACCESS;
   }
 
@@ -164,10 +168,38 @@ print_dlinked_list(FILE *fd, char *msg, struct doubly_linked_list *head)
   fprintf(fd, "[%s]:\n", msg);
   while(NULL != iterator)
   {
-    fprintf(fd, "%d-> ", iterator->value);
+    fprintf(fd, "%d-> ", iterator->index);
     if(!(++align % PRINT_WIDTH))
       fprintf(fd, "\n");
     iterator = iterator->next;
+  }
+  fprintf(fd, "NULL\n");
+
+  LEAVE;
+  return;
+}
+
+
+void
+print_reverse_dlinked_list(FILE *fd, char *msg, struct doubly_linked_list *tail)
+{
+  int align;
+  register struct doubly_linked_list *iterator;
+  char *default_msg = "Default doubly linked list";
+  ENTER("print_dlinked_list");
+
+  if(NULL == msg)
+    msg = default_msg;
+
+  align = 0;
+  iterator = tail;
+  fprintf(fd, "[%s]:\n", msg);
+  while(NULL != iterator)
+  {
+    fprintf(fd, "%d-> ", iterator->index);
+    if(!(++align % PRINT_WIDTH))
+      fprintf(fd, "\n");
+    iterator = iterator->previous;
   }
   fprintf(fd, "NULL\n");
 
@@ -183,20 +215,15 @@ exchange_dlinked_list(struct doubly_linked_list **head,
   struct doubly_linked_list *cur;
   ENTER("exchange_dlinked_list");
 
-  if(NULL == head || NULL == *head)
+  if(NULL == head || NULL == *head || NULL == node)
   {
-    warn_prompt("Null linked list head pointer detected");
-    goto END_OF_DL_EXCHANGE;
-  }
-  if(NULL == node)
-  {
-    warn_prompt("Null pointer of current node detected");
-    goto END_OF_DL_EXCHANGE;
+    warning_prompt(ADD_TRACE(warning_digest[0]));
+    goto END_OF_EXCHANGE;
   }
   if(*head == node)
   {
-    warn_prompt("Can not exchange node before head");
-    goto END_OF_DL_EXCHANGE;
+    warning_prompt(ADD_TRACE(warning_digest[2]));
+    goto END_OF_EXCHANGE;
   }
 
   while((cur = *head))
@@ -222,9 +249,9 @@ exchange_dlinked_list(struct doubly_linked_list **head,
     node->next = cur;
   }
   else
-    warn_prompt("Do not find target node in linked list");
+    warning_prompt(ADD_TRACE(warning_digest[3]));
 
-END_OF_DL_EXCHANGE:
+END_OF_EXCHANGE:
   LEAVE;
   return;
 }

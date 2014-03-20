@@ -170,11 +170,11 @@ print_contains_title(FILE *fd)
 static void
 print_contains_report(FILE *fd, struct iscontains_report *data_r)
 {
+  char *descript = "UNKNOWN";
   char *result[] = {
     "NO_CONTAINS",
     "CONTAINS   ",
   };
-  char *descript;
   ENTER("print_contains_report");
 
   switch(data_r->result)

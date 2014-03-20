@@ -137,7 +137,7 @@ update_power_buffer(unsigned base, int buf_size)
 
   if(NULL == pbuf)
   {
-    warn_prompt("Null buffer pointer, init as default size.");
+    warning_prompt("Null buffer pointer, init as default size.");
     initial_power_buffer(base);
   }
 

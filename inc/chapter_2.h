@@ -5,7 +5,7 @@
 extern void
 error_handle(const char *);
 extern void
-warn_prompt(const char *);
+warning_prompt(char *);
 extern void
 timing_start(void);
 extern void

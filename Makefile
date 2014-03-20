@@ -34,16 +34,12 @@ vpath %.o $(OBJDIR)
 $(TARGET):$(OBJ)
 	$(MAKE) link
 
-ifneq "$(MAKECMDGOALS)"  "clean"
-  -include $(FDPS)
-endif
 
-ifneq "$(MAKECMDGOALS)"  "run"
-  -include $(FDPS)
-endif
-
+ifeq "$(MAKECMDGOALS)"  ""
+-include $(FDPS)
 $(FDPS):$(SRC)
 	$(CC) $(INC) $(MFLAG) -MM $^ >$@
+endif
 
 
 ifneq ($(ALLDIR), $(wildcard $(ALLDIR)))

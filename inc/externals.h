@@ -10,6 +10,8 @@ extern void
 filepointer_init(void);
 extern void
 filepointer_close(void);
+extern void
+data_structure_verify(void);
 
 extern void
 chapt_1_1(void);

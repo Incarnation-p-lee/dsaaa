@@ -15,7 +15,7 @@ error_handle(const char *message)
   if(NULL == message)
     message = unknown;
 
-  fprintf(stdout, "break at %s. ", message);
+  fprintf(stdout, "=ERROR=: breaked at line %s. ", message);
   fprintf(stdout, "%02d =>%s\n", errno, strerror(errno));
   print_stack_traces();
 
@@ -24,7 +24,7 @@ error_handle(const char *message)
 }
 
 void
-warn_prompt(const char *message)
+warning_prompt(char *message)
 {
   char *unknown = "Unknown location.";
   ENTER("warn_handle");
@@ -32,10 +32,14 @@ warn_prompt(const char *message)
   if(NULL == message)
     message = unknown;
 
-  fprintf(stdout, "warning at %s. ", message);
-  fprintf(dsaaa_report, "warning at %s. ", message);
+  fprintf(stdout, "=WARNING=: detected at line %s. ", message);
+  fprintf(dsaaa_report, "=WARNING=: detected at line %s. ", message);
   print_stack_traces();
+
+  if(message == strinfo_buf)
+    memset(message, 0, strlen(message));
 
   LEAVE;
   return;
 }
+

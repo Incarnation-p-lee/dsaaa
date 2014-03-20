@@ -72,7 +72,7 @@ traversal_single_linked_list(struct single_linked_list *head)
   iter = head;
   while(NULL != iter)
   {
-    sum += iter->value;
+    sum += iter->index;
     iter = iter->next;
   }
 

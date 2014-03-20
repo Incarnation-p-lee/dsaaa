@@ -10,8 +10,11 @@ FILE *dsaaa_report;
 const char *blank = 
 "                                               ";
 
+char strinfo_buf[STRINFO_BUF_SIZE];
+
 static HOMEWORK homework[] = {
 #if 1
+  &data_structure_verify,
   &chapt_1_1,
   &chapt_1_4,
   &chapt_2_7,
@@ -23,7 +26,6 @@ static HOMEWORK homework[] = {
   &chapt_3_1,
   &chapt_3_2,
 #else
-  &chapt_3_2,
 #endif
 };
 

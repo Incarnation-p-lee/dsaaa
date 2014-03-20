@@ -15,14 +15,14 @@ generate_slinked_list(int *values, int size)
   ENTER("generate_slinked_list");
 
   if(NULL == values)
-    error_handle("Attempted to access NULL pointer detected");
+    error_handle(ADD_TRACE(error_digest[0]));
 
   if(size <= 0)
-    error_handle("No positive dimension detected");
+    error_handle(ADD_TRACE(error_digest[1]));
 
   iterator = values;
   malloc_initial((void**)&node, sizeof(*node));
-  node->value = *iterator++;
+  node->index = *iterator++;
   node->next = NULL;
   head = node;
 
@@ -45,19 +45,19 @@ append_slinked_list_node(struct single_linked_list *node, int value)
 
   if(NULL == node)
   {
-    warn_prompt("Null pointer of current node detected");
-    goto END_OF_SAPPEND;
+    warning_prompt(ADD_TRACE(warning_digest[0]));
+    goto END_OF_APPEND;
   }
 
   malloc_initial((void**)&next, sizeof(*next));
-  next->value = value;
+  next->index = value;
   next->next = NULL;
 
   if(NULL != node->next)
     next->next = node->next;
   node->next = next;
 
-END_OF_SAPPEND:
+END_OF_APPEND:
   LEAVE;
   return;
 }
@@ -67,19 +67,23 @@ void
 clear_slinked_list(struct single_linked_list **head)
 {
   struct single_linked_list *cur;
+  struct single_linked_list **iter;
   ENTER("clear_slinked_list");
 
   if(NULL == head)
   {
-    warn_prompt("Null pointer of head node detected");
+    warning_prompt(ADD_TRACE(warning_digest[0]));
     goto END_OF_CLEAR;
   }
 
-  while(NULL != (cur = *head))
+  iter = head;
+  while(NULL != (cur = *iter))
   {
-    head = &(*head)->next;
+    iter = &cur->next;
     saft_free((void**)&cur);
   }
+
+  *head = NULL;
 
 END_OF_CLEAR:
   LEAVE;
@@ -95,7 +99,7 @@ lengthof_slinked_list(struct single_linked_list *head)
 
   if(NULL == head)
   {
-    warn_prompt("Null linked list head detected");
+    warning_prompt(ADD_TRACE(warning_digest[0]));
     length = -1;
     goto END_OF_LENGTHOF;
   }
@@ -122,12 +126,12 @@ accessby_index_slinked_list(struct single_linked_list *head, int index)
   node = head;
   if(NULL == head)
   {
-    warn_prompt("Null linked list head pointer detected");
+    warning_prompt(ADD_TRACE(warning_digest[0]));
     goto END_OF_ACCESS;
   }
-  if(0 > index)
+  if(0 > index || index > lengthof_slinked_list(head))
   {
-    warn_prompt("Invalid index of linked list detected");
+    warning_prompt(ADD_TRACE(warning_digest[1]));
     goto END_OF_ACCESS;
   }
 
@@ -159,7 +163,7 @@ print_slinked_list(FILE *fd, char *msg, struct single_linked_list *head)
   fprintf(fd, "[%s]:\n", msg);
   while(NULL != iterator)
   {
-    fprintf(fd, "%d-> ", iterator->value);
+    fprintf(fd, "%d-> ", iterator->index);
     if(!(++align % PRINT_WIDTH))
       fprintf(fd, "\n");
     iterator = iterator->next;
@@ -179,20 +183,15 @@ exchange_slinked_list(struct single_linked_list **head,
   struct single_linked_list *pre;
   ENTER("exchange_slinked_list");
 
-  if(NULL == head || NULL == *head)
+  if(NULL == head || NULL == *head || NULL == node)
   {
-    warn_prompt("Null linked list head pointer detected");
-    goto END_OF_SL_EXCHANGE;
-  }
-  if(NULL == node)
-  {
-    warn_prompt("Null pointer of current node detected");
-    goto END_OF_SL_EXCHANGE;
+    warning_prompt(ADD_TRACE(warning_digest[0]));
+    goto END_OF_EXCHANGE;
   }
   if(*head == node)
   {
-    warn_prompt("Can not exchange node before head");
-    goto END_OF_SL_EXCHANGE;
+    warning_prompt(ADD_TRACE(warning_digest[2]));
+    goto END_OF_EXCHANGE;
   }
 
   pre = *head;
@@ -211,9 +210,9 @@ exchange_slinked_list(struct single_linked_list **head,
     node->next = cur;
   }
   else
-    warn_prompt("Do not find target node in linked list");
+    warning_prompt(ADD_TRACE(warning_digest[3]));
 
-END_OF_SL_EXCHANGE:
+END_OF_EXCHANGE:
   LEAVE;
   return;
 }

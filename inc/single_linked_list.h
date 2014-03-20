@@ -1,12 +1,13 @@
 #ifndef SINGLE_LINKED_LIST_H
 #define SINGLE_LINKED_LIST_H
 
+extern char strinfo_buf[STRINFO_BUF_SIZE];
 
 /*-     EXTERNALS                                                            -*/
 extern void
 error_handle(const char *);
 extern void
-warn_prompt(const char *);
+warning_prompt(char *);
 extern void
 exchange(int *, int *);
 extern void
@@ -23,7 +24,7 @@ saft_free(void **);
 
 
 /*-     TYPE, MARCO AND VARIABLE                                             -*/
-#define PRINT_WIDTH            10
+#define PRINT_WIDTH            20
 
 
 struct single_linked_list *

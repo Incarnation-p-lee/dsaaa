@@ -6,7 +6,7 @@
 extern void
 error_handle(const char *);
 extern void
-warn_prompt(const char *);
+warning_prompt(char *);
 extern void
 exchange(int *, int *);
 extern void
@@ -24,6 +24,8 @@ saft_free(void **);
 
 /*-     TYPE, MARCO AND VARIABLE                                             -*/
 
+
+
 struct doubly_linked_list *
 generate_dlinked_list(int *, int);
 void
@@ -38,7 +40,9 @@ void
 print_dlinked_list(FILE *, char *, struct doubly_linked_list *);
 void
 exchange_dlinked_list(struct doubly_linked_list **,
-  struct doubly_linked_list *);
+                      struct doubly_linked_list *);
+void
+print_reverse_dlinked_list(FILE *, char *, struct doubly_linked_list *);
 
 #endif
 
