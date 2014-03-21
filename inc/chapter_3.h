@@ -133,5 +133,14 @@ print_lots_report(FILE *, struct lots_report *);
 
 /*-     CHAPTER 03-03                                                        -*/
 
+
+
+
+struct poly_linked{
+  float  coefficient;
+  int    pow;
+  struct single_linked_list *sll;
+};
+
 #endif
 

@@ -18,6 +18,10 @@
                 ":"),                                   \
                   (msg)))
 
+#define RANDOM_STATIC_SIZE         \
+        sizeof(random_static) / sizeof(random_static[0])
+
 typedef void (*HOMEWORK)(void);
+
 
 #endif

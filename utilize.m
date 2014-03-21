@@ -3,6 +3,7 @@
 #include "utilize.h"
 #include "diagnosis_info.h"
 
+#include "random_static.c"
 #include "error_handle.c"
 #include "util.c"
 #include "stack_trace.c"

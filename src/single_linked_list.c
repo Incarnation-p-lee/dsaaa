@@ -37,6 +37,19 @@ generate_slinked_list(int *values, int size)
 }
 
 
+struct single_linked_list *
+initial_slinked_list(void)
+{
+  struct single_linked_list *head;
+  ENTER("initial_slinked_list");
+
+  malloc_initial((void**)&head, sizeof(*head));
+
+  LEAVE;
+  return head;
+}
+
+
 void
 append_slinked_list_node(struct single_linked_list *node, int value)
 {
@@ -146,6 +159,29 @@ END_OF_ACCESS:
   return node;
 }
 
+
+void
+serialize_slinked_list(struct single_linked_list *head)
+{
+  struct single_linked_list *node;
+  ENTER("serialize_slinked_list");
+
+  if(NULL == head)
+  {
+    warn_prompt("Null linked list head pointer detected");
+    goto END_OF_SL_SERIAL;
+  }
+
+  node = head;
+  while(node)
+  {
+    node->v
+  }
+
+END_OF_SL_SERIAL:
+  LEAVE;
+  return;
+}
 
 void
 print_slinked_list(FILE *fd, char *msg, struct single_linked_list *head)
