@@ -133,5 +133,14 @@ print_lots_report(FILE *, struct lots_report *);
 
 /*-     CHAPTER 03-03                                                        -*/
 
+/*-     CHAPTER 03-09                                                        -*/
+#define INT_SIZE               sizeof(int)
+
+
+struct any_integer{
+  unsigned int       value;
+  single_linked_list *sll;
+};
+
 #endif
 
