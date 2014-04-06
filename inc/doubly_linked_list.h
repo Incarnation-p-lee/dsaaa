@@ -43,6 +43,8 @@ exchange_dlinked_list(struct doubly_linked_list **,
                       struct doubly_linked_list *);
 void
 print_reverse_dlinked_list(FILE *, char *, struct doubly_linked_list *);
+void
+serialize_dlinked_list(struct doubly_linked_list *);
 
 #endif
 

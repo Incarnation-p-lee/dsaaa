@@ -44,6 +44,8 @@ initial_slinked_list(void)
   ENTER("initial_slinked_list");
 
   malloc_initial((void**)&head, sizeof(*head));
+  head->index = 0;
+  head->next = NULL;
 
   LEAVE;
   return head;
@@ -164,21 +166,24 @@ void
 serialize_slinked_list(struct single_linked_list *head)
 {
   struct single_linked_list *node;
+  int index;
   ENTER("serialize_slinked_list");
 
   if(NULL == head)
   {
-    warn_prompt("Null linked list head pointer detected");
-    goto END_OF_SL_SERIAL;
+    warning_prompt(ADD_TRACE(warning_digest[0]));
+    goto END_OF_SERIAL;
   }
 
+  index = 0;
   node = head;
   while(node)
   {
-    node->v
+    node->index = index++;
+    node = node->next;
   }
 
-END_OF_SL_SERIAL:
+END_OF_SERIAL:
   LEAVE;
   return;
 }

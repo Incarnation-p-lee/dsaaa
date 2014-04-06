@@ -256,3 +256,29 @@ END_OF_EXCHANGE:
   return;
 }
 
+
+void
+serialize_dlinked_list(struct doubly_linked_list *head)
+{
+  struct doubly_linked_list *node;
+  int index;
+  ENTER("serialize_dlinked_list");
+
+  if(NULL == head)
+  {
+    warning_prompt(ADD_TRACE(warning_digest[0]));
+    goto END_OF_SERIAL;
+  }
+
+  index = 0;
+  node = head;
+  while(node)
+  {
+    node->index = index++;
+    node = node->next;
+  }
+
+END_OF_SERIAL:
+  LEAVE;
+  return;
+}

@@ -95,6 +95,11 @@ single_linked_list_verify(void)
   print_slist_result(head);
   print_done(SYMBOL_TO_STRING(exchange_slinked_list));
 
+  print_operation(SYMBOL_TO_STRING(serialize_slinked_list));
+  serialize_slinked_list(head);
+  print_slist_result(head);
+  print_done(SYMBOL_TO_STRING(serialize_slinked_list));
+
   print_operation(SYMBOL_TO_STRING(clear_slinked_list));
   clear_slinked_list(&head);
   if(NULL != head)
@@ -176,6 +181,11 @@ doubly_linked_list_verify(void)
   exchange_dlinked_list(&head, node);
   print_dlist_result(head);
   print_done(SYMBOL_TO_STRING(exchange_dlinked_list));
+
+  print_operation(SYMBOL_TO_STRING(serialize_slinked_list));
+  serialize_dlinked_list(head);
+  print_dlist_result(head);
+  print_done(SYMBOL_TO_STRING(serialize_slinked_list));
 
   print_operation(SYMBOL_TO_STRING(clear_dlinked_list));
   clear_dlinked_list(&head);

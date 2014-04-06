@@ -41,6 +41,10 @@ void
 print_slinked_list(FILE *, char *, struct single_linked_list *);
 void
 exchange_slinked_list(struct single_linked_list **,
-  struct single_linked_list *);
+                      struct single_linked_list *);
+void
+serialize_slinked_list(struct single_linked_list *);
+struct single_linked_list *
+initial_slinked_list(void);
 
 #endif

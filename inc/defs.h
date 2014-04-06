@@ -9,6 +9,10 @@
 #define TIME_START                 timing_start()
 #define TIME_END(usec)             timing_end(usec)
 #define SYMBOL_TO_STRING(symbol)   #symbol
+#define PI                         3.14159265
+#define FLT_ITER                   PI
+#define RANDOM_DATA_SIZE           1024
+
 
 /* DEFINE EXPANDING                                                           */
 #define ADD_TRACE(msg)             (sprintf(strinfo_buf, "[%d] ", __LINE__), \
@@ -18,8 +22,8 @@
                 ":"),                                   \
                   (msg)))
 
-#define RANDOM_STATIC_SIZE         \
-        sizeof(random_static) / sizeof(random_static[0])
+#define CONSTRAINT_OF(ptr, type, ele)                   \
+        (type*)((char*)(ptr) - (char*)(&((type*)0)->ele))
 
 typedef void (*HOMEWORK)(void);
 

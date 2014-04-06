@@ -36,7 +36,6 @@ sub single_file_reference{
 
   open SOURCE_FILE, '<', $filename or
     die "Failed to open source file: [$filename].\n  $!";
-
   
   while(<SOURCE_FILE>){
     $line++;

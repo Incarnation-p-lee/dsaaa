@@ -3,6 +3,10 @@
 
 /*-     EXTERNALS                                                            -*/
 extern FILE *dsaaa_report;
+extern int int_random[];
+extern const char *warning_digest[];
+extern const char *error_digest[];
+extern char strinfo_buf[];
 
 /*-     REFERENCE OF GENERATE FUNCTION MODULE                                -*/
 extern void
@@ -27,6 +31,12 @@ extern void
 realloc_initial(void **, unsigned int);
 extern void
 saft_free(void **);
+extern void
+clear_slinked_list(struct single_linked_list **);
+extern struct single_linked_list *
+initial_slinked_list(void);
+extern void
+serialize_slinked_list(struct single_linked_list *);
 
 
 /*-     REFERENCE OF SINGLE LINKED LIST MODULE                               -*/
@@ -131,16 +141,44 @@ static void
 print_lots_report(FILE *, struct lots_report *);
 
 
-/*-     CHAPTER 03-03                                                        -*/
-
-
-
-
+/*-     CHAPTER 03-06                                                        -*/
+#define POLY_ADD_COUNT         1000
 struct poly_linked{
-  float  coefficient;
-  int    pow;
-  struct single_linked_list *sll;
+  float    coefficient;
+  int      pow;
+  struct   single_linked_list sll;
 };
+struct poly_add_report{
+  unsigned usec;
+  int      msize;
+  int      nsize;
+};
+
+
+void
+chapt_3_6(void);
+static void
+dochapt_3_6(void);
+static float *
+prepare_flt_random(void);
+static void
+clear_flt_random(void **);
+static struct poly_linked *
+generate_polynomial(float *, int *, int);
+static struct poly_linked *
+polynomial_add(struct poly_linked *, struct poly_linked *);
+static void
+clear_polynomial(struct poly_linked **);
+static struct poly_linked *
+get_next_poly(struct single_linked_list *);
+static void
+print_polynomial_layout(struct poly_linked *);
+static void
+print_polynomial_title(void);
+static void
+print_polynomial_report(struct poly_add_report *);
+
+
 
 #endif
 

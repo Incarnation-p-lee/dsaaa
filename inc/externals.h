@@ -33,5 +33,7 @@ extern void
 chapt_3_1(void);
 extern void
 chapt_3_2(void);
+extern void
+chapt_3_6(void);
 
 #endif

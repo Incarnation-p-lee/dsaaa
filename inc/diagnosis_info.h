@@ -13,6 +13,7 @@ const char *warning_digest[] = {                                     /* index */
   "Invalid Index of List",                                           /*-  1  -*/
   "Failed to Exchange before Head",                                  /*-  2  -*/
   "Failed to Find Node in List",                                     /*-  3  -*/
+  "Reached the Tail Node in List",                                   /*   4  -*/
 };
 
 #endif
