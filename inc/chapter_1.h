@@ -4,6 +4,9 @@
 
 extern FILE *dsaaa_report;
 extern const char *blank;
+extern const char *warning_digest[];
+extern const char *error_digest[];
+extern char strinfo_buf[];
 
 extern void
 error_handle(const char *);
@@ -14,8 +17,6 @@ timing_start(void);
 extern void
 timing_end(unsigned *);
 extern void
-exchange(int *, int *);
-extern void
 leave(void);
 extern void
 enter(const char *);
@@ -24,11 +25,9 @@ print_report_header(FILE *, const char *, int, int);
 extern void
 malloc_initial(void **, unsigned int);
 extern void
-realloc_initial(void **, unsigned int);
-extern void
 saft_free(void **);
-extern int
-get_bit_length(unsigned int);
+extern void
+exchange(int *, int *);
 
 
 

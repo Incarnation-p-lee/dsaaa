@@ -152,7 +152,7 @@ selection_data_prepare(int data_size)
 
   ENTER("selection_data_prepare");
   if(0 >= data_size)
-    error_handle("selection_data_prepare");
+    error_handle(ADD_TRACE(error_digest[1]));
 
   malloc_initial((void**)&random_data, sizeof(int) * data_size);
 

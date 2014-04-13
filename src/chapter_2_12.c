@@ -105,7 +105,7 @@ astringent_init(struct sub_sequence *su_rpt, int dimension,
       su_rpt->astringent = dimension * dimension;
       break;
     default:
-      error_handle("Unresolved enum value detected.");
+      warning_prompt(ADD_TRACE(warning_digest[6]));
       break;
   }
 
@@ -145,7 +145,7 @@ print_submin_title(FILE *fd, int size_s,
       fprintf(fd, "MAXIMUN MULTIPLE SUB SEQUENCE *ASTRINGENT : O[N]\n");
       break;
     default:
-      error_handle("Unresolved enum value detected.");
+      warning_prompt(ADD_TRACE(warning_digest[6]));
       break;
   }
 

@@ -72,6 +72,7 @@ define cleanall
 	-rm -rf $(TARGET) $(OBJDIR)/*
 	-rm -rf $(RDIR)/* *.gcda *.gcno
 	-rm -rf $(ADIR)/*
+        -rm -rf core
 endef
 
 define symbol

@@ -186,7 +186,7 @@ print_contains_report(FILE *fd, struct iscontains_report *data_r)
       descript = result[1];
       break;
     default:
-      error_handle("Unresolved contains macro value detected");
+      warning_prompt(ADD_TRACE(warning_digest[6]));
       break;
   }
 

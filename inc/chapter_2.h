@@ -1,6 +1,13 @@
 #ifndef CHAPTER2_H
 #define CHAPTER2_H
 
+
+extern FILE *dsaaa_report;
+extern const char *warning_digest[];
+extern const char *error_digest[];
+extern char strinfo_buf[];
+
+
 /*-     EXTERNAL SYMBOLS                                                     -*/
 extern void
 error_handle(const char *);
@@ -27,7 +34,6 @@ saft_free(void **);
 extern int
 get_bit_length(unsigned int);
 
-extern FILE *dsaaa_report;
 
 
 /*-     CHAPTER 02-07                                                        -*/

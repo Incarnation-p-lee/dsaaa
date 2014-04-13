@@ -16,8 +16,6 @@ enter(const char *);
 extern void
 malloc_initial(void **, unsigned int);
 extern void
-realloc_initial(void **, unsigned int);
-extern void
 saft_free(void **);
 
 

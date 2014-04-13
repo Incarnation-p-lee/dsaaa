@@ -67,7 +67,7 @@ isprime_number(int num)
   ENTER("isprime_number");
 
   if(num < 2)
-    error_handle("Expected Positive Integrate More Than 1.");
+    error_handle(ADD_TRACE(error_digest[2]));
 
   result = isodd_number(num);
   if(INTEGRATE_ODD == result)
@@ -98,7 +98,7 @@ isodd_number(int num)
   ENTER("iseven_number");
 
   if(num < 0)
-    error_handle("Expected Positive Integrate.");
+    error_handle(ADD_TRACE(error_digest[1]));
 
   if(0 == (num & RIGHT_MOST_BIT_MASK))
   {
@@ -145,7 +145,7 @@ print_prime_report(FILE *fd, struct prime_num_report *rpt)
       msg_r = SYMBOL_TO_STRING(NOT_PRIMED);
       break;
     default:
-      error_handle("Unresolved Prime type detected");
+      warning_prompt(ADD_TRACE(warning_digest[6]));
       break;
   }
   fprintf(fd, "%4d. %9d  %10s %10.5f  %11.5f\n", (index_r++ >> 1),

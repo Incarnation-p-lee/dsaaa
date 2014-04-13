@@ -111,7 +111,7 @@ cal_fast_power(unsigned base, int exp)
   ENTER("cal_fast_power");
 
   if(0 > exp)
-    error_handle("Only positive exponent was supported");
+    error_handle(ADD_TRACE(error_digest[1]));
 
   update_power_buffer(base, get_bit_length(exp));
 
@@ -137,7 +137,7 @@ update_power_buffer(unsigned base, int buf_size)
 
   if(NULL == pbuf)
   {
-    warning_prompt("Null buffer pointer, init as default size.");
+    warning_prompt(ADD_TRACE(warning_digest[0]));
     initial_power_buffer(base);
   }
 

@@ -65,7 +65,7 @@ random_sequence(int start, int end, enum repeat_vehicle type)
   ENTER("random_replacement");
 
   if(start > end)
-    error_handle("Index out of range");
+    error_handle(ADD_TRACE(error_digest[3]));
 
   size_r = end - start + 1;
   data.dimension = size_r;
@@ -109,7 +109,7 @@ expected_init(struct gen_random_report *data_r,
       exp = 1.0;
       break;
     default:
-      error_handle("Unresolved enum value detected.");
+      warning_prompt(ADD_TRACE(warning_digest[6]));
       break;
   }
   data_r->expected = pow((double)size_r, exp);
@@ -188,7 +188,7 @@ generate_random(int start, int end, enum repeat_vehicle type)
       random_swap(size_r);
       break;
     default:
-      error_handle("Unresolved enum value detected.");
+      warning_prompt(ADD_TRACE(warning_digest[6]));
       break;
   }
 
@@ -220,7 +220,7 @@ repeat_assist_init(int start, int size_r, enum repeat_vehicle type)
         sequence_data[ittr++] = start++;
       break;
     default:
-      error_handle("Unresolved enum value detected.");
+      warning_prompt(ADD_TRACE(warning_digest[6]));
       break;
   }
 
@@ -243,7 +243,7 @@ repeat_assist_clear(enum repeat_vehicle type)
     case SWAP:
       break;
     default:
-      error_handle("Unresolved enum value detected.");
+      warning_prompt(ADD_TRACE(warning_digest[6]));
       break;
   }
 
@@ -259,7 +259,7 @@ isrepeated_util(int size_r, int raw)
   ENTER("isrepeated_util");
 
   if(0 > size_r)
-    error_handle("Invalid data dimension");
+    error_handle(ADD_TRACE(error_digest[1]));
 
   repeated = NOT_REPEATED;
   iterator = (int *)sequence_data;
@@ -293,7 +293,7 @@ isrepeated_used(int start, int raw)
       repeated = REPEATED;
       break;
     default:
-      error_handle("Invalid definition value detected");
+      warning_prompt(ADD_TRACE(warning_digest[6]));
       break;
   }
 

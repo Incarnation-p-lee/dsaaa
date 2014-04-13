@@ -5,7 +5,6 @@
 /*-     EXTERNALS                                                            -*/
 extern const int raw_data[];
 extern FILE *dsaaa_report;
-extern const char *blank;
 extern const char *error_digest[];
 extern const char *warning_digest[];
 
@@ -21,8 +20,6 @@ extern void
 enter(const char *);
 extern void
 malloc_initial(void **, unsigned int);
-extern void
-realloc_initial(void **, unsigned int);
 extern void
 saft_free(void **);
 

@@ -92,7 +92,7 @@ print_prin_report(FILE *fd, int size, struct principle_ele_report *report)
       break;
     default:
       result = "N/A";
-      warning_prompt("Unknown macro name detected.");
+      warning_prompt(ADD_TRACE(warning_digest[6]));
       break;
   }
   fprintf(fd, "%5d     %6d   %13s    %8d  %10.4f\n", (index++) >> 1,
@@ -152,7 +152,7 @@ principle_element(int *raw_data, int size)
   ENTER("principle_element_setup");
 
   if(size > PRIN_DATA_SIZE)
-    warning_prompt("A risk of memory leak detected.");
+    warning_prompt(ADD_TRACE(warning_digest[7]));
 
   malloc_initial((void**)&data_in, sizeof(*data_in) * size);
   malloc_initial((void**)&data_out, sizeof(*data_out) * size);

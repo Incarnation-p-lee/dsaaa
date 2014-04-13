@@ -2,8 +2,8 @@
 #define UTILISZE_H
 
 
-extern FILE *dsaaa_report;
 extern char strinfo_buf[STRINFO_BUF_SIZE];
+extern FILE *dsaaa_report;
 
 extern void
 enter(const char *);

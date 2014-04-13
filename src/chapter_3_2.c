@@ -85,7 +85,7 @@ init_maxed_array(int *value, int size, int max)
   ENTER("init_lots_value");
 
   if(NULL == value)
-    error_handle("Null pointer detected when initilizing");
+    error_handle(ADD_TRACE(error_digest[0]));
 
   srand(LOTS_RANDOM_SEED);
   iterator = value;
@@ -105,7 +105,7 @@ print_lots(struct single_linked_list *data, struct single_linked_list *index)
 
   if(NULL == data || NULL == index)
   {
-    warning_prompt("Null linked list head pointer detected");
+    warning_prompt(ADD_TRACE(warning_digest[0]));
     goto END_OF_PRINT_LOTS;
   }
 

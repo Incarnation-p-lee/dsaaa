@@ -18,8 +18,6 @@ timing_start(void);
 extern void
 timing_end(unsigned *);
 extern void
-exchange(int *, int *);
-extern void
 leave(void);
 extern void
 enter(const char *);
@@ -28,13 +26,9 @@ print_report_header(FILE *, const char *, int, int);
 extern void
 malloc_initial(void **, unsigned int);
 extern void
-realloc_initial(void **, unsigned int);
-extern void
 saft_free(void **);
 extern void
 clear_slinked_list(struct single_linked_list **);
-extern struct single_linked_list *
-initial_slinked_list(void);
 extern void
 serialize_slinked_list(struct single_linked_list *);
 
@@ -44,8 +38,6 @@ serialize_slinked_list(struct single_linked_list *);
 extern struct single_linked_list *
 generate_slinked_list(int *, int);
 extern void
-append_slinked_list_node(struct single_linked_list *, int);
-extern void
 clear_slinked_list(struct single_linked_list **);
 extern int
 lengthof_slinked_list(struct single_linked_list *head);
@@ -53,28 +45,8 @@ extern struct single_linked_list *
 accessby_index_slinked_list(struct single_linked_list *, int);
 extern void
 print_slinked_list(FILE *, char *, struct single_linked_list *);
-extern void
-exchange_slinked_list(struct single_linked_list **,
-  struct single_linked_list *);
 
 /*-     Doubly Linked List                                                   -*/
-extern struct doubly_linked_list *
-generate_dlinked_list(int *, int);
-extern void
-append_dlinked_list_node(struct doubly_linked_list *, int);
-extern void
-clear_dlinked_list(struct doubly_linked_list **);
-extern int
-lengthof_dlinked_list(struct doubly_linked_list *head);
-extern struct doubly_linked_list *
-accessby_index_dlinked_list(struct doubly_linked_list *, int);
-extern void
-print_dlinked_list(FILE *, char *, struct doubly_linked_list *);
-extern void
-print_reverse_dlinked_list(FILE *, char *, struct doubly_linked_list *);
-extern void
-exchange_dlinked_list(struct doubly_linked_list **,
-                      struct doubly_linked_list *);
 
 
 
