@@ -152,5 +152,14 @@ print_polynomial_report(struct poly_add_report *);
 
 
 
+/*-     CHAPTER 03-09                                                        -*/
+#define INT_SIZE               sizeof(int)
+
+
+struct any_integer{
+  unsigned int       value;
+  single_linked_list *sll;
+};
+
 #endif
 
