@@ -158,7 +158,7 @@ print_polynomial_report(struct poly_add_report *);
 
 struct any_integer{
   unsigned int       value;
-  single_linked_list *sll;
+  struct   single_linked_list sll;
 };
 
 #endif

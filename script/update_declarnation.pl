@@ -8,13 +8,16 @@ my $sdir = './src';
 # format: k->v, module name -> included files
 my %module_files;
 
-# Work Flow
-# build_md_map [build module_files hash table]
-# |
 
-
-&build_md_map($basedir);                     # build hash map %module_files
-&update_declare();                           # update all modules
+if($#ARGV != -1){
+  foreach(@ARGV){
+    chomp;
+    process_module($_);
+  }
+}else{
+  &build_md_map($basedir);                     # build hash map %module_files
+  &update_declare();                           # update all modules
+}
 
 sub build_md_map{
   my $base = shift @_;
@@ -48,7 +51,8 @@ sub build_md_map{
 
 sub update_declare{
   my @mod = keys %module_files;
-  foreach(@mod){
+  my @smod = sort @mod;
+  foreach(@smod){
     &process_module($module_files{$_});
   }
 }
@@ -64,30 +68,60 @@ sub process_module{
     unshift @source, $_ if m/\w+\.c/;
   }
 
-  my @defines;
-  foreach(@source){
+  my @ssource = sort @source;
+  foreach(@ssource){
+    say "\nOperating on [$_] ...";
     my $fullname = $sdir . '/' . $_;
     open SFILE, '<', $fullname or 
       die "Failed to open file [$fullname].  $!";
-  
+    
+    my $comments = undef; 
     while(<SFILE>){
-      next if m://:;
-      next if m:/\*:;
-      next if m:\*/:;
-      next if m/[;|{|}]/;
-      next if m/^\s+$/;
-      my $single;
+      next if $comments;
+
+      next if /\/\//;
+      if(/\/\*/){
+        $comments = 'y' unless /\*\//;
+        next;
+      }
+      if(/\*\//){
+        say "CCC";
+        $comments = undef;
+        next;
+      }
+
+      next if /;|:/;
+      next if /,\s*$/;
+      next if /{|}/;
+      next if /\b(for|while|switch|if|else if)\(/;
+      next if /\belse/;
+      next if /#ifdef|#endif/;
+      next if /^\s*$/;
+      #say "=== $_";
+      my $single = $_;
       while(<SFILE>){
         $single .= $_;
-        last if m/\)\s*$/;
-        if(/;/){
-          $single = undef;
-          last;
-        }
+        last if /\)\s*$/;
       }
-      say "$single" if $single;
+      $single = undef if $single =~ /;/;
+      if($single){
+        my $decl = &def_to_decl($single);
+        say $decl;
+      }
     }
 
     close(SFILE);
   }
+}
+
+
+sub def_to_decl{
+  my $def = shift @_;
+  chomp $def;
+  $def .= ';';
+  return $def if $def =~ /\(\s*void\s*\)/;
+
+  $def =~ s/(\w+)\**\s+(\**)\w+,/\1 \2,/g if $def =~ /,/;
+  $def =~ s/\s*\w+\)/)/g;
+  return $def;
 }
