@@ -129,7 +129,7 @@ generate_polynomial(float *coeff, int *pow, int size)
   ENTER("generate_polynomial");
 
   if(NULL == coeff || NULL == pow)
-    error_handle(ADD_TRACE(warning_digest[0]));
+    error_handle(ADD_TRACE(error_digest[0]));
 
   if(size <= 0)
     error_handle(ADD_TRACE(error_digest[1]));

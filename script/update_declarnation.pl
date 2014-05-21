@@ -10,6 +10,7 @@ my %module_files;
 
 
 if($#ARGV != -1){
+  $sdir = '.';
   foreach(@ARGV){
     chomp;
     process_module($_);
@@ -121,7 +122,10 @@ sub def_to_decl{
   $def .= ';';
   return $def if $def =~ /\(\s*void\s*\)/;
 
-  $def =~ s/(\w+)\**\s+(\**)\w+,/\1 \2,/g if $def =~ /,/;
+  if($def =~ /,/){
+    $def =~ s/(\w+)(\**)\s+(\*+)\w+,/\1 \2\3,/g if $def =~ /\*/;
+    $def =~ s/(\w+)\s+\w+,/\1,/g;
+  }
   $def =~ s/\s*\w+\)/)/g;
   return $def;
 }

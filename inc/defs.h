@@ -23,7 +23,9 @@
                   (msg)))
 
 #define CONSTRAINT_OF(ptr, type, ele)                   \
-        (type*)((char*)(ptr) - (char*)(&((type*)0)->ele))
+        (NULL == (ptr) ?                                \
+          NULL :                                        \
+          (type*)((char*)(ptr) - (char*)(&((type*)0)->ele)))
 
 typedef void (*HOMEWORK)(void);
 

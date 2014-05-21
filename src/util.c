@@ -127,3 +127,30 @@ get_bit_length(unsigned int n)
   LEAVE;
   return result;
 }
+
+int *
+gen_random_int_array(int size)
+{
+  int *raw;
+  int scnt;
+  int base;
+  ENTER("gen_random_int_array");
+
+  if(0 >= size)
+    error_handle(ADD_TRACE(error_digest[1]));
+
+  scnt = sizeof(int_random) / sizeof(int_random[0]);
+  malloc_initial((void**)&raw, sizeof(*raw) * size);
+
+  base = size % scnt;
+  memcpy(raw, int_random, base);
+
+  while(base < size)
+  {
+    memcpy(raw + base, int_random, scnt);
+    base += scnt;
+  }
+
+  LEAVE;
+  return raw;
+}

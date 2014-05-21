@@ -6,3 +6,4 @@
 #include "chapter_3_1.c"
 #include "chapter_3_2.c"
 #include "chapter_3_6.c"
+#include "chapter_3_9.c"

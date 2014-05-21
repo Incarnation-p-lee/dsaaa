@@ -8,6 +8,7 @@ extern const char *warning_digest[];
 extern const char *error_digest[];
 extern char strinfo_buf[];
 
+
 /*-     REFERENCE OF GENERATE FUNCTION MODULE                                -*/
 extern void
 error_handle(const char *);
@@ -31,6 +32,8 @@ extern void
 clear_slinked_list(struct single_linked_list **);
 extern void
 serialize_slinked_list(struct single_linked_list *);
+extern int *
+gen_random_int_array(int);
 
 
 /*-     REFERENCE OF SINGLE LINKED LIST MODULE                               -*/
@@ -116,16 +119,15 @@ print_lots_report(FILE *, struct lots_report *);
 /*-     CHAPTER 03-06                                                        -*/
 #define POLY_ADD_COUNT         1000
 struct poly_linked{
-  float    coefficient;
-  int      pow;
-  struct   single_linked_list sll;
+  float  coefficient;
+  int    pow;
+  struct single_linked_list sll;
 };
 struct poly_add_report{
   unsigned usec;
   int      msize;
   int      nsize;
 };
-
 
 void
 chapt_3_6(void);
@@ -151,15 +153,114 @@ static void
 print_polynomial_report(struct poly_add_report *);
 
 
-
 /*-     CHAPTER 03-09                                                        -*/
-#define INT_SIZE               sizeof(int)
+#define POSITIVE               0xA5B2
+#define NEGATIVE               0x5A2B
+#define MAX_NUMBER             10
+#define BIG                    0x28D
+#define SMALL                  0xA73
+#define EQUAL                  0xFE7
+typedef int                    SIGN_AINT;
 
-
-struct any_integer{
-  unsigned int       value;
-  struct   single_linked_list sll;
+enum CBFLAG{
+  DEFAULT,
+  CARRY,
+  BORROW,
 };
 
-#endif
+enum ARITHMETIC{
+  ADD,
+  SUBTRACT,
+  MULTIPLY,
+};
 
+struct any_integer{
+  int    value;
+  struct single_linked_list sll;
+};
+
+struct any_integer_catalog{
+  void (*arithmetic)(struct any_integer *, struct any_integer *);
+  enum ARITHMETIC type;
+};
+
+struct any_integer_arithmetic_report{
+  unsigned        usec;
+  int             msize;
+  int             nsize;
+  int             astringend;
+};
+
+static enum CBFLAG cb_flag;
+
+void
+chapt_3_9(void);
+static void
+dochapt_3_9(void);
+static void
+do_any_integer_performance(int *, int, int *, int,
+  struct any_integer_arithmetic_report *,
+  void (*)(struct any_integer *, struct any_integer *));
+static void
+set_astringend(struct any_integer_arithmetic_report *,
+  enum ARITHMETIC);
+static int *
+generate_random_seat_array(int, SIGN_AINT);
+static struct any_integer *
+init_any_integer(int *, int);
+static void
+assign_numeric(struct any_integer *, int);
+static void
+clear_any_integer(struct any_integer **);
+void
+add_any_integer(struct any_integer *, struct any_integer *);
+void
+subtract_any_integer(struct any_integer *, struct any_integer *);
+void
+multiply_any_integer(struct any_integer *, struct any_integer *);
+void
+set_zero_any_integer(struct any_integer *);
+static void
+multiply_single_any_integer(struct any_integer *, int);
+struct any_integer *
+copyof_any_integer(struct any_integer *);
+struct any_integer *
+getzero_node_any_integer(void);
+void
+shift_right_any_integer(struct any_integer *, int);
+void
+shift_left_any_integer(struct any_integer *, int);
+int
+iszero_any_integer(struct any_integer *);
+int
+abscompare_any_integer(struct any_integer *, struct any_integer *);
+static void
+eliminate_leading_zero(struct any_integer *);
+void
+insert_any_integer(struct any_integer *, struct any_integer *);
+void
+delete_any_integer(struct any_integer *, struct any_integer *);
+static void
+deal_left_cb(struct any_integer *);
+static void
+set_sign(SIGN_AINT, struct any_integer *);
+static void
+iscarry(struct any_integer *);
+static void
+isborrow(struct any_integer *);
+struct any_integer *
+previous_any_integer(struct any_integer *, struct any_integer *);
+struct any_integer *
+next_any_integer(struct any_integer *);
+struct any_integer *
+last_any_integer(struct any_integer *);
+void
+print_any_integer(struct any_integer *);
+static void
+print_any_integer_title(void);
+static void
+print_any_integer_report(struct any_integer_arithmetic_report *);
+static void
+set_arithmetic_catalog(enum ARITHMETIC);
+
+#endif

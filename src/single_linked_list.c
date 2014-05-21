@@ -112,14 +112,13 @@ lengthof_slinked_list(struct single_linked_list *head)
   int length;
   ENTER("lengthof_slinked_list");
 
+  length = 0;
   if(NULL == head)
   {
     warning_prompt(ADD_TRACE(warning_digest[0]));
-    length = -1;
     goto END_OF_LENGTHOF;
   }
 
-  length = 0;
   while(NULL != head)
   {
     length++;
