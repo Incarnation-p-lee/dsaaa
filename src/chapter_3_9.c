@@ -60,10 +60,12 @@ dochapt_3_9(void)
         mai = generate_random_seat_array(*mlen, POSITIVE);
         do_any_integer_performance(mai, *mlen, nai, *nlen,
           &report, iter->arithmetic);
+        free_random_int_array(mai);
         set_astringend(&report, iter->type);
         print_any_integer_report(&report);
         mlen++;
       }
+      free_random_int_array(nai);
       nlen++;
     }
     iter++;

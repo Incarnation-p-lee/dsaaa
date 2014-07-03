@@ -154,3 +154,21 @@ gen_random_int_array(int size)
   LEAVE;
   return raw;
 }
+
+void
+free_random_int_array(int *raw)
+{
+  ENTER("free_random_int_array");
+
+  if(NULL == raw)
+  {
+    warning_prompt(ADD_TRACE(warning_digest[0]));
+    goto FREE_END;
+  }
+
+  saft_free((void**)&raw);
+
+FREE_END:
+  LEAVE;
+  return;
+}

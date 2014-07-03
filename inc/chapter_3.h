@@ -34,6 +34,8 @@ extern void
 serialize_slinked_list(struct single_linked_list *);
 extern int *
 gen_random_int_array(int);
+extern void
+free_random_int_array(int *);
 
 
 /*-     REFERENCE OF SINGLE LINKED LIST MODULE                               -*/

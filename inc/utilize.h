@@ -36,6 +36,10 @@ void
 saft_free(void **);
 int
 get_bit_length(unsigned int);
+int *
+gen_random_int_array(int);
+void
+free_random_int_array(int *);
 
 static const char *stack_traces[TRACE_DEPTH];
 static int top_index = 0;
