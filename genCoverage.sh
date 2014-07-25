@@ -24,5 +24,6 @@ if [ -x "$reportdir$ouputdir" ];then
 fi
 
 genhtml --output-directory "$reportdir$outputdir" --title "DSAAA" --show-details --legend "$archivedir$rawdatafile"
+cp -rp $reportdir/output/ .
 tar -zcf "$reportname" "$reportdir$outputdir"
 mv "$reportname" "$archivedir"

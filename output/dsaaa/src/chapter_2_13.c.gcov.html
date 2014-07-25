@@ -1,0 +1,249 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - DSAAA - dsaaa/src/chapter_2_13.c</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">dsaaa/src</a> - chapter_2_13.c<span style="font-size: 80%;"> (source / <a href="chapter_2_13.c.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">DSAAA</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">68</td>
+            <td class="headerCovTableEntry">72</td>
+            <td class="headerCovTableEntryHi">94.4 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2014-07-25</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+            | Branches:
+            <span class="coverLegendCov">+</span> taken
+            <span class="coverLegendNoCov">-</span> not taken
+            <span class="coverLegendNoCov">#</span> not executed
+</td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntry">18</td>
+            <td class="headerCovTableEntry">21</td>
+            <td class="headerCovTableEntryMed">85.7 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">           Branch data     Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>                :            : /*----------------------------------------------------------------------------*/</a>
+<span class="lineNum">       2 </span>                :            : /*-AUTHOR:      Incarnation.P Lee                                             */
+<span class="lineNum">       3 </span>                :            : /*-DATE:        12052013                                                      */
+<span class="lineNum">       4 </span>                :            : /*-WHAT:        Homework chapter 2.13                                         */
+<span class="lineNum">       5 </span>                :            : /*-REVISION:                                                                  */
+<span class="lineNum">       6 </span>                :            : /*- DATE ------------------------ DESCRIPTION --------------------------------*/
+<span class="lineNum">       7 </span>                :            : /*- 12052013    CHAPTER 2-13                                                 -*/
+<a name="8"><span class="lineNum">       8 </span>                :            : /*----------------------------------------------------------------------------*/</a>
+<span class="lineNum">       9 </span>                :            : void
+<span class="lineNum">      10 </span>                :<span class="lineCov">          1 : chapt_2_13(void)</span>
+<span class="lineNum">      11 </span>                :            : {
+<span class="lineNum">      12 </span>                :<span class="lineCov">          1 :   ENTER(&quot;chapt_2_13&quot;);</span>
+<span class="lineNum">      13 </span>                :            : 
+<span class="lineNum">      14 </span>                :<span class="lineCov">          1 :   print_report_header(stdout, &quot;IS Prime Number&quot;, 2, 13);</span>
+<span class="lineNum">      15 </span>                :<span class="lineCov">          1 :   print_report_header(dsaaa_report, &quot;IS Prime Number&quot;, 2, 13);</span>
+<span class="lineNum">      16 </span>                :            : 
+<span class="lineNum">      17 </span>                :<span class="lineCov">          1 :   print_prime_title(stdout);</span>
+<span class="lineNum">      18 </span>                :<span class="lineCov">          1 :   print_prime_title(dsaaa_report);</span>
+<span class="lineNum">      19 </span>                :            : 
+<span class="lineNum">      20 </span>                :<span class="lineCov">          1 :   dochapt_2_13();</span>
+<span class="lineNum">      21 </span>                :            : 
+<span class="lineNum">      22 </span>                :<span class="lineCov">          1 :   LEAVE;</span>
+<span class="lineNum">      23 </span>                :<span class="lineCov">          1 :   return;</span>
+<span class="lineNum">      24 </span>                :            : }
+<span class="lineNum">      25 </span>                :            : 
+<a name="26"><span class="lineNum">      26 </span>                :            : </a>
+<span class="lineNum">      27 </span>                :            : static void
+<span class="lineNum">      28 </span>                :<span class="lineCov">          1 : dochapt_2_13(void)</span>
+<span class="lineNum">      29 </span>                :            : {
+<span class="lineNum">      30 </span>                :            :   int rcount;
+<span class="lineNum">      31 </span>                :            :   struct prime_num_report pn_rpt;
+<span class="lineNum">      32 </span>                :            :   register int *iterator;
+<span class="lineNum">      33 </span>                :<span class="lineCov">          1 :   int raw_data[] = {</span>
+<span class="lineNum">      34 </span>                :            :     2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+<span class="lineNum">      35 </span>                :            :     101, 201, 301, 601, 901, 1021, 7341, 12371, 19127, 23761,
+<span class="lineNum">      36 </span>                :            :     86117, 86269, 86477, 86579, 86587, 84461,
+<span class="lineNum">      37 </span>                :            :   };
+<span class="lineNum">      38 </span>                :<span class="lineCov">          1 :   ENTER(&quot;dochapt_2_13&quot;);</span>
+<span class="lineNum">      39 </span>                :            : 
+<span class="lineNum">      40 </span>                :<span class="lineCov">          1 :   iterator = raw_data;</span>
+<span class="lineNum">      41 </span>        [<span class="branchCov" title="Branch 0 was taken 34 times"> + </span><span class="branchCov" title="Branch 1 was taken 1 time"> + </span>]:<span class="lineCov">         35 :   while(iterator &lt; raw_data + sizeof(raw_data) / sizeof(*raw_data))</span>
+<span class="lineNum">      42 </span>                :            :   {
+<span class="lineNum">      43 </span>                :<span class="lineCov">         34 :     rcount = PRIME_REPEAT_COUNT;</span>
+<span class="lineNum">      44 </span>                :<span class="lineCov">         34 :     pn_rpt.raw_data = *iterator++;</span>
+<span class="lineNum">      45 </span>                :<span class="lineCov">         34 :     pn_rpt.astringent = sqrt((double)pn_rpt.raw_data);</span>
+<span class="lineNum">      46 </span>                :            : 
+<span class="lineNum">      47 </span>                :<span class="lineCov">         34 :     TIME_START;</span>
+<span class="lineNum">      48 </span>        [<span class="branchCov" title="Branch 2 was taken 339966 times"> + </span><span class="branchCov" title="Branch 3 was taken 34 times"> + </span>]:<span class="lineCov">     340000 :     pn_rpt.isprimed = PRIME_PERFORMANCE(rcount,</span>
+<span class="lineNum">      49 </span>                :            :       isprime_number, pn_rpt.raw_data);
+<span class="lineNum">      50 </span>                :<span class="lineCov">         34 :     TIME_END(&amp;pn_rpt.usec);</span>
+<span class="lineNum">      51 </span>                :            : 
+<span class="lineNum">      52 </span>                :<span class="lineCov">         34 :     print_prime_report(stdout, &amp;pn_rpt);</span>
+<span class="lineNum">      53 </span>                :<span class="lineCov">         34 :     print_prime_report(dsaaa_report, &amp;pn_rpt);</span>
+<span class="lineNum">      54 </span>                :            :   }
+<span class="lineNum">      55 </span>                :            : 
+<span class="lineNum">      56 </span>                :<span class="lineCov">          1 :   LEAVE;</span>
+<span class="lineNum">      57 </span>                :<span class="lineCov">          1 :   return;</span>
+<span class="lineNum">      58 </span>                :            : }
+<span class="lineNum">      59 </span>                :            : 
+<a name="60"><span class="lineNum">      60 </span>                :            : </a>
+<span class="lineNum">      61 </span>                :            : static int
+<span class="lineNum">      62 </span>                :<span class="lineCov">     340000 : isprime_number(int num)</span>
+<span class="lineNum">      63 </span>                :            : {
+<span class="lineNum">      64 </span>                :            :   int result;
+<span class="lineNum">      65 </span>                :            :   int num_limit;
+<span class="lineNum">      66 </span>                :            :   int iterator;
+<span class="lineNum">      67 </span>                :<span class="lineCov">     340000 :   ENTER(&quot;isprime_number&quot;);</span>
+<span class="lineNum">      68 </span>                :            : 
+<span class="lineNum">      69 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 340000 times"> + </span>]:<span class="lineCov">     340000 :   if(num &lt; 2)</span>
+<span class="lineNum">      70 </span>                :<span class="lineNoCov">          0 :     error_handle(ADD_TRACE(error_digest[2]));</span>
+<span class="lineNum">      71 </span>                :            : 
+<span class="lineNum">      72 </span>                :<span class="lineCov">     340000 :   result = isodd_number(num);</span>
+<span class="lineNum">      73 </span>        [<span class="branchCov" title="Branch 0 was taken 250000 times"> + </span><span class="branchCov" title="Branch 1 was taken 90000 times"> + </span>]:<span class="lineCov">     340000 :   if(INTEGRATE_ODD == result)</span>
+<span class="lineNum">      74 </span>                :            :   {
+<span class="lineNum">      75 </span>                :<span class="lineCov">     250000 :     iterator = 3;</span>
+<span class="lineNum">      76 </span>                :<span class="lineCov">     250000 :     result = PRIMED;</span>
+<span class="lineNum">      77 </span>                :<span class="lineCov">     250000 :     num_limit = (int)sqrt((double)num);</span>
+<span class="lineNum">      78 </span>        [<span class="branchCov" title="Branch 0 was taken 9200000 times"> + </span><span class="branchCov" title="Branch 1 was taken 160000 times"> + </span>]:<span class="lineCov">    9360000 :     while(iterator &lt;= num_limit)</span>
+<span class="lineNum">      79 </span>                :            :     {
+<span class="lineNum">      80 </span>        [<span class="branchCov" title="Branch 0 was taken 90000 times"> + </span><span class="branchCov" title="Branch 1 was taken 9110000 times"> + </span>]:<span class="lineCov">    9200000 :       if(!(num % iterator))</span>
+<span class="lineNum">      81 </span>                :            :       {
+<span class="lineNum">      82 </span>                :<span class="lineCov">      90000 :         result = NOT_PRIMED;</span>
+<span class="lineNum">      83 </span>                :<span class="lineCov">      90000 :         break;</span>
+<span class="lineNum">      84 </span>                :            :       }
+<span class="lineNum">      85 </span>                :<span class="lineCov">    9110000 :       iterator += 2;</span>
+<span class="lineNum">      86 </span>                :            :     }
+<span class="lineNum">      87 </span>                :            :   }
+<span class="lineNum">      88 </span>                :            : 
+<span class="lineNum">      89 </span>                :<span class="lineCov">     340000 :   LEAVE;</span>
+<span class="lineNum">      90 </span>                :<span class="lineCov">     340000 :   return result;</span>
+<span class="lineNum">      91 </span>                :            : }
+<span class="lineNum">      92 </span>                :            : 
+<a name="93"><span class="lineNum">      93 </span>                :            : </a>
+<span class="lineNum">      94 </span>                :            : static int
+<span class="lineNum">      95 </span>                :<span class="lineCov">     340000 : isodd_number(int num)</span>
+<span class="lineNum">      96 </span>                :            : {
+<span class="lineNum">      97 </span>                :            :   int result;
+<span class="lineNum">      98 </span>                :<span class="lineCov">     340000 :   ENTER(&quot;iseven_number&quot;);</span>
+<span class="lineNum">      99 </span>                :            : 
+<span class="lineNum">     100 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 340000 times"> + </span>]:<span class="lineCov">     340000 :   if(num &lt; 0)</span>
+<span class="lineNum">     101 </span>                :<span class="lineNoCov">          0 :     error_handle(ADD_TRACE(error_digest[1]));</span>
+<span class="lineNum">     102 </span>                :            : 
+<span class="lineNum">     103 </span>        [<span class="branchCov" title="Branch 0 was taken 90000 times"> + </span><span class="branchCov" title="Branch 1 was taken 250000 times"> + </span>]:<span class="lineCov">     340000 :   if(0 == (num &amp; RIGHT_MOST_BIT_MASK))</span>
+<span class="lineNum">     104 </span>                :            :   {
+<span class="lineNum">     105 </span>        [<span class="branchCov" title="Branch 0 was taken 10000 times"> + </span><span class="branchCov" title="Branch 1 was taken 80000 times"> + </span>]:<span class="lineCov">      90000 :     if(2 == num)</span>
+<span class="lineNum">     106 </span>                :<span class="lineCov">      10000 :       result = PRIMED;</span>
+<span class="lineNum">     107 </span>                :            :     else
+<span class="lineNum">     108 </span>                :<span class="lineCov">      80000 :       result = NOT_PRIMED;</span>
+<span class="lineNum">     109 </span>                :            :   }
+<span class="lineNum">     110 </span>                :            :   else
+<span class="lineNum">     111 </span>                :<span class="lineCov">     250000 :     result = INTEGRATE_ODD;</span>
+<span class="lineNum">     112 </span>                :            : 
+<span class="lineNum">     113 </span>                :<span class="lineCov">     340000 :   LEAVE;</span>
+<span class="lineNum">     114 </span>                :<span class="lineCov">     340000 :   return result;</span>
+<span class="lineNum">     115 </span>                :            : }
+<span class="lineNum">     116 </span>                :            : 
+<a name="117"><span class="lineNum">     117 </span>                :            : </a>
+<span class="lineNum">     118 </span>                :            : static void
+<span class="lineNum">     119 </span>                :<span class="lineCov">          2 : print_prime_title(FILE *fd)</span>
+<span class="lineNum">     120 </span>                :            : {
+<span class="lineNum">     121 </span>                :<span class="lineCov">          2 :   ENTER(&quot;print_prime_title&quot;);</span>
+<span class="lineNum">     122 </span>                :            : 
+<span class="lineNum">     123 </span>                :<span class="lineCov">          2 :   fprintf(fd, &quot;PRIME NUMBER VALIDATION: O[sqrt(N)]\n&quot;);</span>
+<span class="lineNum">     124 </span>                :<span class="lineCov">          2 :   fprintf(fd, &quot;INDEX   DATA_IN   IS_PRIMED&quot;</span>
+<span class="lineNum">     125 </span>                :            :     &quot;  TIME(usec)  ASTRINGEND\n&quot;);
+<span class="lineNum">     126 </span>                :            : 
+<span class="lineNum">     127 </span>                :<span class="lineCov">          2 :   LEAVE;</span>
+<span class="lineNum">     128 </span>                :<span class="lineCov">          2 :   return;</span>
+<span class="lineNum">     129 </span>                :            : }
+<span class="lineNum">     130 </span>                :            : 
+<a name="131"><span class="lineNum">     131 </span>                :            : </a>
+<span class="lineNum">     132 </span>                :            : static void
+<span class="lineNum">     133 </span>                :<span class="lineCov">         68 : print_prime_report(FILE *fd, struct prime_num_report *rpt)</span>
+<span class="lineNum">     134 </span>                :            : {
+<span class="lineNum">     135 </span>                :            :   static int index_r = 0;
+<span class="lineNum">     136 </span>                :<span class="lineCov">         68 :   char *msg_r = &quot;UNKNOWN&quot;;</span>
+<span class="lineNum">     137 </span>                :<span class="lineCov">         68 :   ENTER(&quot;print_prime_report&quot;);</span>
+<span class="lineNum">     138 </span>                :            : 
+<span class="lineNum">     139 </span>     [<span class="branchCov" title="Branch 0 was taken 34 times"> + </span><span class="branchCov" title="Branch 1 was taken 34 times"> + </span><span class="branchNoCov" title="Branch 2 was not taken"> - </span>]:<span class="lineCov">         68 :   switch(rpt-&gt;isprimed)</span>
+<span class="lineNum">     140 </span>                :            :   {
+<span class="lineNum">     141 </span>                :            :     case PRIMED:
+<span class="lineNum">     142 </span>                :<span class="lineCov">         34 :       msg_r = SYMBOL_TO_STRING(PRIMED);</span>
+<span class="lineNum">     143 </span>                :<span class="lineCov">         34 :       break;</span>
+<span class="lineNum">     144 </span>                :            :     case NOT_PRIMED:
+<span class="lineNum">     145 </span>                :<span class="lineCov">         34 :       msg_r = SYMBOL_TO_STRING(NOT_PRIMED);</span>
+<span class="lineNum">     146 </span>                :<span class="lineCov">         34 :       break;</span>
+<span class="lineNum">     147 </span>                :            :     default:
+<span class="lineNum">     148 </span>                :<span class="lineNoCov">          0 :       warning_prompt(ADD_TRACE(warning_digest[6]));</span>
+<span class="lineNum">     149 </span>                :<span class="lineNoCov">          0 :       break;</span>
+<span class="lineNum">     150 </span>                :            :   }
+<span class="lineNum">     151 </span>                :<span class="lineCov">         68 :   fprintf(fd, &quot;%4d. %9d  %10s %10.5f  %11.5f\n&quot;, (index_r++ &gt;&gt; 1),</span>
+<span class="lineNum">     152 </span>                :<span class="lineCov">         68 :     rpt-&gt;raw_data, msg_r, (double)rpt-&gt;usec / PRIME_REPEAT_COUNT,</span>
+<span class="lineNum">     153 </span>                :<span class="lineCov">        136 :     rpt-&gt;usec / rpt-&gt;astringent);</span>
+<span class="lineNum">     154 </span>                :            : 
+<span class="lineNum">     155 </span>                :<span class="lineCov">         68 :   LEAVE;</span>
+<span class="lineNum">     156 </span>                :<span class="lineCov">         68 :   return;</span>
+<span class="lineNum">     157 </span>                :            : }
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.9</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

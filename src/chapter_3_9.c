@@ -88,7 +88,7 @@ do_any_integer_performance(int *m, int msize, int *n, int nsize,
   ENTER("do_any_integer_performance");
   /* performance test function need not parameter checking.                  */
 
-  count = 100;
+  count = 50;
   usec = 0;
   report->usec = 0;
   b = init_any_integer(n, nsize);
@@ -940,16 +940,26 @@ struct any_integer *
 next_any_integer(struct any_integer *node)
 {
   struct any_integer *next;
+  struct single_linked_list *link;
+  unsigned long long offset;
   ENTER("next_any_integer");
 
   next = NULL;
-  if(NULL == node)
-  {
-    warning_prompt(ADD_TRACE(warning_digest[0]));
+  link = node->sll.next;
+  offset = (unsigned long long)(&((struct any_integer *)0)->sll);
+  if(NULL == node || NULL == link)
     goto END_OF_NEXT;
-  }
 
-  next = CONSTRAINT_OF(node->sll.next, struct any_integer, sll);
+  asm volatile(
+    "movq %1, %%rax\r\n"
+    "movq %2, %%rdx\r\n"
+    "subq %%rdx, %%rax\r\n"
+    "movq %%rax, %0\r\n"
+    :"=r"(next)
+    :"r"(link), "r"(offset)
+    :"rax", "rdx"
+  );
+  //next = CONSTRAINT_OF(node->sll.next, struct any_integer, sll);
 
 END_OF_NEXT:
   LEAVE;
