@@ -6,10 +6,19 @@ struct single_linked_list{
   int index;
   struct single_linked_list *next;
 };
+
 struct doubly_linked_list{
   int index;
   struct doubly_linked_list *next;
   struct doubly_linked_list *previous;
+};
+
+struct array_queue{
+  unsigned size;
+  unsigned rest;
+  void     **front;
+  void     **rear;
+  void     *queue;
 };
 
 #endif
