@@ -13,12 +13,12 @@ exchange(int *a, int *b)
   ENTER("exchange");
   assert(NULL != a && NULL != b);
 
-  if(*a == *b)
-    return;
-
-  *a = *a^*b;
-  *b = *a^*b;
-  *a = *b^*a;
+  if(*a != *b)
+  {
+    *a = *a^*b;
+    *b = *a^*b;
+    *a = *b^*a;
+  }
 
   LEAVE;
   return;
@@ -32,7 +32,7 @@ filepointer_init()
 
   dsaaa_report = fopen(rept_fname, "w+");
   if(NULL == dsaaa_report)
-    error_handle("fopen");
+    error_handle(ADD_TRACE(error_digest[6]));
 
   LEAVE;
   return;
@@ -42,6 +42,7 @@ void
 filepointer_close()
 {
   ENTER("filepointer_close");
+
   fclose(dsaaa_report);
 
   LEAVE;
@@ -74,7 +75,7 @@ malloc_initial(void **pointer, unsigned int length)
 
   *pointer = malloc(length);
   if(NULL == *pointer)
-    error_handle("malloc failed to get suffient memory");
+    error_handle(ADD_TRACE(error_digest[7]));
 
   memset(*pointer, 0, length);
 
@@ -82,17 +83,26 @@ malloc_initial(void **pointer, unsigned int length)
   return;
 }
 
-
 void
 realloc_initial(void **pointer, unsigned int length)
 {
   ENTER("realloc_initial");
 
+  realloc_noinitial(pointer, length);
+  memset(*pointer, 0, length);
+
+  LEAVE;
+  return;
+}
+
+void
+realloc_noinitial(void **pointer, unsigned int length)
+{
+  ENTER("realloc_noinitial");
+
   *pointer = realloc(*pointer, length);
   if(NULL == *pointer)
-    error_handle("realloc failed to update memory");
-
-  memset(*pointer, 0, length);
+    error_handle(ADD_TRACE(error_digest[8]));
 
   LEAVE;
   return;

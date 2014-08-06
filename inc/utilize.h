@@ -33,6 +33,8 @@ malloc_initial(void **, unsigned int);
 void
 realloc_initial(void **, unsigned int);
 void
+realloc_noinitial(void **, unsigned int);
+void
 saft_free(void **);
 int
 get_bit_length(unsigned int);

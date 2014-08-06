@@ -8,7 +8,9 @@ struct timeval ts_end;
 
 FILE *dsaaa_report;
 const char *blank = 
-"                                               ";
+"                                                           \
+                                                            \
+                                                            ";
 
 char strinfo_buf[STRINFO_BUF_SIZE];
 
@@ -28,7 +30,7 @@ static HOMEWORK homework[] = {
   &chapt_3_6,
   &chapt_3_9,
 #else
-  &chapt_3_9,
+  &data_structure_verify,
 #endif
 };
 

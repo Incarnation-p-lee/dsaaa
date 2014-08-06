@@ -29,7 +29,6 @@ data_structure_verify(void)
   return;
 }
 
-
 static void
 single_linked_list_verify(void)
 {
@@ -102,18 +101,12 @@ single_linked_list_verify(void)
 
   print_operation(SYMBOL_TO_STRING(clear_slinked_list));
   clear_slinked_list(&head);
-  if(NULL != head)
-  {
-    printf("AAA = %p", head);
-    getchar();
-  }
   print_slist_result(head);
   print_done(SYMBOL_TO_STRING(clear_slinked_list));
 
   LEAVE;
   return;
 }
-
 
 static void
 doubly_linked_list_verify(void)
@@ -196,6 +189,105 @@ doubly_linked_list_verify(void)
   return;
 }
 
+static void
+array_stack_verify(void)
+{
+  int data[32];
+  int tmp;
+  register int *iter;
+  struct array_stack *stack;
+  ENTER("array_stack_verify");
+
+  tmp = 0;
+  iter = data;
+  while(iter < data + sizeof(data) / sizeof(data[0]))
+    *iter++ = tmp++;
+
+  print_operation(SYMBOL_TO_STRING(create_array_stack_space));
+  stack = create_array_stack_space();
+  print_done(SYMBOL_TO_STRING(create_array_stack_space));
+
+  iter = data;
+  print_operation(SYMBOL_TO_STRING(push_array_stack));
+  push_array_stack(stack, iter++);
+  print_array_stack(stack);
+  print_done(SYMBOL_TO_STRING(push_array_stack));
+
+  print_operation(SYMBOL_TO_STRING(print_array_stack));
+  while(iter < data + sizeof(data) / sizeof(data[0]))
+    push_array_stack(stack, iter++);
+  print_array_stack(stack);
+  print_done(SYMBOL_TO_STRING(print_array_stack));
+
+  print_operation(SYMBOL_TO_STRING(is_array_stack_full));
+  tmp = is_array_stack_full(stack);
+  fprintf(stdout, "Array stack is %s\n", 1 == tmp ? "FULL" : "NOT full");
+  fprintf(dsaaa_report, "Array stack is %s\n", 1 == tmp ? "FULL" : "NOT full");
+  print_done(SYMBOL_TO_STRING(is_array_stack_full));
+
+  print_operation(SYMBOL_TO_STRING(rest_space_of_array_stack));
+  tmp = rest_space_of_array_stack(stack);
+  fprintf(stdout, "The rest of array stack is %d\n", tmp);
+  fprintf(dsaaa_report, "The rest of array stack is %d\n", tmp);
+  print_done(SYMBOL_TO_STRING(rest_space_of_array_stack));
+
+  print_operation(SYMBOL_TO_STRING(is_empty_array_stack));
+  tmp = is_empty_array_stack(stack);
+  fprintf(stdout, "Array stack is %s\n", 1 == tmp ? "EMPTY" : "NOT empty");
+  fprintf(dsaaa_report, "Array stack is %s\n", 1 == tmp ? "EMPTY" : "NOT empty");
+  print_done(SYMBOL_TO_STRING(is_empty_array_stack));
+
+  print_operation(SYMBOL_TO_STRING(pop_array_stack));
+  iter = pop_array_stack(stack);
+  print_int(iter);
+  fprintf(stdout, "\n");
+  fprintf(dsaaa_report, "\n");
+  print_done(SYMBOL_TO_STRING(pop_array_stack));
+
+  print_operation(SYMBOL_TO_STRING(cleanup_array_stack));
+  cleanup_array_stack(stack);
+  print_done(SYMBOL_TO_STRING(cleanup_array_stack));
+
+  print_operation(SYMBOL_TO_STRING(is_empty_array_stack));
+  tmp = is_empty_array_stack(stack);
+  fprintf(stdout, "Array stack is %s\n", 1 == tmp ? "EMPTY" : "NOT empty");
+  fprintf(dsaaa_report, "Array stack is %s\n", 1 == tmp ? "EMPTY" : "NOT empty");
+  print_done(SYMBOL_TO_STRING(is_empty_array_stack));
+
+  print_operation(SYMBOL_TO_STRING(destroy_array_stack_space));
+  destroy_array_stack_space(&stack);
+  print_done(SYMBOL_TO_STRING(destroy_array_stack_space));
+
+  LEAVE;
+  return;
+}
+
+static void
+print_array_stack(struct array_stack *stack)
+{
+  ENTER("print_array_stack");
+
+  traverse_array_stack(stack, &print_int);
+  fprintf(stdout, "\n");
+  fprintf(dsaaa_report, "\n");
+
+  LEAVE;
+  return;
+}
+
+static void
+print_int(void *data)
+{
+  int *tmp;
+  ENTER("print_int");
+
+  tmp = data;
+  fprintf(stdout, "%d ", *tmp);
+  fprintf(dsaaa_report, "%d ", *tmp);
+
+  LEAVE;
+  return;
+}
 
 static void
 print_operation(const char *msg)
@@ -206,8 +298,8 @@ print_operation(const char *msg)
   if(NULL != msg)
     op_msg = msg;
 
-  fprintf(stdout,"Operating on %30s ...\n", op_msg);
-  fprintf(dsaaa_report,"Operating on %30s ...\n", op_msg);
+  fprintf(stdout,"[Operating on %30s ...\n", op_msg);
+  fprintf(dsaaa_report,"[Operating on %30s ...\n", op_msg);
 
   LEAVE;
   return;
@@ -223,8 +315,8 @@ print_done(const char *msg)
   if(NULL != msg)
     op_msg = msg;
 
-  fprintf(stdout,"[DONE] <== %s\n\n", op_msg);
-  fprintf(dsaaa_report,"[DONE] <== %s\n\n", op_msg);
+  fprintf(stdout,"DONE] <== %s\n\n", op_msg);
+  fprintf(dsaaa_report,"DONE] <== %s\n\n", op_msg);
 
   LEAVE;
   return;
@@ -288,5 +380,4 @@ print_dlist_node(struct doubly_linked_list *node)
   fprintf(dsaaa_report,"%08d\n", node->index);
 
   LEAVE;
-  return;
 }

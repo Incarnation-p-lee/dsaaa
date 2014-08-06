@@ -5,3 +5,5 @@ report/*
 refs
 core
 tags
+Session.vim
+*.elf

@@ -9,6 +9,9 @@ const char *error_digest[] = {                                       /* index */
   "Index out of Range",                                              /*-  3  -*/
   "Invalied Numeric Format",                                         /*-  4  -*/
   "Inconsistent Calculate Result",                                   /*-  5  -*/
+  "Attempt to Open File Failed",                                     /*-  6  -*/
+  "Malloc Failed to Get Memory",                                     /*-  7  -*/
+  "Realloc Failed to Update Memory",                                 /*-  8  -*/
 };
 
 

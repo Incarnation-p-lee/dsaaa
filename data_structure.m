@@ -4,9 +4,10 @@
 #include "raw_data_verify.h"
 #include "single_linked_list.h"
 #include "doubly_linked_list.h"
+#include "array_stack.h"
 #include "data_structure_verify.h"
 
 #include "single_linked_list.c"
 #include "doubly_linked_list.c"
+#include "array_stack.c"
 #include "data_structure_verify.c"
-

@@ -36,6 +36,10 @@ single_linked_list_verify(void);
 static void
 doubly_linked_list_verify(void);
 static void
+array_stack_verify(void);
+static void
+print_array_stack(struct array_stack *);
+static void
 print_operation(const char *);
 static void
 print_done(const char *);
@@ -47,16 +51,20 @@ static void
 print_dlist_result(struct doubly_linked_list *);
 static void
 print_dlist_node(struct doubly_linked_list *);
+static void
+print_int(void *);
 
 
 /*-     GLOBAL or STATIC AVAILABLES                                          -*/
 static const char *ds_info[] = {
-  "Single Linked List",
+  "Array Stack",
   "Doubly Linked List",
+  "Single Linked List",
 };
 static void (*structure_set[])(void) = {
-  &single_linked_list_verify,
+  &array_stack_verify,
   &doubly_linked_list_verify,
+  &single_linked_list_verify,
 };
 
 
