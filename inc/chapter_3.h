@@ -265,4 +265,38 @@ print_any_integer_report(struct any_integer_arithmetic_report *);
 static void
 set_arithmetic_catalog(enum ARITHMETIC);
 
+
+/*-     CHAPTER 03-10                                                        -*/
+struct josephus_game_serial{
+  int    serial_num;
+  struct single_linked_list sll;
+};
+
+struct josephus_game_report{
+  unsigned count;
+  unsigned len;
+  unsigned usec;
+  unsigned astringend;
+};
+
+void
+chapt_3_10(void);
+static void
+dochapt_3_10(void);
+static void
+start_josephus_game(struct josephus_game_serial **, unsigned);
+static void
+create_serial_loop_link_list(struct josephus_game_serial **, int);
+static void
+print_josephus_game_title(void);
+static void
+print_josephus_game_report(struct josephus_game_report *);
+static inline struct josephus_game_serial *
+next_josephus_game_serial(struct josephus_game_serial *);
+static void
+destroy_josephus_game_serial_node(struct josephus_game_serial **,
+                                  struct josephus_game_serial *);
+static struct josephus_game_serial *
+deliver_josephus_game_hot_potato(struct josephus_game_serial *, int);
+
 #endif

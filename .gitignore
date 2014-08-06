@@ -2,6 +2,7 @@
 *.out
 obj/*
 report/*
+archive/*
 refs
 core
 tags

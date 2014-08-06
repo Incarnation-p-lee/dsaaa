@@ -26,6 +26,13 @@ struct array_stack{
   struct stack_loc loc;
   unsigned         rest;
   unsigned         size;
+
+struct array_queue{
+  unsigned size;
+  unsigned rest;
+  void     **front;
+  void     **rear;
+  void     *queue;
 };
 
 #endif
