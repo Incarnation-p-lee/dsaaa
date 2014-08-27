@@ -99,10 +99,10 @@ single_linked_list_verify(void)
   print_slist_result(head);
   print_done(SYMBOL_TO_STRING(serialize_slinked_list));
 
-  print_operation(SYMBOL_TO_STRING(clear_slinked_list));
-  clear_slinked_list(&head);
+  print_operation(SYMBOL_TO_STRING(destroy_slinked_list));
+  destroy_slinked_list(&head);
   print_slist_result(head);
-  print_done(SYMBOL_TO_STRING(clear_slinked_list));
+  print_done(SYMBOL_TO_STRING(destroy_slinked_list));
 
   LEAVE;
   return;
@@ -180,10 +180,10 @@ doubly_linked_list_verify(void)
   print_dlist_result(head);
   print_done(SYMBOL_TO_STRING(serialize_slinked_list));
 
-  print_operation(SYMBOL_TO_STRING(clear_dlinked_list));
-  clear_dlinked_list(&head);
+  print_operation(SYMBOL_TO_STRING(destroy_dlinked_list));
+  destroy_dlinked_list(&head);
   print_dlist_result(head);
-  print_done(SYMBOL_TO_STRING(clear_dlinked_list));
+  print_done(SYMBOL_TO_STRING(destroy_dlinked_list));
 
   LEAVE;
   return;

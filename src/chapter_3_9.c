@@ -941,12 +941,10 @@ next_any_integer(struct any_integer *node)
 {
   struct any_integer *next;
   struct single_linked_list *link;
-  unsigned long long offset;
   ENTER("next_any_integer");
 
   next = NULL;
   link = node->sll.next;
-  offset = (unsigned long long)(&((struct any_integer *)0)->sll);
   if(NULL == node || NULL == link)
     goto END_OF_NEXT;
 

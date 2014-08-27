@@ -29,7 +29,7 @@ generate_dlinked_list(int *, int);
 void
 append_dlinked_list_node(struct doubly_linked_list *, int);
 void
-clear_dlinked_list(struct doubly_linked_list **);
+destroy_dlinked_list(struct doubly_linked_list **);
 int
 lengthof_dlinked_list(struct doubly_linked_list *head);
 struct doubly_linked_list *

@@ -68,11 +68,11 @@ dochapt_3_2(void)
 
     print_lots_report(stdout, &report);
     print_lots_report(dsaaa_report, &report);
-    clear_slinked_list(&ind_list);
+    destroy_slinked_list(&ind_list);
     saft_free((void**)&index);
   }
 
-  clear_slinked_list(&val_list);
+  destroy_slinked_list(&val_list);
   LEAVE;
   return;
 }

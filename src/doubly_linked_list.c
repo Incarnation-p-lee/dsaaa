@@ -69,11 +69,11 @@ END_OF_APPEND:
 
 
 void
-clear_dlinked_list(struct doubly_linked_list **head)
+destroy_dlinked_list(struct doubly_linked_list **head)
 {
   struct doubly_linked_list *cur;
   struct doubly_linked_list **iter;
-  ENTER("clear_dlinked_list");
+  ENTER("destroy_dlinked_list");
 
   if(NULL == head)
   {

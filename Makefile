@@ -69,10 +69,10 @@ show:
 	$(call dylink, $(TARGET))
 
 define cleanall
-	-rm -rf $(TARGET) $(OBJDIR)/*
-	-rm -rf $(RDIR)/* *.gcda *.gcno
-	-rm -rf $(ADIR)/*
-        -rm -rf core
+	-rm -rfv $(TARGET) $(OBJDIR)/*
+	-rm -rfv $(RDIR)/* *.gcda *.gcno
+	-rm -rfv $(ADIR)/*
+        -rm -rfv core
 endef
 
 define symbol

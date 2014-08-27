@@ -43,7 +43,7 @@ free_random_int_array(int *);
 extern struct single_linked_list *
 generate_slinked_list(int *, int);
 extern void
-clear_slinked_list(struct single_linked_list **);
+destroy_slinked_list(struct single_linked_list **);
 extern int
 lengthof_slinked_list(struct single_linked_list *head);
 extern struct single_linked_list *

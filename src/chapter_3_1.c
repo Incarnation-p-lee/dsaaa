@@ -52,7 +52,7 @@ dochapt_3_1(void)
       traversal_single_linked_list, head);
     TIME_END(&tr_report.usec);
 
-    clear_slinked_list(&head);
+    destroy_slinked_list(&head);
     print_traversal_report(stdout, &tr_report);
     print_traversal_report(dsaaa_report, &tr_report);
   }

@@ -27,10 +27,10 @@ saft_free(void **);
 
 struct single_linked_list *
 generate_slinked_list(int *, int);
-void
+struct single_linked_list *
 append_slinked_list_node(struct single_linked_list *, int);
 void
-clear_slinked_list(struct single_linked_list **);
+destroy_slinked_list(struct single_linked_list **);
 int
 lengthof_slinked_list(struct single_linked_list *head);
 struct single_linked_list *
@@ -44,5 +44,8 @@ void
 serialize_slinked_list(struct single_linked_list *);
 struct single_linked_list *
 initial_slinked_list(void);
+void
+delete_slinked_list_node(struct single_linked_list **,
+                         struct single_linked_list *);
 
 #endif

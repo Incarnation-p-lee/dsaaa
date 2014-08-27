@@ -52,7 +52,7 @@ initial_slinked_list(void)
 }
 
 
-void
+struct single_linked_list *
 append_slinked_list_node(struct single_linked_list *node, int value)
 {
   struct single_linked_list *next;
@@ -74,16 +74,63 @@ append_slinked_list_node(struct single_linked_list *node, int value)
 
 END_OF_APPEND:
   LEAVE;
-  return;
+  return next;
 }
 
 
 void
-clear_slinked_list(struct single_linked_list **head)
+delete_slinked_list_node(struct single_linked_list **head,
+                         struct single_linked_list *node)
+{
+  struct single_linked_list *cur;
+  ENTER("delete_slinked_list_node");
+
+  if(NULL == node || NULL == head || NULL == *head)
+  {
+    warning_prompt(ADD_TRACE(warning_digest[0]));
+    goto END_OF_DELETE;
+  }
+
+  cur = *head;
+  if(cur == node)
+  {
+    *head = node->next;
+  }
+  else
+  {
+    while(node != cur->next)
+      cur = cur->next;
+  }
+
+  saft_free((void**)&node);
+
+END_OF_DELETE:
+  LEAVE;
+  return;
+}
+
+
+struct single_linked_list *
+next_slinked_list(struct single_linked_list *cur)
+{
+  struct single_linked_list *result;
+  ENTER("next_slinked_list");
+
+  result = NULL;
+  if(cur)
+    result = cur->next;
+
+  LEAVE;
+  return result;
+}
+
+
+void
+destroy_slinked_list(struct single_linked_list **head)
 {
   struct single_linked_list *cur;
   struct single_linked_list **iter;
-  ENTER("clear_slinked_list");
+  ENTER("destroy_slinked_list");
 
   if(NULL == head)
   {
