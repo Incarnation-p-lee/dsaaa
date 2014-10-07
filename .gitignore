@@ -8,3 +8,4 @@ core
 tags
 Session.vim
 *.elf
+*.gcno

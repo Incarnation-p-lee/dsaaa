@@ -23,7 +23,7 @@ generate_dlinked_list(int *val, int size)
   iterator = val;
   malloc_initial((void**)&node, sizeof(*node));
   node->index = *iterator++;
-  node->previous = node->next = NULL;
+  node->previous = node->next = node;
   head = node;
 
   while(iterator < val + size)
@@ -36,6 +36,20 @@ generate_dlinked_list(int *val, int size)
   return head;
 }
 
+void
+initial_dlinked_list_node(struct doubly_linked_list *head)
+{
+  ENTER("initial_dlinked_list_node");
+
+  if(head)
+  {
+    head->index = 0;
+    head->next = head->previous = head;
+  }
+
+  LEAVE;
+  return;
+}
 
 void
 append_dlinked_list_node(struct doubly_linked_list *node, int value)
@@ -67,6 +81,23 @@ END_OF_APPEND:
   return;
 }
 
+void
+insert_after_dlinked_list(struct doubly_linked_list *cur,
+                          struct doubly_linked_list *node)
+{
+  ENTER("insert_after_dlinked_list");
+
+  if(cur && node)
+  {
+    cur->next->previous = node;
+    node->next = cur->next;
+    cur->next = node;
+    node->previous = cur;
+  }
+
+  LEAVE;
+  return;
+}
 
 void
 destroy_dlinked_list(struct doubly_linked_list **head)
@@ -166,7 +197,8 @@ print_dlinked_list(FILE *fd, char *msg, struct doubly_linked_list *head)
   align = 0;
   iterator = head;
   fprintf(fd, "[%s]:\n", msg);
-  while(NULL != iterator)
+  iterator = iterator->next;
+  while(head != iterator)
   {
     fprintf(fd, "%d-> ", iterator->index);
     if(!(++align % PRINT_WIDTH))
@@ -194,7 +226,8 @@ print_reverse_dlinked_list(FILE *fd, char *msg, struct doubly_linked_list *tail)
   align = 0;
   iterator = tail;
   fprintf(fd, "[%s]:\n", msg);
-  while(NULL != iterator)
+  iterator = iterator->next;
+  while(tail != iterator)
   {
     fprintf(fd, "%d-> ", iterator->index);
     if(!(++align % PRINT_WIDTH))
@@ -271,8 +304,8 @@ serialize_dlinked_list(struct doubly_linked_list *head)
   }
 
   index = 0;
-  node = head;
-  while(node)
+  node = head->next;
+  while(head != node)
   {
     node->index = index++;
     node = node->next;
@@ -281,4 +314,27 @@ serialize_dlinked_list(struct doubly_linked_list *head)
 END_OF_SERIAL:
   LEAVE;
   return;
+}
+
+/*
+* As doubly linked list, remove operation will return next node by default.
+*/
+struct doubly_linked_list *
+remove_node_dlinked_list(struct doubly_linked_list *node)
+{
+  struct doubly_linked_list *next;
+  ENTER("remove_node_dlinked_list");
+
+  next = NULL;
+  if(node && node->next == node)
+    node->next = node->previous = NULL;
+  else if(node)
+  {
+    next = node->next;
+    node->previous->next = node->next;
+    node->next->previous = node->previous;
+  }
+
+  LEAVE;
+  return next;
 }

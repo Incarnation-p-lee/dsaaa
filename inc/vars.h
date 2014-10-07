@@ -30,8 +30,9 @@ static HOMEWORK homework[] = {
   &chapt_3_6,
   &chapt_3_9,
   &chapt_3_10,
+  &chapt_3_16,
 #else
-  &data_structure_verify,
+  &chapt_3_16,
 #endif
 };
 

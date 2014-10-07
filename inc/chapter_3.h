@@ -52,6 +52,20 @@ extern void
 print_slinked_list(FILE *, char *, struct single_linked_list *);
 
 /*-     Doubly Linked List                                                   -*/
+extern struct doubly_linked_list *
+generate_dlinked_list(int *, int);
+extern void
+destroy_dlinked_list(struct doubly_linked_list **);
+extern void
+print_dlinked_list(FILE *fd, char *msg, struct doubly_linked_list *head);
+extern void
+initial_dlinked_list_node(struct doubly_linked_list *);
+extern void
+insert_after_dlinked_list(struct doubly_linked_list *,
+                          struct doubly_linked_list *);
+extern struct doubly_linked_list *
+remove_node_dlinked_list(struct doubly_linked_list *);
+
 
 
 
@@ -298,5 +312,44 @@ destroy_josephus_game_serial_node(struct josephus_game_serial **,
                                   struct josephus_game_serial *);
 static struct josephus_game_serial *
 deliver_josephus_game_hot_potato(struct josephus_game_serial *, int);
+
+/*-     CHAPTER 03-16                                                        -*/
+#define REDUNDANT_RAW_DATA_MAX 128u
+struct redundant_list {
+  unsigned num;
+  struct doubly_linked_list dll;
+};
+
+struct redundant_list_report {
+  float redundant_rate;
+  unsigned size;
+  unsigned usec;
+  unsigned astringend;
+};
+
+void
+chapt_3_16(void);
+static void
+dochapt_3_16(void);
+static unsigned *
+create_raw_random_data(int);
+static inline void
+destroy_raw_random_data(unsigned **);
+static struct redundant_list *
+create_redundant_linked_list(unsigned *, int);
+static void
+destroy_redundant_linked_list(struct redundant_list **);
+static struct redundant_list *
+next_redundant_linked_list(struct redundant_list *);
+static void
+remove_redundant_linked_list(struct redundant_list *);
+static struct redundant_list *
+remove_node_redundant_linked_list(struct redundant_list *);
+static inline void
+init_redundant_list_report(struct redundant_list_report *, int);
+static void
+print_redundant_list_report(struct redundant_list_report *);
+static void
+print_title_redundant_list_report(void);
 
 #endif
