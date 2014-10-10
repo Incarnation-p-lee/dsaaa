@@ -215,7 +215,7 @@ polynomial_add(struct poly_linked *mpol, struct poly_linked *npol)
   while(inode)
   {
     malloc_initial((void**)&pnode, sizeof(*pnode));
-    lnode = &pnode->sll;
+    lnode->next = &pnode->sll;
     lnode = lnode->next;
     pnode->pow = inode->pow;
     pnode->coefficient = inode->coefficient;
@@ -230,6 +230,7 @@ polynomial_add(struct poly_linked *mpol, struct poly_linked *npol)
   serialize_slinked_list(&sum_head->sll);
   saft_free((void**)&pnode);
 
+
 POLY_ADD_END:
   LEAVE;
   return sum_head;
@@ -240,7 +241,7 @@ static void
 clear_polynomial(struct poly_linked **head)
 {
   struct poly_linked *pnode;
-  struct single_linked_list *lnode;
+  struct poly_linked *next;
   ENTER("clear_polynomial");
 
   if(NULL == head || NULL == *head)
@@ -252,9 +253,9 @@ clear_polynomial(struct poly_linked **head)
   pnode = *head;
   while(pnode)
   {
-    lnode = &pnode->sll;
+    next = get_next_poly(&pnode->sll);
     saft_free((void**)&pnode);
-    pnode = get_next_poly(lnode);
+    pnode = next;
   }
 
   *head = NULL;

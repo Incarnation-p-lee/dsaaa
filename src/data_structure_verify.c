@@ -124,7 +124,7 @@ doubly_linked_list_verify(void)
   print_dlist_result(head);
 
   node = head;
-  while(node->next)
+  while(node->next != head)
     node = node->next;
   print_dlist_result(node);
   print_done(SYMBOL_TO_STRING(generate_slinked_list));
@@ -169,7 +169,7 @@ doubly_linked_list_verify(void)
   exchange_dlinked_list(NULL, node);
   exchange_dlinked_list(&head, NULL);
   exchange_dlinked_list(&head, node);
-  while(node->next)
+  while(node->next != head)
     node = node->next;
   exchange_dlinked_list(&head, node);
   print_dlist_result(head);

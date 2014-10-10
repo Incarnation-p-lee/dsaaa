@@ -116,6 +116,7 @@ destroy_dlinked_list(struct doubly_linked_list **head)
   while(NULL != (cur = *iter))
   {
     iter = &cur->next;
+    remove_node_dlinked_list(cur);
     saft_free((void**)&cur);
   }
 
@@ -131,6 +132,7 @@ int
 lengthof_dlinked_list(struct doubly_linked_list *head)
 {
   int length;
+  struct doubly_linked_list *node;
   ENTER("lengthof_dlinked_list");
 
   if(NULL == head)
@@ -141,10 +143,11 @@ lengthof_dlinked_list(struct doubly_linked_list *head)
   }
 
   length = 0;
-  while(NULL != head)
+  node = head;
+  while(node->next != head)
   {
     length++;
-    head = head->next;
+    node = node->next;
   }
 
 END_OF_LENGTHOF:
@@ -194,16 +197,19 @@ print_dlinked_list(FILE *fd, char *msg, struct doubly_linked_list *head)
   if(NULL == msg)
     msg = default_msg;
 
-  align = 0;
-  iterator = head;
-  fprintf(fd, "[%s]:\n", msg);
-  iterator = iterator->next;
-  while(head != iterator)
+  if(head)
   {
-    fprintf(fd, "%d-> ", iterator->index);
-    if(!(++align % PRINT_WIDTH))
-      fprintf(fd, "\n");
+    align = 0;
+    iterator = head;
+    fprintf(fd, "[%s]:\n", msg);
     iterator = iterator->next;
+    while(head != iterator)
+    {
+      fprintf(fd, "%d-> ", iterator->index);
+      if(!(++align % PRINT_WIDTH))
+        fprintf(fd, "\n");
+      iterator = iterator->next;
+    }
   }
   fprintf(fd, "NULL\n");
 
@@ -246,6 +252,7 @@ exchange_dlinked_list(struct doubly_linked_list **head,
   struct doubly_linked_list *node)
 {
   struct doubly_linked_list *cur;
+  struct doubly_linked_list *start;
   ENTER("exchange_dlinked_list");
 
   if(NULL == head || NULL == *head || NULL == node)
@@ -259,7 +266,8 @@ exchange_dlinked_list(struct doubly_linked_list **head,
     goto END_OF_EXCHANGE;
   }
 
-  while((cur = *head))
+  start = *head;
+  while((cur = *head)->next != start)
   {
     if(cur->next == node)
       break;
