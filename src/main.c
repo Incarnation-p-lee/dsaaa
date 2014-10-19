@@ -8,6 +8,11 @@
 /*- 10242013    CHAPTER 1. Add function pointer.               -*/
 /*-                        Start chapter1.2                    -*/
 /*--------------------------------------------------------------*/
+#include "include.h"
+#include "defs.h"
+#include "vars.h"
+#include "externals.h"
+
 int
 main(int argc, char **argv)
 {
