@@ -6,3 +6,4 @@ CC           =gcc
 CFLAG        =-g -Wall -Werror -c
 LFLAG        =
 TARGET       =dsaaa.elf
+EXTLIB       =-lm

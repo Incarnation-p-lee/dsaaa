@@ -1,13 +1,14 @@
 #!/bin/sh
 
 objdir=obj_out
-mkfile=$objdir/Makefile
+mkfile=Makefile
 srcdir=src
-objfile=`ls $objdir/*.o`
-echo $objfile
-echo \
-"include ../$srcdir/base.Makefile
+cd $objdir > /dev/null
+objfile=`ls *.o`
+cat << EOF > $mkfile
+include ../$srcdir/base.Makefile
 
-\$(TARGET):$objfile
-	\$(CC) \$(LFLAG) -o \$@ \$^ \$(EXRLIB)" > $mkfile
-
+\$(TARGET):`echo $objfile`
+	\$(CC) \$(LFLAG) -o \$@ \$^ \$(EXTLIB)
+	mv \$@ ./out
+EOF

@@ -61,5 +61,9 @@ done
 # compiling main.o
 compile_obj "src/"
 
-# link to elf
+# generate makefile for obj_out
 sh src/script/update_lk_mk.sh
+# link to elf
+cd $objdir > /dev/null
+make
+cd - > /dev/null

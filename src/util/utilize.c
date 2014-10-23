@@ -27,7 +27,7 @@ exchange(int *a, int *b)
 void
 filepointer_init()
 {
-  char *rept_fname = "./archive/homework.rept";
+  char *rept_fname = "./homework.rept";
   ENTER("filepointer_init");
 
   dsaaa_report = fopen(rept_fname, "w+");
