@@ -1,30 +1,32 @@
 #!/bin/sh
 
-debug=0
-code_coverage=0
+argv_cfg=
+argv_lnk=
 
 for argv in "$@"
 do
-  echo $argv
   case $argv in
     "DEBUG=1")
-    debug=1
-    echo "A"
+      argv_cfg="$argv_cfg -g -DDEBUG"
     ;;
     "DEBUG=0")
-    debug=0
-    echo "B"
+      argv_cfg="$argv_cfg -o2"
     ;;
     "CODE_COVERAGE=1")
-    code_coverage=1
-    echo "C"
+      argv_cfg="$argv_cfg -fprofile-arcs -ftest-coverage"
+      argv_lnk="$argv_lnk -fprofile-arcs -ftest-coverage"
+    ;;
+    "PROFILE=1")
+      argv_lnk="$argv_lnk -pg"
+      argv_cfg="$argv_cfg -pg"
     ;;
     "CODE_COVERAGE=0")
-    code_coverage=0
-    echo "D"
+    ;;
+    "PROFILE=0")
     ;;
   esac
 done
+
 
 objdir=obj_out
 
@@ -38,7 +40,7 @@ mkdir -vp $objdir/out/
 
 function compile_obj() {
   cd $1 > /dev/null
-  make
+  make "ARGV_CFG=$argv_cfg"
   cd - > /dev/null
   mv -v $1*.o $objdir
 }
@@ -65,5 +67,5 @@ compile_obj "src/"
 sh src/script/update_lk_mk.sh
 # link to elf
 cd $objdir > /dev/null
-make
+make "ARGV_LNK=$argv_lnk"
 cd - > /dev/null

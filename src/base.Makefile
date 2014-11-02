@@ -3,7 +3,9 @@
 
 SHELL        =/bin/sh
 CC           =gcc
-CFLAG        =-g -Wall -Werror -c
+CFLAG        =-Wall -Werror -c
+CFLAG        +=$(ARGV_CFG)
 LFLAG        =
+LFLAG        +=$(ARGV_LNK)
 TARGET       =dsaaa.elf
 EXTLIB       =-lm
